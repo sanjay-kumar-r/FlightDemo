@@ -1,0 +1,36 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v3.1",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v3.1": {
+      "AirlinesDTOs/1.0.0": {
+        "dependencies": {
+          "UsersDTOs": "1.0.0"
+        },
+        "runtime": {
+          "AirlinesDTOs.dll": {}
+        }
+      },
+      "UsersDTOs/1.0.0": {
+        "runtime": {
+          "UsersDTOs.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "AirlinesDTOs/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "UsersDTOs/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

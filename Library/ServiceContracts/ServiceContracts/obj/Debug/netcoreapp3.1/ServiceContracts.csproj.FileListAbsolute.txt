@@ -1,0 +1,17 @@
+D:\WorkSpace\Library\ServiceContracts\ServiceContracts\bin\Debug\netcoreapp3.1\ServiceContracts.deps.json
+D:\WorkSpace\Library\ServiceContracts\ServiceContracts\bin\Debug\netcoreapp3.1\ServiceContracts.dll
+D:\WorkSpace\Library\ServiceContracts\ServiceContracts\bin\Debug\netcoreapp3.1\ServiceContracts.pdb
+D:\WorkSpace\Library\ServiceContracts\ServiceContracts\bin\Debug\netcoreapp3.1\CommonDTOs.dll
+D:\WorkSpace\Library\ServiceContracts\ServiceContracts\bin\Debug\netcoreapp3.1\CommonDTOs.pdb
+D:\WorkSpace\Library\ServiceContracts\ServiceContracts\obj\Debug\netcoreapp3.1\ServiceContracts.csproj.AssemblyReference.cache
+D:\WorkSpace\Library\ServiceContracts\ServiceContracts\obj\Debug\netcoreapp3.1\ServiceContracts.GeneratedMSBuildEditorConfig.editorconfig
+D:\WorkSpace\Library\ServiceContracts\ServiceContracts\obj\Debug\netcoreapp3.1\ServiceContracts.AssemblyInfoInputs.cache
+D:\WorkSpace\Library\ServiceContracts\ServiceContracts\obj\Debug\netcoreapp3.1\ServiceContracts.AssemblyInfo.cs
+D:\WorkSpace\Library\ServiceContracts\ServiceContracts\obj\Debug\netcoreapp3.1\ServiceContracts.csproj.CoreCompileInputs.cache
+D:\WorkSpace\Library\ServiceContracts\ServiceContracts\obj\Debug\netcoreapp3.1\ServiceContracts.dll
+D:\WorkSpace\Library\ServiceContracts\ServiceContracts\obj\Debug\netcoreapp3.1\ServiceContracts.pdb
+D:\WorkSpace\Library\ServiceContracts\ServiceContracts\bin\Debug\netcoreapp3.1\UsersDTOs.dll
+D:\WorkSpace\Library\ServiceContracts\ServiceContracts\bin\Debug\netcoreapp3.1\UsersDTOs.pdb
+D:\WorkSpace\Library\ServiceContracts\ServiceContracts\bin\Debug\netcoreapp3.1\AirlinesDTOs.dll
+D:\WorkSpace\Library\ServiceContracts\ServiceContracts\bin\Debug\netcoreapp3.1\AirlinesDTOs.pdb
+D:\WorkSpace\Library\ServiceContracts\ServiceContracts\obj\Debug\netcoreapp3.1\ServiceContracts.csproj.CopyComplete

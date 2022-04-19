@@ -1,0 +1,23 @@
+
+url:- http://localhost:9001/api/v1.0/Users/Update
+
+type:- POST
+
+header:-
+
+User-Agent: Fiddler
+Content-Type: application/json
+UserId: 1234
+TenantId: 9012
+AccessToken: abcd
+
+body:-
+
+{
+   "Id":1,
+   "FirstName":"aaaaa",
+   "LastName":"bbbbk",
+   "EmailId":"aaabbb@gmai.com",
+   "Password":"pass@word1",
+   "AccountStatusId":4
+}

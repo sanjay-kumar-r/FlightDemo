@@ -1,0 +1,563 @@
+{
+	"info": {
+		"_postman_id": "72fad691-6ee8-4570-8c30-149e5b1cd9da",
+		"name": "Users",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Users_Get",
+			"item": [
+				{
+					"name": "Users_Get",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": " application/json",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "UserId",
+								"value": " 1234",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "TenantId",
+								"value": " 9012",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "AccessToken",
+								"value": " abcd",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "http://localhost:9050/api/v1.0/Users/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9050",
+							"path": [
+								"api",
+								"v1.0",
+								"Users",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Users_Get/{id}",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": " application/json",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "UserId",
+								"value": " 1234",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "TenantId",
+								"value": " 9012",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "AccessToken",
+								"value": " abcd",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "http://localhost:9050/api/v1.0/Users/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9050",
+							"path": [
+								"api",
+								"v1.0",
+								"Users",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Users_Register",
+			"item": [
+				{
+					"name": "Users_Register",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"strictSSL": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": " application/json",
+								"type": "text"
+							},
+							{
+								"key": "UserId",
+								"value": " 1234",
+								"type": "text"
+							},
+							{
+								"key": "TenantId",
+								"value": " 9012",
+								"type": "text"
+							},
+							{
+								"key": "AccessToken",
+								"value": " abcd",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"FirstName\":\"sanjtest\",\r\n   \"LastName\":\"ok\",\r\n   \"EmailId\":\"sanjtest@gmai.com\",\r\n   \"Password\":\"asd123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9050/api/v1.0/Users/Register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9050",
+							"path": [
+								"api",
+								"v1.0",
+								"Users",
+								"Register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Users_RegisterAsAdmin",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": " application/json",
+								"type": "text"
+							},
+							{
+								"key": "UserId",
+								"value": " 1234",
+								"type": "text"
+							},
+							{
+								"key": "TenantId",
+								"value": " 9012",
+								"type": "text"
+							},
+							{
+								"key": "AccessToken",
+								"value": " abcd",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"FirstName\":\"testAdminuser\",\r\n   \"LastName\":\"tesAD\",\r\n   \"EmailId\":\"testAdmin@123.com\",\r\n   \"Password\":\"asd123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9050/api/v1.0/Users/RegisterAsAdmin",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9050",
+							"path": [
+								"api",
+								"v1.0",
+								"Users",
+								"RegisterAsAdmin"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Users_Login",
+			"item": [
+				{
+					"name": "Users_Login",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": " application/json",
+								"type": "text"
+							},
+							{
+								"key": "UserId",
+								"value": " 1234",
+								"type": "text"
+							},
+							{
+								"key": "TenantId",
+								"value": " 9012",
+								"type": "text"
+							},
+							{
+								"key": "AccessToken",
+								"value": " abcd",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"EmailId\":\"sanj@gmai.com\",\r\n   \"Password\":\"asd123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9050/api/v1.0/Users/Login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9050",
+							"path": [
+								"api",
+								"v1.0",
+								"Users",
+								"Login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Users_Update",
+			"item": [
+				{
+					"name": "Users_Update",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": " application/json",
+								"type": "text"
+							},
+							{
+								"key": "UserId",
+								"value": " 1234",
+								"type": "text"
+							},
+							{
+								"key": "TenantId",
+								"value": " 9012",
+								"type": "text"
+							},
+							{
+								"key": "AccessToken",
+								"value": " abcd",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"Id\":1,\r\n   \"FirstName\":\"aaaaa\",\r\n   \"LastName\":\"bbbbk\",\r\n   \"EmailId\":\"aaabbb@gmai.com\",\r\n   \"Password\":\"pass@word1\",\r\n   \"AccountStatusId\":4\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9050/api/v1.0/Users/Update",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9050",
+							"path": [
+								"api",
+								"v1.0",
+								"Users",
+								"Update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Users_UpdateUserAsSuperAdmin",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": " application/json",
+								"type": "text"
+							},
+							{
+								"key": "UserId",
+								"value": " 1234",
+								"type": "text"
+							},
+							{
+								"key": "TenantId",
+								"value": " 9012",
+								"type": "text"
+							},
+							{
+								"key": "AccessToken",
+								"value": " abcd",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "123",
+							"options": {
+								"raw": {
+									"language": "text"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9050/api/v1.0/Users/UpdateUserAsSuperAdmin",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9050",
+							"path": [
+								"api",
+								"v1.0",
+								"Users",
+								"UpdateUserAsSuperAdmin"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Users_Delete",
+			"item": [
+				{
+					"name": "Users_Delete",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": " application/json",
+								"type": "text"
+							},
+							{
+								"key": "UserId",
+								"value": " 1234",
+								"type": "text"
+							},
+							{
+								"key": "TenantId",
+								"value": " 9012",
+								"type": "text"
+							},
+							{
+								"key": "AccessToken",
+								"value": " abcd",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "1234",
+							"options": {
+								"raw": {
+									"language": "text"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9050/api/v1.0/Users/Delete",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9050",
+							"path": [
+								"api",
+								"v1.0",
+								"Users",
+								"Delete"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Users_PermanantDeleteUser",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": " application/json",
+								"type": "text"
+							},
+							{
+								"key": "UserId",
+								"value": " 1234",
+								"type": "text"
+							},
+							{
+								"key": "TenantId",
+								"value": " 9012",
+								"type": "text"
+							},
+							{
+								"key": "AccessToken",
+								"value": " abcd",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "1234",
+							"options": {
+								"raw": {
+									"language": "text"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9050/api/v1.0/Users/PermanantDeleteUser",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9050",
+							"path": [
+								"api",
+								"v1.0",
+								"Users",
+								"PermanantDeleteUser"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Users_ValidateAdmin",
+			"item": [
+				{
+					"name": "Users_ValidateAdmin",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": " application/json",
+								"type": "text"
+							},
+							{
+								"key": "UserId",
+								"value": " 1234",
+								"type": "text"
+							},
+							{
+								"key": "TenantId",
+								"value": " 9012",
+								"type": "text"
+							},
+							{
+								"key": "AccessToken",
+								"value": " abcd",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "1234",
+							"options": {
+								"raw": {
+									"language": "text"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9050/api/v1.0/Users/ValidateAdmin",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9050",
+							"path": [
+								"api",
+								"v1.0",
+								"Users",
+								"ValidateAdmin"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

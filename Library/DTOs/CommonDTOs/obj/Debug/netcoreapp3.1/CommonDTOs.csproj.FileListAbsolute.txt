@@ -1,0 +1,10 @@
+D:\WorkSpace\Library\DTOs\CommonDTOs\bin\Debug\netcoreapp3.1\CommonDTOs.deps.json
+D:\WorkSpace\Library\DTOs\CommonDTOs\bin\Debug\netcoreapp3.1\CommonDTOs.dll
+D:\WorkSpace\Library\DTOs\CommonDTOs\bin\Debug\netcoreapp3.1\CommonDTOs.pdb
+D:\WorkSpace\Library\DTOs\CommonDTOs\obj\Debug\netcoreapp3.1\CommonDTOs.GeneratedMSBuildEditorConfig.editorconfig
+D:\WorkSpace\Library\DTOs\CommonDTOs\obj\Debug\netcoreapp3.1\CommonDTOs.AssemblyInfoInputs.cache
+D:\WorkSpace\Library\DTOs\CommonDTOs\obj\Debug\netcoreapp3.1\CommonDTOs.AssemblyInfo.cs
+D:\WorkSpace\Library\DTOs\CommonDTOs\obj\Debug\netcoreapp3.1\CommonDTOs.csproj.CoreCompileInputs.cache
+D:\WorkSpace\Library\DTOs\CommonDTOs\obj\Debug\netcoreapp3.1\CommonDTOs.dll
+D:\WorkSpace\Library\DTOs\CommonDTOs\obj\Debug\netcoreapp3.1\CommonDTOs.pdb
+D:\WorkSpace\Library\DTOs\CommonDTOs\obj\Debug\netcoreapp3.1\CommonDTOs.csproj.AssemblyReference.cache

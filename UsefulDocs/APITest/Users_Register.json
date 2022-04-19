@@ -1,0 +1,21 @@
+
+url:- http://localhost:9001/api/v1.0/Users/Register
+
+type:- POST
+
+header:-
+
+User-Agent: Fiddler
+Content-Type: application/json
+UserId: 1234
+TenantId: 9012
+AccessToken: abcd
+
+body:-
+
+{
+   "FirstName":"sanj",
+   "LastName":"k",
+   "EmailId":"sanj@gmai.com",
+   "Password":"asd123"
+}

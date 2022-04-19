@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31729.503
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Flight.Airlines", "Flight.Airlines.csproj", "{840B113A-D0A5-469A-85AE-37B91E42BD7D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CommonDTOs", "..\..\Library\DTOs\CommonDTOs\CommonDTOs.csproj", "{D4F2812B-BE0C-4212-8EC8-153A871A00AB}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ServiceContracts", "..\..\Library\ServiceContracts\ServiceContracts\ServiceContracts.csproj", "{F87356E5-901C-4214-9781-9BE225347877}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CommonUtils", "..\..\Library\Utils\CommonUtils\CommonUtils.csproj", "{EC17544C-60B1-4D41-8B4B-1FBA5D9279C0}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AirlinesDTOs", "..\..\Library\DTOs\AirlinesDTOs\AirlinesDTOs.csproj", "{D42B1D77-880B-4447-A753-91575BE2B56C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UsersDTOs", "..\..\Library\DTOs\UsersDTOs\UsersDTOs.csproj", "{B099975E-7A36-4797-9079-7700E6C512EF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{840B113A-D0A5-469A-85AE-37B91E42BD7D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{840B113A-D0A5-469A-85AE-37B91E42BD7D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{840B113A-D0A5-469A-85AE-37B91E42BD7D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{840B113A-D0A5-469A-85AE-37B91E42BD7D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D4F2812B-BE0C-4212-8EC8-153A871A00AB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D4F2812B-BE0C-4212-8EC8-153A871A00AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D4F2812B-BE0C-4212-8EC8-153A871A00AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D4F2812B-BE0C-4212-8EC8-153A871A00AB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F87356E5-901C-4214-9781-9BE225347877}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F87356E5-901C-4214-9781-9BE225347877}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F87356E5-901C-4214-9781-9BE225347877}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F87356E5-901C-4214-9781-9BE225347877}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EC17544C-60B1-4D41-8B4B-1FBA5D9279C0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EC17544C-60B1-4D41-8B4B-1FBA5D9279C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EC17544C-60B1-4D41-8B4B-1FBA5D9279C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EC17544C-60B1-4D41-8B4B-1FBA5D9279C0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D42B1D77-880B-4447-A753-91575BE2B56C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D42B1D77-880B-4447-A753-91575BE2B56C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D42B1D77-880B-4447-A753-91575BE2B56C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D42B1D77-880B-4447-A753-91575BE2B56C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B099975E-7A36-4797-9079-7700E6C512EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B099975E-7A36-4797-9079-7700E6C512EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B099975E-7A36-4797-9079-7700E6C512EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B099975E-7A36-4797-9079-7700E6C512EF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B7C01ED5-D09F-4287-8FDE-78C4019479E2}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,12 @@
+D:\WorkSpace\Library\DTOs\AirlinesDTOs\bin\Release\netcoreapp3.1\AirlinesDTOs.deps.json
+D:\WorkSpace\Library\DTOs\AirlinesDTOs\bin\Release\netcoreapp3.1\AirlinesDTOs.dll
+D:\WorkSpace\Library\DTOs\AirlinesDTOs\bin\Release\netcoreapp3.1\AirlinesDTOs.pdb
+D:\WorkSpace\Library\DTOs\AirlinesDTOs\bin\Release\netcoreapp3.1\UsersDTOs.dll
+D:\WorkSpace\Library\DTOs\AirlinesDTOs\bin\Release\netcoreapp3.1\UsersDTOs.pdb
+D:\WorkSpace\Library\DTOs\AirlinesDTOs\obj\Release\netcoreapp3.1\AirlinesDTOs.csproj.AssemblyReference.cache
+D:\WorkSpace\Library\DTOs\AirlinesDTOs\obj\Release\netcoreapp3.1\AirlinesDTOs.GeneratedMSBuildEditorConfig.editorconfig
+D:\WorkSpace\Library\DTOs\AirlinesDTOs\obj\Release\netcoreapp3.1\AirlinesDTOs.AssemblyInfoInputs.cache
+D:\WorkSpace\Library\DTOs\AirlinesDTOs\obj\Release\netcoreapp3.1\AirlinesDTOs.AssemblyInfo.cs
+D:\WorkSpace\Library\DTOs\AirlinesDTOs\obj\Release\netcoreapp3.1\AirlinesDTOs.csproj.CoreCompileInputs.cache
+D:\WorkSpace\Library\DTOs\AirlinesDTOs\obj\Release\netcoreapp3.1\AirlinesDTOs.dll
+D:\WorkSpace\Library\DTOs\AirlinesDTOs\obj\Release\netcoreapp3.1\AirlinesDTOs.pdb

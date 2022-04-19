@@ -1,0 +1,26 @@
+
+url:- http://localhost:9050/api/v1.0/Airlines/Add
+
+type:- POST
+
+header:-
+
+User-Agent: Fiddler
+Content-Type: application/json
+UserId: 1234
+TenantId: 9012
+AccessToken: abcd
+
+body:-
+
+{
+   "Name":"RYN Airs",
+   "AirlineCode":"SKA1",
+   "ContactNumber":"111222333444",
+   "ContactAddress":"#no address",
+   "TotalSeats":90,
+   "TotalBCSeats":60,
+   "TotalNBCSeats":30,
+   "BCTicketCost":2000.512,
+   "NBCTicketCost":100.539
+}
