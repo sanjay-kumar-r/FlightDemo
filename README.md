@@ -11,9 +11,23 @@ To create Flight demo projects for training
 ./WebService/Flight.Airlines/ folder -> has microservice project related to Aprlines - Add/Update/Delete
 ./WebService/Flight.Users/ folder -> has microservice project related to Users - Register/Login/Update/Delete
 ./Tools/APIGateway/ folder -> has microservice project related to API Gateway - routing json file is present in OcelotConfigs/ocelot.json (or) ocelot.{env}.json
-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------------------
 
-# 2. To run the microservices :-
+# 2. SetUp :-
+=> <project>/appsettings.json :
+			(a) Urls = specifies the hosting url.
+			(b) ConnectionStrings/SqlServerConnectionString = specifies DB connection string.
+			(c) HeaderValidation (and) AdminValidation = specifies if we want to by pass validation.
+			(d) endpointUrls/ValidateAdminUrl = specifies url for admin validation api.
+			(e) APIGatewayUrl = api gateway url.
+			
+=> create databases Airlines and Users. 
+
+=> .\WebService\Flight.Airlines\Migrations = contains migration scripts and db snapshots
+=> .\WebService\Flignt.Users\Migrations = contains migration scripts and db snapshots
+----------------------------------------------------------------------------------------------------------------------------------
+
+# 3. To run the microservices :-
 
 Prerequisite : dotnet core 3.1 runtime /sdk
 
@@ -29,9 +43,10 @@ Tools/APIGateway/bin/Release/netcoreapp3.1/publish/  -> we can just go to this f
 (or)
 
 Simply open the projects in VS2019 and run them there.
-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------
 
-# 3. To test the microservices :-
+# 4. To test the microservices :-
 
 open postman and import the json files from './UsefulDocs/Postman/' folder , U can see all the api test requests present.
+Header UserId is important for Airlines module (should be admin userId)
   
