@@ -54,4 +54,33 @@ namespace AirlinesDTOs
         public long ModifiedBy { get; set; }
         //public UserDtOs.Users ModifierUser { get; set; }
     }
+
+    [DataContract(Name = "DiscountTagDetails")]
+    public class DiscountTagDetails
+    {
+        [DataMember(Name = "Id")]
+        //[key]
+        public long Id { get; set; }
+
+        [DataMember(Name = "Name")]
+        [MaxLength(512)]
+        public string Name { get; set; }
+
+        [DataMember(Name = "DiscountCode")]
+        [MaxLength(100)]
+        public string DiscountCode { get; set; }
+
+        [DataMember(Name = "Description")]
+        [MaxLength(1024)]
+        public string Description { get; set; }
+
+        [DataMember(Name = "Discount")]
+        public float Discount { get; set; }
+
+        [DataMember(Name = "IsByRate")]
+        public bool? IsByRate { get; set; } = null;
+
+        [DataMember(Name = "IsActive")]
+        public bool? IsActive { get; set; } = null;
+    }
 }

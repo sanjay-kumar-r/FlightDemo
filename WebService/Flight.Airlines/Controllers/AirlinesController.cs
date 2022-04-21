@@ -1,4 +1,5 @@
-﻿using CommonDTOs;
+﻿using AirlinesDTOs;
+using CommonDTOs;
 using Flight.Airlines.Models.Utils;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
@@ -40,10 +41,10 @@ namespace Flight.Airlines.Controllers
         //    }
         //}
 
-        public AirlinesController(IConfiguration config, IAirlinesRepository usersRepo)
+        public AirlinesController(IConfiguration config, IAirlinesRepository airlinesRepo)
         {
             this.config = config;
-            this.airlineRepo = usersRepo;
+            this.airlineRepo = airlinesRepo;
             //this.context = context;
             //headerInfo = SetHeaderInfo();
         }
@@ -82,7 +83,7 @@ namespace Flight.Airlines.Controllers
 
         [HttpPost]
         [Route("GetAirlinesByFiltercondition")]
-        public IEnumerable<AirlinesDTOs.Airlines> GetAirlinesByFiltercondition([FromBody] AirlinesDTOs.Airlines airline)
+        public IEnumerable<AirlinesDTOs.Airlines> GetAirlinesByFiltercondition([FromBody] AirlinesDTOs.AirlineDetails airline)
         {
             return airlineRepo.GetAirlinesByFiltercondition(airline);
         }
@@ -94,7 +95,7 @@ namespace Flight.Airlines.Controllers
             if (!AirlinesValidation.ValidateAddFlight(airline))
                 throw new Exception("AirlinesValidation.ValidateAddFlight Falied");
 
-            if (airlineRepo.FlightExists(airline))
+            if (airlineRepo.IsAirlineAlreadyExists(airline))
                 throw new Exception("Airline name and/or code already exists");
 
             long userId = Convert.ToInt64(HttpContext.Request.Headers["UserId"]);
@@ -105,17 +106,31 @@ namespace Flight.Airlines.Controllers
 
         [HttpPost]
         [Route("Update")]
-        public Result Update([FromBody] AirlinesDTOs.Airlines airline)
+        public Result Update([FromBody] AirlinesDTOs.AirlineDetails airline)
         {
             if (!AirlinesValidation.ValidateUpdateFlight(airline))
-                throw new Exception("AirlinesValidation.ValidateAddFlight Falied");
+                throw new Exception("AirlinesValidation.ValidateUpdateFlight Falied");
 
-            if (airlineRepo.FlightExists(airline))
+            AirlinesDTOs.Airlines airline_1 = new AirlinesDTOs.Airlines()
+            {
+                Id = airline.Id,
+                Name = airline.Name,
+                AirlineCode = airline.AirlineCode,
+                ContactNumber = airline.ContactNumber,
+                ContactAddress = airline.ContactAddress,
+                TotalSeats = airline.TotalBCSeats,
+                TotalBCSeats = airline.TotalBCSeats,
+                TotalNBCSeats = airline.TotalNBCSeats,
+                BCTicketCost = airline.BCTicketCost,
+                NBCTicketCost = airline.NBCTicketCost
+            };
+            if (airline.IsActive != null)
+                airline_1.IsActive = (bool)airline.IsActive;
+            if (airlineRepo.IsAirlineAlreadyExists(airline_1))
                 throw new Exception("Airline name and/or code already exists");
 
             long userId = Convert.ToInt64(HttpContext.Request.Headers["UserId"]);
-            airline.ModifiedBy = Convert.ToInt64(userId);
-            return airlineRepo.UpdateAirline(airline);
+            return airlineRepo.UpdateAirline(airline, userId);
         }
 
         [HttpPost]
@@ -143,7 +158,7 @@ namespace Flight.Airlines.Controllers
             {
                 Id = id,
                 ModifiedBy = Convert.ToInt64(HttpContext.Request.Headers["UserId"])
-        };
+            };
             return airlineRepo.DeleteAirline(airline);
         }
 
@@ -151,7 +166,141 @@ namespace Flight.Airlines.Controllers
         [Route("PermanentDelete")]
         public Result PermanentDelete([FromBody] long id)
         {
-            return airlineRepo.PermanentDelete(id);
+            return airlineRepo.PermanentDeleteAirline(id);
         }
+
+        [HttpPost]
+        [Route("MapAirlinesDiscountTags")]
+        public Result MapAirlinesDiscountTags([FromBody] List<AirlinesDTOs.AirlineDiscountTagMappingDetails> airlineDiscountTagMappingDetails)
+        {
+            if (!AirlinesValidation.ValidateAirlineDiscountTagMappings(airlineDiscountTagMappingDetails))
+                throw new Exception("AirlinesValidation.ValidateAirlineDiscountTagMappings Falied");
+
+            List<AirlineDiscountTagMappings> airlineDiscountTagMappings = new List<AirlineDiscountTagMappings>();
+            var mappings = airlineDiscountTagMappingDetails.Where(x => x.Airline != null
+                && (x.Airline.Id > 0 || !string.IsNullOrWhiteSpace(x.Airline.Name) || !string.IsNullOrWhiteSpace(x.Airline.AirlineCode))
+                && x.DiscountTags != null);
+            if (mappings != null && mappings.Count() > 0)
+            {
+                long userId = Convert.ToInt64(HttpContext?.Request?.Headers["UserId"]);
+                foreach (var map in mappings)
+                {
+                    var airline = airlineRepo.GetAirlinesByFiltercondition(map.Airline);
+                    if (airline != null && airline.Count() > 0)
+                    {
+                        var discountTags = map.DiscountTags.Where(x => x.Id > 0
+                                || !string.IsNullOrWhiteSpace(x.Name) || !string.IsNullOrWhiteSpace(x.DiscountCode));
+                        if (discountTags != null && discountTags.Count() > 0)
+                        {
+                            var discountTagDetails = airlineRepo.GetDiscountTagsByMultipleFilterconditions(discountTags.ToList());
+                            if (discountTagDetails != null && discountTagDetails.Count() > 0)
+                            {
+                                airlineDiscountTagMappings.AddRange(discountTagDetails.
+                                    Select(x => new AirlineDiscountTagMappings()
+                                    {
+                                        AirlineId = airline.FirstOrDefault().Id,
+                                        DiscountTagId = x.Id,
+                                        TaggedBy = userId,
+                                        Airline = null,
+                                        DiscountTag = null
+                                    }));
+                            }
+                        }
+                    }
+                }
+
+                if (airlineDiscountTagMappings == null || airlineDiscountTagMappings.Count() <= 0)
+                    throw new Exception("All input mappings are invalid");
+
+                return airlineRepo.AddAirlineDiscountTagMappings(airlineDiscountTagMappings);
+            }
+            else
+                return new Result() { Res = false, ResultMessage = "input airlineDiscountTagMappingDetails are invalid" };
+        }
+
+        [HttpGet]
+        [Route("GetAirlineDiscountTagsMapping")]
+        public IEnumerable<AirlineDiscountTagMappingDetails> GetAirlineDiscountTagsMapping()
+        {
+            IEnumerable<AirlineDiscountTagMappingDetails> airlineDiscountTagsMappingDetails = null;
+            var airlineDiscountTagsMappings = airlineRepo.GetAirlineDiscountTagsMappings();
+            if (airlineDiscountTagsMappings != null && airlineDiscountTagsMappings.Count() > 0)
+            {
+                airlineDiscountTagsMappingDetails = airlineDiscountTagsMappings.GroupBy(x => x.AirlineId).Select(x =>
+                new AirlineDiscountTagMappingDetails()
+                {
+                    Airline = new AirlineDetails()
+                    {
+                        Id = x.Key,
+                        Name = x.FirstOrDefault().Airline.Name,
+                        AirlineCode = x.FirstOrDefault().Airline.AirlineCode,
+                        ContactNumber = x.FirstOrDefault().Airline.ContactNumber,
+                        ContactAddress = x.FirstOrDefault().Airline.ContactAddress,
+                        TotalSeats = x.FirstOrDefault().Airline.TotalSeats,
+                        TotalBCSeats = x.FirstOrDefault().Airline.TotalBCSeats,
+                        TotalNBCSeats = x.FirstOrDefault().Airline.TotalNBCSeats,
+                        BCTicketCost = x.FirstOrDefault().Airline.BCTicketCost,
+                        NBCTicketCost = x.FirstOrDefault().Airline.NBCTicketCost,
+                        IsActive = x.FirstOrDefault().Airline.IsActive
+                    },
+                    DiscountTags = x.Select(y => new DiscountTagDetails()
+                    {
+                        Id = y.DiscountTag.Id,
+                        Name = y.DiscountTag.Name,
+                        DiscountCode = y.DiscountTag.DiscountCode,
+                        Description = y.DiscountTag.Description,
+                        Discount = y.DiscountTag.Discount,
+                        IsByRate = y.DiscountTag.IsByRate,
+                        IsActive = y.DiscountTag.IsActive
+                    }).ToList()
+                });
+            }
+            return airlineDiscountTagsMappingDetails;
+        }
+
+        [HttpGet]
+        [Route("GetAirlineDiscountTagsMapping/{airlineId}")]
+        [Route("GetAirlineDiscountTagsMapping/{airlineId}/{discountId}")]
+        public IEnumerable<AirlineDiscountTagMappingDetails> GetAirlineDiscountTagsMapping(long airlineId = 0, long discountId = 0)
+        {
+            if (airlineId <= 0 && discountId <= 0)
+                throw new Exception("Atleast one of the fields (airlineId or discountId) should be be greated than zero");
+
+            var airlineDiscountTagsMappingDetails = new List<AirlineDiscountTagMappingDetails>();
+            var airlineDiscountTagsMappings = airlineRepo.GetAirlineDiscountTagsMappings(airlineId, discountId);
+            if (airlineDiscountTagsMappings != null && airlineDiscountTagsMappings.Count() > 0)
+            {
+                airlineDiscountTagsMappingDetails = airlineDiscountTagsMappings.GroupBy(x => x.AirlineId).Select(x =>
+                new AirlineDiscountTagMappingDetails()
+                {
+                    Airline = new AirlineDetails()
+                    {
+                        Id = x.Key,
+                        Name = x.FirstOrDefault().Airline.Name,
+                        AirlineCode = x.FirstOrDefault().Airline.AirlineCode,
+                        ContactNumber = x.FirstOrDefault().Airline.ContactNumber,
+                        ContactAddress = x.FirstOrDefault().Airline.ContactAddress,
+                        TotalSeats = x.FirstOrDefault().Airline.TotalSeats,
+                        TotalBCSeats = x.FirstOrDefault().Airline.TotalBCSeats,
+                        TotalNBCSeats = x.FirstOrDefault().Airline.TotalNBCSeats,
+                        BCTicketCost = x.FirstOrDefault().Airline.BCTicketCost,
+                        NBCTicketCost = x.FirstOrDefault().Airline.NBCTicketCost,
+                        IsActive = x.FirstOrDefault().Airline.IsActive
+                    },
+                    DiscountTags = x.Select(y => new DiscountTagDetails()
+                    {
+                        Id = y.DiscountTag.Id,
+                        Name = y.DiscountTag.Name,
+                        DiscountCode = y.DiscountTag.DiscountCode,
+                        Description = y.DiscountTag.Description,
+                        Discount = y.DiscountTag.Discount,
+                        IsByRate = y.DiscountTag.IsByRate,
+                        IsActive = y.DiscountTag.IsActive
+                    }).ToList()
+                }).ToList();
+            }
+            return airlineDiscountTagsMappingDetails;
+        }
+
     }
 }

@@ -9,7 +9,7 @@ namespace Flight.Airlines.Models.Utils
     {
         public static bool ValidateAddFlight(AirlinesDTOs.Airlines airline)
         {
-            if (string.IsNullOrWhiteSpace(airline.Name) || string.IsNullOrWhiteSpace(airline.ContactNumber)
+            if (airline == null || string.IsNullOrWhiteSpace(airline.Name) || string.IsNullOrWhiteSpace(airline.ContactNumber)
                 || airline.TotalSeats <= 0 || airline.TotalBCSeats < 0 || airline.TotalNBCSeats < 0 || 
                 (airline.TotalBCSeats + airline.TotalNBCSeats) != airline.TotalSeats ||
                 airline.BCTicketCost < (double)0 || airline.NBCTicketCost < (double)0)
@@ -17,9 +17,9 @@ namespace Flight.Airlines.Models.Utils
             return true;
         }
 
-        public static bool ValidateUpdateFlight(AirlinesDTOs.Airlines airline)
+        public static bool ValidateUpdateFlight(AirlinesDTOs.AirlineDetails airline)
         {
-            if (airline.Id <= 0
+            if (airline == null || airline.Id <= 0
                 || airline.TotalSeats <= 0 || airline.TotalBCSeats < 0 || airline.TotalNBCSeats < 0 ||
                 (airline.TotalBCSeats + airline.TotalNBCSeats) != airline.TotalSeats ||
                 airline.BCTicketCost < (double)0 || airline.NBCTicketCost < (double)0)
@@ -37,6 +37,13 @@ namespace Flight.Airlines.Models.Utils
                 return false;
             return true;
         }
-        
+
+        public static bool ValidateAirlineDiscountTagMappings(List<AirlinesDTOs.AirlineDiscountTagMappingDetails> mappings)
+        {
+            if (mappings == null || mappings.Count() <= 0)
+                return false;
+            return true;
+        }
+
     }
 }

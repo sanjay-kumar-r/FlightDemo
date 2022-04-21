@@ -1,5 +1,6 @@
 {
   "Routes": [
+    //Users :->
     {
       "DownstreamPathTemplate": "/api/{version}/Users/",
       "DownstreamScheme": "http",
@@ -120,6 +121,7 @@
       "UpstreamPathTemplate": "/api/{version}/Users/Delete",
       "UpstreamHttpMethod": [ "Post" ]
     },
+    //Airlines :->
     {
       "DownstreamPathTemplate": "/api/{version}/Airlines/",
       "DownstreamScheme": "http",
@@ -154,6 +156,56 @@
         }
       ],
       "UpstreamPathTemplate": "/api/{version}/Airlines/{everything}",
+      "UpstreamHttpMethod": [ "Post" ]
+    },
+    //AirlinesDiscountTagsMappings
+    //{
+    //  "DownstreamPathTemplate": "/api/{version}/Airlines/{everything}",
+    //  "DownstreamScheme": "http",
+    //  "DownstreamHostAndPorts": [
+    //    {
+    //      "Host": "localhost",
+    //      "Port": "9003"
+    //    }
+    //  ],
+    //  "UpstreamPathTemplate": "/api/{version}/Airlines/{everything}",
+    //  "UpstreamHttpMethod": [ "Get" ]
+    //},
+    //DiscountTags :->
+    {
+      "DownstreamPathTemplate": "/api/{version}/DiscountTags/",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "9003"
+        }
+      ],
+      "UpstreamPathTemplate": "/api/{version}/DiscountTags/",
+      "UpstreamHttpMethod": [ "Get" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/{version}/DiscountTags/{id}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "9003"
+        }
+      ],
+      "UpstreamPathTemplate": "/api/{version}/DiscountTags/{id}",
+      "UpstreamHttpMethod": [ "Get" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/{version}/DiscountTags/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "9003"
+        }
+      ],
+      "UpstreamPathTemplate": "/api/{version}/DiscountTags/{everything}",
       "UpstreamHttpMethod": [ "Post" ]
     }
   ],

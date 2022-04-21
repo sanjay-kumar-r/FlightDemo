@@ -40,6 +40,7 @@ namespace Flight.Airlines
             services.AddDbContextPool<AirlinesDBContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("SQLServerConnectionString")));
             services.AddTransient<IAirlinesRepository, AirlinesRepository>();
+            //services.AddTransient<IDiscountTagsRepository, DiscountTagsRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

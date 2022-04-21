@@ -79,3 +79,4 @@ D:\WorkSpace\WebService\Flignt.Users\bin\Debug\netcoreapp3.1\Humanizer.dll
 D:\WorkSpace\WebService\Flignt.Users\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.Design.dll
 D:\WorkSpace\WebService\Flignt.Users\bin\Debug\netcoreapp3.1\AirlinesDTOs.dll
 D:\WorkSpace\WebService\Flignt.Users\bin\Debug\netcoreapp3.1\AirlinesDTOs.pdb
+D:\WorkSpace\WebService\Flignt.Users\obj\Debug\netcoreapp3.1\Flight.Users.csproj.CopyComplete

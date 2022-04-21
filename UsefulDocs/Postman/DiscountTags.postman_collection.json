@@ -1,0 +1,374 @@
+{
+	"info": {
+		"_postman_id": "afdf1d78-848f-4823-b247-e8654ba7e908",
+		"name": "DiscountTags",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Discount_Tags",
+			"item": [
+				{
+					"name": "DiscountTags_Get",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": " application/json",
+								"type": "text"
+							},
+							{
+								"key": "UserId",
+								"value": " 1234",
+								"type": "text"
+							},
+							{
+								"key": "TenantId",
+								"value": " 9012",
+								"type": "text"
+							},
+							{
+								"key": "AccessToken",
+								"value": " abcd",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:9050/api/v1.0/DiscountTags",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9050",
+							"path": [
+								"api",
+								"v1.0",
+								"DiscountTags"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DiscountTags_Get/{id}",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": " application/json",
+								"type": "text"
+							},
+							{
+								"key": "UserId",
+								"value": " 1234",
+								"type": "text"
+							},
+							{
+								"key": "TenantId",
+								"value": " 9012",
+								"type": "text"
+							},
+							{
+								"key": "AccessToken",
+								"value": " abcd",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:9050/api/v1.0/DiscountTags/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9050",
+							"path": [
+								"api",
+								"v1.0",
+								"DiscountTags",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "DiscountTags_Add",
+			"item": [
+				{
+					"name": "DiscountTags_Add",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": " application/json",
+								"type": "text"
+							},
+							{
+								"key": "UserId",
+								"value": " 3",
+								"type": "text"
+							},
+							{
+								"key": "TenantId",
+								"value": " 9012",
+								"type": "text"
+							},
+							{
+								"key": "AccessToken",
+								"value": " abcd",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"Name\": \"Spring Offer\",\r\n    \"DiscountCode\": \"Spring456\",\r\n    \"Description\": \"limited for Spring offer only\",\r\n    \"Discount\": 6.12,\r\n    \"IsByRate\": true,\r\n    \"IsActive\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9050/api/v1.0/DiscountTags/Add",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9050",
+							"path": [
+								"api",
+								"v1.0",
+								"DiscountTags",
+								"Add"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "DiscountTags_Update",
+			"item": [
+				{
+					"name": "DiscountTags_Update",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": " application/json",
+								"type": "text"
+							},
+							{
+								"key": "UserId",
+								"value": " 3",
+								"type": "text"
+							},
+							{
+								"key": "TenantId",
+								"value": " 9012",
+								"type": "text"
+							},
+							{
+								"key": "AccessToken",
+								"value": " abcd",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"Id\": 1,\r\n    \"Name\": \"Spring Offer\",\r\n    \"DiscountCode\": \"Spring6\",\r\n    \"Description\": \"limited for spring offer only\",\r\n    \"Discount\": 6.12,\r\n    \"IsByRate\": true,\r\n    \"IsActive\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9050/api/v1.0/DiscountTags/Update",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9050",
+							"path": [
+								"api",
+								"v1.0",
+								"DiscountTags",
+								"Update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DiscountTags_ActivateDeactivateAirline",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": " application/json",
+								"type": "text"
+							},
+							{
+								"key": "UserId",
+								"value": " 3",
+								"type": "text"
+							},
+							{
+								"key": "TenantId",
+								"value": " 9012",
+								"type": "text"
+							},
+							{
+								"key": "AccessToken",
+								"value": " abcd",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"Id\": 1,\r\n    \"IsActive\": false\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9050/api/v1.0/DiscountTags/ActivateDeactivateDiscountTag",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9050",
+							"path": [
+								"api",
+								"v1.0",
+								"DiscountTags",
+								"ActivateDeactivateDiscountTag"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "DiscountTags_Delete",
+			"item": [
+				{
+					"name": "DiscountTags_Delete",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": " application/json",
+								"type": "text"
+							},
+							{
+								"key": "UserId",
+								"value": " 3",
+								"type": "text"
+							},
+							{
+								"key": "TenantId",
+								"value": " 9012",
+								"type": "text"
+							},
+							{
+								"key": "AccessToken",
+								"value": " abcd",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "1",
+							"options": {
+								"raw": {
+									"language": "text"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9050/api/v1.0/DiscountTags/Delete",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9050",
+							"path": [
+								"api",
+								"v1.0",
+								"DiscountTags",
+								"Delete"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DiscountTags_PermanentDelete",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": " application/json",
+								"type": "text"
+							},
+							{
+								"key": "UserId",
+								"value": " 3",
+								"type": "text"
+							},
+							{
+								"key": "TenantId",
+								"value": " 9012",
+								"type": "text"
+							},
+							{
+								"key": "AccessToken",
+								"value": " abcd",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "2",
+							"options": {
+								"raw": {
+									"language": "text"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9050/api/v1.0/DiscountTags/PermanentDelete",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9050",
+							"path": [
+								"api",
+								"v1.0",
+								"DiscountTags",
+								"PermanentDelete"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

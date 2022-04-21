@@ -56,14 +56,15 @@ namespace Flight.Users.Model.Utils
 
         public bool UserExists(string emailId, long? id = null)
         {
-            return context.Users.Any(u => u.EmailId.Equals(emailId) && (id == null || id != u.Id));
+            return context.Users.Any(u => u.EmailId.Equals(emailId) && (id == null || id != u.Id) && !u.IsDeleted);
         }
         public bool ValidateAdmin(UserDtOs.Users user)
         {
             return context.Users.Any(u => (user.Id <= 0 || u.Id == user.Id) 
                 &&(string.IsNullOrWhiteSpace(user.EmailId) ||  u.EmailId.Equals(user.EmailId))
                 && (u.AccountStatusId == (int)AccountStatusCode.Active)
-                && (u.IsSuperAdmin == true));
+                && (u.IsSuperAdmin == true)
+                && !u.IsDeleted);
         }
 
         public IEnumerable<UserDtOs.Users> GetUsers(long? id = null)
@@ -111,7 +112,7 @@ namespace Flight.Users.Model.Utils
             try
             {
                 Result result = new Result();
-                if (user.Id > 0 && context.Users.Count() > 0 && context.Users.Any(x => x.Id == user.Id))
+                if (user.Id > 0 && context.Users.Count() > 0 && context.Users.Any(x => x.Id == user.Id && !x.IsDeleted))
                 {
                     context.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
                     UserDtOs.Users userExisting = context.Users.First(x => x.Id == user.Id);
@@ -138,7 +139,7 @@ namespace Flight.Users.Model.Utils
                 {
                     result.Res = false;
                     result.ResultMessage = $"unable to update user date for id={user.Id} " + Environment.NewLine +
-                        "Invalid_UserId_or_No_data_exists_that_matches_UserId";
+                        "Invalid/Deleted_UserId_or_No_data_exists_that_matches_UserId";
                 }
                 return result;
 
@@ -154,7 +155,7 @@ namespace Flight.Users.Model.Utils
             try
             {
                 Result result = new Result();
-                if (id > 0 && context.Users.Count() > 0 && context.Users.Any(x => x.Id == id))
+                if (id > 0 && context.Users.Count() > 0 && context.Users.Any(x => x.Id == id && !x.IsDeleted))
                 {
                     context.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
                     UserDtOs.Users userExisting = context.Users.First(x => x.Id == id);
@@ -171,7 +172,7 @@ namespace Flight.Users.Model.Utils
                 {
                     result.Res = false;
                     result.ResultMessage = $"unable to update user as super admin for id={id} " + Environment.NewLine +
-                        "Invalid_UserId_or_No_data_exists_that_matches_UserId";
+                        "Invalid/Deleted_UserId_or_No_data_exists_that_matches_UserId";
                 }
                 return result;
 

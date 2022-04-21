@@ -8,7 +8,7 @@ To create Flight demo projects for training
 
 ./Library folder -> has the shared DTOs, Service contracts and Utils classes which will be used by client and webservice.
 ./WebService folder -> contains microservice projects.
-./WebService/Flight.Airlines/ folder -> has microservice project related to Aprlines - Add/Update/Delete
+./WebService/Flight.Airlines/ folder -> has microservice project related to Aprlines , Discounts , AirlineDiscountMappings and Scheduler - Add/Update/Delete
 ./WebService/Flight.Users/ folder -> has microservice project related to Users - Register/Login/Update/Delete
 ./Tools/APIGateway/ folder -> has microservice project related to API Gateway - routing json file is present in OcelotConfigs/ocelot.json (or) ocelot.{env}.json
 ----------------------------------------------------------------------------------------------------------------------------------

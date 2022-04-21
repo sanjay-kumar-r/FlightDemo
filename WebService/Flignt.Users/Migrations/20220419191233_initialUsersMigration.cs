@@ -63,6 +63,10 @@ namespace Flight.Users.Migrations
                 name: "IX_Users_AccountStatusId",
                 table: "Users",
                 column: "AccountStatusId");
+
+
+            //migrationBuilder.Sql("ALTER DATABASE SCOPED CONFIGURATION SET IDENTITY_CACHE=OFF", true);
+            //migrationBuilder.AlterDatabase("ALTER DATABASE SCOPED CONFIGURATION SET IDENTITY_CACHE=OFF");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

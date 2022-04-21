@@ -1,0 +1,211 @@
+{
+	"info": {
+		"_postman_id": "f04a807a-4334-44b5-aefa-d56407631d34",
+		"name": "AirlineDiscountTagMappings",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "mappings_Add",
+			"item": [
+				{
+					"name": "mappings_Add",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": " application/json",
+								"type": "text"
+							},
+							{
+								"key": "UserId",
+								"value": " 3",
+								"type": "text"
+							},
+							{
+								"key": "TenantId",
+								"value": " 9012",
+								"type": "text"
+							},
+							{
+								"key": "AccessToken",
+								"value": " abcd",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n    {\r\n        \"Airline\": {\r\n            \"Id\": 1,\r\n            \"Name\": \"Air India\",\r\n            \"AirlineCode\": \"AIR1\"\r\n        },\r\n        \"DiscountTags\": [\r\n            {\r\n                \"Id\": 3,\r\n                \"Name\": \"Winter Offer\",\r\n                \"DiscountCode\": \"Winter456\"\r\n            },\r\n            {\r\n                \"Id\": 4,\r\n                \"Name\": \"Spring Offer\",\r\n                \"DiscountCode\": \"Spring456\"\r\n            }\r\n        ]\r\n    },\r\n    {\r\n        \"Airline\": {\r\n            \"Id\": 2\r\n        },\r\n        \"DiscountTags\": [\r\n            {\r\n                \"Id\": 5\r\n            },\r\n            {\r\n                \"Name\": \"Spring Offer\"\r\n            },\r\n            {\r\n                \"DiscountCode\": \"Winter456\"\r\n            }\r\n        ]\r\n    }\r\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9050/api/v1.0/Airlines/MapAirlinesDiscountTags",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9050",
+							"path": [
+								"api",
+								"v1.0",
+								"Airlines",
+								"MapAirlinesDiscountTags"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "mappings_Add_InvalidMaps",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": " application/json",
+								"type": "text"
+							},
+							{
+								"key": "UserId",
+								"value": " 3",
+								"type": "text"
+							},
+							{
+								"key": "TenantId",
+								"value": " 9012",
+								"type": "text"
+							},
+							{
+								"key": "AccessToken",
+								"value": " abcd",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n    {\r\n        \"Airline\": {\r\n            \"Id\": 112,\r\n            \"Name\": \"Air India\",\r\n            \"AirlineCode\": \"AIR1\"\r\n        },\r\n        \"DiscountTags\": [\r\n            {\r\n                \"Id\": 323,\r\n                \"Name\": \"Winter Offer\",\r\n                \"DiscountCode\": \"Winter456\"\r\n            },\r\n            {\r\n                \"Id\": 423,\r\n                \"Name\": \"Spring Offer\",\r\n                \"DiscountCode\": \"Spring456\"\r\n            }\r\n        ]\r\n    },\r\n    {\r\n        \"Airline\": {\r\n            \"Id\": 2\r\n        },\r\n        \"DiscountTags\": [\r\n            {\r\n                \"Id\": 533\r\n            },\r\n            {\r\n                \"Name\": \"Spring Offer223333\"\r\n            },\r\n            {\r\n                \"DiscountCode\": \"Winter4563434445\"\r\n            }\r\n        ]\r\n    }\r\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9050/api/v1.0/Airlines/MapAirlinesDiscountTags",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9050",
+							"path": [
+								"api",
+								"v1.0",
+								"Airlines",
+								"MapAirlinesDiscountTags"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "mapplngs_Get",
+			"item": [
+				{
+					"name": "mappings_Get",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": " application/json",
+								"type": "text"
+							},
+							{
+								"key": "UserId",
+								"value": " 1234",
+								"type": "text"
+							},
+							{
+								"key": "TenantId",
+								"value": " 9012",
+								"type": "text"
+							},
+							{
+								"key": "AccessToken",
+								"value": " abcd",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:9050/api/v1.0/Airlines/GetAirlineDiscountTagsMapping",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9050",
+							"path": [
+								"api",
+								"v1.0",
+								"Airlines",
+								"GetAirlineDiscountTagsMapping"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "mappings_Get/{airlineId}/{DiscountId}",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": " application/json",
+								"type": "text"
+							},
+							{
+								"key": "UserId",
+								"value": " 1234",
+								"type": "text"
+							},
+							{
+								"key": "TenantId",
+								"value": " 9012",
+								"type": "text"
+							},
+							{
+								"key": "AccessToken",
+								"value": " abcd",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:9050/api/v1.0/Airlines/GetAirlineDiscountTagsMapping/1/4",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9050",
+							"path": [
+								"api",
+								"v1.0",
+								"Airlines",
+								"GetAirlineDiscountTagsMapping",
+								"1",
+								"4"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

@@ -6,7 +6,7 @@ using System.Text;
 
 namespace AirlinesDTOs
 {
-    [DataContract(Name = "DiscountTags")]
+    [DataContract(Name = "AirlineDiscountTagMappings")]
     public class AirlineDiscountTagMappings
     {
 
@@ -27,5 +27,15 @@ namespace AirlinesDTOs
         //[ForeignKey("TaggedUser")]
         public long TaggedBy { get; set; }
         //public UserDtOs.Users TaggedUser { get; set; }
+    }
+
+    [DataContract(Name = "AirlineDiscountTagMappingDetails")]
+    public class AirlineDiscountTagMappingDetails
+    {
+        [DataMember(Name = "Airline")]
+        public AirlinesDTOs.AirlineDetails Airline { get; set; }
+
+        [DataMember(Name = "DiscountTags")]
+        public List<AirlinesDTOs.DiscountTagDetails> DiscountTags { get; set; }
     }
 }
