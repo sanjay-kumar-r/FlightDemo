@@ -268,6 +268,8 @@ namespace Flight.Airlines.Controllers
                                 {
                                     AirlineId = airline.FirstOrDefault().Id,
                                     DiscountTagId = x,
+                                    Airline = null,
+                                    DiscountTag = null
                                     //TaggedBy = userId,
                                     //Airline = null,
                                     //DiscountTag = null
@@ -288,7 +290,7 @@ namespace Flight.Airlines.Controllers
             }
             else
                 return result;
-                //return new Result() { Res = false, ResultMessage = "input remapAirlineDiscountTagsDetails are invalid" };
+            //return new Result() { Res = false, ResultMessage = "input remapAirlineDiscountTagsDetails are invalid" };
         }
 
         [HttpGet]
@@ -375,5 +377,101 @@ namespace Flight.Airlines.Controllers
             return airlineDiscountTagsMappingDetails;
         }
 
+        //Search available flights
+        [HttpPost]
+        [Route("GetAvailableAirlines")]
+        public IEnumerable<AirlinesSearchResponse> GetAvailableAirlines([FromBody] AirlinesSearchRequest airlinesSearchRequest)
+        {
+            if (airlinesSearchRequest.DepartureDate == null)
+                airlinesSearchRequest.DepartureDate = DateTime.Now.Date;
+            if (airlinesSearchRequest.ArrivalDate == null)
+                airlinesSearchRequest.ArrivalDate = DateTime.Now.AddDays(7).Date;
+            if (!AirlinesValidation.ValidateGetAvailableAirlines(airlinesSearchRequest))
+                throw new Exception("AirlinesValidation.ValidateGetAvailableAirlines Failed");
+
+            var airlinesSearchResponse = new List<AirlinesSearchResponse>();
+            //get available airline schedules
+            var scheduleSearch = new AirlineScheduleDetails()
+            {
+                From = airlinesSearchRequest.From,
+                To = airlinesSearchRequest.To,
+                DepartureDay = airlinesSearchRequest.DepartureDate.Value.DayOfWeek,
+                DepartureDate = airlinesSearchRequest.DepartureDate.Value.Date
+            };
+            var availableSchedules = airlineRepo.GetGetAirlineSchedulesByFilterCondition(scheduleSearch);
+            if(availableSchedules != null && availableSchedules.Count() > 0)
+            {
+                //get active airline schedules
+                var activeSchedules = availableSchedules.Where(x => x.Airline != null && !x.Airline.IsDeleted && x.Airline.IsActive);
+                if(activeSchedules != null && activeSchedules.Count() > 0)
+                {
+                    //get available seats
+                    foreach (var schedule in activeSchedules)
+                    {
+                        var response = new AirlinesSearchResponse()
+                        {
+                            AirlineSchedules = schedule,
+                            DiscountTags = null,
+                            BCSeatsAvailable = schedule.Airline.TotalBCSeats,
+                            NBCSeatsAvailable = schedule.Airline.TotalNBCSeats,
+                        };
+                        if (!schedule.IsRegular)
+                        {
+                            response.ActualDepartureDate = schedule.DepartureDate.Value.Date;
+                            response.ActualArrivalDate = schedule.ArrivalDate.Value.Date;
+                        }
+                        else
+                        {
+                            var today = DateTime.Now.DayOfWeek;
+                            if((int)schedule.DepartureDay.Value >= (int)today)
+                                response.ActualDepartureDate = DateTime.Now.AddDays((int)schedule.DepartureDay.Value - (int)today);
+                            else
+                            {
+                                response.ActualDepartureDate = DateTime.Now.AddDays(
+                                    ((int)Enum.GetValues(typeof(DayOfWeek)).Cast<DayOfWeek>().Max() - (int)today) 
+                                    + (int)schedule.DepartureDay.Value + 1);
+                            }
+                            if ((int)schedule.ArrivalDay.Value >= (int)today)
+                                response.ActualArrivalDate = DateTime.Now.AddDays((int)schedule.ArrivalDay.Value - (int)today);
+                            else
+                            {
+                                response.ActualArrivalDate = DateTime.Now.AddDays(
+                                    ((int)Enum.GetValues(typeof(DayOfWeek)).Cast<DayOfWeek>().Max() - (int)today)
+                                    + (int)schedule.ArrivalDay.Value + 1);
+                            }
+                        }
+                        response.ActualDepartureDate = response.ActualDepartureDate +
+                            new TimeSpan(schedule.DepartureTime.Hour, schedule.DepartureTime.Minute, schedule.DepartureTime.Second);
+                        response.ActualArrivalDate = response.ActualArrivalDate +
+                            new TimeSpan(schedule.DepartureTime.Hour, schedule.DepartureTime.Minute, schedule.DepartureTime.Second);
+                        //get active discountTags and add to result
+                        var discountTagMappings = airlineRepo.GetAirlineDiscountTagsMappings(schedule.AirlineId);
+                        if(discountTagMappings != null && discountTagMappings.Count() > 0)
+                        {
+                            var activeDiscountTags = discountTagMappings.Where(x => !x.DiscountTag.IsDeleted && x.DiscountTag.IsActive);
+                            if(activeDiscountTags != null && activeDiscountTags.Count() > 0)
+                            {
+                                response.DiscountTags = activeDiscountTags.Select(x => x.DiscountTag).ToList();
+                            }
+                        }
+                        //get available seats
+                        var scheduleTrackerSearch = new AirlineScheduleTracker()
+                        {
+                            ScheduleId = schedule.Id,
+                            ActualDepartureDate = airlinesSearchRequest.DepartureDate.Value.Date
+                        };
+                        var scheduleTrackers = airlineRepo.GetAirlineScheduleTrackerByFilterCondition(scheduleTrackerSearch);
+                        if(scheduleTrackers != null && scheduleTrackers.Count() > 0 && scheduleTrackers.FirstOrDefault() != null)
+                        {
+                            response.BCSeatsAvailable = scheduleTrackers.FirstOrDefault().BCSeatsRemaining;
+                            response.NBCSeatsAvailable = scheduleTrackers.FirstOrDefault().NBCSeatsRemaining;
+                        }
+                        //add the prepared response to final list
+                        airlinesSearchResponse.Add(response);
+                    }
+                }
+            }
+            return airlinesSearchResponse;
+        }
     }
 }

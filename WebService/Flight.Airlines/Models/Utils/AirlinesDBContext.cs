@@ -16,6 +16,7 @@ namespace Flight.Airlines.Models.Utils
         public DbSet<AirlinesDTOs.DiscountTags> DiscountTags { get; set; }
         public DbSet<AirlinesDTOs.AirlineDiscountTagMappings> AirlineDiscountTagMappings { get; set; }
         public DbSet<AirlinesDTOs.AirlineSchedules> AirlineSchedules { get; set; }
+        public DbSet<AirlinesDTOs.AirlineScheduleTracker> AirlineScheduleTracker { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -98,14 +99,17 @@ namespace Flight.Airlines.Models.Utils
             modelBuilder.Entity<AirlinesDTOs.AirlineSchedules>()
                    .Property(t => t.ArrivalTime)
                    .IsRequired();
-            //PopulateDayTable(refmodelBuilder);
-        }
 
-        //public void PopulateDayTable(ref ModelBuilder modelBuilder)
-        //{
-        //    List<>
-        //    modelBuilder.Entity<AirlinesDTOs.AirlineSchedules>()
-        //        .HasData()
-        //}
+            //AirlineScheduleTracker
+            modelBuilder.Entity<AirlinesDTOs.AirlineScheduleTracker>()
+                .HasKey(x => x.Id)
+                .HasName("PrimaryKey_ScheduleTrackerId");
+            modelBuilder.Entity<AirlinesDTOs.AirlineScheduleTracker>()
+                   .Property(x => x.ScheduleId)
+                   .IsRequired();
+            modelBuilder.Entity<AirlinesDTOs.AirlineScheduleTracker>()
+                   .Property(x => x.ActualDepartureDate)
+                   .IsRequired();
+        }
     }
 }

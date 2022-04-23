@@ -83,5 +83,20 @@ namespace ServiceContracts.Airlines
         bool DeleteAirlineScheduleByScheduleIds(List<long> ids, long userId);
 
         Result PermanentDeleteAirlineSchedule(long id);
+
+        //AirlineSchedulesTracker --------------------------------------------------------------------------------
+        IEnumerable<AirlineScheduleTracker> GetAirlineScheduleTracker(long? id = null, bool isByScheduleId = false);
+
+        IEnumerable<AirlineScheduleTracker> GetAirlineScheduleTrackerByIds(List<long> ids, bool isByScheduleId = false);
+
+        IEnumerable<AirlineScheduleTracker> GetAirlineScheduleTrackerByFilterCondition(AirlinesDTOs.AirlineScheduleTracker scheduleTracker);
+
+        long AddAirlineScheduleTracker(AirlineScheduleTracker scheduleTracker);
+
+        bool UpdateAirlineScheduleTracker(long id, int bcTickets, int nbcTickets);
+
+        bool DeleteAirlineScheduleTracker(long id);
+
+        bool DeleteAirlineScheduleTrackerByTrackerIds(List<long> ids);
     }
 }

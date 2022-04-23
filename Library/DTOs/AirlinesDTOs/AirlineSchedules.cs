@@ -106,4 +106,53 @@ namespace AirlinesDTOs
         [DataMember(Name = "ArrivalTime")]
         public DateTime? ArrivalTime { get; set; }
     }
+
+    [DataContract(Name = "AirlineScheduleTracker")]
+    public class AirlineScheduleTracker
+    {
+        [DataMember(Name = "Id")]
+        public long Id { get; set; }
+
+        [DataMember(Name = "ScheduleId")]
+        [ForeignKey("AirlineSchedule")]
+        public long ScheduleId { get; set; }
+        public AirlineSchedules AirlineSchedule { get; set; }
+
+        [DataMember(Name = "ActualDepartureDate")]
+        public DateTime ActualDepartureDate { get; set; }
+
+        [DataMember(Name = "ActualArrivalDate")]
+        public DateTime? ActualArrivalDate { get; set; }
+
+        [DataMember(Name = "BCSeatsRemaining")]
+        public int BCSeatsRemaining { get; set; }
+
+        [DataMember(Name = "NBCSeatsRemaining")]
+        public int NBCSeatsRemaining { get; set; }
+
+        [DataMember(Name = "IsDeleted")]
+        public bool IsDeleted { get; set; } = false;
+    }
+
+    [DataContract(Name = "AirlineScheduleTrackerDetails")]
+    public class AirlineScheduleTrackerDetails
+    {
+        [DataMember(Name = "Id")]
+        public long Id { get; set; }
+
+        [DataMember(Name = "ScheduleId")]
+        public long ScheduleId { get; set; }
+
+        [DataMember(Name = "ActualDepartureDate")]
+        public DateTime? ActualDepartureDate { get; set; }
+
+        [DataMember(Name = "ActualArrivalDate")]
+        public DateTime? ActualArrivalDate { get; set; }
+
+        [DataMember(Name = "BCSeatsRemaining")]
+        public int BCSeatsRemaining { get; set; }
+
+        [DataMember(Name = "NBCSeatsRemaining")]
+        public int NBCSeatsRemaining { get; set; }
+    }
 }

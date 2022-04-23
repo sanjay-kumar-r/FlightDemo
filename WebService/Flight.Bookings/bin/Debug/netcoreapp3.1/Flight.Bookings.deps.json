@@ -1837,6 +1837,7 @@
       "ServiceContracts/1.0.0": {
         "dependencies": {
           "AirlinesDTOs": "1.0.0",
+          "BookingsDTOs": "1.0.0",
           "CommonDTOs": "1.0.0",
           "UsersDTOs": "1.0.0"
         },

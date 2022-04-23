@@ -1571,6 +1571,16 @@
           "bin/placeholder/AirlinesDTOs.dll": {}
         }
       },
+      "BookingsDTOs/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v3.1",
+        "compile": {
+          "bin/placeholder/BookingsDTOs.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/BookingsDTOs.dll": {}
+        }
+      },
       "CommonDTOs/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v3.1",
@@ -1586,6 +1596,7 @@
         "framework": ".NETCoreApp,Version=v3.1",
         "dependencies": {
           "AirlinesDTOs": "1.0.0",
+          "BookingsDTOs": "1.0.0",
           "CommonDTOs": "1.0.0",
           "UsersDTOs": "1.0.0"
         },
@@ -5626,6 +5637,11 @@
       "type": "project",
       "path": "../../DTOs/AirlinesDTOs/AirlinesDTOs.csproj",
       "msbuildProject": "../../DTOs/AirlinesDTOs/AirlinesDTOs.csproj"
+    },
+    "BookingsDTOs/1.0.0": {
+      "type": "project",
+      "path": "../../DTOs/BookingsDTOs/BookingsDTOs.csproj",
+      "msbuildProject": "../../DTOs/BookingsDTOs/BookingsDTOs.csproj"
     },
     "CommonDTOs/1.0.0": {
       "type": "project",

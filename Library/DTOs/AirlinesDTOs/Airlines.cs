@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Runtime.Serialization;
@@ -105,5 +106,51 @@ namespace AirlinesDTOs
 
         [DataMember(Name = "IsActive")]
         public bool? IsActive { get; set; } = null;
+    }
+
+    [DataContract(Name = "AirlinesSearchRequest")]
+    public class AirlinesSearchRequest
+    {
+        [DataMember(Name = "From")]
+        [MaxLength(512)]
+        public string From { get; set; }
+
+        [DataMember(Name = "To")]
+        [MaxLength(512)]
+        public string To { get; set; }
+
+        [DataMember(Name = "DepartureDate")]
+        public DateTime? DepartureDate { get; set; }
+
+        [DataMember(Name = "ArrivalDate")]
+        public DateTime? ArrivalDate { get; set; }
+    }
+
+    [DataContract(Name = "AirlinesSearchResponse")]
+    public class AirlinesSearchResponse
+    {
+        [DataMember(Name = "AirlineSchedules")]
+        public AirlineSchedules AirlineSchedules { get; set; }
+
+        [DataMember(Name = "ActualDepartureDate")]
+        public DateTime? ActualDepartureDate { get; set; }
+
+        //[DataMember(Name = "ActualDepartureTime")]
+        //public DateTime? ActualDepartureTime { get; set; }
+
+        [DataMember(Name = "ActualArrivalDate")]
+        public DateTime? ActualArrivalDate { get; set; }
+
+        //[DataMember(Name = "ActualArrivalTime")]
+        //public DateTime? ActualArrivalTime { get; set; }
+
+        [DataMember(Name = "DiscountTags")]
+        public List<DiscountTags> DiscountTags { get; set; }
+
+        [DataMember(Name = "BCSeatsAvailable")]
+        public long BCSeatsAvailable { get; set; }
+
+        [DataMember(Name = "NBCSeatsAvailable")]
+        public long NBCSeatsAvailable { get; set; }
     }
 }

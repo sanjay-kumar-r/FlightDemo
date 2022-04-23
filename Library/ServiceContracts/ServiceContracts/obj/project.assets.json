@@ -15,6 +15,16 @@
           "bin/placeholder/AirlinesDTOs.dll": {}
         }
       },
+      "BookingsDTOs/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v3.1",
+        "compile": {
+          "bin/placeholder/BookingsDTOs.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/BookingsDTOs.dll": {}
+        }
+      },
       "CommonDTOs/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v3.1",
@@ -43,6 +53,11 @@
       "path": "../../DTOs/AirlinesDTOs/AirlinesDTOs.csproj",
       "msbuildProject": "../../DTOs/AirlinesDTOs/AirlinesDTOs.csproj"
     },
+    "BookingsDTOs/1.0.0": {
+      "type": "project",
+      "path": "../../DTOs/BookingsDTOs/BookingsDTOs.csproj",
+      "msbuildProject": "../../DTOs/BookingsDTOs/BookingsDTOs.csproj"
+    },
     "CommonDTOs/1.0.0": {
       "type": "project",
       "path": "../../DTOs/CommonDTOs/CommonDTOs.csproj",
@@ -57,6 +72,7 @@
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v3.1": [
       "AirlinesDTOs >= 1.0.0",
+      "BookingsDTOs >= 1.0.0",
       "CommonDTOs >= 1.0.0",
       "UsersDTOs >= 1.0.0"
     ]
@@ -98,6 +114,9 @@
           "projectReferences": {
             "D:\\WorkSpace\\Library\\DTOs\\AirlinesDTOs\\AirlinesDTOs.csproj": {
               "projectPath": "D:\\WorkSpace\\Library\\DTOs\\AirlinesDTOs\\AirlinesDTOs.csproj"
+            },
+            "D:\\WorkSpace\\Library\\DTOs\\BookingsDTOs\\BookingsDTOs.csproj": {
+              "projectPath": "D:\\WorkSpace\\Library\\DTOs\\BookingsDTOs\\BookingsDTOs.csproj"
             },
             "D:\\WorkSpace\\Library\\DTOs\\CommonDTOs\\CommonDTOs.csproj": {
               "projectPath": "D:\\WorkSpace\\Library\\DTOs\\CommonDTOs\\CommonDTOs.csproj"

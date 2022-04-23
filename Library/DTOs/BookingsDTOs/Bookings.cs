@@ -37,10 +37,47 @@ namespace BookingsDTOs
         public BookingStatus BookingStatus { get; set; }
 
         [DataMember(Name = "CreatedOn")]
-        public DateTime? CreatedOn { get; set; }
+        public DateTime? CreatedOn { get; set; } = null;
 
         [DataMember(Name = "CanceledOn")]
-        public DateTime? CanceledOn { get; set; }
+        public DateTime? CanceledOn { get; set; } = null;
+
+        [DataMember(Name = "IsRefunded")]
+        public bool? IsRefunded { get; set; } = null;
+    }
+
+    [DataContract(Name = "BookingDetails")]
+    public class BookingDetails
+    {
+        [DataMember(Name = "Id")]
+        public long Id { get; set; }
+
+        [DataMember(Name = "UserId")]
+        public long UserId { get; set; }
+
+        [DataMember(Name = "ScheduleId")]
+        public long ScheduleId { get; set; }
+
+        [DataMember(Name = "DateBookedFor")]
+        public DateTime? DateBookedFor { get; set; } = null;
+
+        [DataMember(Name = "BCSeats")]
+        public long BCSeats { get; set; }
+
+        [DataMember(Name = "NBCSeats")]
+        public long NBCSeats { get; set; }
+
+        [DataMember(Name = "ActualPaidAmount")]
+        public double ActualPaidAmount { get; set; }
+
+        [DataMember(Name = "BookingStatusId")]
+        public int BookingStatusId { get; set; }
+
+        [DataMember(Name = "CreatedOn")]
+        public DateTime? CreatedOn { get; set; } = null;
+
+        [DataMember(Name = "CanceledOn")]
+        public DateTime? CanceledOn { get; set; } = null;
 
         [DataMember(Name = "IsRefunded")]
         public bool? IsRefunded { get; set; } = null;

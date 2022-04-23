@@ -104,5 +104,13 @@ namespace Flight.Airlines.Models.Utils
             return true;
         }
 
+        public static bool ValidateGetAvailableAirlines(AirlinesDTOs.AirlinesSearchRequest airlinesSearchRequest)
+        {
+            if (airlinesSearchRequest == null || string.IsNullOrWhiteSpace(airlinesSearchRequest.From)
+                || string.IsNullOrWhiteSpace(airlinesSearchRequest.To))
+                return false;
+            return true;
+        }
+
     }
 }
