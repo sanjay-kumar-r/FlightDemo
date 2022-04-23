@@ -15,6 +15,7 @@ namespace Flight.Airlines.Models.Utils
         public DbSet<AirlinesDTOs.Airlines> Airlines { get; set; }
         public DbSet<AirlinesDTOs.DiscountTags> DiscountTags { get; set; }
         public DbSet<AirlinesDTOs.AirlineDiscountTagMappings> AirlineDiscountTagMappings { get; set; }
+        public DbSet<AirlinesDTOs.AirlineSchedules> AirlineSchedules { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -71,6 +72,40 @@ namespace Flight.Airlines.Models.Utils
             modelBuilder.Entity<AirlinesDTOs.DiscountTags>()
                    .Property(t => t.ModifiedBy)
                    .IsRequired();
+
+            //AirlineScledules
+            modelBuilder.Entity<AirlinesDTOs.AirlineSchedules>()
+                .HasKey(u => u.Id)
+                .HasName("PrimaryKey_ScheduleId");
+            modelBuilder.Entity<AirlinesDTOs.AirlineSchedules>()
+                    .Property(t => t.AirlineId)
+                    .IsRequired();
+            modelBuilder.Entity<AirlinesDTOs.AirlineSchedules>()
+                   .Property(t => t.From)
+                   .IsRequired();
+            modelBuilder.Entity<AirlinesDTOs.AirlineSchedules>()
+                  .Property(t => t.To)
+                  .IsRequired();
+            modelBuilder.Entity<AirlinesDTOs.AirlineSchedules>()
+                   .Property(t => t.Createdby)
+                   .IsRequired();
+            modelBuilder.Entity<AirlinesDTOs.AirlineSchedules>()
+                   .Property(t => t.ModifiedBy)
+                   .IsRequired();
+            modelBuilder.Entity<AirlinesDTOs.AirlineSchedules>()
+                   .Property(t => t.DepartureTime)
+                   .IsRequired();
+            modelBuilder.Entity<AirlinesDTOs.AirlineSchedules>()
+                   .Property(t => t.ArrivalTime)
+                   .IsRequired();
+            //PopulateDayTable(refmodelBuilder);
         }
+
+        //public void PopulateDayTable(ref ModelBuilder modelBuilder)
+        //{
+        //    List<>
+        //    modelBuilder.Entity<AirlinesDTOs.AirlineSchedules>()
+        //        .HasData()
+        //}
     }
 }

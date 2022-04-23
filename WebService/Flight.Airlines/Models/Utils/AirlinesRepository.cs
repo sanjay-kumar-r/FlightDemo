@@ -16,9 +16,10 @@ namespace Flight.Airlines.Models.Utils
         public AirlinesRepository(AirlinesDBContext context)
         {
             this.context = context;
+            context.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
         }
 
-        //Airlines
+        //Airlines --------------------------------------------------------------------------------
         public Result ActivateDeactivateAirline(AirlinesDTOs.Airlines airline)
         {
             Result result = new Result();
@@ -63,7 +64,12 @@ namespace Flight.Airlines.Models.Utils
         {
             return context.Airlines.Any(x => (string.IsNullOrWhiteSpace(airline.Name) || x.Name.Equals(airline.Name))
                 && (string.IsNullOrWhiteSpace(airline.AirlineCode) || x.AirlineCode.Equals(airline.AirlineCode))
-                && (airline.Id <= 0 || airline.Id != airline.Id) && !x.IsDeleted);
+                && (airline.Id <= 0 || airline.Id != x.Id) && !x.IsDeleted);
+        }
+
+        public bool IsAirlineIdsExists(List<long> ids)
+        {
+            return context.Airlines.AsEnumerable().Where(x => ids.Contains(x.Id) && !x.IsDeleted).Any();
         }
 
         public Result DeleteAirline(AirlinesDTOs.Airlines airline)
@@ -99,7 +105,15 @@ namespace Flight.Airlines.Models.Utils
             if (id == null)
                 return context.Airlines.Where(x => !x.IsDeleted);
             else
-                return new List<AirlinesDTOs.Airlines>() { context.Airlines.FirstOrDefault(x => x.Id == id) };
+                return new List<AirlinesDTOs.Airlines>() { context.Airlines.FirstOrDefault(x => x.Id == id && !x.IsDeleted) };
+        }
+
+        public IEnumerable<AirlinesDTOs.Airlines> GetAirlinesbyIds(List<long> ids)
+        {
+            if (ids == null || ids.Count() <= 0)
+                return context.Airlines.Where(x => !x.IsDeleted);
+            else
+                return context.Airlines.AsEnumerable().Where(x => ids.Contains(x.Id) && !x.IsDeleted);
         }
 
         public IEnumerable<AirlinesDTOs.Airlines> GetAirlinesByFiltercondition(AirlinesDTOs.AirlineDetails airline)
@@ -117,10 +131,10 @@ namespace Flight.Airlines.Models.Utils
                 );
         }
 
-        public IEnumerable<DiscountTags> GetAirlinesByMultipleFilterconditions(List<AirlineDetails> airlineDetails)
+        public IEnumerable<AirlinesDTOs.Airlines> GetAirlinesByMultipleFilterconditions(List<AirlineDetails> airlineDetails)
         {
             if (airlineDetails == null || airlineDetails.Count() <= 0)
-                return context.DiscountTags.Where(x => !x.IsDeleted);
+                return context.Airlines.Where(x => !x.IsDeleted);
             Guid g = Guid.NewGuid();
             string splitter = g.ToString();
             g = Guid.NewGuid();
@@ -129,13 +143,13 @@ namespace Flight.Airlines.Models.Utils
             string namePlaceHolder = g.ToString();
             g = Guid.NewGuid();
             string codePlaceHolder = g.ToString();
-            var discountTagsGrouped = airlineDetails.Select(x => (x.Id > 0 ? x.Id.ToString() : idPlaceHolder) + splitter +
+            var airlinesGrouped = airlineDetails.Select(x => (x.Id > 0 ? x.Id.ToString() : idPlaceHolder) + splitter +
                 (!string.IsNullOrWhiteSpace(x.Name) ? x.Name : namePlaceHolder) + splitter +
                 (!string.IsNullOrWhiteSpace(x.AirlineCode) ? x.AirlineCode : codePlaceHolder));
-            return context.DiscountTags.AsEnumerable().Where(x => !x.IsDeleted &&
-                discountTagsGrouped.Any(y =>
-                y.Replace(idPlaceHolder, x.Id.ToString()).Replace(namePlaceHolder, x.Name).Replace(codePlaceHolder, x.DiscountCode)
-                .Equals(x.Id + splitter + x.Name + splitter + x.DiscountCode)));
+            return context.Airlines.AsEnumerable().Where(x => !x.IsDeleted &&
+                airlinesGrouped.Any(y =>
+                y.Replace(idPlaceHolder, x.Id.ToString()).Replace(namePlaceHolder, x.Name).Replace(codePlaceHolder, x.AirlineCode)
+                .Equals(x.Id + splitter + x.Name + splitter + x.AirlineCode)));
         }
 
         public Result PermanentDeleteAirline(long id)
@@ -147,12 +161,12 @@ namespace Flight.Airlines.Models.Utils
                 context.Airlines.Remove(airline);
                 context.SaveChanges();
                 result.Res = true;
-                result.ResultMessage = $"successfully deleted(permanent) airline date for id={id}";
+                result.ResultMessage = $"successfully deleted(permanent) airline data for id={id}";
             }
             else
             {
                 result.Res = false;
-                result.ResultMessage = $"unable to delete(permanent) airline date for id={id} " + Environment.NewLine +
+                result.ResultMessage = $"unable to delete(permanent) airline data for id={id} " + Environment.NewLine +
                     "Invalid_AirlineId_or_No_data_exists_that_matches_AirlineId";
             }
             return result;
@@ -194,24 +208,32 @@ namespace Flight.Airlines.Models.Utils
                 airlineUpdated.State = Microsoft.EntityFrameworkCore.EntityState.Modified;
                 context.SaveChanges();
                 result.Res = true;
-                result.ResultMessage = $"successfully updated airline date for id={airline.Id}";
+                result.ResultMessage = $"successfully updated airline data for id={airline.Id}";
             }
             else
             {
                 result.Res = false;
-                result.ResultMessage = $"unable to update airline date for id={airline.Id} " + Environment.NewLine +
+                result.ResultMessage = $"unable to update airline data for id={airline.Id} " + Environment.NewLine +
                     "Invalid/Deleted_AirlineId_or_No_data_exists_that_matches_AirlineId";
             }
             return result;
         }
 
-        //DiscountTags
+        //DiscountTags --------------------------------------------------------------------------------
         public IEnumerable<DiscountTags> GetDiscountTags(long? id = null)
         {
             if (id == null)
                 return context.DiscountTags.Where(x => !x.IsDeleted);
             else
-                return new List<AirlinesDTOs.DiscountTags>() { context.DiscountTags.FirstOrDefault(x => x.Id == id) };
+                return new List<AirlinesDTOs.DiscountTags>() { context.DiscountTags.FirstOrDefault(x => x.Id == id && !x.IsDeleted) };
+        }
+
+        public IEnumerable<DiscountTags> GetDiscountTagByIds(List<long> ids = null)
+        {
+            if (ids == null)
+                return context.DiscountTags.Where(x => !x.IsDeleted);
+            else
+                return context.DiscountTags.Where(x => !x.IsDeleted && ids.Contains(x.Id));
         }
 
         public IEnumerable<DiscountTags> GetDiscountTagsByFiltercondition(DiscountTagDetails discountTag)
@@ -219,12 +241,11 @@ namespace Flight.Airlines.Models.Utils
             if (discountTag == null || (discountTag.Id <= 0 && string.IsNullOrWhiteSpace(discountTag.Name) && string.IsNullOrWhiteSpace(discountTag.DiscountCode)
                     && discountTag.Discount <= 0) || discountTag.IsActive == null)
                 return context.DiscountTags.Where(x => !x.IsDeleted);
-            return context.DiscountTags.Where(x => (discountTag.Id <= 0 || discountTag.Id == x.Id)
+            return context.DiscountTags.Where(x => (discountTag.Id <= 0 || discountTag.Id == x.Id) && !x.IsDeleted
                 && (string.IsNullOrWhiteSpace(discountTag.Name) || x.Name.Contains(discountTag.Name))
                 && (string.IsNullOrWhiteSpace(discountTag.DiscountCode) || x.DiscountCode.Contains(discountTag.DiscountCode))
                 && (discountTag.Discount <= 0 || x.Discount <= discountTag.Discount)
                 && (discountTag.IsActive == null || x.IsActive == discountTag.IsActive)
-                && !x.IsDeleted
                 );
         }
 
@@ -296,12 +317,12 @@ namespace Flight.Airlines.Models.Utils
                 discountTagUpdated.State = Microsoft.EntityFrameworkCore.EntityState.Modified;
                 context.SaveChanges();
                 result.Res = true;
-                result.ResultMessage = $"successfully updated discountTag date for id={discountTag.Id}";
+                result.ResultMessage = $"successfully updated discountTag data for id={discountTag.Id}";
             }
             else
             {
                 result.Res = false;
-                result.ResultMessage = $"unable to update discountTag date for id={discountTag.Id} " + Environment.NewLine +
+                result.ResultMessage = $"unable to update discountTag data for id={discountTag.Id} " + Environment.NewLine +
                     "Invalid/Deleted_discountTagId_or_No_data_exists_that_matches_discountTagId";
             }
             return result;
@@ -372,35 +393,46 @@ namespace Flight.Airlines.Models.Utils
                 context.DiscountTags.Remove(discountTag);
                 context.SaveChanges();
                 result.Res = true;
-                result.ResultMessage = $"successfully deleted(permanent) discountTag date for id={id}";
+                result.ResultMessage = $"successfully deleted(permanent) discountTag data for id={id}";
             }
             else
             {
                 result.Res = false;
-                result.ResultMessage = $"unable to delete(permanent) discountTag date for id={id} " + Environment.NewLine +
+                result.ResultMessage = $"unable to delete(permanent) discountTag data for id={id} " + Environment.NewLine +
                     "Invalid_DiscountTagId_or_No_data_exists_that_matches_DiscountTagId";
             }
             return result;
         }
 
-        public Result AddAirlineDiscountTagMappings(List<AirlineDiscountTagMappings> airlineDiscountTagMappings)
+        //Airline-DiscountTag Mappings --------------------------------------------------------------------------------
+        public bool AddAirlineDiscountTagMappings(List<AirlineDiscountTagMappings> airlineDiscountTagMappings)
         {
-            Result result = new Result();
             var mapppings = airlineDiscountTagMappings.Where(x => 
                 !context.AirlineDiscountTagMappings.Any(y => y.AirlineId == x.AirlineId && y.DiscountTagId == x.DiscountTagId));
             if (mapppings != null && mapppings.Count() > 0)
             {
                 context.AirlineDiscountTagMappings.AddRange(mapppings);
                 context.SaveChanges();
-                result.Res = true;
-                result.ResultMessage = $"successfully added airlineDiscountTagMappings";
             }
-            else
-            {
-                result.Res = true;
-                result.ResultMessage = $"airlineDiscountTagMappings already exists";
-            }
-            return result;
+            return true;
+        }
+
+        public bool RemoveAirlineDiscountTagMappings(List<AirlineDiscountTagMappings> airlineDiscountTagMappings)
+        {
+            var groupedMapping = airlineDiscountTagMappings.Select(x => x.AirlineId + "_" + x.DiscountTagId).Distinct();
+            //foreach (var mapping in airlineDiscountTagMappings)
+            //{
+            //    context.Entry(mapping).State = EntityState.Deleted;
+            //    context.SaveChanges();
+            //}
+            //context.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
+            //context.AirlineDiscountTagMappings.RemoveRange(
+            //    context.AirlineDiscountTagMappings.Where(x => groupedMapping.Contains(x.AirlineId + "_" + x.DiscountTagId)));
+            context.AirlineDiscountTagMappings.RemoveRange(
+                context.AirlineDiscountTagMappings.AsEnumerable().Where(x => 
+                airlineDiscountTagMappings.Any(y => y.AirlineId == x.AirlineId && y.DiscountTagId == x.DiscountTagId)));
+            context.SaveChanges();
+            return true;
         }
 
         public IEnumerable<AirlineDiscountTagMappings> GetAirlineDiscountTagsMappings(long? airlineId = null, long? discountId = null)
@@ -413,9 +445,197 @@ namespace Flight.Airlines.Models.Utils
                     && (discountId == null || discountId <= 0 || x.DiscountTagId == discountId));
         }
 
-        public IEnumerable<AirlineDiscountTagMappings> GetAirlineDiscountTagsMappingsByAirlineIds(List<long> airlineIds)
+        public IEnumerable<AirlineDiscountTagMappings> GetAirlineDiscountTagsMappingsByIds(List<long> ids, bool isByAirlineId)
         {
             throw new NotImplementedException();
+        }
+
+        //Airline-DiscountTag Mappings --------------------------------------------------------------------------------
+        public IEnumerable<AirlineSchedules> GetAirlineSchedules(long? id = null, bool isByAirlineId = false)
+        {
+            if (id == null)
+                return context.AirlineSchedules.Include(x => x.Airline).Where(x => !x.IsDeleted);
+            else
+                return context.AirlineSchedules.Include(x => x.Airline).Where(x => !x.IsDeleted && (isByAirlineId ? x.AirlineId == id : x.Id == id));
+        }
+
+        public IEnumerable<AirlineSchedules> GetAirlineSchedulesByIds(List<long> ids, bool isByAirlineId = false)
+        {
+            if (ids == null || ids.Count() <= 0)
+                return context.AirlineSchedules.Include(x => x.Airline).Where(x => !x.IsDeleted);
+            else
+                return context.AirlineSchedules.Include(x => x.Airline).AsEnumerable().Where(x => !x.IsDeleted 
+                && ids.Contains((isByAirlineId ? x.AirlineId : x.Id)));
+        }
+
+        public IEnumerable<AirlineSchedules> GetGetAirlineSchedulesByFilterCondition(AirlineScheduleDetails schedule)
+        {
+            if (schedule == null || (schedule.Id <= 0 && string.IsNullOrWhiteSpace(schedule.From) && string.IsNullOrWhiteSpace(schedule.To)
+                    && (schedule.DepartureDay == null || !Enum.IsDefined(typeof(DayOfWeek), schedule.DepartureDay))
+                    && schedule.DepartureDate == null && schedule.DepartureTime == null
+                    && (schedule.ArrivalDay == null || !Enum.IsDefined(typeof(DayOfWeek), schedule.ArrivalDay))
+                    && schedule.DepartureDate == null && schedule.DepartureTime == null ))
+                return context.AirlineSchedules.Where(x => !x.IsDeleted);
+            return context.AirlineSchedules.Include(x => x.Airline).Where(x => !x.IsDeleted
+                && (schedule.Id <= 0 || schedule.Id == x.Id)
+                && (string.IsNullOrWhiteSpace(schedule.From) || x.From.Contains(schedule.From))
+                && (string.IsNullOrWhiteSpace(schedule.To) || x.To.Contains(schedule.To))
+                && (schedule.DepartureDay == null || !Enum.IsDefined(typeof(DayOfWeek), schedule.DepartureDay)
+                    || x.DepartureDay.Equals(schedule.DepartureDay))
+                && (schedule.DepartureDate == null || x.DepartureDate.Value.Date.Equals(schedule.DepartureDate.Value.Date))
+                && (schedule.DepartureTime == null || (x.DepartureTime.Hour >=schedule.DepartureTime.Value.Hour 
+                    && x.DepartureTime.Minute >= schedule.DepartureTime.Value.Minute))
+                //&& (schedule.DepartureTime == null || x.DepartureTime.ToShortTimeString().Equals(schedule.DepartureTime.Value.ToShortTimeString()))
+                && (schedule.ArrivalDay == null || !Enum.IsDefined(typeof(DayOfWeek), schedule.ArrivalDay)
+                    || x.ArrivalDay.Equals(schedule.ArrivalDay))
+                && (schedule.ArrivalDate == null || x.ArrivalDate.Value.Date.Equals(schedule.ArrivalDate.Value.Date))
+                && (schedule.ArrivalTime == null || (x.ArrivalTime.Hour >= schedule.ArrivalTime.Value.Hour
+                    && x.ArrivalTime.Minute >= schedule.ArrivalTime.Value.Minute))
+                //&& (schedule.ArrivalTime == null || x.ArrivalTime.ToShortTimeString().Equals(schedule.ArrivalTime.Value.ToShortTimeString()))
+                );
+        }
+
+        public IEnumerable<AirlineSchedules> GetGetAirlineSchedulesByMultipleFilterConditions(List<AirlineScheduleDetails> schedules)
+        {
+            throw new NotImplementedException();
+        }
+
+        public long AddAirlineSchedule(AirlineSchedules schedule)
+        {
+            //long id = -1;
+            //if (schedule != null && !context.AirlineSchedules.Any(x => x.AirlineId == schedule.AirlineId && !x.IsDeleted
+            //     && x.From.Equals(schedule.From) && x.To.Equals(schedule.To)
+            //     && ((x.DepartureDay != null && x.DepartureDay.Equals(schedule.DepartureDay))
+            //         || (x.DepartureDate != null && x.DepartureDate.Value.Date.Equals(schedule.DepartureDate.Value.Date)))
+            //     && ((x.ArrivalDay != null && x.ArrivalDay.Equals(schedule.ArrivalDay))
+            //         || (x.ArrivalDate != null && x.ArrivalDate.Value.Date.Equals(schedule.ArrivalDate.Value.Date)))
+            //     && ((x.DepartureTime != null && x.DepartureTime.Hour == schedule.DepartureTime.Hour)
+            //         || ((x.ArrivalTime != null && x.ArrivalTime.Hour == schedule.ArrivalTime.Hour)))))
+
+            schedule.CreatedOn = DateTime.Now;
+            schedule.ModifiedOn = DateTime.Now;
+            //airline.CreatedUser = null;
+            //airline.ModifiedUser = null;
+            context.AirlineSchedules.Add(schedule);
+            context.SaveChanges();
+            long id = schedule.Id;
+
+            return id;
+        }
+
+        public List<long> AddAirlineSchedulesByRange(List<AirlineSchedules> schedules)
+        {
+            //if (schedules != null && schedules.Count() > 0
+            //    && !context.AirlineSchedules.Any(x => !x.IsDeleted &&
+            //    schedules.Any(y => x.AirlineId == y.AirlineId && x.From.Equals(y.From) && x.To.Equals(y.To)
+            //        && ((x.DepartureDay != null && x.DepartureDay.Equals(y.DepartureDay))
+            //            || (x.DepartureDate != null && x.DepartureDate.Value.Date.Equals(y.DepartureDate.Value.Date)))
+            //        && ((x.ArrivalDay != null && x.ArrivalDay.Equals(y.ArrivalDay))
+            //            || (x.ArrivalDate != null && x.ArrivalDate.Value.Date.Equals(y.ArrivalDate.Value.Date)))
+            //        && ((x.DepartureTime != null && x.DepartureTime.Hour == y.DepartureTime.Hour)
+            //            || ((x.ArrivalTime != null && x.ArrivalTime.Hour == y.ArrivalTime.Hour)))))
+            //    )
+            context.AirlineSchedules.AddRange(schedules);
+            context.SaveChanges();
+            List<long> ids = schedules.Select(x => x.Id).ToList();
+            return ids;
+        }
+
+        public bool IsAirlineScheduleAlreadyExists(AirlineSchedules schedule)
+        {
+            return context.AirlineSchedules.Any(x => //(schedule.Id <= 0 || x.Id != schedule.Id) &&
+                  x.AirlineId == schedule.AirlineId 
+                 && !x.IsDeleted
+                 && x.From.Equals(schedule.From) && x.To.Equals(schedule.To)
+                 && ((x.DepartureDay != null && x.DepartureDay.Equals(schedule.DepartureDay))
+                     || (x.DepartureDate != null && x.DepartureDate.Value.Date.Equals(schedule.DepartureDate.Value.Date)))
+                 && ((x.ArrivalDay != null && x.ArrivalDay.Equals(schedule.ArrivalDay))
+                     || (x.ArrivalDate != null && x.ArrivalDate.Value.Date.Equals(schedule.ArrivalDate.Value.Date)))
+                 && ((x.DepartureTime != null && x.DepartureTime.Hour == schedule.DepartureTime.Hour)
+                     || ((x.ArrivalTime != null && x.ArrivalTime.Hour == schedule.ArrivalTime.Hour))));
+        }
+
+        public bool IsAirlineScheduleRangeAlreadyExists(List<AirlineSchedules> schedules)
+        {
+            return context.AirlineSchedules.AsEnumerable().Any(x => !x.IsDeleted
+                && schedules.Any(y => //(y.Id <= 0 || x.Id != y.Id) &&
+                    x.AirlineId == y.AirlineId 
+                    && x.From.Equals(y.From) && x.To.Equals(y.To)
+                    && ((x.DepartureDay != null && x.DepartureDay.Equals(y.DepartureDay))
+                        || (x.DepartureDate != null && x.DepartureDate.Value.Date.Equals(y.DepartureDate.Value.Date)))
+                    && ((x.ArrivalDay != null && x.ArrivalDay.Equals(y.ArrivalDay))
+                        || (x.ArrivalDate != null && x.ArrivalDate.Value.Date.Equals(y.ArrivalDate.Value.Date)))
+                    && ((x.DepartureTime != null && x.DepartureTime.Hour == y.DepartureTime.Hour)
+                        || ((x.ArrivalTime != null && x.ArrivalTime.Hour == y.ArrivalTime.Hour)))));
+        }
+
+        public bool DeleteAirlineSchedule(long id, long userId)
+        {
+            bool result = false;
+            if (id > 0 && context.AirlineSchedules.Count() > 0 && context.AirlineSchedules.Any(x => x.Id == id))
+            {
+                context.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
+                AirlinesDTOs.AirlineSchedules scheduleExisting = context.AirlineSchedules.First(x => x.Id == id);
+                scheduleExisting.IsDeleted = true;
+                scheduleExisting.ModifiedOn = DateTime.Now;
+                scheduleExisting.ModifiedBy = userId;
+                //scheduleExisting.CreatedUser = null;
+                //scheduleExisting.ModifiedUser = null;
+
+                var scheduleUpdated = context.AirlineSchedules.Attach(scheduleExisting);
+                scheduleUpdated.State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+                context.SaveChanges();
+                result = true;
+            }
+            return result;
+        }
+
+        public bool DeleteAirlineScheduleByScheduleIds(List<long> ids, long userId)
+        {
+            context.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
+            bool result = false;
+            if (ids != null && ids.Count() > 0 && context.AirlineSchedules.Count() > 0)
+            {
+                //var schedules = context.AirlineSchedules.AsNoTracking().Where(x => ids.Contains(x.Id));
+                //if (schedules != null && schedules.Count() > 0)
+                //{
+                foreach (var id in ids)
+                {
+                    var schedule = context.AirlineSchedules.AsNoTracking().FirstOrDefault(x => x.Id == id);
+                    if (schedule != null && schedule.Id > 0)
+                    {
+                        schedule.IsDeleted = true;
+                        schedule.ModifiedOn = DateTime.Now;
+                        schedule.ModifiedBy = userId;
+                        var scheduleUpdated = context.AirlineSchedules.Attach(schedule);
+                        scheduleUpdated.State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+                        context.SaveChanges();
+                        result = true;
+                    }
+                }
+                //}
+            }
+            return result;
+        }
+
+        public Result PermanentDeleteAirlineSchedule(long id)
+        {
+            Result result = new Result();
+            if (id > 0 && context.AirlineSchedules.Count() > 0 && context.AirlineSchedules.Any(x => x.Id == id))
+            {
+                AirlinesDTOs.AirlineSchedules schedule = new AirlinesDTOs.AirlineSchedules() { Id = id };
+                context.AirlineSchedules.Remove(schedule);
+                context.SaveChanges();
+                result.Res = true;
+                result.ResultMessage = $"successfully deleted(permanent) AirlineSchedule for id={id}";
+            }
+            else
+            {
+                result.Res = false;
+                result.ResultMessage = $"unable to delete(permanent) AirlineSchedule data for id={id} " + Environment.NewLine +
+                    "Invalid_ScheduleId_or_No_data_exists_that_matches_ScheduleId";
+            }
+            return result;
         }
     }
 }

@@ -11,10 +11,10 @@
         }
       ],
       "UpstreamPathTemplate": "/api/{version}/Users/",
-      "UpstreamHttpMethod": [ "Get" ]
+      "UpstreamHttpMethod": [ "Get", "Post" ]
     },
     {
-      "DownstreamPathTemplate": "/api/{version}/Users/{id}",
+      "DownstreamPathTemplate": "/api/{version}/Users/{everything}",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
@@ -22,104 +22,8 @@
           "Port": "9001"
         }
       ],
-      "UpstreamPathTemplate": "/api/{version}/Users/{id}",
-      "UpstreamHttpMethod": [ "Get" ]
-    },
-    {
-      "DownstreamPathTemplate": "/api/{version}/Users/GetUsersByFiltercondition",
-      "DownstreamScheme": "http",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "localhost",
-          "Port": "9001"
-        }
-      ],
-      "UpstreamPathTemplate": "/api/{version}/Users/GetUsersByFiltercondition",
-      "UpstreamHttpMethod": [ "Post" ]
-    },
-    {
-      "DownstreamPathTemplate": "/api/{version}/Users/Register",
-      "DownstreamScheme": "http",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "localhost",
-          "Port": "9001"
-        }
-      ],
-      "UpstreamPathTemplate": "/api/{version}/Users/Register",
-      "UpstreamHttpMethod": [ "Post" ]
-    },
-    {
-      "DownstreamPathTemplate": "/api/{version}/Users/RegisterAsAdmin",
-      "DownstreamScheme": "http",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "localhost",
-          "Port": "9001"
-        }
-      ],
-      "UpstreamPathTemplate": "/api/{version}/Users/RegisterAsAdmin",
-      "UpstreamHttpMethod": [ "Post" ]
-    },
-    {
-      "DownstreamPathTemplate": "/api/{version}/Users/ValidateAdmin",
-      "DownstreamScheme": "http",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "localhost",
-          "Port": "9001"
-        }
-      ],
-      "UpstreamPathTemplate": "/api/{version}/Users/ValidateAdmin",
-      "UpstreamHttpMethod": [ "Post" ]
-    },
-    {
-      "DownstreamPathTemplate": "/api/{version}/Users/Login",
-      "DownstreamScheme": "http",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "localhost",
-          "Port": "9001"
-        }
-      ],
-      "UpstreamPathTemplate": "/api/{version}/Users/Login",
-      "UpstreamHttpMethod": [ "Post" ]
-    },
-    {
-      "DownstreamPathTemplate": "/api/{version}/Users/Update",
-      "DownstreamScheme": "http",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "localhost",
-          "Port": "9001"
-        }
-      ],
-      "UpstreamPathTemplate": "/api/{version}/Users/Update",
-      "UpstreamHttpMethod": [ "Post" ]
-    },
-    {
-      "DownstreamPathTemplate": "/api/{version}/Users/UpdateUserAsSuperAdmin",
-      "DownstreamScheme": "http",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "localhost",
-          "Port": "9001"
-        }
-      ],
-      "UpstreamPathTemplate": "/api/{version}/Users/UpdateUserAsSuperAdmin",
-      "UpstreamHttpMethod": [ "Post" ]
-    },
-    {
-      "DownstreamPathTemplate": "/api/{version}/Users/Delete",
-      "DownstreamScheme": "http",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "localhost",
-          "Port": "9001"
-        }
-      ],
-      "UpstreamPathTemplate": "/api/{version}/Users/Delete",
-      "UpstreamHttpMethod": [ "Post" ]
+      "UpstreamPathTemplate": "/api/{version}/Users/{everything}",
+      "UpstreamHttpMethod": [ "Get", "Post" ]
     },
     //Airlines :->
     {
@@ -132,19 +36,7 @@
         }
       ],
       "UpstreamPathTemplate": "/api/{version}/Airlines/",
-      "UpstreamHttpMethod": [ "Get" ]
-    },
-    {
-      "DownstreamPathTemplate": "/api/{version}/Airlines/{id}",
-      "DownstreamScheme": "http",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "localhost",
-          "Port": "9003"
-        }
-      ],
-      "UpstreamPathTemplate": "/api/{version}/Airlines/{id}",
-      "UpstreamHttpMethod": [ "Get" ]
+      "UpstreamHttpMethod": [ "Get", "Post" ]
     },
     {
       "DownstreamPathTemplate": "/api/{version}/Airlines/{everything}",
@@ -156,21 +48,8 @@
         }
       ],
       "UpstreamPathTemplate": "/api/{version}/Airlines/{everything}",
-      "UpstreamHttpMethod": [ "Post" ]
+      "UpstreamHttpMethod": [ "Get", "Post" ]
     },
-    //AirlinesDiscountTagsMappings
-    //{
-    //  "DownstreamPathTemplate": "/api/{version}/Airlines/{everything}",
-    //  "DownstreamScheme": "http",
-    //  "DownstreamHostAndPorts": [
-    //    {
-    //      "Host": "localhost",
-    //      "Port": "9003"
-    //    }
-    //  ],
-    //  "UpstreamPathTemplate": "/api/{version}/Airlines/{everything}",
-    //  "UpstreamHttpMethod": [ "Get" ]
-    //},
     //DiscountTags :->
     {
       "DownstreamPathTemplate": "/api/{version}/DiscountTags/",
@@ -182,19 +61,7 @@
         }
       ],
       "UpstreamPathTemplate": "/api/{version}/DiscountTags/",
-      "UpstreamHttpMethod": [ "Get" ]
-    },
-    {
-      "DownstreamPathTemplate": "/api/{version}/DiscountTags/{id}",
-      "DownstreamScheme": "http",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "localhost",
-          "Port": "9003"
-        }
-      ],
-      "UpstreamPathTemplate": "/api/{version}/DiscountTags/{id}",
-      "UpstreamHttpMethod": [ "Get" ]
+      "UpstreamHttpMethod": [ "Get", "Post" ]
     },
     {
       "DownstreamPathTemplate": "/api/{version}/DiscountTags/{everything}",
@@ -206,7 +73,32 @@
         }
       ],
       "UpstreamPathTemplate": "/api/{version}/DiscountTags/{everything}",
-      "UpstreamHttpMethod": [ "Post" ]
+      "UpstreamHttpMethod": [ "Get", "Post" ]
+    },
+    //AirlineSchedules :->
+    {
+      "DownstreamPathTemplate": "/api/{version}/AirlineSchedules/",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "9003"
+        }
+      ],
+      "UpstreamPathTemplate": "/api/{version}/AirlineSchedules/",
+      "UpstreamHttpMethod": [ "Get", "Post" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/{version}/AirlineSchedules/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "9003"
+        }
+      ],
+      "UpstreamPathTemplate": "/api/{version}/AirlineSchedules/{everything}",
+      "UpstreamHttpMethod": [ "Get", "Post" ]
     }
   ],
   "GlobalConfiguration": {

@@ -8,16 +8,20 @@ namespace ServiceContracts.Airlines
 {
     public interface IAirlinesRepository
     {
-        //Airlines
+        //Airlines --------------------------------------------------------------------------------
         IEnumerable<AirlinesDTOs.Airlines> GetAirlines(long? id = null);
+
+        IEnumerable<AirlinesDTOs.Airlines> GetAirlinesbyIds(List<long> ids);
 
         IEnumerable<AirlinesDTOs.Airlines> GetAirlinesByFiltercondition(AirlinesDTOs.AirlineDetails airline);
 
-        IEnumerable<DiscountTags> GetAirlinesByMultipleFilterconditions(List<AirlineDetails> airlineDetails);
+        IEnumerable<AirlinesDTOs.Airlines> GetAirlinesByMultipleFilterconditions(List<AirlineDetails> airlineDetails);
 
         long AddAirline(AirlinesDTOs.Airlines airline);
 
         bool IsAirlineAlreadyExists(AirlinesDTOs.Airlines airline);
+
+        bool IsAirlineIdsExists(List<long> ids);
 
         Result UpdateAirline(AirlinesDTOs.AirlineDetails airline, long userId);
 
@@ -27,8 +31,10 @@ namespace ServiceContracts.Airlines
 
         Result PermanentDeleteAirline(long id);
 
-        //DiscountTags
+        //DiscountTags --------------------------------------------------------------------------------
         IEnumerable<AirlinesDTOs.DiscountTags> GetDiscountTags(long? id = null);
+
+        IEnumerable<DiscountTags> GetDiscountTagByIds(List<long> ids = null);
 
         IEnumerable<AirlinesDTOs.DiscountTags> GetDiscountTagsByFiltercondition(AirlinesDTOs.DiscountTagDetails discountTag);
 
@@ -46,9 +52,36 @@ namespace ServiceContracts.Airlines
 
         Result PermanentDeleteDiscountTag(long id);
 
-        //AirlineDiscountTagMappings
-        Result AddAirlineDiscountTagMappings(List<AirlineDiscountTagMappings> airlineDiscountTagMappings);
+        //Airline-DiscountTags Mappings --------------------------------------------------------------------------------
+        bool AddAirlineDiscountTagMappings(List<AirlineDiscountTagMappings> airlineDiscountTagMappings);
+
+        bool RemoveAirlineDiscountTagMappings(List<AirlineDiscountTagMappings> airlineDiscountTagMappings);
 
         IEnumerable<AirlineDiscountTagMappings> GetAirlineDiscountTagsMappings(long? airlineId = null, long? discountId = null);
+
+        IEnumerable<AirlineDiscountTagMappings> GetAirlineDiscountTagsMappingsByIds(List<long> ids, bool isByAirlineId);
+
+        //AirlineSchedules --------------------------------------------------------------------------------
+        IEnumerable<AirlinesDTOs.AirlineSchedules> GetAirlineSchedules(long? id = null, bool isByAirlineId = false);
+
+        IEnumerable<AirlineSchedules> GetAirlineSchedulesByIds(List<long> ids, bool isByAirlineId = false);
+
+        IEnumerable<AirlinesDTOs.AirlineSchedules> GetGetAirlineSchedulesByFilterCondition(AirlinesDTOs.AirlineScheduleDetails schedule);
+
+        IEnumerable<AirlineSchedules> GetGetAirlineSchedulesByMultipleFilterConditions(List<AirlineScheduleDetails> schedules);
+
+        long AddAirlineSchedule(AirlinesDTOs.AirlineSchedules schedule);
+
+        List<long> AddAirlineSchedulesByRange(List<AirlineSchedules> schedules);
+
+        bool IsAirlineScheduleAlreadyExists(AirlineSchedules schedule);
+
+        bool IsAirlineScheduleRangeAlreadyExists(List<AirlineSchedules> schedules);
+
+        bool DeleteAirlineSchedule(long id, long userId);
+
+        bool DeleteAirlineScheduleByScheduleIds(List<long> ids, long userId);
+
+        Result PermanentDeleteAirlineSchedule(long id);
     }
 }

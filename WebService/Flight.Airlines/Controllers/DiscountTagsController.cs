@@ -54,8 +54,8 @@ namespace Flight.Airlines.Controllers
         [Route("Add")]
         public long Add([FromBody] AirlinesDTOs.DiscountTags discountTag)
         {
-            if (!DiscountTagsValidation.ValidateAddDiscountTag(discountTag))
-                throw new Exception("DiscountTagsValidation.ValidateAddDiscountTag Falied");
+            if (!AirlinesValidation.ValidateAddDiscountTag(discountTag))
+                throw new Exception("AirlinesValidation.ValidateAddDiscountTag Falied");
 
             if (airlinesRepo.IsDiscountTagAlreadyExists(discountTag))
                 throw new Exception("DiscountTag name and/or code already exists");
@@ -70,8 +70,8 @@ namespace Flight.Airlines.Controllers
         [Route("Update")]
         public Result Update([FromBody] AirlinesDTOs.DiscountTagDetails discountTag)
         {
-            if (!DiscountTagsValidation.ValidateUpdateDiscountTag(discountTag))
-                throw new Exception("DiscountTagsValidation.ValidateUpdateDiscountTag Falied");
+            if (!AirlinesValidation.ValidateUpdateDiscountTag(discountTag))
+                throw new Exception("AirlinesValidation.ValidateUpdateDiscountTag Falied");
 
             AirlinesDTOs.DiscountTags discountTag_1 = new AirlinesDTOs.DiscountTags()
             {
@@ -96,8 +96,8 @@ namespace Flight.Airlines.Controllers
         [Route("ActivateDeactivateDiscountTag")]
         public Result ActivateDeactivateDiscountTag([FromBody] dynamic obj)
         {
-            if (!DiscountTagsValidation.ValidateActivateDeactivateDiscountTag(obj.GetProperty("Id"), obj.GetProperty("IsActive")))
-                throw new Exception("DiscountTagsValidation.ValidateActivateDeactivateDiscountTag Falied");
+            if (!AirlinesValidation.ValidateActivateDeactivateDiscountTag(obj.GetProperty("Id"), obj.GetProperty("IsActive")))
+                throw new Exception("AirlinesValidation.ValidateActivateDeactivateDiscountTag Falied");
 
             AirlinesDTOs.DiscountTags discountTag = new AirlinesDTOs.DiscountTags()
             {

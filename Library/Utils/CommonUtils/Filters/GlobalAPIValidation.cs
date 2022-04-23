@@ -23,6 +23,7 @@ namespace CommonUtils.Filters
         private readonly IConfiguration config;
         private readonly ICustomExceptionMessageBuilder exBuilder;
         private readonly ILogger logger;
+        private Stopwatch timer = null;
 
         public GlobalAPIValidation(IConfiguration config, ICustomExceptionMessageBuilder exBuilder, ServiceContracts.Logger.ILogger logger)
         {
@@ -36,7 +37,7 @@ namespace CommonUtils.Filters
             SetHeaderInfo(context);
             SetLogicalThreadContextAndLogEntry(context);
            
-            Stopwatch timer = Stopwatch.StartNew();
+            timer = Stopwatch.StartNew();
             if (await ValidateRequest(context))
             {
                 await next();
@@ -49,7 +50,7 @@ namespace CommonUtils.Filters
             string operationName = context.RouteData.Values["controller"] + "->" + context.RouteData.Values["action"];
             timer.Stop();
             logger.Log(LogLevel.INFO,
-                $"API '{operationName}' executing ENDED => timeElapsed = '{timer.Elapsed.TotalMilliseconds}'ms");
+                $"API '{operationName}' execution Ended => timeElapsed = '{timer?.Elapsed.TotalMilliseconds}'ms");
         }
 
         public void OnException(ExceptionContext context)
@@ -62,6 +63,9 @@ namespace CommonUtils.Filters
                 }
             }
             logger.Log(LogLevel.ERROR, $"errorMessage :=>'{context.Exception.Message}' stackTrace :=>'[{context.Exception.StackTrace}]'");
+            timer.Stop();
+            logger.Log(LogLevel.INFO,
+                $"Execution Ended => timeElapsed = '{timer?.Elapsed.TotalMilliseconds}'ms");
             //throw new Exception("Internal_Setver_Error");
             throw context.Exception;
         }
@@ -76,7 +80,7 @@ namespace CommonUtils.Filters
         }
 
         private void SetLogicalThreadContextAndLogEntry(ActionExecutingContext context)
-        {;
+        {
             //string traceId = Activity.Current?.RootId ?? context?.HttpContext?.TraceIdentifier;
             string traceId = context?.HttpContext?.TraceIdentifier;
             string spanId = Activity.Current?.SpanId.ToString();

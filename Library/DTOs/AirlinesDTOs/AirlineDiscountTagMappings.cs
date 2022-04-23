@@ -38,4 +38,17 @@ namespace AirlinesDTOs
         [DataMember(Name = "DiscountTags")]
         public List<AirlinesDTOs.DiscountTagDetails> DiscountTags { get; set; }
     }
+
+    [DataContract(Name = "RemapAirlineDiscountTagsDetails")]
+    public class RemapAirlineDiscountTagsDetails
+    {
+        [DataMember(Name = "AirlineId")]
+        public long AirlineId { get; set; }
+
+        [DataMember(Name = "AddedDiscountTagIds")]
+        public List<long> AddedDiscountTagIds { get; set; }
+
+        [DataMember(Name = "RemovedDiscountTagIds")]
+        public List<long> RemovedDiscountTagIds { get; set; }
+    }
 }

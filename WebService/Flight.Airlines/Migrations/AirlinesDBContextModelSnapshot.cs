@@ -45,6 +45,70 @@ namespace Flight.Airlines.Migrations
                     b.ToTable("AirlineDiscountTagMappings");
                 });
 
+            modelBuilder.Entity("AirlinesDTOs.AirlineSchedules", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<long>("AirlineId")
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime?>("ArrivalDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("ArrivalDay")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("ArrivalTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<long>("Createdby")
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime?>("DepartureDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("DepartureDay")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("DepartureTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("From")
+                        .IsRequired()
+                        .HasMaxLength(512)
+                        .HasColumnType("nvarchar(512)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsRegular")
+                        .HasColumnType("bit");
+
+                    b.Property<long>("ModifiedBy")
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("To")
+                        .IsRequired()
+                        .HasMaxLength(512)
+                        .HasColumnType("nvarchar(512)");
+
+                    b.HasKey("Id")
+                        .HasName("PrimaryKey_ScheduleId");
+
+                    b.HasIndex("AirlineId");
+
+                    b.ToTable("AirlineSchedules");
+                });
+
             modelBuilder.Entity("AirlinesDTOs.Airlines", b =>
                 {
                     b.Property<long>("Id")
@@ -178,6 +242,17 @@ namespace Flight.Airlines.Migrations
                     b.Navigation("Airline");
 
                     b.Navigation("DiscountTag");
+                });
+
+            modelBuilder.Entity("AirlinesDTOs.AirlineSchedules", b =>
+                {
+                    b.HasOne("AirlinesDTOs.Airlines", "Airline")
+                        .WithMany()
+                        .HasForeignKey("AirlineId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Airline");
                 });
 #pragma warning restore 612, 618
         }

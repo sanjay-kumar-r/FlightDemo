@@ -61,6 +61,58 @@
 					"response": []
 				},
 				{
+					"name": "mappings_RemapAirlinesDiscountTags",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": " application/json",
+								"type": "text"
+							},
+							{
+								"key": "UserId",
+								"value": " 3",
+								"type": "text"
+							},
+							{
+								"key": "TenantId",
+								"value": " 9012",
+								"type": "text"
+							},
+							{
+								"key": "AccessToken",
+								"value": " abcd",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n    {\r\n        \"AirlineId\": 1,\r\n        \"AddedDiscountTagIds\": [\r\n            1,\r\n            2,\r\n            3,\r\n            4,\r\n            5\r\n        ],\r\n        \"RemovedDiscountTagIds\": [\r\n            1,\r\n            2,\r\n            3\r\n        ]\r\n    },\r\n    {\r\n        \"AirlineId\": 2,\r\n        \"AddedDiscountTagIds\": [],\r\n        \"RemovedDiscountTagIds\": [\r\n            4\r\n        ]\r\n    },\r\n    {\r\n        \"AirlineId\": 234,\r\n        \"AddedDiscountTagIds\": [],\r\n        \"RemovedDiscountTagIds\": [\r\n            1,\r\n            2,\r\n            3,\r\n            4\r\n        ]\r\n    }\r\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9003/api/v1.0/Airlines/RemapAirlinesDiscountTags",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9003",
+							"path": [
+								"api",
+								"v1.0",
+								"Airlines",
+								"RemapAirlinesDiscountTags"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "mappings_Add_InvalidMaps",
 					"request": {
 						"method": "POST",

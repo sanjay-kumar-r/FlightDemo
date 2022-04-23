@@ -49,7 +49,7 @@ namespace UserDtOs
                 { "REGISTERED", "On user first time register" },
                 { "ACTIVE", "On user first time login and there after" },
                 { "INACTIVE", "On user not loggedIn long time or updated by admin" },
-                { "BLOCKED", "On user invalid/wrong attempt to login or update by admin" },
+                { "BLOCKED", "On user invalid/wrong attempt to login or update by admin" }
                 //{ "DELETED", "Updated by admin" }
             };
         }

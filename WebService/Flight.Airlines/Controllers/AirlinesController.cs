@@ -171,7 +171,7 @@ namespace Flight.Airlines.Controllers
 
         [HttpPost]
         [Route("MapAirlinesDiscountTags")]
-        public Result MapAirlinesDiscountTags([FromBody] List<AirlinesDTOs.AirlineDiscountTagMappingDetails> airlineDiscountTagMappingDetails)
+        public bool MapAirlinesDiscountTags([FromBody] List<AirlinesDTOs.AirlineDiscountTagMappingDetails> airlineDiscountTagMappingDetails)
         {
             if (!AirlinesValidation.ValidateAirlineDiscountTagMappings(airlineDiscountTagMappingDetails))
                 throw new Exception("AirlinesValidation.ValidateAirlineDiscountTagMappings Falied");
@@ -215,7 +215,80 @@ namespace Flight.Airlines.Controllers
                 return airlineRepo.AddAirlineDiscountTagMappings(airlineDiscountTagMappings);
             }
             else
-                return new Result() { Res = false, ResultMessage = "input airlineDiscountTagMappingDetails are invalid" };
+                return false;
+            //{
+            //    return new Result() { Res = false, ResultMessage = "input airlineDiscountTagMappingDetails are invalid" };
+            //}
+        }
+
+        [HttpPost]
+        [Route("RemapAirlinesDiscountTags")]
+        public bool RemapAirlinesDiscountTags([FromBody] List<AirlinesDTOs.RemapAirlineDiscountTagsDetails> remapAirlineDiscountTagsDetails)
+        {
+            bool result = false;
+            if (!AirlinesValidation.ValidateRemapAirlineDiscountTagsDetails(remapAirlineDiscountTagsDetails))
+                throw new Exception("AirlinesValidation.ValidateRemapAirlineDiscountTagsDetails Falied");
+
+            List<AirlineDiscountTagMappings> addedAirlineDiscountTagMappings = new List<AirlineDiscountTagMappings>();
+            List<AirlineDiscountTagMappings> removedAirlineDiscountTagMappings = new List<AirlineDiscountTagMappings>();
+            var mappings = remapAirlineDiscountTagsDetails.Where(x => x.AirlineId > 0
+                && (x.AddedDiscountTagIds != null || x.RemovedDiscountTagIds != null));
+            if (mappings != null && mappings.Count() > 0)
+            {
+                long userId = Convert.ToInt64(HttpContext?.Request?.Headers["UserId"]);
+                foreach (var map in mappings)
+                {
+                    var airline = airlineRepo.GetAirlines(map.AirlineId);
+                    if (airline != null && airline.Count() > 0 && airline.FirstOrDefault() != null)
+                    {
+                        if (map.AddedDiscountTagIds != null && map.AddedDiscountTagIds.Count() > 0)
+                        {
+                            var addedDiscountTagIds = map.AddedDiscountTagIds.Except(map.RemovedDiscountTagIds ?? new List<long>());
+                            if (addedDiscountTagIds != null && addedDiscountTagIds.Count() > 0)
+                            {
+                                var discountTagDetails = airlineRepo.GetDiscountTagByIds(addedDiscountTagIds.ToList());
+                                if (discountTagDetails != null && discountTagDetails.Count() > 0)
+                                {
+                                    addedAirlineDiscountTagMappings.AddRange(discountTagDetails.
+                                        Select(x => new AirlineDiscountTagMappings()
+                                        {
+                                            AirlineId = airline.FirstOrDefault().Id,
+                                            DiscountTagId = x.Id,
+                                            TaggedBy = userId,
+                                            Airline = null,
+                                            DiscountTag = null
+                                        }));
+                                }
+                            }
+                        }
+                        if (map.RemovedDiscountTagIds != null && map.RemovedDiscountTagIds.Count() > 0)
+                        {
+                            removedAirlineDiscountTagMappings.AddRange(map.RemovedDiscountTagIds.
+                                Select(x => new AirlineDiscountTagMappings()
+                                {
+                                    AirlineId = airline.FirstOrDefault().Id,
+                                    DiscountTagId = x,
+                                    //TaggedBy = userId,
+                                    //Airline = null,
+                                    //DiscountTag = null
+                                }));
+                        }
+                    }
+                }
+
+                if ((addedAirlineDiscountTagMappings == null || addedAirlineDiscountTagMappings.Count() <= 0)
+                    && (removedAirlineDiscountTagMappings == null || removedAirlineDiscountTagMappings.Count() <= 0))
+                    throw new Exception("All input mappings are invalid");
+
+                if (addedAirlineDiscountTagMappings != null && addedAirlineDiscountTagMappings.Count() > 0)
+                    result = airlineRepo.AddAirlineDiscountTagMappings(addedAirlineDiscountTagMappings);
+                if (removedAirlineDiscountTagMappings != null && removedAirlineDiscountTagMappings.Count() > 0)
+                    result = airlineRepo.RemoveAirlineDiscountTagMappings(removedAirlineDiscountTagMappings);
+                return result;
+            }
+            else
+                return result;
+                //return new Result() { Res = false, ResultMessage = "input remapAirlineDiscountTagsDetails are invalid" };
         }
 
         [HttpGet]

@@ -10,4 +10,8 @@
     <ProjectReference Include="..\..\DTOs\UsersDTOs\UsersDTOs.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="AirlinesDTOs\" />
+  </ItemGroup>
+
 </Project>
