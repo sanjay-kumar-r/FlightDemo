@@ -28,7 +28,8 @@ namespace BookingsDTOs
         Booked = 1,
         Waiting,
         Canceled,
-        Refunded
+        Refunded,
+        Invalid
     }
 
     public static class BookingStatusDescription
@@ -48,7 +49,8 @@ namespace BookingsDTOs
                 { "BOOKED", "When airline schedule successfully booked" },
                 { "WAITING", "When seats are already filled" },
                 { "CANCELED", "When user cancels Booking" },
-                { "REFUNDED", "When user gets refunded back" }
+                { "REFUNDED", "When user gets refunded back" },
+                { "INVALID", "When user initiates an invalid booking" }
             };
         }
     }

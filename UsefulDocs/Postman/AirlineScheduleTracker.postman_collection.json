@@ -1,0 +1,284 @@
+{
+	"info": {
+		"_postman_id": "3a3ae9f3-90f8-436e-b40d-af47f9bec88a",
+		"name": "AirlineScheduleTracker",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "ScheduleTracker_Get",
+			"item": [
+				{
+					"name": "ScheduleTracker_GetAvailableAirlines",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": " application/json",
+								"type": "text"
+							},
+							{
+								"key": "UserId",
+								"value": " 3",
+								"type": "text"
+							},
+							{
+								"key": "TenantId",
+								"value": " 9012",
+								"type": "text"
+							},
+							{
+								"key": "AccessToken",
+								"value": " abcd",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"From\":\"INDIA\",\r\n    \"To\":\"UK\",\r\n    \"DepartureDate\":\"2022-04-25\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9050/api/v1.0/AirlineScheduleTracker/GetAvailableAirlines",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9050",
+							"path": [
+								"api",
+								"v1.0",
+								"AirlineScheduleTracker",
+								"GetAvailableAirlines"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "ScheduleTracker_Add",
+			"item": [
+				{
+					"name": "ScheduleTracker_CheckForAvailableSeatsAndAddTracker",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": " application/json",
+								"type": "text"
+							},
+							{
+								"key": "UserId",
+								"value": " 3",
+								"type": "text"
+							},
+							{
+								"key": "TenantId",
+								"value": " 9012",
+								"type": "text"
+							},
+							{
+								"key": "AccessToken",
+								"value": " abcd",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"AirlineId\": 1,\r\n    \"From\": \"India\",\r\n    \"To\": \"USA\",\r\n    \"IsRegular\": true,\r\n    \"DepartureDay\": 2,\r\n    \"DepartureDate\": \"2022-05-21\",\r\n    \"DepartureTime\": \"2022-05-22T08:44:19.610363\",\r\n    \"ArrivalDay\": 4,\r\n    \"ArrivalDate\": \"2022-05-24\",\r\n    \"ArrivalTime\": \"2022-05-22T14:44:19.610363\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9050/api/v1.0/ScheduleTracker/CheckForAvailableSeatsAndAddTracker",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9050",
+							"path": [
+								"api",
+								"v1.0",
+								"ScheduleTracker",
+								"CheckForAvailableSeatsAndAddTracker"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "AirlineSchedules_Delete",
+			"item": [
+				{
+					"name": "AirlineSchedules_Delete",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": " application/json",
+								"type": "text"
+							},
+							{
+								"key": "UserId",
+								"value": " 3",
+								"type": "text"
+							},
+							{
+								"key": "TenantId",
+								"value": " 9012",
+								"type": "text"
+							},
+							{
+								"key": "AccessToken",
+								"value": " abcd",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "4",
+							"options": {
+								"raw": {
+									"language": "text"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9050/api/v1.0/AirlineSchedules/Delete",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9050",
+							"path": [
+								"api",
+								"v1.0",
+								"AirlineSchedules",
+								"Delete"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "AirlineSchedules_DeleteByAirlineIds",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": " application/json",
+								"type": "text"
+							},
+							{
+								"key": "UserId",
+								"value": " 3",
+								"type": "text"
+							},
+							{
+								"key": "TenantId",
+								"value": " 9012",
+								"type": "text"
+							},
+							{
+								"key": "AccessToken",
+								"value": " abcd",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n    1,\r\n    22,\r\n    3\r\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9050/api/v1.0/AirlineSchedules/DeleteByAirlineIds",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9050",
+							"path": [
+								"api",
+								"v1.0",
+								"AirlineSchedules",
+								"DeleteByAirlineIds"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "AirlineSchedules_DeleteByScheduleIds",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": " application/json",
+								"type": "text"
+							},
+							{
+								"key": "UserId",
+								"value": " 3",
+								"type": "text"
+							},
+							{
+								"key": "TenantId",
+								"value": " 9012",
+								"type": "text"
+							},
+							{
+								"key": "AccessToken",
+								"value": " abcd",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n    1,\r\n    22,\r\n    3\r\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9050/api/v1.0/AirlineSchedules/DeleteByScheduleIds",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9050",
+							"path": [
+								"api",
+								"v1.0",
+								"AirlineSchedules",
+								"DeleteByScheduleIds"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

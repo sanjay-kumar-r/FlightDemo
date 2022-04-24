@@ -45,6 +45,39 @@ namespace Flight.Airlines.Migrations
                     b.ToTable("AirlineDiscountTagMappings");
                 });
 
+            modelBuilder.Entity("AirlinesDTOs.AirlineScheduleTracker", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime?>("ActualArrivalDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("ActualDepartureDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("BCSeatsRemaining")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("NBCSeatsRemaining")
+                        .HasColumnType("int");
+
+                    b.Property<long>("ScheduleId")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("Id")
+                        .HasName("PrimaryKey_ScheduleTrackerId");
+
+                    b.HasIndex("ScheduleId");
+
+                    b.ToTable("AirlineScheduleTracker");
+                });
+
             modelBuilder.Entity("AirlinesDTOs.AirlineSchedules", b =>
                 {
                     b.Property<long>("Id")
@@ -242,6 +275,17 @@ namespace Flight.Airlines.Migrations
                     b.Navigation("Airline");
 
                     b.Navigation("DiscountTag");
+                });
+
+            modelBuilder.Entity("AirlinesDTOs.AirlineScheduleTracker", b =>
+                {
+                    b.HasOne("AirlinesDTOs.AirlineSchedules", "AirlineSchedule")
+                        .WithMany()
+                        .HasForeignKey("ScheduleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("AirlineSchedule");
                 });
 
             modelBuilder.Entity("AirlinesDTOs.AirlineSchedules", b =>

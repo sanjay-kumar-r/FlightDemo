@@ -3,6 +3,7 @@ using Flight.Users.Model.Utils;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using ServiceContracts;
+using ServiceContracts.Logger;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,13 +16,18 @@ namespace Flight.Users.Controllers
     [ApiController]
     public class UsersController : ControllerBase
     {
-        private readonly IConfiguration config;
+        private readonly CustomSettings customSettings;
+        //private readonly IConfiguration config;
         private readonly IUsersRepository usersRepo;
+        private readonly ILogger logger;
 
-        public UsersController(IConfiguration config, IUsersRepository usersRepo)
+        public UsersController(IConfiguration config, IUsersRepository usersRepo, ILogger logger)
         {
-            this.config = config;
+            customSettings = new CustomSettings();
+            config.GetSection("CustomSettings").Bind(customSettings);
+            //this.config = config;
             this.usersRepo = usersRepo;
+            this.logger = logger;
         }
 
         [HttpGet]

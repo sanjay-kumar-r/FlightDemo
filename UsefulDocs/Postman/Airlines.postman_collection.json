@@ -183,7 +183,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"Id\": 2,\r\n    \"Name\": \"IndiGo123\",\r\n    \"AirlineCode\": \"IND1\",\r\n    \"ContactNumber\": \"111222333444\",\r\n    \"ContactAddress\": \"#no address\",\r\n    \"TotalSeats\": 90,\r\n    \"TotalBCSeats\": 60,\r\n    \"TotalNBCSeats\": 30,\r\n    \"BCTicketCost\": 2000.512,\r\n    \"NBCTicketCost\": 100.539\r\n}",
+							"raw": "{\r\n    \"Id\": 2,\r\n    \"Name\": \"IndiGo123\",\r\n    \"AirlineCode\": \"IND1\",\r\n    \"ContactNumber\": \"111222333444\",\r\n    \"ContactAddress\": \"#no address\",\r\n    \"TotalSeats\": 10,\r\n    \"TotalBCSeats\": 6,\r\n    \"TotalNBCSeats\": 4,\r\n    \"BCTicketCost\": 50,\r\n    \"NBCTicketCost\": 20\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"

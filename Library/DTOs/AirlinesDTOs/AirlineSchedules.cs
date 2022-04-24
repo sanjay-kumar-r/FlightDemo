@@ -121,8 +121,14 @@ namespace AirlinesDTOs
         [DataMember(Name = "ActualDepartureDate")]
         public DateTime ActualDepartureDate { get; set; }
 
+        //[DataMember(Name = "ActualDepartureTime")]
+        //public DateTime ActualDepartureTime { get; set; }
+
         [DataMember(Name = "ActualArrivalDate")]
         public DateTime? ActualArrivalDate { get; set; }
+
+        //[DataMember(Name = "ActualArrivalTime")]
+        //public DateTime ActualArrivalTime { get; set; }
 
         [DataMember(Name = "BCSeatsRemaining")]
         public int BCSeatsRemaining { get; set; }

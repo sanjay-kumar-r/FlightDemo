@@ -64,6 +64,12 @@ namespace Flight.Bookings.Migrations
                             Id = 4,
                             Description = "When user gets refunded back",
                             Status = "Refunded"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Description = "When user initiates an invalid booking",
+                            Status = "Invalid"
                         });
                 });
 
@@ -77,8 +83,8 @@ namespace Flight.Bookings.Migrations
                     b.Property<double>("ActualPaidAmount")
                         .HasColumnType("float");
 
-                    b.Property<long>("BCSeats")
-                        .HasColumnType("bigint");
+                    b.Property<int>("BCSeats")
+                        .HasColumnType("int");
 
                     b.Property<int>("BookingStatusId")
                         .HasColumnType("int");
@@ -95,8 +101,11 @@ namespace Flight.Bookings.Migrations
                     b.Property<bool?>("IsRefunded")
                         .HasColumnType("bit");
 
-                    b.Property<long>("NBCSeats")
-                        .HasColumnType("bigint");
+                    b.Property<int>("NBCSeats")
+                        .HasColumnType("int");
+
+                    b.Property<string>("PNR")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<long>("ScheduleId")
                         .HasColumnType("bigint");

@@ -1,0 +1,214 @@
+{
+	"info": {
+		"_postman_id": "f64012c9-8daf-4c70-8c02-54e9fd3740a3",
+		"name": "Bookings",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Bookings_Get",
+			"item": [
+				{
+					"name": "Bookings_GetBookingsById/(id)",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": " application/json",
+								"type": "text"
+							},
+							{
+								"key": "UserId",
+								"value": " 3",
+								"type": "text"
+							},
+							{
+								"key": "TenantId",
+								"value": " 9012",
+								"type": "text"
+							},
+							{
+								"key": "AccessToken",
+								"value": " abcd",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:9050/api/v1.0/Bookings/GetBookingsById/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9050",
+							"path": [
+								"api",
+								"v1.0",
+								"Bookings",
+								"GetBookingsById",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Bookings_Get",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": " application/json",
+								"type": "text"
+							},
+							{
+								"key": "UserId",
+								"value": " 3",
+								"type": "text"
+							},
+							{
+								"key": "TenantId",
+								"value": " 9012",
+								"type": "text"
+							},
+							{
+								"key": "AccessToken",
+								"value": " abcd",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:9050/api/v1.0/Bookings",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9050",
+							"path": [
+								"api",
+								"v1.0",
+								"Bookings"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Bookings_Add",
+			"item": [
+				{
+					"name": "Bookings_BookTicket",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": " application/json",
+								"type": "text"
+							},
+							{
+								"key": "UserId",
+								"value": " 3",
+								"type": "text"
+							},
+							{
+								"key": "TenantId",
+								"value": " 9012",
+								"type": "text"
+							},
+							{
+								"key": "AccessToken",
+								"value": " abcd",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"ScheduleId\":4,\r\n    \"DateBookedFor\":\"2022-05-18T09:05:00.610363\",\r\n    \"BCSeats\":0,\r\n    \"NBCSeats\":2,\r\n    \"ActualPaidAmount\":34\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9050/api/v1.0/Bookings/BookTicket",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9050",
+							"path": [
+								"api",
+								"v1.0",
+								"Bookings",
+								"BookTicket"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Bookings_Delete",
+			"item": [
+				{
+					"name": "Bookings_CancelBooking",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": " application/json",
+								"type": "text"
+							},
+							{
+								"key": "UserId",
+								"value": " 3",
+								"type": "text"
+							},
+							{
+								"key": "TenantId",
+								"value": " 9012",
+								"type": "text"
+							},
+							{
+								"key": "AccessToken",
+								"value": " abcd",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "4",
+							"options": {
+								"raw": {
+									"language": "text"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9050/api/v1.0/Bookings/CancelBooking",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9050",
+							"path": [
+								"api",
+								"v1.0",
+								"Bookings",
+								"CancelBooking"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

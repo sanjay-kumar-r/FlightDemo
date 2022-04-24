@@ -119,7 +119,7 @@ namespace Flight.Airlines.Models.Utils
         public IEnumerable<AirlinesDTOs.Airlines> GetAirlinesByFiltercondition(AirlinesDTOs.AirlineDetails airline)
         {
             if (airline == null || (airline.Id <= 0 && string.IsNullOrWhiteSpace(airline.Name) && string.IsNullOrWhiteSpace(airline.AirlineCode)
-                    && airline.BCTicketCost <= 0 && airline.NBCTicketCost <= 0) || airline.IsActive == null)
+                    && airline.BCTicketCost <= 0 && airline.NBCTicketCost <= 0 && airline.IsActive == null))
                 return context.Airlines.Where(x => !x.IsDeleted);
             return context.Airlines.Where(x => (airline.Id <= 0 || airline.Id == x.Id)
                 && (string.IsNullOrWhiteSpace(airline.Name) || x.Name.Contains(airline.Name))
@@ -196,7 +196,7 @@ namespace Flight.Airlines.Models.Utils
                 if(airline.BCTicketCost > 0)
                     airlineExisting.BCTicketCost = airline.BCTicketCost;
                 if (airline.NBCTicketCost > 0)
-                    airlineExisting.BCTicketCost = airline.NBCTicketCost;
+                    airlineExisting.NBCTicketCost = airline.NBCTicketCost;
                 if (airline.IsActive != null)
                     airlineExisting.IsActive = (bool)airline.IsActive;
                 airlineExisting.ModifiedOn = DateTime.Now;
@@ -437,12 +437,16 @@ namespace Flight.Airlines.Models.Utils
 
         public IEnumerable<AirlineDiscountTagMappings> GetAirlineDiscountTagsMappings(long? airlineId = null, long? discountId = null)
         {
-            if ((airlineId == null || airlineId <= 0) && (discountId == null || discountId <= 0)  )
+            context.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
+            if ((airlineId == null || airlineId <= 0) && (discountId == null || discountId <= 0))
                 return context.AirlineDiscountTagMappings.Include(x => x.Airline).Include(x => x.DiscountTag).AsEnumerable();
             else
-                return context.AirlineDiscountTagMappings.Include(x => x.Airline).Include(x => x.DiscountTag).Where(x => 
-                    (airlineId == null || airlineId <= 0 || x.AirlineId == airlineId) 
-                    && (discountId == null || discountId <= 0 || x.DiscountTagId == discountId));
+            {
+                var res = context.AirlineDiscountTagMappings.Include(x => x.Airline).Include(x => x.DiscountTag).Where(x =>
+                     (airlineId == null || airlineId <= 0 || x.AirlineId == airlineId)
+                     && (discountId == null || discountId <= 0 || x.DiscountTagId == discountId)).ToList();
+                return res;
+            }
         }
 
         public IEnumerable<AirlineDiscountTagMappings> GetAirlineDiscountTagsMappingsByIds(List<long> ids, bool isByAirlineId)
@@ -474,31 +478,39 @@ namespace Flight.Airlines.Models.Utils
                     && (schedule.DepartureDay == null || !Enum.IsDefined(typeof(DayOfWeek), schedule.DepartureDay))
                     && schedule.DepartureDate == null && schedule.DepartureTime == null
                     && (schedule.ArrivalDay == null || !Enum.IsDefined(typeof(DayOfWeek), schedule.ArrivalDay))
-                    && schedule.DepartureDate == null && schedule.DepartureTime == null ))
+                    && schedule.DepartureDate == null && schedule.DepartureTime == null))
                 return context.AirlineSchedules.Where(x => !x.IsDeleted);
-            return context.AirlineSchedules.Include(x => x.Airline).Where(x => !x.IsDeleted
+            return context.AirlineSchedules.Include(x => x.Airline).AsNoTracking().Where(x => !x.IsDeleted
                 && (schedule.Id <= 0 || schedule.Id == x.Id)
                 && (string.IsNullOrWhiteSpace(schedule.From) || x.From.Contains(schedule.From))
                 && (string.IsNullOrWhiteSpace(schedule.To) || x.To.Contains(schedule.To))
-                && (x.IsRegular && (schedule.DepartureDay == null || !Enum.IsDefined(typeof(DayOfWeek), schedule.DepartureDay)
+                && ((x.IsRegular && (schedule.DepartureDay == null || !Enum.IsDefined(typeof(DayOfWeek), schedule.DepartureDay)
                     //|| x.DepartureDay.Equals(schedule.DepartureDay)))
-                    || x.DepartureDay >= schedule.DepartureDay))
-                && (!x.IsRegular && (schedule.DepartureDate == null
+                    || (int)x.DepartureDay >= (int)schedule.DepartureDay))
+                    || (!x.IsRegular && (schedule.DepartureDate == null
                     //|| x.DepartureDate.Value.Date.Equals(schedule.DepartureDate.Value.Date)))
                     || x.DepartureDate.Value.Date >= schedule.DepartureDate.Value.Date))
-                && (schedule.DepartureTime == null || (x.DepartureTime.Hour >= schedule.DepartureTime.Value.Hour 
+                    )
+                //&& (!x.IsRegular && (schedule.DepartureDate == null
+                //    //|| x.DepartureDate.Value.Date.Equals(schedule.DepartureDate.Value.Date)))
+                //    || x.DepartureDate.Value.Date >= schedule.DepartureDate.Value.Date))
+                && (schedule.DepartureTime == null || (x.DepartureTime.Hour >= schedule.DepartureTime.Value.Hour
                     && x.DepartureTime.Minute >= schedule.DepartureTime.Value.Minute))
                 //&& (schedule.DepartureTime == null || x.DepartureTime.ToShortTimeString().Equals(schedule.DepartureTime.Value.ToShortTimeString()))
-                && (x.IsRegular && (schedule.ArrivalDay == null || !Enum.IsDefined(typeof(DayOfWeek), schedule.ArrivalDay)
+                && ((x.IsRegular && (schedule.ArrivalDay == null || !Enum.IsDefined(typeof(DayOfWeek), schedule.ArrivalDay)
                     //|| x.ArrivalDay.Equals(schedule.ArrivalDay)))
-                    || x.ArrivalDay <= schedule.ArrivalDay))
-                && (!x.IsRegular && (schedule.ArrivalDate == null
-                    //|| x.ArrivalDate.Value.Date.Equals(schedule.ArrivalDate.Value.Date)))
-                    || x.ArrivalDate.Value.Date <= schedule.ArrivalDate.Value.Date))
+                    || (int)x.ArrivalDay <= (int)schedule.ArrivalDay))
+                    || (!x.IsRegular && (schedule.ArrivalDate == null
+                        //|| x.ArrivalDate.Value.Date.Equals(schedule.ArrivalDate.Value.Date)))
+                        || x.ArrivalDate.Value.Date <= schedule.ArrivalDate.Value.Date))
+                    )
+                //&& (!x.IsRegular && (schedule.ArrivalDate == null
+                //    //|| x.ArrivalDate.Value.Date.Equals(schedule.ArrivalDate.Value.Date)))
+                //    || x.ArrivalDate.Value.Date <= schedule.ArrivalDate.Value.Date))
                 && (schedule.ArrivalTime == null || (x.ArrivalTime.Hour <= schedule.ArrivalTime.Value.Hour
                     && x.ArrivalTime.Minute <= schedule.ArrivalTime.Value.Minute))
                 //&& (schedule.ArrivalTime == null || x.ArrivalTime.ToShortTimeString().Equals(schedule.ArrivalTime.Value.ToShortTimeString()))
-                );
+                ).ToList();
         }
 
         public IEnumerable<AirlineSchedules> GetGetAirlineSchedulesByMultipleFilterConditions(List<AirlineScheduleDetails> schedules)
@@ -651,14 +663,16 @@ namespace Flight.Airlines.Models.Utils
             if (scheduleTracker == null || (scheduleTracker.Id <= 0 && scheduleTracker.ScheduleId <= 0 
                 && scheduleTracker.ActualDepartureDate == null && scheduleTracker.ActualArrivalDate == null))
                 return context.AirlineScheduleTracker.Where(x => !x.IsDeleted);
-            return context.AirlineScheduleTracker.Include(x => x.AirlineSchedule).Include(x => x.AirlineSchedule.Airline)
+            return context.AirlineScheduleTracker.Include(x => x.AirlineSchedule).Include(x => x.AirlineSchedule.Airline).AsEnumerable()
                 .Where(x => !x.IsDeleted
                 && (scheduleTracker.Id <= 0 || scheduleTracker.Id == x.Id)
                 && (scheduleTracker.ScheduleId <= 0 || scheduleTracker.ScheduleId == x.ScheduleId)
                 && (scheduleTracker.ActualDepartureDate == null 
-                    || scheduleTracker.ActualDepartureDate.Date.Equals(x.ActualDepartureDate.Date))
+                    || (scheduleTracker.ActualDepartureDate.Date.Equals(x.ActualDepartureDate.Date)
+                        && scheduleTracker.ActualDepartureDate.ToShortTimeString().Equals(x.ActualDepartureDate.ToShortTimeString())))
                 && (scheduleTracker.ActualArrivalDate == null 
-                    || scheduleTracker.ActualArrivalDate.Value.Date.Equals(x.ActualArrivalDate.Value.Date))
+                    || (scheduleTracker.ActualArrivalDate.Value.Date.Equals(x.ActualArrivalDate.Value.Date)
+                        && scheduleTracker.ActualArrivalDate.Value.ToShortTimeString().Equals(x.ActualArrivalDate.Value.ToShortTimeString())))
                 );
         }
 
@@ -671,20 +685,30 @@ namespace Flight.Airlines.Models.Utils
             return id;
         }
 
-        public bool UpdateAirlineScheduleTracker(long id, int bcTickets, int nbcTickets)
+        public bool UpdateAirlineScheduleTracker(long id, int bcTickets, int nbcTickets, bool isRevert = false)
         {
             bool result = false;
             if (id > 0 && (bcTickets > 0 || nbcTickets > 0) && context.AirlineScheduleTracker.Count() > 0
-                && context.AirlineScheduleTracker.Any(x => x.Id == id))
+                && context.AirlineScheduleTracker.Any(x => x.Id == id && !x.IsDeleted))
             {
                 using (var transaction = context.Database.BeginTransaction(System.Data.IsolationLevel.Serializable))
                 {
                     context.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
                     AirlineScheduleTracker scheduleTrackerExisting = context.AirlineScheduleTracker.First(x => x.Id == id);
                     if (bcTickets > 0)
-                        scheduleTrackerExisting.BCSeatsRemaining = scheduleTrackerExisting.BCSeatsRemaining - bcTickets;
+                    {
+                        if(isRevert)
+                            scheduleTrackerExisting.BCSeatsRemaining = scheduleTrackerExisting.BCSeatsRemaining + bcTickets;
+                        else
+                            scheduleTrackerExisting.BCSeatsRemaining = scheduleTrackerExisting.BCSeatsRemaining - bcTickets;
+                    }
                     if (nbcTickets > 0)
-                        scheduleTrackerExisting.NBCSeatsRemaining = scheduleTrackerExisting.NBCSeatsRemaining - nbcTickets;
+                    {
+                        if(isRevert)
+                            scheduleTrackerExisting.NBCSeatsRemaining = scheduleTrackerExisting.NBCSeatsRemaining + nbcTickets;
+                        else
+                            scheduleTrackerExisting.NBCSeatsRemaining = scheduleTrackerExisting.NBCSeatsRemaining - nbcTickets;
+                    }
 
                     var scheduleTrackerUpdated = context.AirlineScheduleTracker.Attach(scheduleTrackerExisting);
                     scheduleTrackerUpdated.State = Microsoft.EntityFrameworkCore.EntityState.Modified;

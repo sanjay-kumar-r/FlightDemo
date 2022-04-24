@@ -11,7 +11,7 @@ namespace Flight.Users.Model.Utils
         public static bool ValidateBookTicket(BookingsDTOs.Bookings booking)
         {
             if (booking == null || booking.ScheduleId <= 0 || booking.DateBookedFor == null 
-                || (booking.BCSeats == 0 && booking.NBCSeats == 0) || booking.BookingStatusId <= 0)
+                || (booking.BCSeats == 0 && booking.NBCSeats == 0))
                 return false;
             return true;
               

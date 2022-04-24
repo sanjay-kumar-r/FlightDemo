@@ -37,7 +37,8 @@ namespace Flight.Bookings
                 options.Filters.AddService(typeof(GlobalAPIValidation));
             });
             services.AddDbContextPool<BookingsDBContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("SQLServerConnectionString")));
+                options.UseSqlServer(Configuration.GetConnectionString("SQLServerConnectionString"))
+                .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking));
             services.AddTransient<IBookingsRepository, BookingsRepository>();
         }
 

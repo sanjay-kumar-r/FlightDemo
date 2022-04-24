@@ -19,7 +19,8 @@ namespace Flight.Users.Model.Utils
         }
         public IEnumerable<BookingsDTOs.Bookings> GetBookings(long userId, long? id = null)
         {
-            return context.Bookings.Include(x => x.BookingStatus).AsNoTracking().Where(x => x.UserId == userId && (id == null || x.Id == id));
+            return context.Bookings.Include(x => x.BookingStatus).AsEnumerable()
+                .Where(x => x.UserId == userId && (id == null || x.Id == id)).ToList();
         }
 
         public IEnumerable<BookingsDTOs.Bookings> GetBookingsByFiltercondition(BookingsDTOs.Bookings booking)
@@ -27,12 +28,11 @@ namespace Flight.Users.Model.Utils
             return context.Bookings.Include(x => x.BookingStatus).AsNoTracking().Where(x => x.UserId == booking.UserId 
                 && (booking.Id <= 0 || booking.Id == x.Id)
                 && (booking.ScheduleId <= 0 || booking.ScheduleId == x.ScheduleId)
-                && (booking.ScheduleId <= 0 || booking.ScheduleId == x.ScheduleId)
                 && (booking.DateBookedFor != null || booking.DateBookedFor.Date == x.DateBookedFor.Date)
                 && (!Enum.IsDefined(typeof(BookingStatusCode), booking.BookingStatusId) || booking.BookingStatusId == x.BookingStatusId)
                 && (booking.CreatedOn != null || booking.CreatedOn.Value.Date == x.CreatedOn.Value.Date)
                 && (booking.CanceledOn != null || booking.CanceledOn.Value.Date == x.CanceledOn.Value.Date)
-                && (booking.IsRefunded != null || booking.IsRefunded == x.IsRefunded));
+                && (booking.IsRefunded != null || booking.IsRefunded == x.IsRefunded)).ToList();
         }
 
         public long BookTicket(BookingsDTOs.Bookings booking)
@@ -61,6 +61,22 @@ namespace Flight.Users.Model.Utils
                     result = true;
                 }
             }
+            return result;
+        }
+
+        public bool UpdateBookingStatus(long id, long userId, BookingStatusCode bookingStatus)
+        {
+            context.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
+            bool result = false;
+            //if (id > 0 && context.Bookings.Any(x => x.Id == id))
+            //{
+                var booking = context.Bookings.AsNoTracking().FirstOrDefault(x => x.Id == id && x.UserId == userId);
+                booking.BookingStatusId = (int)bookingStatus;
+                var bookingUpdated = context.Bookings.Attach(booking);
+                bookingUpdated.State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+                context.SaveChanges();
+                result = true;
+            //}
             return result;
         }
     }

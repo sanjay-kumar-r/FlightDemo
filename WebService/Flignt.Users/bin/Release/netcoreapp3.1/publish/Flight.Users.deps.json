@@ -1789,6 +1789,14 @@
           "AirlinesDTOs.dll": {}
         }
       },
+      "BookingsDTOs/1.0.0": {
+        "runtime": {
+          "BookingsDTOs.dll": {}
+        },
+        "compile": {
+          "BookingsDTOs.dll": {}
+        }
+      },
       "CommonDTOs/1.0.0": {
         "runtime": {
           "CommonDTOs.dll": {}
@@ -1815,6 +1823,7 @@
       "ServiceContracts/1.0.0": {
         "dependencies": {
           "AirlinesDTOs": "1.0.0",
+          "BookingsDTOs": "1.0.0",
           "CommonDTOs": "1.0.0",
           "UsersDTOs": "1.0.0"
         },
@@ -4437,6 +4446,11 @@
       "hashPath": "system.xml.xmlserializer.4.3.0.nupkg.sha512"
     },
     "AirlinesDTOs/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "BookingsDTOs/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

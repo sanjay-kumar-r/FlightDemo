@@ -8,8 +8,9 @@ To create Flight demo projects for training
 
 ./Library folder -> has the shared DTOs, Service contracts and Utils classes which will be used by client and webservice.
 ./WebService folder -> contains microservice projects.
-./WebService/Flight.Airlines/ folder -> has microservice project related to Aprlines , Discounts , AirlineDiscountMappings and Scheduler - Add/Update/Delete
-./WebService/Flight.Users/ folder -> has microservice project related to Users - Register/Login/Update/Delete
+./WebService/Flight.Airlines/ folder -> has microservice project related to Aprlines , Discounts , AirlineDiscountMappings , AirlineSchedule and AirlineScheduleTracker - Add/Update/Delete and others ...
+./WebService/Flight.Users/ folder -> has microservice project related to Users - Register/Login/Update/Delete ...
+./WebService/Flight.Bookings/ folder -> has microservice project related to Bookings - BookTicket/CancelTicket/GetTickets ...
 ./Tools/APIGateway/ folder -> has microservice project related to API Gateway - routing json file is present in OcelotConfigs/ocelot.json (or) ocelot.{env}.json
 ----------------------------------------------------------------------------------------------------------------------------------
 
@@ -21,10 +22,11 @@ To create Flight demo projects for training
 			(d) endpointUrls/ValidateAdminUrl = specifies url for admin validation api.
 			(e) APIGatewayUrl = api gateway url.
 			
-=> create databases Airlines and Users. 
+=> create databases Airlines and Users and Bookings. 
 
 => .\WebService\Flight.Airlines\Migrations = contains migration scripts and db snapshots
 => .\WebService\Flignt.Users\Migrations = contains migration scripts and db snapshots
+=> .\WebService\Flignt.Bookings\Migrations = contains migration scripts and db snapshots
 ----------------------------------------------------------------------------------------------------------------------------------
 
 # 3. To run the microservices :-
@@ -37,6 +39,8 @@ Execution :
                 > dotnet Flight.Airlines.dll
 ./WebService/Flignt.Users/bin/Release/netcoreapp3.1/publish/  -> we can just go to this folder location in powershell/commandPrompt and just execute 
                 > dotnet Flight.Users.dll
+./WebService/Flignt.Bookings/bin/Release/netcoreapp3.1/publish/  -> we can just go to this folder location in powershell/commandPrompt and just execute 
+                > dotnet Flight.Bookings.dll
 Tools/APIGateway/bin/Release/netcoreapp3.1/publish/  -> we can just go to this folder location in powershell/commandPrompt and just execute 
                 > dotnet APIGateway.dll
 

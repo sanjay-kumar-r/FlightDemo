@@ -54,6 +54,7 @@ D:\WorkSpace\WebService\Flight.Airlines\bin\Release\netcoreapp3.1\runtimes\win-x
 D:\WorkSpace\WebService\Flight.Airlines\bin\Release\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Runtime.Caching.dll
 D:\WorkSpace\WebService\Flight.Airlines\bin\Release\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
 D:\WorkSpace\WebService\Flight.Airlines\bin\Release\netcoreapp3.1\AirlinesDTOs.dll
+D:\WorkSpace\WebService\Flight.Airlines\bin\Release\netcoreapp3.1\BookingsDTOs.dll
 D:\WorkSpace\WebService\Flight.Airlines\bin\Release\netcoreapp3.1\CommonDTOs.dll
 D:\WorkSpace\WebService\Flight.Airlines\bin\Release\netcoreapp3.1\CommonUtils.dll
 D:\WorkSpace\WebService\Flight.Airlines\bin\Release\netcoreapp3.1\ServiceContracts.dll
@@ -64,6 +65,7 @@ D:\WorkSpace\WebService\Flight.Airlines\bin\Release\netcoreapp3.1\ServiceContrac
 D:\WorkSpace\WebService\Flight.Airlines\bin\Release\netcoreapp3.1\CommonUtils.pdb
 D:\WorkSpace\WebService\Flight.Airlines\bin\Release\netcoreapp3.1\CommonDTOs.pdb
 D:\WorkSpace\WebService\Flight.Airlines\bin\Release\netcoreapp3.1\UsersDTOs.pdb
+D:\WorkSpace\WebService\Flight.Airlines\bin\Release\netcoreapp3.1\BookingsDTOs.pdb
 D:\WorkSpace\WebService\Flight.Airlines\bin\Release\netcoreapp3.1\log4net.xml
 D:\WorkSpace\WebService\Flight.Airlines\obj\Release\netcoreapp3.1\Flight.Airlines.csproj.AssemblyReference.cache
 D:\WorkSpace\WebService\Flight.Airlines\obj\Release\netcoreapp3.1\Flight.Airlines.GeneratedMSBuildEditorConfig.editorconfig

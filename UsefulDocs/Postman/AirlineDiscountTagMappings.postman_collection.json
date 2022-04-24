@@ -88,7 +88,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "[\r\n    {\r\n        \"AirlineId\": 1,\r\n        \"AddedDiscountTagIds\": [\r\n            1,\r\n            2,\r\n            3,\r\n            4,\r\n            5\r\n        ],\r\n        \"RemovedDiscountTagIds\": [\r\n            1,\r\n            2,\r\n            3\r\n        ]\r\n    },\r\n    {\r\n        \"AirlineId\": 2,\r\n        \"AddedDiscountTagIds\": [],\r\n        \"RemovedDiscountTagIds\": [\r\n            4\r\n        ]\r\n    },\r\n    {\r\n        \"AirlineId\": 234,\r\n        \"AddedDiscountTagIds\": [],\r\n        \"RemovedDiscountTagIds\": [\r\n            1,\r\n            2,\r\n            3,\r\n            4\r\n        ]\r\n    }\r\n]",
+							"raw": "[\r\n    {\r\n        \"AirlineId\": 1,\r\n        \"AddedDiscountTagIds\": [\r\n            1,\r\n            2,\r\n            3,\r\n            4,\r\n            5\r\n        ],\r\n        \"RemovedDiscountTagIds\": [\r\n            1,\r\n            3\r\n        ]\r\n    },\r\n    {\r\n        \"AirlineId\": 2,\r\n        \"AddedDiscountTagIds\": [1,2],\r\n        \"RemovedDiscountTagIds\": [\r\n            4\r\n        ]\r\n    },\r\n    {\r\n        \"AirlineId\": 234,\r\n        \"AddedDiscountTagIds\": [],\r\n        \"RemovedDiscountTagIds\": [\r\n            1,\r\n            2,\r\n            3,\r\n            4\r\n        ]\r\n    }\r\n]",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -96,12 +96,12 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:9003/api/v1.0/Airlines/RemapAirlinesDiscountTags",
+							"raw": "http://localhost:9050/api/v1.0/Airlines/RemapAirlinesDiscountTags",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "9003",
+							"port": "9050",
 							"path": [
 								"api",
 								"v1.0",

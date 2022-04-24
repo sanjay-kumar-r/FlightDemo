@@ -5,5 +5,6 @@
   </PropertyGroup>
   <PropertyGroup>
     <ActiveDebugProfile>Flight.Bookings</ActiveDebugProfile>
+    <NameOfLastUsedPublishProfile>D:\WorkSpace\WebService\Flight.Bookings\Properties\PublishProfiles\FolderProfile.pubxml</NameOfLastUsedPublishProfile>
   </PropertyGroup>
 </Project>

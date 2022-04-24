@@ -50,6 +50,7 @@ D:\WorkSpace\WebService\Flignt.Users\obj\Release\netcoreapp3.1\PubTmp\Out\runtim
 D:\WorkSpace\WebService\Flignt.Users\obj\Release\netcoreapp3.1\PubTmp\Out\runtimes\win\lib\netstandard2.0\System.Runtime.Caching.dll
 D:\WorkSpace\WebService\Flignt.Users\obj\Release\netcoreapp3.1\PubTmp\Out\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
 D:\WorkSpace\WebService\Flignt.Users\obj\Release\netcoreapp3.1\PubTmp\Out\AirlinesDTOs.dll
+D:\WorkSpace\WebService\Flignt.Users\obj\Release\netcoreapp3.1\PubTmp\Out\BookingsDTOs.dll
 D:\WorkSpace\WebService\Flignt.Users\obj\Release\netcoreapp3.1\PubTmp\Out\CommonDTOs.dll
 D:\WorkSpace\WebService\Flignt.Users\obj\Release\netcoreapp3.1\PubTmp\Out\CommonUtils.dll
 D:\WorkSpace\WebService\Flignt.Users\obj\Release\netcoreapp3.1\PubTmp\Out\ServiceContracts.dll
@@ -60,5 +61,6 @@ D:\WorkSpace\WebService\Flignt.Users\obj\Release\netcoreapp3.1\PubTmp\Out\Servic
 D:\WorkSpace\WebService\Flignt.Users\obj\Release\netcoreapp3.1\PubTmp\Out\CommonUtils.pdb
 D:\WorkSpace\WebService\Flignt.Users\obj\Release\netcoreapp3.1\PubTmp\Out\CommonDTOs.pdb
 D:\WorkSpace\WebService\Flignt.Users\obj\Release\netcoreapp3.1\PubTmp\Out\AirlinesDTOs.pdb
+D:\WorkSpace\WebService\Flignt.Users\obj\Release\netcoreapp3.1\PubTmp\Out\BookingsDTOs.pdb
 D:\WorkSpace\WebService\Flignt.Users\obj\Release\netcoreapp3.1\PubTmp\Out\log4net.xml
 D:\WorkSpace\WebService\Flignt.Users\obj\Release\netcoreapp3.1\PubTmp\Out\Flight.Users.deps.json

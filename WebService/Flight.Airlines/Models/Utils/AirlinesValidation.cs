@@ -104,10 +104,30 @@ namespace Flight.Airlines.Models.Utils
             return true;
         }
 
+        //Airline search
         public static bool ValidateGetAvailableAirlines(AirlinesDTOs.AirlinesSearchRequest airlinesSearchRequest)
         {
             if (airlinesSearchRequest == null || string.IsNullOrWhiteSpace(airlinesSearchRequest.From)
                 || string.IsNullOrWhiteSpace(airlinesSearchRequest.To))
+                return false;
+            return true;
+        }
+
+        //available seats check
+        public static bool ValidateCheckForAvailableSeats(AirlinesDTOs.AirlineScheduleTracker airlineScheduleTracker)
+        {
+            if (airlineScheduleTracker == null || airlineScheduleTracker.ScheduleId <= 0
+                || (airlineScheduleTracker.BCSeatsRemaining < 0 && airlineScheduleTracker.NBCSeatsRemaining < 0)
+                || airlineScheduleTracker.ActualDepartureDate >= DateTime.Now)
+                return false;
+            return true;
+        }
+
+        public static bool RevertScheduleTracker(AirlinesDTOs.AirlineScheduleTracker airlineScheduleTracker)
+        {
+            if (airlineScheduleTracker == null || airlineScheduleTracker.ScheduleId <= 0
+                || (airlineScheduleTracker.BCSeatsRemaining < 0 && airlineScheduleTracker.NBCSeatsRemaining < 0)
+                || airlineScheduleTracker.ActualDepartureDate >= DateTime.Now)
                 return false;
             return true;
         }

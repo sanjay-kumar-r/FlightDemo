@@ -3,6 +3,7 @@ using Flight.Airlines.Models.Utils;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using ServiceContracts.Airlines;
+using ServiceContracts.Logger;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,13 +16,20 @@ namespace Flight.Airlines.Controllers
     [ApiController]
     public class DiscountTagsController : ControllerBase
     {
-        private readonly IConfiguration config;
+        private readonly CustomSettings customSettings;
+        //private readonly IConfiguration config;
         private readonly IAirlinesRepository airlinesRepo;
-        public DiscountTagsController(IConfiguration config, IAirlinesRepository airlinesRepo)
+        private readonly ILogger logger;
+
+        public DiscountTagsController(IConfiguration config, IAirlinesRepository airlineRepo, ILogger logger)
         {
-            this.config = config;
-            this.airlinesRepo = airlinesRepo;
+            customSettings = new CustomSettings();
+            config.GetSection("CustomSettings").Bind(customSettings);
+            //this.config = config;
+            this.airlinesRepo = airlineRepo;
+            this.logger = logger;
         }
+
         [HttpGet]
         [Route("Ping")]
         public string Ping()

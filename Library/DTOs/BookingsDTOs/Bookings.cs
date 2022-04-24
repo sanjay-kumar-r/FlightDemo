@@ -23,10 +23,10 @@ namespace BookingsDTOs
         public DateTime DateBookedFor { get; set; }
 
         [DataMember(Name = "BCSeats")]
-        public long BCSeats { get; set; }
+        public int BCSeats { get; set; }
 
         [DataMember(Name = "NBCSeats")]
-        public long NBCSeats { get; set; }
+        public int NBCSeats { get; set; }
 
         [DataMember(Name = "ActualPaidAmount")]
         public double ActualPaidAmount { get; set; }
@@ -35,6 +35,9 @@ namespace BookingsDTOs
         [ForeignKey("BookingStatus")]
         public int BookingStatusId { get; set; }
         public BookingStatus BookingStatus { get; set; }
+
+        [DataMember(Name = "PNR")]
+        public string PNR { get; set; }
 
         [DataMember(Name = "CreatedOn")]
         public DateTime? CreatedOn { get; set; } = null;
@@ -62,25 +65,35 @@ namespace BookingsDTOs
         public DateTime? DateBookedFor { get; set; } = null;
 
         [DataMember(Name = "BCSeats")]
-        public long BCSeats { get; set; }
+        public int BCSeats { get; set; }
 
         [DataMember(Name = "NBCSeats")]
-        public long NBCSeats { get; set; }
+        public int NBCSeats { get; set; }
 
-        [DataMember(Name = "ActualPaidAmount")]
-        public double ActualPaidAmount { get; set; }
+        [DataMember(Name = "DiscountIdAvailed")]
+        public int DiscountIdAvailed { get; set; }
 
         [DataMember(Name = "BookingStatusId")]
         public int BookingStatusId { get; set; }
 
-        [DataMember(Name = "CreatedOn")]
-        public DateTime? CreatedOn { get; set; } = null;
+        //[DataMember(Name = "CreatedOn")]
+        //public DateTime? CreatedOn { get; set; } = null;
 
-        [DataMember(Name = "CanceledOn")]
-        public DateTime? CanceledOn { get; set; } = null;
+        //[DataMember(Name = "CanceledOn")]
+        //public DateTime? CanceledOn { get; set; } = null;
 
-        [DataMember(Name = "IsRefunded")]
-        public bool? IsRefunded { get; set; } = null;
+        //[DataMember(Name = "IsRefunded")]
+        //public bool? IsRefunded { get; set; } = null;
+    }
+
+    [DataContract(Name = "BookingResponse")]
+    public class BookingResponse
+    {
+        [DataMember(Name = "BookingStatus")]
+        public string BookingStatus { get; set; }
+
+        [DataMember(Name = "PNR")]
+        public string PNR { get; set; }
     }
 }
 

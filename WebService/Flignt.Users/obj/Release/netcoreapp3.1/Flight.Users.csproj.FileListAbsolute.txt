@@ -79,3 +79,5 @@ D:\WorkSpace\WebService\Flignt.Users\obj\Release\netcoreapp3.1\Flight.Users.Razo
 D:\WorkSpace\WebService\Flignt.Users\obj\Release\netcoreapp3.1\Flight.Users.dll
 D:\WorkSpace\WebService\Flignt.Users\obj\Release\netcoreapp3.1\Flight.Users.pdb
 D:\WorkSpace\WebService\Flignt.Users\obj\Release\netcoreapp3.1\Flight.Users.genruntimeconfig.cache
+D:\WorkSpace\WebService\Flignt.Users\bin\Release\netcoreapp3.1\BookingsDTOs.dll
+D:\WorkSpace\WebService\Flignt.Users\bin\Release\netcoreapp3.1\BookingsDTOs.pdb

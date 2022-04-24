@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BookingsDTOs;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -13,5 +14,7 @@ namespace ServiceContracts.Bookings
         long BookTicket(BookingsDTOs.Bookings booking);
 
         bool CancelTicketByBookingIds(List<long> ids, long userId);
+
+        bool UpdateBookingStatus(long id, long userId, BookingStatusCode bookingStatus);
     }
 }

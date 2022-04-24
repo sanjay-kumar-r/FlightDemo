@@ -93,7 +93,7 @@ namespace ServiceContracts.Airlines
 
         long AddAirlineScheduleTracker(AirlineScheduleTracker scheduleTracker);
 
-        bool UpdateAirlineScheduleTracker(long id, int bcTickets, int nbcTickets);
+        bool UpdateAirlineScheduleTracker(long id, int bcTickets, int nbcTickets, bool isRevert = false);
 
         bool DeleteAirlineScheduleTracker(long id);
 

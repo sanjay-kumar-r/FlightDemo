@@ -99,6 +99,56 @@
       ],
       "UpstreamPathTemplate": "/api/{version}/AirlineSchedules/{everything}",
       "UpstreamHttpMethod": [ "Get", "Post" ]
+    },
+    //AirlineScheduleTracker :->
+    {
+      "DownstreamPathTemplate": "/api/{version}/AirlineScheduleTracker/",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "9003"
+        }
+      ],
+      "UpstreamPathTemplate": "/api/{version}/AirlineScheduleTracker/",
+      "UpstreamHttpMethod": [ "Get", "Post" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/{version}/AirlineScheduleTracker/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "9003"
+        }
+      ],
+      "UpstreamPathTemplate": "/api/{version}/AirlineScheduleTracker/{everything}",
+      "UpstreamHttpMethod": [ "Get", "Post" ]
+    },
+    //Bookings :->
+    {
+      "DownstreamPathTemplate": "/api/{version}/Bookings/",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "9005"
+        }
+      ],
+      "UpstreamPathTemplate": "/api/{version}/Bookings/",
+      "UpstreamHttpMethod": [ "Get", "Post" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/{version}/Bookings/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "9005"
+        }
+      ],
+      "UpstreamPathTemplate": "/api/{version}/Bookings/{everything}",
+      "UpstreamHttpMethod": [ "Get", "Post" ]
     }
   ],
   "GlobalConfiguration": {

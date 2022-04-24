@@ -1,0 +1,10 @@
+D:\WorkSpace\Library\DTOs\BookingsDTOs\bin\Release\netcoreapp3.1\BookingsDTOs.deps.json
+D:\WorkSpace\Library\DTOs\BookingsDTOs\bin\Release\netcoreapp3.1\BookingsDTOs.dll
+D:\WorkSpace\Library\DTOs\BookingsDTOs\bin\Release\netcoreapp3.1\BookingsDTOs.pdb
+D:\WorkSpace\Library\DTOs\BookingsDTOs\obj\Release\netcoreapp3.1\BookingsDTOs.csproj.AssemblyReference.cache
+D:\WorkSpace\Library\DTOs\BookingsDTOs\obj\Release\netcoreapp3.1\BookingsDTOs.GeneratedMSBuildEditorConfig.editorconfig
+D:\WorkSpace\Library\DTOs\BookingsDTOs\obj\Release\netcoreapp3.1\BookingsDTOs.AssemblyInfoInputs.cache
+D:\WorkSpace\Library\DTOs\BookingsDTOs\obj\Release\netcoreapp3.1\BookingsDTOs.AssemblyInfo.cs
+D:\WorkSpace\Library\DTOs\BookingsDTOs\obj\Release\netcoreapp3.1\BookingsDTOs.csproj.CoreCompileInputs.cache
+D:\WorkSpace\Library\DTOs\BookingsDTOs\obj\Release\netcoreapp3.1\BookingsDTOs.dll
+D:\WorkSpace\Library\DTOs\BookingsDTOs\obj\Release\netcoreapp3.1\BookingsDTOs.pdb

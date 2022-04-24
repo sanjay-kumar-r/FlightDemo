@@ -33,4 +33,3 @@ D:\WorkSpace\Tools\APIGateway\obj\Debug\netcoreapp3.1\APIGateway.dll
 D:\WorkSpace\Tools\APIGateway\obj\Debug\netcoreapp3.1\APIGateway.pdb
 D:\WorkSpace\Tools\APIGateway\obj\Debug\netcoreapp3.1\APIGateway.genruntimeconfig.cache
 D:\WorkSpace\Tools\APIGateway\obj\Debug\netcoreapp3.1\APIGateway.csproj.AssemblyReference.cache
-D:\WorkSpace\Tools\APIGateway\obj\Debug\netcoreapp3.1\APIGateway.csproj.CopyComplete
