@@ -1,6 +1,7 @@
 ﻿using AirlinesDTOs;
 using BookingsDTOs;
 using CommonDTOs;
+using CommonUtils.APIExecuter;
 using Flight.Bookings.Models.Utils;
 using Flight.Users.Model.Utils;
 using Microsoft.AspNetCore.Mvc;
@@ -13,6 +14,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -74,33 +76,82 @@ namespace Flight.Bookings.Controllers
             if (!BookingsValidation.ValidateBookTicket(booking))
                 throw new Exception("BookingsValidation.ValidateBookTicket Falied");
 
+            HeaderInfo headerInfo = new HeaderInfo()
+            {
+                UserId = HttpContext.Request.Headers["UserId"],
+                TenantId = HttpContext.Request.Headers["TenantId"],
+                AccessToken = HttpContext.Request.Headers["AccessToken"]
+            };
             BookingStatusCode status = BookingStatusCode.Invalid;
             try
             {
                 string pnr = string.Empty;
-                using (var httpClient = new HttpClient())
+                string checkForAvailableSeatsAndAddTrackerUrl = customSettings.EndpointUrls["CheckForAvailableSeatsAndAddTrackerUrl"];
+                string apiGatewayBaseUrl = customSettings.ApiGatewayBaseUrl;
+                string requestUrl = apiGatewayBaseUrl.Trim('/', ' ') + "/" + checkForAvailableSeatsAndAddTrackerUrl.Trim('/', ' ');
+                var tracker = new AirlineScheduleTracker()
                 {
-                    string checkForAvailableSeatsAndAddTrackerUrl = customSettings.EndpointUrls["CheckForAvailableSeatsAndAddTrackerUrl"];
-                    string apiGatewayBaseUrl = customSettings.ApiGatewayBaseUrl;
-                    string requestUrl = apiGatewayBaseUrl.Trim('/', ' ') + "/" + checkForAvailableSeatsAndAddTrackerUrl.Trim('/', ' ');
-                    var tracker = new AirlineScheduleTracker()
-                    {
-                        ScheduleId = booking.ScheduleId,
-                        ActualDepartureDate = booking.DateBookedFor,
-                        BCSeatsRemaining = booking.BCSeats,
-                        NBCSeatsRemaining = booking.NBCSeats,
-                    };
-                    string body = JsonConvert.SerializeObject(tracker);
-                    StringContent requestBody = new StringContent(body, Encoding.UTF8, "application/json");
-                    using (var response = await httpClient.PostAsync(requestUrl, requestBody))
-                    {
-                        string apiResponse = await response.Content.ReadAsStringAsync();
-                        status = (BookingStatusCode)Convert.ToInt32(apiResponse);
-                    }
+                    ScheduleId = booking.ScheduleId,
+                    ActualDepartureDate = booking.DateBookedFor,
+                    BCSeatsRemaining = booking.BCSeats,
+                    NBCSeatsRemaining = booking.NBCSeats,
+                };
+                using (var response = await ApiExecutor.ExecutePostAPI(requestUrl, headerInfo, tracker))
+                {
+                    string apiResponse = await response.Content.ReadAsStringAsync();
+                    status = (BookingStatusCode)Convert.ToInt32(apiResponse);
                 }
+                //using (var httpClient = new HttpClient())
+                //{
+                //    string checkForAvailableSeatsAndAddTrackerUrl = customSettings.EndpointUrls["CheckForAvailableSeatsAndAddTrackerUrl"];
+                //    string apiGatewayBaseUrl = customSettings.ApiGatewayBaseUrl;
+                //    string requestUrl = apiGatewayBaseUrl.Trim('/', ' ') + "/" + checkForAvailableSeatsAndAddTrackerUrl.Trim('/', ' ');
+                //    httpClient.BaseAddress = new Uri(requestUrl);
+                //    httpClient.DefaultRequestHeaders.Clear();
+                //    httpClient.DefaultRequestHeaders.Add("UserId", headerInfo.UserId);
+                //    httpClient.DefaultRequestHeaders.Add("TenantId", headerInfo.TenantId);
+                //    httpClient.DefaultRequestHeaders.Add("AccessToken", headerInfo.AccessToken);
+                //    var tracker = new AirlineScheduleTracker()
+                //    {
+                //        ScheduleId = booking.ScheduleId,
+                //        ActualDepartureDate = booking.DateBookedFor,
+                //        BCSeatsRemaining = booking.BCSeats,
+                //        NBCSeatsRemaining = booking.NBCSeats,
+                //    };
+                //    //var buffer = System.Text.Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(tracker));
+                //    //var byteContent = new ByteArrayContent(buffer);
+                //    //byteContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+                //    //HttpResponseMessage response = httpClient.PostAsJsonAsync(requestUrl, tracker).Result;
+                //    using (var response = await httpClient.PostAsJsonAsync(requestUrl, tracker))
+                //    {
+                //        string apiResponse = await response.Content.ReadAsStringAsync();
+                //        status = (BookingStatusCode)Convert.ToInt32(apiResponse);
+                //    }
+                //}
+
+                //using (var httpClient = new HttpClient())
+                //{
+                //    string checkForAvailableSeatsAndAddTrackerUrl = customSettings.EndpointUrls["CheckForAvailableSeatsAndAddTrackerUrl"];
+                //    string apiGatewayBaseUrl = customSettings.ApiGatewayBaseUrl;
+                //    string requestUrl = apiGatewayBaseUrl.Trim('/', ' ') + "/" + checkForAvailableSeatsAndAddTrackerUrl.Trim('/', ' ');
+                //    var tracker = new AirlineScheduleTracker()
+                //    {
+                //        ScheduleId = booking.ScheduleId,
+                //        ActualDepartureDate = booking.DateBookedFor,
+                //        BCSeatsRemaining = booking.BCSeats,
+                //        NBCSeatsRemaining = booking.NBCSeats,
+                //    };
+                //    string body = JsonConvert.SerializeObject(tracker);
+                //    StringContent requestBody = new StringContent(body, Encoding.UTF8, "application/json");
+                //    using (var response = await httpClient.PostAsync(requestUrl, requestBody))
+                //    {
+                //        string apiResponse = await response.Content.ReadAsStringAsync();
+                //        status = (BookingStatusCode)Convert.ToInt32(apiResponse);
+                //    }
+                //}
                 if (!status.Equals(BookingStatusCode.Invalid))
                 {
-                    if (!status.Equals(BookingStatusCode.Booked))
+                    if (status.Equals(BookingStatusCode.Booked))
                     {
                         Guid g = Guid.NewGuid();
                         pnr = g.ToString();
@@ -111,9 +162,7 @@ namespace Flight.Bookings.Controllers
                     bookingsRepo.BookTicket(booking);
                 }
                 else
-                {
-                    throw new Exception("Invalid booking : error while updating tracker or invalid number of seats claimed");
-                }
+                    logger.Log(LogLevel.INFO, "Invalid booking (wrong schedule and/or daparturedate)");
                 BookingResponse bookingResponse = new BookingResponse()
                 {
                     BookingStatus = status.ToString(),
@@ -126,66 +175,7 @@ namespace Flight.Bookings.Controllers
             {
                 logger.Log(LogLevel.ERROR, $"Error while Booking Ticket. Error message => '{ex.Message}' , Stack Trace => {ex.StackTrace}");
                 logger.Log(LogLevel.INFO, "Reverting Schedule tracker changes(updating back the available seats)");
-                //logger.Log(LogLevel.INFO, "1. Reverting booking status to invalid :");
-                //BookingsDTOs.Bookings bookingSearch = new BookingsDTOs.Bookings()
-                //{
-                //    UserId = Convert.ToInt64(HttpContext.Request.Headers["UserId"]),
-                //    ScheduleId = booking.ScheduleId,
-                //    DateBookedFor = booking.DateBookedFor,
-                //    BookingStatusId = -1,
-                //};
-                //var bookings = bookingsRepo.GetBookingsByFiltercondition(bookingSearch);
-                //bool result = true;
-                //if (bookings != null && bookings.Count() > 0 && bookings.FirstOrDefault() != null)
-                //{
-                //    var userBooking = bookings.FirstOrDefault();
-                //    result = bookingsRepo.UpdateBookingStatus(userBooking.Id, userBooking.UserId, BookingStatusCode.Invalid);
-                //}
-                //if (result)
-                //{
-                //    logger.Log(LogLevel.INFO, "2. Reverting schedule tracker by reverting available seats :");
-                //    using (var httpClient = new HttpClient())
-                //    {
-                //        string RevertScheduleTrackerUrl = customSettings.EndpointUrls["RevertScheduleTrackerUrl"];
-                //        string apiGatewayBaseUrl = customSettings.ApiGatewayBaseUrl;
-                //        string requestUrl = apiGatewayBaseUrl.Trim('/', ' ') + "/" + RevertScheduleTrackerUrl.Trim('/', ' ');
-                //        var tracker = new AirlineScheduleTracker()
-                //        {
-                //            ScheduleId = booking.ScheduleId,
-                //            ActualDepartureDate = booking.DateBookedFor,
-                //            BCSeatsRemaining = booking.BCSeats,
-                //            NBCSeatsRemaining = booking.NBCSeats,
-                //        };
-                //        string body = JsonConvert.SerializeObject(tracker);
-                //        StringContent requestBody = new StringContent(body, Encoding.UTF8, "application/json");
-                //        using (var response = await httpClient.PostAsync(requestUrl, requestBody))
-                //        {
-                //            string apiResponse = await response.Content.ReadAsStringAsync();
-                //            result = Convert.ToBoolean(apiResponse);
-                //        }
-                //    }
-                //    if (result)
-                //    {
-                //        logger.Log(LogLevel.INFO, "Revert Booking completed successfully");
-                //        BookingResponse bookingResponse = new BookingResponse()
-                //        {
-                //            BookingStatus = BookingStatusCode.Invalid.ToString()
-                //        };
-                //        return bookingResponse;
-                //    }
-                //    else
-                //    {
-                //        logger.Log(LogLevel.ERROR, "Revert Booking incomplete (error while reverting schedule tracker)");
-                //        throw new Exception("Error while reverting booking");
-                //    }
-                //}
-                //else
-                //{
-                //    logger.Log(LogLevel.ERROR, "Revert Booking incomplete (error while reverting booking table)");
-                //    throw new Exception("Error while reverting booking");
-                //}
-                BookingHelper bookingHelper = new BookingHelper(config, bookingsRepo, logger, 
-                    Convert.ToInt64(HttpContext.Request.Headers["UserId"]));
+                BookingHelper bookingHelper = new BookingHelper(config, bookingsRepo, logger, headerInfo);
                 bool result = await bookingHelper.BookingRevert(booking);
                 if(result)
                 {
@@ -205,34 +195,43 @@ namespace Flight.Bookings.Controllers
         [Route("CancelBooking")]
         public async Task<bool> CancelBooking([FromBody] int id)
         {
-            long userId = Convert.ToInt64(HttpContext.Request.Headers["UserId"]);
-            bool result = bookingsRepo.CancelTicketByBookingIds(new List<long>() { id }, userId);
-            if(result)
+            HeaderInfo headerInfo = new HeaderInfo()
             {
-                logger.Log(LogLevel.INFO, "Reverting Schedule tracker changes(updating back the available seats)");
-                var bookings = bookingsRepo.GetBookings(userId, id).ToList();
-                if(bookings != null && bookings.Count() > 0 && bookings.FirstOrDefault() != null)
+                UserId = HttpContext.Request.Headers["UserId"],
+                TenantId = HttpContext.Request.Headers["TenantId"],
+                AccessToken = HttpContext.Request.Headers["AccessToken"]
+            };
+            long userId = Convert.ToInt64(HttpContext.Request.Headers["UserId"]);
+            var bookings = bookingsRepo.GetBookings(userId, id).ToList();
+            bool result = false;
+            if (bookings != null && bookings.Count() > 0 && bookings.FirstOrDefault() != null)
+            {
+                
+                result = bookingsRepo.CancelTicketByBookingIds(new List<long>() { id }, userId);
+                if (result)
                 {
                     var booking = bookings.FirstOrDefault();
-                    BookingHelper bookingHelper = new BookingHelper(config, bookingsRepo, logger, userId);
-                    result = await bookingHelper.ScheduleTrackerRevert(booking);
-                    if (result)
+                    if (booking.BookingStatusId == (int)BookingStatusCode.Booked)
                     {
-                        logger.Log(LogLevel.INFO, "Revert Schedule Tracker completed successfully");
-                        //logger.Log(LogLevel.INFO, "Cancel Booking initiated :");
-                        //result = bookingsRepo.UpdateBookingStatus(id, userId, BookingStatusCode.Canceled);
-                        //if(result)
-                        //    logger.Log(LogLevel.INFO, "Cancel Booking completed successfully");
-                        //logger.Log(LogLevel.INFO, "Enable other booking requests");
-                        //var bookingSearch = new BookingsDTOs.Bookings()
-                        //{
-                        //    ScheduleId = booking.ScheduleId,
-                        //    DateBookedFor = booking.DateBookedFor
-                        //};
-                        //bookingsRepo.GetBookingsByFiltercondition(bookingSearch);
+                        logger.Log(LogLevel.INFO, "Reverting Schedule tracker changes(updating back the available seats)");
+                        BookingHelper bookingHelper = new BookingHelper(config, bookingsRepo, logger, headerInfo);
+                        result = await bookingHelper.ScheduleTrackerRevert(booking);
+                        if (result)
+                        {
+                            logger.Log(LogLevel.INFO, "Revert Schedule Tracker completed successfully");
+                            //if(result)
+                            //    logger.Log(LogLevel.INFO, "Cancel Booking completed successfully");
+                            //logger.Log(LogLevel.INFO, "Enable other booking requests");
+                            //var bookingSearch = new BookingsDTOs.Bookings()
+                            //{
+                            //    ScheduleId = booking.ScheduleId,
+                            //    DateBookedFor = booking.DateBookedFor
+                            //};
+                            //bookingsRepo.GetBookingsByFiltercondition(bookingSearch);
+                        }
+                        else
+                            logger.Log(LogLevel.ERROR, "Revert Schedule Tracker incomplete");
                     }
-                    else
-                        logger.Log(LogLevel.ERROR, "Revert Schedule Tracker incomplete");
                 }
             }
             logger.Log(LogLevel.INFO, $"CancelBooking for id='{id}' => result='{result}'");

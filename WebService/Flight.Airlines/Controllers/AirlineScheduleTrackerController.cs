@@ -155,9 +155,15 @@ namespace Flight.Airlines.Controllers
             var schedules = airlinesRepo.GetAirlineSchedules(airlineScheduleTracker.ScheduleId);
             if (schedules != null && schedules.Count() > 0 && schedules.FirstOrDefault() != null)
             {
+                //Validate proper schedule time
+                var schedule = schedules.FirstOrDefault(x => 
+                (x.IsRegular && x.DepartureDay == airlineScheduleTracker.ActualDepartureDate.DayOfWeek
+                    && x.DepartureTime.ToShortTimeString().Equals(airlineScheduleTracker.ActualDepartureDate.ToShortTimeString()))
+                || (!x.IsRegular && x.DepartureDate?.Date == airlineScheduleTracker.ActualDepartureDate.Date
+                    && x.DepartureTime.ToShortTimeString().Equals(airlineScheduleTracker.ActualDepartureDate.ToShortTimeString())));
+
                 //validate if airline is active
-                var schedule = schedules.FirstOrDefault();
-                if (!schedules.FirstOrDefault().Airline.IsDeleted && schedules.FirstOrDefault().Airline.IsActive)
+                if (schedule != null && schedule.Id > 0 && !schedule.Airline.IsDeleted && schedule.Airline.IsActive)
                 {
                     //prepare search request - just to be sure that not passing and filtering by any other parameters
                     var scheduleTrackerSearch = new AirlineScheduleTracker()

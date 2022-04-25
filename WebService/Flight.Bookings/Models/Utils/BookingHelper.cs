@@ -1,6 +1,7 @@
 ﻿using AirlinesDTOs;
 using BookingsDTOs;
 using CommonDTOs;
+using CommonUtils.APIExecuter;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
@@ -21,26 +22,27 @@ namespace Flight.Bookings.Models.Utils
         private readonly IConfiguration config;
         private readonly IBookingsRepository bookingsRepo;
         private readonly ILogger logger;
-        private readonly long userId ;
-        public BookingHelper(IConfiguration config, IBookingsRepository bookingsRepo, ILogger logger, long userId)
+        //private readonly long userId ;
+        private readonly HeaderInfo headerInfo;
+        public BookingHelper(IConfiguration config, IBookingsRepository bookingsRepo, ILogger logger, HeaderInfo headerInfo)
         {
             customSettings = new CustomSettings();
             config.GetSection("CustomSettings").Bind(customSettings);
             //this.config = config;
             this.bookingsRepo = bookingsRepo;
             this.logger = logger;
-            this.userId = userId;
+            this.headerInfo = headerInfo;
         }
         public async Task<bool> BookingRevert(BookingsDTOs.Bookings booking)
         {
             bool result = true;
-            logger.Log(LogLevel.INFO, "Reverting booking status to invalid :");
+            logger.Log(LogLevel.INFO, "Reverting booking status to invalid");
             BookingsDTOs.Bookings bookingSearch = new BookingsDTOs.Bookings()
             {
-                UserId = userId,
+                UserId = Convert.ToInt64(headerInfo.UserId),
                 ScheduleId = booking.ScheduleId,
                 DateBookedFor = booking.DateBookedFor,
-                BookingStatusId = -1,
+                BookingStatusId = 0,
             };
             var bookings = bookingsRepo.GetBookingsByFiltercondition(bookingSearch);
             if (bookings != null && bookings.Count() > 0 && bookings.FirstOrDefault() != null)
@@ -65,26 +67,41 @@ namespace Flight.Bookings.Models.Utils
         {
             bool result = true;
             logger.Log(LogLevel.INFO, "Reverting Schedule Tracker initiated :");
-            using (var httpClient = new HttpClient())
+            string RevertScheduleTrackerUrl = customSettings.EndpointUrls["RevertScheduleTrackerUrl"];
+            string apiGatewayBaseUrl = customSettings.ApiGatewayBaseUrl;
+            string requestUrl = apiGatewayBaseUrl.Trim('/', ' ') + "/" + RevertScheduleTrackerUrl.Trim('/', ' ');
+            var tracker = new AirlineScheduleTracker()
             {
-                string RevertScheduleTrackerUrl = customSettings.EndpointUrls["RevertScheduleTrackerUrl"];
-                string apiGatewayBaseUrl = customSettings.ApiGatewayBaseUrl;
-                string requestUrl = apiGatewayBaseUrl.Trim('/', ' ') + "/" + RevertScheduleTrackerUrl.Trim('/', ' ');
-                var tracker = new AirlineScheduleTracker()
-                {
-                    ScheduleId = booking.ScheduleId,
-                    ActualDepartureDate = booking.DateBookedFor,
-                    BCSeatsRemaining = booking.BCSeats,
-                    NBCSeatsRemaining = booking.NBCSeats,
-                };
-                string body = JsonConvert.SerializeObject(tracker);
-                StringContent requestBody = new StringContent(body, Encoding.UTF8, "application/json");
-                using (var response = await httpClient.PostAsync(requestUrl, requestBody))
-                {
-                    string apiResponse = await response.Content.ReadAsStringAsync();
-                    result = Convert.ToBoolean(apiResponse);
-                }
+                ScheduleId = booking.ScheduleId,
+                ActualDepartureDate = booking.DateBookedFor,
+                BCSeatsRemaining = booking.BCSeats,
+                NBCSeatsRemaining = booking.NBCSeats,
+            };
+            using (var response = await ApiExecutor.ExecutePostAPI(requestUrl, headerInfo, tracker))
+            {
+                string apiResponse = await response.Content.ReadAsStringAsync();
+                result = Convert.ToBoolean(apiResponse);
             }
+            //using (var httpClient = new HttpClient())
+            //{
+            //    string RevertScheduleTrackerUrl = customSettings.EndpointUrls["RevertScheduleTrackerUrl"];
+            //    string apiGatewayBaseUrl = customSettings.ApiGatewayBaseUrl;
+            //    string requestUrl = apiGatewayBaseUrl.Trim('/', ' ') + "/" + RevertScheduleTrackerUrl.Trim('/', ' ');
+            //    var tracker = new AirlineScheduleTracker()
+            //    {
+            //        ScheduleId = booking.ScheduleId,
+            //        ActualDepartureDate = booking.DateBookedFor,
+            //        BCSeatsRemaining = booking.BCSeats,
+            //        NBCSeatsRemaining = booking.NBCSeats,
+            //    };
+            //    string body = JsonConvert.SerializeObject(tracker);
+            //    StringContent requestBody = new StringContent(body, Encoding.UTF8, "application/json");
+            //    using (var response = await httpClient.PostAsync(requestUrl, requestBody))
+            //    {
+            //        string apiResponse = await response.Content.ReadAsStringAsync();
+            //        result = Convert.ToBoolean(apiResponse);
+            //    }
+            //}
             return result;
         }
     }

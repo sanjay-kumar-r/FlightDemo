@@ -18,6 +18,6 @@ D:\WorkSpace\Library\Utils\CommonUtils\bin\Release\netcoreapp3.1\UsersDTOs.dll
 D:\WorkSpace\Library\Utils\CommonUtils\bin\Release\netcoreapp3.1\UsersDTOs.pdb
 D:\WorkSpace\Library\Utils\CommonUtils\bin\Release\netcoreapp3.1\AirlinesDTOs.dll
 D:\WorkSpace\Library\Utils\CommonUtils\bin\Release\netcoreapp3.1\AirlinesDTOs.pdb
-D:\WorkSpace\Library\Utils\CommonUtils\obj\Release\netcoreapp3.1\CommonUtils.csproj.CopyComplete
 D:\WorkSpace\Library\Utils\CommonUtils\bin\Release\netcoreapp3.1\BookingsDTOs.dll
 D:\WorkSpace\Library\Utils\CommonUtils\bin\Release\netcoreapp3.1\BookingsDTOs.pdb
+D:\WorkSpace\Library\Utils\CommonUtils\obj\Release\netcoreapp3.1\CommonUtils.csproj.CopyComplete

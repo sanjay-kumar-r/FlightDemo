@@ -16,3 +16,4 @@ D:\WorkSpace\Library\ServiceContracts\ServiceContracts\bin\Debug\netcoreapp3.1\A
 D:\WorkSpace\Library\ServiceContracts\ServiceContracts\bin\Debug\netcoreapp3.1\AirlinesDTOs.pdb
 D:\WorkSpace\Library\ServiceContracts\ServiceContracts\bin\Debug\netcoreapp3.1\BookingsDTOs.dll
 D:\WorkSpace\Library\ServiceContracts\ServiceContracts\bin\Debug\netcoreapp3.1\BookingsDTOs.pdb
+D:\WorkSpace\Library\ServiceContracts\ServiceContracts\obj\Debug\netcoreapp3.1\ServiceContracts.csproj.CopyComplete

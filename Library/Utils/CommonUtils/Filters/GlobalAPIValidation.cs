@@ -14,6 +14,7 @@ using ServiceContracts.Logger;
 using Newtonsoft.Json;
 using System.Linq;
 using Newtonsoft.Json.Linq;
+using CommonUtils.APIExecuter;
 
 namespace CommonUtils.Filters
 {
@@ -126,32 +127,31 @@ namespace CommonUtils.Filters
                     && Convert.ToBoolean(configurationSection.GetSection("ISValidationRequired").Value))
                 {
                     //check if any excludeControllers list matches request controllerName 
-                    var excludeControllersSection = configurationSection.GetSection("ExcludeControllers");
-                    if (excludeControllersSection != null && !string.IsNullOrWhiteSpace(excludeControllersSection.Value))
+                    var excludeControllers = configurationSection.GetSection("ExcludeControllers");
+                    if (excludeControllers != null)
                     {
-                        List<string> excludeControllers = excludeControllersSection.Value.Split(',').ToList();
-                        if (excludeControllers.Any(x => x.Equals(controllerName, StringComparison.OrdinalIgnoreCase)))
+                        if (excludeControllers.AsEnumerable().Any(x => !string.IsNullOrWhiteSpace(x.Value)
+                         && x.Value.Equals(controllerName, StringComparison.OrdinalIgnoreCase)))
                             return false;
                     }
 
                     //check if any excludeActions list match request actionName (or ControllerName:ActionName)
-                    var excludeActionsSection = configurationSection.GetSection("ExcludeActions");
-                    if (excludeActionsSection != null && !string.IsNullOrWhiteSpace(excludeActionsSection.Value))
+                    var excludeActions = configurationSection.GetSection("ExcludeActions");
+                    if (excludeActions != null && !string.IsNullOrWhiteSpace(excludeActions.Value))
                     {
-                        var excludeActions = excludeActionsSection.Value.Split(',');
-                        bool isExcludeValidation = excludeActions.Any(x =>
+                        bool isExcludeValidation = excludeActions.AsEnumerable().Any(x =>
                         {
                             //match with ControllerName:ActionName
-                            if (x.Contains(':'))
+                            if (!string.IsNullOrWhiteSpace(x.Value) && x.Value.Contains(':'))
                             {
-                                var lst = x.Split(':');
+                                var lst = x.Value.Split(':');
                                 return lst[0].Equals(controllerName, StringComparison.OrdinalIgnoreCase)
                                     && lst[1].Equals(actionName, StringComparison.OrdinalIgnoreCase);
                             }
                             else
                             {
                                 //match with just ActionName
-                                return x.Equals(actionName, StringComparison.OrdinalIgnoreCase);
+                                return x.Value.Equals(actionName, StringComparison.OrdinalIgnoreCase);
                             }
                         });
                         if (isExcludeValidation)
@@ -163,8 +163,8 @@ namespace CommonUtils.Filters
                         var ExcludeApiPathSection = configurationSection.GetSection("ExcludeApiPath");
                         if (ExcludeApiPathSection != null)
                         {
-                            var excludeControllers = ExcludeApiPathSection.AsEnumerable().ToList();
-                            if (excludeControllers.Any(x =>
+                            var excludeurls = ExcludeApiPathSection.AsEnumerable().ToList();
+                            if (excludeurls.Any(x =>
                                 x.Value != null && x.Value.Trim(' ', '/').Equals(apiPath.Trim(' ', '/'), StringComparison.OrdinalIgnoreCase)))
                                 return false;
                         }
@@ -201,30 +201,49 @@ namespace CommonUtils.Filters
         private async Task<bool> ValidateAdmin(ActionExecutingContext context)
         {
             bool isValid = false;
-            using(var httpClient = new HttpClient())
+            if (config.GetSection("CustomSettings") != null)
             {
-                if (config.GetSection("CustomSettings") != null)
+                var customsettings = config.GetSection("CustomSettings");
+                if (customsettings.GetSection("APIGatewayUrl") != null && !string.IsNullOrWhiteSpace(customsettings.GetSection("APIGatewayUrl").Value))
                 {
-                    var customsettings = config.GetSection("CustomSettings");
-                    if (customsettings.GetSection("APIGatewayUrl") != null && !string.IsNullOrWhiteSpace(customsettings.GetSection("APIGatewayUrl").Value))
-                    {                        
-                        string apiGatewaUrl = customsettings.GetSection("APIGatewayUrl").Value;
-                        if (customsettings.GetSection("endpointUrls") != null && customsettings.GetSection("endpointUrls").GetSection("ValidateAdminUrl") != null
-                            && !string.IsNullOrWhiteSpace(customsettings.GetSection("endpointUrls").GetSection("ValidateAdminUrl").Value))
+                    string apiGatewaUrl = customsettings.GetSection("APIGatewayUrl").Value;
+                    if (customsettings.GetSection("EndpointUrls") != null && customsettings.GetSection("EndpointUrls").GetSection("ValidateAdminUrl") != null
+                        && !string.IsNullOrWhiteSpace(customsettings.GetSection("EndpointUrls").GetSection("ValidateAdminUrl").Value))
+                    {
+                        string ValidateAdminUrl = customsettings.GetSection("EndpointUrls").GetSection("ValidateAdminUrl").Value;
+                        string requestUrl = apiGatewaUrl.Trim('/', ' ') + "/" + ValidateAdminUrl.Trim('/', ' ');
+                        using (var response = await ApiExecutor.ExecutePostAPI(requestUrl, _headerInfo, _headerInfo.UserId))
                         {
-                            string ValidateAdminUrl = customsettings.GetSection("endpointUrls").GetSection("ValidateAdminUrl").Value;
-                            string requestUrl = apiGatewaUrl.Trim('/', ' ') + "/" + ValidateAdminUrl.Trim('/', ' ');
-                            //StringContent content = new StringContent(JsonConvert.SerializeObject(myClassObject), Encoding.UTF8, "application/json");
-                            StringContent requestBody = new StringContent(_headerInfo.UserId, Encoding.UTF8, "application/json");
-                            using (var response = await httpClient.PostAsync(requestUrl, requestBody))
-                            {
-                                string apiResponse = await response.Content.ReadAsStringAsync();
-                                isValid = Convert.ToBoolean(apiResponse);
-                            }
+                            string apiResponse = await response.Content.ReadAsStringAsync();
+                            isValid = Convert.ToBoolean(apiResponse);
                         }
                     }
                 }
             }
+            //using (var httpClient = new HttpClient())
+            //{
+            //    if (config.GetSection("CustomSettings") != null)
+            //    {
+            //        var customsettings = config.GetSection("CustomSettings");
+            //        if (customsettings.GetSection("APIGatewayUrl") != null && !string.IsNullOrWhiteSpace(customsettings.GetSection("APIGatewayUrl").Value))
+            //        {                        
+            //            string apiGatewaUrl = customsettings.GetSection("APIGatewayUrl").Value;
+            //            if (customsettings.GetSection("EndpointUrls") != null && customsettings.GetSection("EndpointUrls").GetSection("ValidateAdminUrl") != null
+            //                && !string.IsNullOrWhiteSpace(customsettings.GetSection("EndpointUrls").GetSection("ValidateAdminUrl").Value))
+            //            {
+            //                string ValidateAdminUrl = customsettings.GetSection("EndpointUrls").GetSection("ValidateAdminUrl").Value;
+            //                string requestUrl = apiGatewaUrl.Trim('/', ' ') + "/" + ValidateAdminUrl.Trim('/', ' ');
+            //                //StringContent content = new StringContent(JsonConvert.SerializeObject(myClassObject), Encoding.UTF8, "application/json");
+            //                StringContent requestBody = new StringContent(_headerInfo.UserId, Encoding.UTF8, "application/json");
+            //                using (var response = await httpClient.PostAsync(requestUrl, requestBody))
+            //                {
+            //                    string apiResponse = await response.Content.ReadAsStringAsync();
+            //                    isValid = Convert.ToBoolean(apiResponse);
+            //                }
+            //            }
+            //        }
+            //    }
+            //}
             if (!isValid)
             {
                 //exBuilder.AddMessage("Admin validation returned 'false'");

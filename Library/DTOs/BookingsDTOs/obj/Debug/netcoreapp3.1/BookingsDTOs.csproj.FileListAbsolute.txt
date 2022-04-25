@@ -1,7 +1,6 @@
 D:\WorkSpace\Library\DTOs\BookingsDTOs\bin\Debug\netcoreapp3.1\BookingsDTOs.deps.json
 D:\WorkSpace\Library\DTOs\BookingsDTOs\bin\Debug\netcoreapp3.1\BookingsDTOs.dll
 D:\WorkSpace\Library\DTOs\BookingsDTOs\bin\Debug\netcoreapp3.1\BookingsDTOs.pdb
-D:\WorkSpace\Library\DTOs\BookingsDTOs\obj\Debug\netcoreapp3.1\BookingsDTOs.csproj.AssemblyReference.cache
 D:\WorkSpace\Library\DTOs\BookingsDTOs\obj\Debug\netcoreapp3.1\BookingsDTOs.GeneratedMSBuildEditorConfig.editorconfig
 D:\WorkSpace\Library\DTOs\BookingsDTOs\obj\Debug\netcoreapp3.1\BookingsDTOs.AssemblyInfoInputs.cache
 D:\WorkSpace\Library\DTOs\BookingsDTOs\obj\Debug\netcoreapp3.1\BookingsDTOs.AssemblyInfo.cs

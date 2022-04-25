@@ -25,23 +25,48 @@ namespace Flight.Users.Model.Utils
 
         public IEnumerable<BookingsDTOs.Bookings> GetBookingsByFiltercondition(BookingsDTOs.Bookings booking)
         {
-            return context.Bookings.Include(x => x.BookingStatus).AsNoTracking().Where(x => x.UserId == booking.UserId 
+            return context.Bookings.Include(x => x.BookingStatus).AsEnumerable().Where(x => x.UserId == booking.UserId 
                 && (booking.Id <= 0 || booking.Id == x.Id)
                 && (booking.ScheduleId <= 0 || booking.ScheduleId == x.ScheduleId)
-                && (booking.DateBookedFor != null || booking.DateBookedFor.Date == x.DateBookedFor.Date)
+                && (booking.DateBookedFor == null || booking.DateBookedFor.Date == x.DateBookedFor.Date)
                 && (!Enum.IsDefined(typeof(BookingStatusCode), booking.BookingStatusId) || booking.BookingStatusId == x.BookingStatusId)
-                && (booking.CreatedOn != null || booking.CreatedOn.Value.Date == x.CreatedOn.Value.Date)
-                && (booking.CanceledOn != null || booking.CanceledOn.Value.Date == x.CanceledOn.Value.Date)
-                && (booking.IsRefunded != null || booking.IsRefunded == x.IsRefunded)).ToList();
+                && (booking.CreatedOn == null || booking.CreatedOn.Value.Date == x.CreatedOn.Value.Date)
+                && (booking.CanceledOn == null || booking.CanceledOn.Value.Date == x.CanceledOn.Value.Date)
+                && (booking.IsRefunded == null || booking.IsRefunded == x.IsRefunded)).ToList();
         }
 
         public long BookTicket(BookingsDTOs.Bookings booking)
         {
-            booking.CreatedOn = DateTime.Now;
-            booking.BookingStatusId = context.BookingStatus.First(x => x.Id == (int)BookingStatusCode.Booked).Id;
-            context.Bookings.Add(booking);
-            context.SaveChanges();
-            long id = booking.Id;
+            context.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
+            long id = 0;
+            if (booking != null)
+            {
+                var bookingExisting = context.Bookings.AsEnumerable().FirstOrDefault(x => x.UserId == booking.UserId 
+                && x.DateBookedFor.Date == booking.DateBookedFor.Date 
+                && x.DateBookedFor.ToShortTimeString().Equals(booking.DateBookedFor.ToShortTimeString()));
+                if(bookingExisting != null && bookingExisting.Id > 0 && bookingExisting.BookingStatusId == (int)BookingStatusCode.Waiting)
+                {
+                    if(Enum.IsDefined(typeof(BookingStatusCode), booking.BookingStatusId))
+                    {
+                        id = bookingExisting.Id;
+                        bookingExisting.BookingStatusId = (int)booking.BookingStatusId;
+                        bookingExisting.PNR = booking.PNR;
+                        var bookingUpdated = context.Bookings.Attach(bookingExisting);
+                        bookingUpdated.State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+                        context.SaveChanges();
+                    }
+                }
+                else
+                {
+                    booking.CreatedOn = DateTime.Now;
+                    booking.BookingStatusId = Enum.IsDefined(typeof(BookingStatusCode), booking.BookingStatusId) 
+                        ? booking.BookingStatusId : (int)BookingStatusCode.Invalid;
+                    context.Bookings.Add(booking);
+                    context.SaveChanges();
+                    id = booking.Id;
+                    return id;
+                }
+            }
             return id;
         }
 
@@ -54,11 +79,15 @@ namespace Flight.Users.Model.Utils
                 foreach(int id in ids)
                 {
                     var booking = context.Bookings.AsNoTracking().FirstOrDefault(x => x.Id == id && x.UserId == userId);
-                    booking.BookingStatusId = (int)BookingStatusCode.Canceled;
-                    var bookingUpdated = context.Bookings.Attach(booking);
-                    bookingUpdated.State = Microsoft.EntityFrameworkCore.EntityState.Modified;
-                    context.SaveChanges();
-                    result = true;
+                    if (booking != null)
+                    {
+                        booking.BookingStatusId = (int)BookingStatusCode.Canceled;
+                        booking.CanceledOn = DateTime.Now;
+                        var bookingUpdated = context.Bookings.Attach(booking);
+                        bookingUpdated.State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+                        context.SaveChanges();
+                        result = true;
+                    }
                 }
             }
             return result;
