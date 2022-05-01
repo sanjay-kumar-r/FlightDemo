@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31729.503
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Flight.Airlines", "Flight.Airlines.csproj", "{840B113A-D0A5-469A-85AE-37B91E42BD7D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Flight.Airlines", "Flight.Airlines.csproj", "{840B113A-D0A5-469A-85AE-37B91E42BD7D}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CommonDTOs", "..\..\Library\DTOs\CommonDTOs\CommonDTOs.csproj", "{D4F2812B-BE0C-4212-8EC8-153A871A00AB}"
 EndProject
@@ -14,6 +14,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AirlinesDTOs", "..\..\Library\DTOs\AirlinesDTOs\AirlinesDTOs.csproj", "{D42B1D77-880B-4447-A753-91575BE2B56C}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UsersDTOs", "..\..\Library\DTOs\UsersDTOs\UsersDTOs.csproj", "{B099975E-7A36-4797-9079-7700E6C512EF}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UsersRepositoryUtils", "..\..\Library\Utils\UsersRepositoryUtils\UsersRepositoryUtils.csproj", "{3DA7CA99-548E-4CBA-84EF-4F5FBAC3AC7E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{B099975E-7A36-4797-9079-7700E6C512EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B099975E-7A36-4797-9079-7700E6C512EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B099975E-7A36-4797-9079-7700E6C512EF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3DA7CA99-548E-4CBA-84EF-4F5FBAC3AC7E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3DA7CA99-548E-4CBA-84EF-4F5FBAC3AC7E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3DA7CA99-548E-4CBA-84EF-4F5FBAC3AC7E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3DA7CA99-548E-4CBA-84EF-4F5FBAC3AC7E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

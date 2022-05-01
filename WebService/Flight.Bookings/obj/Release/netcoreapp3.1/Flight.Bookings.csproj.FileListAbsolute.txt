@@ -81,3 +81,13 @@ D:\WorkSpace\WebService\Flight.Bookings\obj\Release\netcoreapp3.1\Flight.Booking
 D:\WorkSpace\WebService\Flight.Bookings\obj\Release\netcoreapp3.1\Flight.Bookings.dll
 D:\WorkSpace\WebService\Flight.Bookings\obj\Release\netcoreapp3.1\Flight.Bookings.pdb
 D:\WorkSpace\WebService\Flight.Bookings\obj\Release\netcoreapp3.1\Flight.Bookings.genruntimeconfig.cache
+D:\WorkSpace\WebService\Flight.Bookings\bin\Release\netcoreapp3.1\Flight.Bookings.xml
+D:\WorkSpace\WebService\Flight.Bookings\bin\Release\netcoreapp3.1\Microsoft.OpenApi.dll
+D:\WorkSpace\WebService\Flight.Bookings\bin\Release\netcoreapp3.1\Swashbuckle.AspNetCore.Swagger.dll
+D:\WorkSpace\WebService\Flight.Bookings\bin\Release\netcoreapp3.1\Swashbuckle.AspNetCore.SwaggerGen.dll
+D:\WorkSpace\WebService\Flight.Bookings\bin\Release\netcoreapp3.1\Swashbuckle.AspNetCore.SwaggerUI.dll
+D:\WorkSpace\WebService\Flight.Bookings\bin\Release\netcoreapp3.1\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+D:\WorkSpace\WebService\Flight.Bookings\bin\Release\netcoreapp3.1\AuthDTOs.dll
+D:\WorkSpace\WebService\Flight.Bookings\bin\Release\netcoreapp3.1\UsersRepositoryUtils.dll
+D:\WorkSpace\WebService\Flight.Bookings\bin\Release\netcoreapp3.1\UsersRepositoryUtils.pdb
+D:\WorkSpace\WebService\Flight.Bookings\bin\Release\netcoreapp3.1\AuthDTOs.pdb

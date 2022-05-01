@@ -15,6 +15,7 @@ using Newtonsoft.Json;
 using System.Linq;
 using Newtonsoft.Json.Linq;
 using CommonUtils.APIExecuter;
+using AuthDTOs;
 
 namespace CommonUtils.Filters
 {
@@ -76,7 +77,8 @@ namespace CommonUtils.Filters
             var header = new HeaderInfo();
             header.UserId = context.HttpContext.Request.Headers["UserId"];
             header.TenantId = context.HttpContext.Request.Headers["TenantId"];
-            header.AccessToken = context.HttpContext.Request.Headers["AccessToken"];
+            header.Authorization = context.HttpContext.Request.Headers["Authorization"];
+            header.RefreshToken = context.HttpContext.Request.Headers["RefreshToken"];
             _headerInfo = header;
         }
 
@@ -183,10 +185,12 @@ namespace CommonUtils.Filters
             string message = string.Empty;
             if (String.IsNullOrWhiteSpace(headerInfo.UserId))
                 message += "UserId, ";
-            if (String.IsNullOrWhiteSpace(headerInfo.TenantId))
-                message += "TenantId, ";
-            if (String.IsNullOrWhiteSpace(headerInfo.AccessToken))
-                message += "AccessToken";
+            //if (String.IsNullOrWhiteSpace(headerInfo.TenantId))
+            //    message += "TenantId, ";
+            if (String.IsNullOrWhiteSpace(headerInfo.Authorization))
+                message += "Authorization, ";
+            //if (String.IsNullOrWhiteSpace(headerInfo.RefreshToken))
+            //    message += "RefreshToken";
 
             if (string.IsNullOrWhiteSpace(message))
                 return true;
@@ -210,9 +214,14 @@ namespace CommonUtils.Filters
                     if (customsettings.GetSection("EndpointUrls") != null && customsettings.GetSection("EndpointUrls").GetSection("ValidateAdminUrl") != null
                         && !string.IsNullOrWhiteSpace(customsettings.GetSection("EndpointUrls").GetSection("ValidateAdminUrl").Value))
                     {
-                        string ValidateAdminUrl = customsettings.GetSection("EndpointUrls").GetSection("ValidateAdminUrl").Value;
+                        var endPointUrls = customsettings.GetSection("EndpointUrls");
+                        string ValidateAdminUrl = endPointUrls.GetSection("ValidateAdminUrl").Value;
                         string requestUrl = apiGatewaUrl.Trim('/', ' ') + "/" + ValidateAdminUrl.Trim('/', ' ');
-                        using (var response = await ApiExecutor.ExecutePostAPI(requestUrl, _headerInfo, _headerInfo.UserId))
+                        string refreshTokenUrl = endPointUrls.GetSection("RefreshTokenUrl").Value;
+                        string refreshTokenRequestUrl = apiGatewaUrl.Trim('/', ' ') + "/" + refreshTokenUrl.Trim('/', ' ');
+
+                        using (var response = await (new ApiExecutor(logger)).CallAPIWithRetry(APIRequestType.Post, requestUrl,
+                            _headerInfo, _headerInfo.UserId, refreshTokenRequestUrl, true))
                         {
                             string apiResponse = await response.Content.ReadAsStringAsync();
                             isValid = Convert.ToBoolean(apiResponse);

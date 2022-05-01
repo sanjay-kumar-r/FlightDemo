@@ -1,9 +1,10 @@
-﻿using System;
+﻿using AuthDTOs;
+using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Runtime.Serialization;
 
-namespace UserDtOs
+namespace UsersDTOs
 {
     [DataContract(Name = "Users")]
     public class Users
@@ -55,27 +56,31 @@ namespace UserDtOs
     public class UserDetails
     {
         [DataMember(Name = "Id")]
-        [Key]
         public long Id { get; set; }
 
         [DataMember(Name = "FirstName")]
-        [MaxLength(512)]
         public string FirstName { get; set; }
 
         [DataMember(Name = "LastName")]
-        [MaxLength(512)]
         public string LastName { get; set; }
 
         [DataMember(Name = "EmailId")]
-        [Required]
-        [MaxLength(1024)]
         public string EmailId { get; set; }
 
-        [DataMember(Name = "AccountStatus")]
-        [Required]
-        public AccountStatus AccountStatus { get; set; }
+        [DataMember(Name = "AccountStatusId")]
+        public int? AccountStatusId { get; set; }
 
         [DataMember(Name = "IsSuperAdmin")]
-        public bool IsSuperAdmin { get; set; } = false;
+        public bool? IsSuperAdmin { get; set; }
+    }
+
+    [DataContract(Name = "UserLoginResponse")]
+    public class UserLoginResponse
+    {
+        [DataMember(Name = "User")]
+        public Users User { get; set; }
+
+        [DataMember(Name = "AuthResponse")]
+        public AuthResponse AuthResponse { get; set; }
     }
 }

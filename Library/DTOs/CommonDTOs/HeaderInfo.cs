@@ -35,6 +35,9 @@ namespace CommonDTOs
 
         [DataMember(Name = "RandomNumber")]
         public string RandomNumber { get; set; }
+
+        [DataMember(Name = "RefreshToken")]
+        public string RefreshToken { get; set; }
     }
 
     public enum AccessTokenType

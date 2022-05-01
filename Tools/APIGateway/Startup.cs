@@ -12,6 +12,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 
 namespace APIGateway
@@ -47,7 +48,21 @@ namespace APIGateway
             //        log.AddConsole(LogLevel.Debug);
             //    }).WithDictionaryHandle();
             //};
+            services.AddControllers();
             services.AddOcelot(Configuration);
+            services.AddSwaggerGen(options =>
+            {
+                options.SwaggerDoc("v1.0", new Microsoft.OpenApi.Models.OpenApiInfo
+                {
+                    Title = "Flight API Gateway Service",
+                    Description = "Project to test Flight API Gateway Service",
+                    Version = "1.0"
+                });
+                var fileName = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var filePath = Path.Combine(Directory.GetCurrentDirectory(), fileName);
+                options.IncludeXmlComments(filePath);
+            });
+            services.AddSwaggerForOcelot(Configuration);
         }
 
         public async void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -55,6 +70,15 @@ namespace APIGateway
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                app.UseSwagger();
+                app.UseSwaggerUI(options => {
+                    options.SwaggerEndpoint("/swagger/v1.0/swagger.json", "Flight API Gateway Swagger");
+                    options.RoutePrefix = string.Empty;
+                });
+                app.UseSwaggerForOcelotUI(options =>
+                {
+                    options.PathToSwaggerGenerator = "/swagger/docs";
+                });
             }
 
             app.UseRouting();

@@ -8,7 +8,7 @@ namespace Flight.Users.Model.Utils
 {
     public class UsersValidation
     {
-        public static bool ValidateRegistration(UserDtOs.Users user)
+        public static bool ValidateRegistration(UsersDTOs.Users user)
         {
             if (string.IsNullOrWhiteSpace(user.FirstName) ||
                 string.IsNullOrWhiteSpace(user.EmailId) || string.IsNullOrWhiteSpace(user.Password))
@@ -24,7 +24,7 @@ namespace Flight.Users.Model.Utils
                 
         }
 
-        public static bool ValidateLogin(UserDtOs.Users user)
+        public static bool ValidateLogin(UsersDTOs.Users user)
         {
             if (string.IsNullOrWhiteSpace(user.EmailId) || string.IsNullOrWhiteSpace(user.Password))
                 return false;
@@ -32,7 +32,7 @@ namespace Flight.Users.Model.Utils
 
         }
 
-        public static bool ValidateUpdate(UserDtOs.Users user)
+        public static bool ValidateUpdate(UsersDTOs.Users user)
         {
             if (user.Id <= 0)
                 return false;

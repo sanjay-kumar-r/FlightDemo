@@ -1,17 +1,23 @@
-﻿using CommonDTOs;
+﻿using AuthDTOs;
+using CommonDTOs;
+using CommonUtils.APIExecuter;
 using Flight.Users.Model.Utils;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
+using Newtonsoft.Json;
 using ServiceContracts;
 using ServiceContracts.Logger;
+using ServiceContracts.Users;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using UserDtOs;
+using UsersDTOs;
 
 namespace Flight.Users.Controllers
 {
+    [AllowAnonymous]
     [Route("api/v1.0/[controller]")]
     [ApiController]
     public class UsersController : ControllerBase
@@ -38,48 +44,66 @@ namespace Flight.Users.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<UserDtOs.Users> Get()
+        public IEnumerable<UsersDTOs.Users> Get()
         {
             return usersRepo.GetUsers();
         }
 
         [HttpGet]
         [Route("{id}")]
-        [Route("GetUsers/{id}")]
-        public IEnumerable<UserDtOs.Users> Get(long id)
+        //[Route("GetUsers/{id}")]
+        public IEnumerable<UsersDTOs.Users> Get(long id)
         {
             return usersRepo.GetUsers(id);
         }
 
         [HttpPost]
-        [Route("GetUsersByFiltercondition")]
-        public IEnumerable<UserDtOs.Users> GetUsersByFiltercondition([FromBody] UserDtOs.Users user)
+        [Route("GetUsersByFilterCondition")]
+        public IEnumerable<UsersDTOs.Users> GetUsersByFilterCondition([FromBody] UsersDTOs.Users user)
         {
-            return usersRepo.GetUsersByFiltercondition(user);
+            var userDetails = new UserDetails()
+            {
+                Id = user.Id,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                EmailId = user.EmailId,
+                AccountStatusId = user.AccountStatusId,
+                IsSuperAdmin = user.IsSuperAdmin
+            };
+            return usersRepo.GetUsersByFilterCondition(userDetails);
         }
 
         [HttpPost]
         [Route("Register")]
-        public long Register([FromBody] UserDtOs.Users user)
+        public long Register([FromBody] UsersDTOs.Users user)
         {
             if (!UsersValidation.ValidateRegistration(user))
                 throw new Exception("UsersValidation.ValidateRegistration Falied");
 
             if (usersRepo.UserExists(user.EmailId))
                 throw new Exception("User with same emailId already exists");
+
+            user.IsSuperAdmin = false;
+            user.IsDeleted = false;
+            user.AccountStatusId = 0;
+            user.AccountStatus = null;
             return usersRepo.Register(user);
         }
 
         [HttpPost]
         [Route("RegisterAsAdmin")]
-        public long RegisterAsAdmin([FromBody] UserDtOs.Users user)
+        public long RegisterAsAdmin([FromBody] UsersDTOs.Users user)
         {
             if (!UsersValidation.ValidateRegistration(user))
                 throw new Exception("UsersValidation.ValidateRegistration Falied");
 
             if (usersRepo.UserExists(user.EmailId))
                 throw new Exception("User with same emailId already exists");
+
             user.IsSuperAdmin = true;
+            user.IsDeleted = false;
+            user.AccountStatusId = 0;
+            user.AccountStatus = null;
             return usersRepo.Register(user);
         }
 
@@ -87,27 +111,58 @@ namespace Flight.Users.Controllers
         [Route("ValidateAdmin")]
         public bool ValidateAdmin([FromBody] long id)
         {
-            UserDtOs.Users user = new UserDtOs.Users() { Id = id };
+            UsersDTOs.Users user = new UsersDTOs.Users() { Id = id };
             return usersRepo.ValidateAdmin(user);
         }
 
         [HttpPost]
         [Route("Login")]
-        public UserDtOs.Users Login([FromBody] UserDtOs.Users user)
+        public async Task<UsersDTOs.UserLoginResponse> Login([FromBody] UsersDTOs.Users user)
         {
             if(!UsersValidation.ValidateLogin(user))
                 throw new Exception("UsersValidation.ValidateLogin Falied");
 
-            var userDetails = usersRepo.ValidateLoginAndUdpateAccountStatus(user);
-            if (userDetails != null)
-                return userDetails;
+            var userLoginResponse = new UserLoginResponse();
+            var userDetail = usersRepo.ValidateLoginAndUdpateAccountStatus(user);
+            if (userDetail != null)
+            {
+                userDetail.Password = null;
+                userLoginResponse.User = userDetail;
+
+                string apiGatewayBaseUrl = customSettings.ApiGatewayBaseUrl;
+                string getTokenUrl = customSettings.EndpointUrls["GetTokenUrl"];
+                string getTokenRequestUrl = apiGatewayBaseUrl.Trim('/', ' ') + "/" + getTokenUrl.Trim('/', ' ');
+                var authRequest = new AuthRequest()
+                {
+                    UserName = user.EmailId,
+                    Password = user.Password
+                };
+                HeaderInfo headerInfo = new HeaderInfo()
+                {
+                    UserId = HttpContext.Request.Headers["UserId"]
+                    //,
+                    //TenantId = HttpContext.Request.Headers["TenantId"],
+                    //Authorization = HttpContext.Request.Headers["Authorization"],
+                    //RefreshToken = HttpContext.Request.Headers["RefreshToken"]
+                };
+                var authResponse = new AuthResponse();
+                using (var response = await (new ApiExecutor(logger)).CallAPI(APIRequestType.Post, getTokenRequestUrl, headerInfo, 
+                    authRequest, false))
+                {
+                    string apiResponse = await response.Content.ReadAsStringAsync();
+                    authResponse = JsonConvert.DeserializeObject<AuthResponse>(apiResponse);
+                }
+                userLoginResponse.AuthResponse = authResponse;
+            }
             else
                 throw new Exception("Invalid email and/or password");
+
+            return userLoginResponse;
         }
 
         [HttpPost]
         [Route("Update")]
-        public Result Update([FromBody] UserDtOs.Users user)
+        public Result Update([FromBody] UsersDTOs.Users user)
         {
             if (!UsersValidation.ValidateUpdate(user))
                 throw new Exception("UsersValidation.ValidateUpdate Falied");

@@ -1,5 +1,6 @@
 ﻿using CommonDTOs;
 using Flight.Airlines.Models.Utils;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using ServiceContracts.Airlines;
@@ -12,6 +13,7 @@ using System.Threading.Tasks;
 
 namespace Flight.Airlines.Controllers
 {
+    [Authorize(Roles = "admin")]
     [Route("api/v1.0/[controller]")]
     [ApiController]
     public class DiscountTagsController : ControllerBase
@@ -45,7 +47,7 @@ namespace Flight.Airlines.Controllers
 
         [HttpGet]
         [Route("{id}")]
-        [Route("GetDiscountTag/{id}")]
+        //[Route("GetDiscountTag/{id}")]
         public IEnumerable<AirlinesDTOs.DiscountTags> Get(long id)
         {
             return airlinesRepo.GetDiscountTags(id);

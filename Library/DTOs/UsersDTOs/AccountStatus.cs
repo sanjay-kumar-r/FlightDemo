@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
 using System.Text;
 
-namespace UserDtOs
+namespace UsersDTOs
 {
     [DataContract(Name = "AccountStatus")]
     public class AccountStatus

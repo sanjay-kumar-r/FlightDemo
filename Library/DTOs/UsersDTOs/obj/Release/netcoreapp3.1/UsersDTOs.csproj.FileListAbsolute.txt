@@ -8,3 +8,5 @@ D:\WorkSpace\Library\DTOs\UsersDTOs\obj\Release\netcoreapp3.1\UsersDTOs.Assembly
 D:\WorkSpace\Library\DTOs\UsersDTOs\obj\Release\netcoreapp3.1\UsersDTOs.csproj.CoreCompileInputs.cache
 D:\WorkSpace\Library\DTOs\UsersDTOs\obj\Release\netcoreapp3.1\UsersDTOs.dll
 D:\WorkSpace\Library\DTOs\UsersDTOs\obj\Release\netcoreapp3.1\UsersDTOs.pdb
+D:\WorkSpace\Library\DTOs\UsersDTOs\bin\Release\netcoreapp3.1\AuthDTOs.dll
+D:\WorkSpace\Library\DTOs\UsersDTOs\bin\Release\netcoreapp3.1\AuthDTOs.pdb

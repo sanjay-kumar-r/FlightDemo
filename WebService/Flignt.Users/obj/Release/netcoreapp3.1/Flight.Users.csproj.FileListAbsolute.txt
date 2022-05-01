@@ -81,3 +81,13 @@ D:\WorkSpace\WebService\Flignt.Users\obj\Release\netcoreapp3.1\Flight.Users.pdb
 D:\WorkSpace\WebService\Flignt.Users\obj\Release\netcoreapp3.1\Flight.Users.genruntimeconfig.cache
 D:\WorkSpace\WebService\Flignt.Users\bin\Release\netcoreapp3.1\BookingsDTOs.dll
 D:\WorkSpace\WebService\Flignt.Users\bin\Release\netcoreapp3.1\BookingsDTOs.pdb
+D:\WorkSpace\WebService\Flignt.Users\bin\Release\netcoreapp3.1\Microsoft.OpenApi.dll
+D:\WorkSpace\WebService\Flignt.Users\bin\Release\netcoreapp3.1\Swashbuckle.AspNetCore.Swagger.dll
+D:\WorkSpace\WebService\Flignt.Users\bin\Release\netcoreapp3.1\Swashbuckle.AspNetCore.SwaggerGen.dll
+D:\WorkSpace\WebService\Flignt.Users\bin\Release\netcoreapp3.1\Swashbuckle.AspNetCore.SwaggerUI.dll
+D:\WorkSpace\WebService\Flignt.Users\bin\Release\netcoreapp3.1\Flight.Users.xml
+D:\WorkSpace\WebService\Flignt.Users\bin\Release\netcoreapp3.1\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+D:\WorkSpace\WebService\Flignt.Users\bin\Release\netcoreapp3.1\AuthDTOs.dll
+D:\WorkSpace\WebService\Flignt.Users\bin\Release\netcoreapp3.1\UsersRepositoryUtils.dll
+D:\WorkSpace\WebService\Flignt.Users\bin\Release\netcoreapp3.1\UsersRepositoryUtils.pdb
+D:\WorkSpace\WebService\Flignt.Users\bin\Release\netcoreapp3.1\AuthDTOs.pdb

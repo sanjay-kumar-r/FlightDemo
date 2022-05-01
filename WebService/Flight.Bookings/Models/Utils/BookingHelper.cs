@@ -70,6 +70,8 @@ namespace Flight.Bookings.Models.Utils
             string RevertScheduleTrackerUrl = customSettings.EndpointUrls["RevertScheduleTrackerUrl"];
             string apiGatewayBaseUrl = customSettings.ApiGatewayBaseUrl;
             string requestUrl = apiGatewayBaseUrl.Trim('/', ' ') + "/" + RevertScheduleTrackerUrl.Trim('/', ' ');
+            string refreshTokenUrl = customSettings.EndpointUrls["RefreshTokenUrl"];
+            string refreshTokenRequestUrl = apiGatewayBaseUrl.Trim('/', ' ') + "/" + refreshTokenUrl.Trim('/', ' ');
             var tracker = new AirlineScheduleTracker()
             {
                 ScheduleId = booking.ScheduleId,
@@ -77,7 +79,8 @@ namespace Flight.Bookings.Models.Utils
                 BCSeatsRemaining = booking.BCSeats,
                 NBCSeatsRemaining = booking.NBCSeats,
             };
-            using (var response = await ApiExecutor.ExecutePostAPI(requestUrl, headerInfo, tracker))
+            using (var response = await (new ApiExecutor(logger)).CallAPIWithRetry(APIRequestType.Post, requestUrl, headerInfo, tracker ,
+                refreshTokenRequestUrl, true))
             {
                 string apiResponse = await response.Content.ReadAsStringAsync();
                 result = Convert.ToBoolean(apiResponse);

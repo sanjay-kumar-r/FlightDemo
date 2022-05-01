@@ -4,6 +4,7 @@ using CommonDTOs;
 using CommonUtils.APIExecuter;
 using Flight.Bookings.Models.Utils;
 using Flight.Users.Model.Utils;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
@@ -21,6 +22,8 @@ using System.Threading.Tasks;
 
 namespace Flight.Bookings.Controllers
 {
+    //[Authorize(Roles ="")]
+    [Authorize]
     [Route("api/v1.0/[controller]")]
     [ApiController]
     public class BookingsController : ControllerBase
@@ -54,7 +57,7 @@ namespace Flight.Bookings.Controllers
 
         [HttpGet]
         [Route("{id}")]
-        [Route("GetBookingsById/{id}")]
+        //[Route("GetBookingsById/{id}")]
         public IEnumerable<BookingsDTOs.Bookings> Get(int id)
         {
             long userId = Convert.ToInt64(HttpContext.Request.Headers["UserId"]);
@@ -62,7 +65,7 @@ namespace Flight.Bookings.Controllers
         }
 
         [HttpPost]
-        [Route("GetBookingsByFilterCondition/{id}")]
+        [Route("GetBookingsByFilterCondition")]
         public IEnumerable<BookingsDTOs.Bookings> GetBookingsByFiltercondition(BookingsDTOs.Bookings booking)
         {
             booking.UserId = Convert.ToInt64(HttpContext.Request.Headers["UserId"]);
@@ -80,7 +83,8 @@ namespace Flight.Bookings.Controllers
             {
                 UserId = HttpContext.Request.Headers["UserId"],
                 TenantId = HttpContext.Request.Headers["TenantId"],
-                AccessToken = HttpContext.Request.Headers["AccessToken"]
+                Authorization = HttpContext.Request.Headers["Authorization"],
+                RefreshToken = HttpContext.Request.Headers["RefreshToken"]
             };
             BookingStatusCode status = BookingStatusCode.Invalid;
             try
@@ -89,6 +93,8 @@ namespace Flight.Bookings.Controllers
                 string checkForAvailableSeatsAndAddTrackerUrl = customSettings.EndpointUrls["CheckForAvailableSeatsAndAddTrackerUrl"];
                 string apiGatewayBaseUrl = customSettings.ApiGatewayBaseUrl;
                 string requestUrl = apiGatewayBaseUrl.Trim('/', ' ') + "/" + checkForAvailableSeatsAndAddTrackerUrl.Trim('/', ' ');
+                string refreshTokenUrl = customSettings.EndpointUrls["RefreshTokenUrl"];
+                string refreshTokenRequestUrl = apiGatewayBaseUrl.Trim('/', ' ') + "/" + refreshTokenUrl.Trim('/', ' ');
                 var tracker = new AirlineScheduleTracker()
                 {
                     ScheduleId = booking.ScheduleId,
@@ -96,7 +102,8 @@ namespace Flight.Bookings.Controllers
                     BCSeatsRemaining = booking.BCSeats,
                     NBCSeatsRemaining = booking.NBCSeats,
                 };
-                using (var response = await ApiExecutor.ExecutePostAPI(requestUrl, headerInfo, tracker))
+                using (var response = await (new ApiExecutor(logger)).CallAPIWithRetry(APIRequestType.Post, requestUrl, headerInfo, tracker,
+                    refreshTokenRequestUrl, true))
                 {
                     string apiResponse = await response.Content.ReadAsStringAsync();
                     status = (BookingStatusCode)Convert.ToInt32(apiResponse);
@@ -199,7 +206,8 @@ namespace Flight.Bookings.Controllers
             {
                 UserId = HttpContext.Request.Headers["UserId"],
                 TenantId = HttpContext.Request.Headers["TenantId"],
-                AccessToken = HttpContext.Request.Headers["AccessToken"]
+                Authorization = HttpContext.Request.Headers["Authorization"],
+                RefreshToken = HttpContext.Request.Headers["RefreshToken"]
             };
             long userId = Convert.ToInt64(HttpContext.Request.Headers["UserId"]);
             var bookings = bookingsRepo.GetBookings(userId, id).ToList();

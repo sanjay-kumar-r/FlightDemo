@@ -2,6 +2,7 @@
 using BookingsDTOs;
 using CommonDTOs;
 using Flight.Airlines.Models.Utils;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using ServiceContracts.Airlines;
@@ -15,6 +16,8 @@ using System.Threading.Tasks;
 
 namespace Flight.Airlines.Controllers
 {
+    //[Authorize(Roles = "admin")]
+    [Authorize]
     [Route("api/v1.0/[controller]")]
     [ApiController]
     public class AirlineScheduleTrackerController : ControllerBase

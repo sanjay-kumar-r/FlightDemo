@@ -21,3 +21,5 @@ D:\WorkSpace\Library\Utils\CommonUtils\bin\Release\netcoreapp3.1\AirlinesDTOs.pd
 D:\WorkSpace\Library\Utils\CommonUtils\bin\Release\netcoreapp3.1\BookingsDTOs.dll
 D:\WorkSpace\Library\Utils\CommonUtils\bin\Release\netcoreapp3.1\BookingsDTOs.pdb
 D:\WorkSpace\Library\Utils\CommonUtils\obj\Release\netcoreapp3.1\CommonUtils.csproj.CopyComplete
+D:\WorkSpace\Library\Utils\CommonUtils\bin\Release\netcoreapp3.1\AuthDTOs.dll
+D:\WorkSpace\Library\Utils\CommonUtils\bin\Release\netcoreapp3.1\AuthDTOs.pdb

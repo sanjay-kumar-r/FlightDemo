@@ -33,3 +33,16 @@ D:\WorkSpace\Tools\APIGateway\obj\Release\netcoreapp3.1\APIGateway.RazorTargetAs
 D:\WorkSpace\Tools\APIGateway\obj\Release\netcoreapp3.1\APIGateway.dll
 D:\WorkSpace\Tools\APIGateway\obj\Release\netcoreapp3.1\APIGateway.pdb
 D:\WorkSpace\Tools\APIGateway\obj\Release\netcoreapp3.1\APIGateway.genruntimeconfig.cache
+D:\WorkSpace\Tools\APIGateway\bin\Release\netcoreapp3.1\APIGateway.xml
+D:\WorkSpace\Tools\APIGateway\bin\Release\netcoreapp3.1\Kros.Utils.dll
+D:\WorkSpace\Tools\APIGateway\bin\Release\netcoreapp3.1\Microsoft.OpenApi.dll
+D:\WorkSpace\Tools\APIGateway\bin\Release\netcoreapp3.1\MMLib.SwaggerForOcelot.dll
+D:\WorkSpace\Tools\APIGateway\bin\Release\netcoreapp3.1\Swashbuckle.AspNetCore.Swagger.dll
+D:\WorkSpace\Tools\APIGateway\bin\Release\netcoreapp3.1\Swashbuckle.AspNetCore.SwaggerGen.dll
+D:\WorkSpace\Tools\APIGateway\bin\Release\netcoreapp3.1\Swashbuckle.AspNetCore.SwaggerUI.dll
+D:\WorkSpace\Tools\APIGateway\bin\Release\netcoreapp3.1\System.Data.SqlClient.dll
+D:\WorkSpace\Tools\APIGateway\bin\Release\netcoreapp3.1\runtimes\win-arm64\native\sni.dll
+D:\WorkSpace\Tools\APIGateway\bin\Release\netcoreapp3.1\runtimes\win-x64\native\sni.dll
+D:\WorkSpace\Tools\APIGateway\bin\Release\netcoreapp3.1\runtimes\win-x86\native\sni.dll
+D:\WorkSpace\Tools\APIGateway\bin\Release\netcoreapp3.1\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
+D:\WorkSpace\Tools\APIGateway\bin\Release\netcoreapp3.1\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll

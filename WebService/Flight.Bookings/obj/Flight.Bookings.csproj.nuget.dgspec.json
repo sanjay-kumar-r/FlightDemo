@@ -68,6 +68,66 @@
         }
       }
     },
+    "D:\\WorkSpace\\Library\\DTOs\\AuthDTOs\\AuthDTOs.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\WorkSpace\\Library\\DTOs\\AuthDTOs\\AuthDTOs.csproj",
+        "projectName": "AuthDTOs",
+        "projectPath": "D:\\WorkSpace\\Library\\DTOs\\AuthDTOs\\AuthDTOs.csproj",
+        "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
+        "outputPath": "D:\\WorkSpace\\Library\\DTOs\\AuthDTOs\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
+          "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
+            "targetAlias": "netcoreapp3.1",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "targetAlias": "netcoreapp3.1",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.402\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
     "D:\\WorkSpace\\Library\\DTOs\\BookingsDTOs\\BookingsDTOs.csproj": {
       "version": "1.0.0",
       "restore": {
@@ -169,6 +229,12 @@
       "frameworks": {
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
+          "dependencies": {
+            "Microsoft.AspNetCore.Authentication.JwtBearer": {
+              "target": "Package",
+              "version": "[3.1.24, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
@@ -281,6 +347,9 @@
               "D:\\WorkSpace\\Library\\DTOs\\AirlinesDTOs\\AirlinesDTOs.csproj": {
                 "projectPath": "D:\\WorkSpace\\Library\\DTOs\\AirlinesDTOs\\AirlinesDTOs.csproj"
               },
+              "D:\\WorkSpace\\Library\\DTOs\\AuthDTOs\\AuthDTOs.csproj": {
+                "projectPath": "D:\\WorkSpace\\Library\\DTOs\\AuthDTOs\\AuthDTOs.csproj"
+              },
               "D:\\WorkSpace\\Library\\DTOs\\BookingsDTOs\\BookingsDTOs.csproj": {
                 "projectPath": "D:\\WorkSpace\\Library\\DTOs\\BookingsDTOs\\BookingsDTOs.csproj"
               },
@@ -374,6 +443,10 @@
               "target": "Package",
               "version": "[5.2.8, )"
             },
+            "Microsoft.AspNetCore.Authentication.JwtBearer": {
+              "target": "Package",
+              "version": "[3.1.24, )"
+            },
             "Microsoft.AspNetCore.Mvc.Abstractions": {
               "target": "Package",
               "version": "[2.2.0, )"
@@ -381,6 +454,89 @@
             "Microsoft.Extensions.Configuration.Abstractions": {
               "target": "Package",
               "version": "[6.0.0, )"
+            },
+            "Swashbuckle.AspNetCore.SwaggerGen": {
+              "target": "Package",
+              "version": "[6.3.1, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.402\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "D:\\WorkSpace\\Library\\Utils\\UsersRepositoryUtils\\UsersRepositoryUtils.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\WorkSpace\\Library\\Utils\\UsersRepositoryUtils\\UsersRepositoryUtils.csproj",
+        "projectName": "UsersRepositoryUtils",
+        "projectPath": "D:\\WorkSpace\\Library\\Utils\\UsersRepositoryUtils\\UsersRepositoryUtils.csproj",
+        "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
+        "outputPath": "D:\\WorkSpace\\Library\\Utils\\UsersRepositoryUtils\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
+          "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
+            "targetAlias": "netcoreapp3.1",
+            "projectReferences": {
+              "D:\\WorkSpace\\Library\\DTOs\\UsersDTOs\\UsersDTOs.csproj": {
+                "projectPath": "D:\\WorkSpace\\Library\\DTOs\\UsersDTOs\\UsersDTOs.csproj"
+              },
+              "D:\\WorkSpace\\Library\\ServiceContracts\\ServiceContracts\\ServiceContracts.csproj": {
+                "projectPath": "D:\\WorkSpace\\Library\\ServiceContracts\\ServiceContracts\\ServiceContracts.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "targetAlias": "netcoreapp3.1",
+          "dependencies": {
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[5.0.16, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[5.0.16, )"
             }
           },
           "imports": [
@@ -438,11 +594,17 @@
               "D:\\WorkSpace\\Library\\DTOs\\CommonDTOs\\CommonDTOs.csproj": {
                 "projectPath": "D:\\WorkSpace\\Library\\DTOs\\CommonDTOs\\CommonDTOs.csproj"
               },
+              "D:\\WorkSpace\\Library\\DTOs\\UsersDTOs\\UsersDTOs.csproj": {
+                "projectPath": "D:\\WorkSpace\\Library\\DTOs\\UsersDTOs\\UsersDTOs.csproj"
+              },
               "D:\\WorkSpace\\Library\\ServiceContracts\\ServiceContracts\\ServiceContracts.csproj": {
                 "projectPath": "D:\\WorkSpace\\Library\\ServiceContracts\\ServiceContracts\\ServiceContracts.csproj"
               },
               "D:\\WorkSpace\\Library\\Utils\\CommonUtils\\CommonUtils.csproj": {
                 "projectPath": "D:\\WorkSpace\\Library\\Utils\\CommonUtils\\CommonUtils.csproj"
+              },
+              "D:\\WorkSpace\\Library\\Utils\\UsersRepositoryUtils\\UsersRepositoryUtils.csproj": {
+                "projectPath": "D:\\WorkSpace\\Library\\Utils\\UsersRepositoryUtils\\UsersRepositoryUtils.csproj"
               }
             }
           }
@@ -466,6 +628,10 @@
               "suppressParent": "All",
               "target": "Package",
               "version": "[5.0.16, )"
+            },
+            "Swashbuckle.AspNetCore": {
+              "target": "Package",
+              "version": "[6.3.1, )"
             }
           },
           "imports": [

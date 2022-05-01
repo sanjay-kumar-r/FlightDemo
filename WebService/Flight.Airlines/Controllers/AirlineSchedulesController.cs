@@ -1,6 +1,7 @@
 ﻿using AirlinesDTOs;
 using CommonDTOs;
 using Flight.Airlines.Models.Utils;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using ServiceContracts.Airlines;
@@ -13,6 +14,7 @@ using System.Threading.Tasks;
 
 namespace Flight.Airlines.Controllers
 {
+    [Authorize(Roles = "admin")]
     [Route("api/v1.0/[controller]")]
     [ApiController]
     public class AirlineSchedulesController : ControllerBase
@@ -46,7 +48,7 @@ namespace Flight.Airlines.Controllers
 
         [HttpGet]
         [Route("{id}")]
-        [Route("GetAirlineSchedules/{id}")]
+        //[Route("GetAirlineSchedules/{id}")]
         public IEnumerable<AirlinesDTOs.AirlineSchedules> Get(long id)
         {
             return airlinesRepo.GetAirlineSchedules(id);

@@ -439,7 +439,9 @@ namespace Flight.Airlines.Models.Utils
         {
             context.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
             if ((airlineId == null || airlineId <= 0) && (discountId == null || discountId <= 0))
+            {
                 return context.AirlineDiscountTagMappings.Include(x => x.Airline).Include(x => x.DiscountTag).AsEnumerable();
+            }
             else
             {
                 var res = context.AirlineDiscountTagMappings.Include(x => x.Airline).Include(x => x.DiscountTag).Where(x =>

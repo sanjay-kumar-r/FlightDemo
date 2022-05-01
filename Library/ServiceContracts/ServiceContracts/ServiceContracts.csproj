@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\DTOs\AirlinesDTOs\AirlinesDTOs.csproj" />
+    <ProjectReference Include="..\..\DTOs\AuthDTOs\AuthDTOs.csproj" />
     <ProjectReference Include="..\..\DTOs\BookingsDTOs\BookingsDTOs.csproj" />
     <ProjectReference Include="..\..\DTOs\CommonDTOs\CommonDTOs.csproj" />
     <ProjectReference Include="..\..\DTOs\UsersDTOs\UsersDTOs.csproj" />

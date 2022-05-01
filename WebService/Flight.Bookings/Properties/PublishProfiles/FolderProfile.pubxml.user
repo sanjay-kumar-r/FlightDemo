@@ -5,6 +5,6 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <_PublishTargetUrl>D:\WorkSpace\WebService\Flight.Bookings\bin\Release\netcoreapp3.1\publish\</_PublishTargetUrl>
-    <History>True|2022-04-25T11:32:06.1030731Z;True|2022-04-25T16:35:47.8892609+05:30;True|2022-04-25T16:33:58.7010617+05:30;True|2022-04-25T15:30:19.6708294+05:30;True|2022-04-25T11:27:15.4821328+05:30;True|2022-04-25T04:05:51.7591353+05:30;</History>
+    <History>True|2022-05-01T15:13:16.3978207Z;False|2022-05-01T20:42:21.4395841+05:30;True|2022-05-01T18:07:26.7818843+05:30;True|2022-04-28T16:17:25.9756813+05:30;True|2022-04-25T17:02:06.1030731+05:30;True|2022-04-25T16:35:47.8892609+05:30;True|2022-04-25T16:33:58.7010617+05:30;True|2022-04-25T15:30:19.6708294+05:30;True|2022-04-25T11:27:15.4821328+05:30;True|2022-04-25T04:05:51.7591353+05:30;</History>
   </PropertyGroup>
 </Project>

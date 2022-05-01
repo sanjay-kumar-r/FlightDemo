@@ -2,25 +2,29 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
-using UserDtOs;
+using UsersDTOs;
 
-namespace ServiceContracts
+namespace ServiceContracts.Users
 {
     public interface IUsersRepository
     {
-        long Register(Users user);
+        long Register(UsersDTOs.Users user);
 
-        Users ValidateLoginAndUdpateAccountStatus(Users user);
+        UsersDTOs.Users ValidateLogin(UsersDTOs.Users user);
+
+        UsersDTOs.Users ValidateLoginAndUdpateAccountStatus(UsersDTOs.Users user);
 
         bool UserExists(string emailId, long? id = null);
 
-        bool ValidateAdmin(UserDtOs.Users user);
+        bool ValidateAdmin(UsersDTOs.Users user);
 
-        IEnumerable<UserDtOs.Users> GetUsers(long? id = null);
+        IEnumerable<UsersDTOs.Users> GetUsers(long? id = null);
 
-        IEnumerable<UserDtOs.Users> GetUsersByFiltercondition(UserDtOs.Users user = null);
+        IEnumerable<UsersDTOs.Users> GetUsersByFilterCondition(UsersDTOs.UserDetails user = null);
 
-        Result UpdateUser(UserDtOs.Users user);
+        UsersDTOs.Users GetUserByEmailId(string emailId);
+
+        Result UpdateUser(UsersDTOs.Users user);
 
         Result UpdateUserAsSuperAdmin(long id);
 

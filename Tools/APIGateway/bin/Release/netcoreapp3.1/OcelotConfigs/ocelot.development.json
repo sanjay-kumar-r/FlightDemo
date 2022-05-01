@@ -11,7 +11,8 @@
         }
       ],
       "UpstreamPathTemplate": "/api/{version}/Users/",
-      "UpstreamHttpMethod": [ "Get", "Post" ]
+      "UpstreamHttpMethod": [ "Get", "Post" ],
+      "SwaggerKey": "Users"
     },
     {
       "DownstreamPathTemplate": "/api/{version}/Users/{everything}",
@@ -23,7 +24,8 @@
         }
       ],
       "UpstreamPathTemplate": "/api/{version}/Users/{everything}",
-      "UpstreamHttpMethod": [ "Get", "Post" ]
+      "UpstreamHttpMethod": [ "Get", "Post" ],
+      "SwaggerKey": "Users"
     },
     //Airlines :->
     {
@@ -36,7 +38,8 @@
         }
       ],
       "UpstreamPathTemplate": "/api/{version}/Airlines/",
-      "UpstreamHttpMethod": [ "Get", "Post" ]
+      "UpstreamHttpMethod": [ "Get", "Post" ],
+      "SwaggerKey": "Airlines"
     },
     {
       "DownstreamPathTemplate": "/api/{version}/Airlines/{everything}",
@@ -48,7 +51,8 @@
         }
       ],
       "UpstreamPathTemplate": "/api/{version}/Airlines/{everything}",
-      "UpstreamHttpMethod": [ "Get", "Post" ]
+      "UpstreamHttpMethod": [ "Get", "Post" ],
+      "SwaggerKey": "Airlines"
     },
     //DiscountTags :->
     {
@@ -61,7 +65,8 @@
         }
       ],
       "UpstreamPathTemplate": "/api/{version}/DiscountTags/",
-      "UpstreamHttpMethod": [ "Get", "Post" ]
+      "UpstreamHttpMethod": [ "Get", "Post" ],
+      "SwaggerKey": "DiscountTags"
     },
     {
       "DownstreamPathTemplate": "/api/{version}/DiscountTags/{everything}",
@@ -73,7 +78,8 @@
         }
       ],
       "UpstreamPathTemplate": "/api/{version}/DiscountTags/{everything}",
-      "UpstreamHttpMethod": [ "Get", "Post" ]
+      "UpstreamHttpMethod": [ "Get", "Post" ],
+      "SwaggerKey": "DiscountTags"
     },
     //AirlineSchedules :->
     {
@@ -86,7 +92,8 @@
         }
       ],
       "UpstreamPathTemplate": "/api/{version}/AirlineSchedules/",
-      "UpstreamHttpMethod": [ "Get", "Post" ]
+      "UpstreamHttpMethod": [ "Get", "Post" ],
+      "SwaggerKey": "AirlineSchedules"
     },
     {
       "DownstreamPathTemplate": "/api/{version}/AirlineSchedules/{everything}",
@@ -98,7 +105,8 @@
         }
       ],
       "UpstreamPathTemplate": "/api/{version}/AirlineSchedules/{everything}",
-      "UpstreamHttpMethod": [ "Get", "Post" ]
+      "UpstreamHttpMethod": [ "Get", "Post" ],
+      "SwaggerKey": "AirlineSchedules"
     },
     //AirlineScheduleTracker :->
     {
@@ -111,7 +119,8 @@
         }
       ],
       "UpstreamPathTemplate": "/api/{version}/AirlineScheduleTracker/",
-      "UpstreamHttpMethod": [ "Get", "Post" ]
+      "UpstreamHttpMethod": [ "Get", "Post" ],
+      "SwaggerKey": "AirlineScheduleTracker"
     },
     {
       "DownstreamPathTemplate": "/api/{version}/AirlineScheduleTracker/{everything}",
@@ -123,7 +132,8 @@
         }
       ],
       "UpstreamPathTemplate": "/api/{version}/AirlineScheduleTracker/{everything}",
-      "UpstreamHttpMethod": [ "Get", "Post" ]
+      "UpstreamHttpMethod": [ "Get", "Post" ],
+      "SwaggerKey": "AirlineScheduleTracker"
     },
     //Bookings :->
     {
@@ -136,7 +146,8 @@
         }
       ],
       "UpstreamPathTemplate": "/api/{version}/Bookings/",
-      "UpstreamHttpMethod": [ "Get", "Post" ]
+      "UpstreamHttpMethod": [ "Get", "Post" ],
+      "SwaggerKey": "Bookings"
     },
     {
       "DownstreamPathTemplate": "/api/{version}/Bookings/{everything}",
@@ -148,7 +159,107 @@
         }
       ],
       "UpstreamPathTemplate": "/api/{version}/Bookings/{everything}",
-      "UpstreamHttpMethod": [ "Get", "Post" ]
+      "UpstreamHttpMethod": [ "Get", "Post" ],
+      "SwaggerKey": "Bookings"
+    },
+    //AuthTokens :->
+    {
+      "DownstreamPathTemplate": "/api/AuthTokens/",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "9007"
+        }
+      ],
+      "UpstreamPathTemplate": "/api/AuthTokens/",
+      "UpstreamHttpMethod": [ "Get", "Post" ],
+      "SwaggerKey": "AuthTokens"
+    },
+    {
+      "DownstreamPathTemplate": "/api/AuthTokens/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "9007"
+        }
+      ],
+      "UpstreamPathTemplate": "/api/AuthTokens/{everything}",
+      "UpstreamHttpMethod": [ "Get", "Post" ],
+      "SwaggerKey": "AuthTokens"
+    }
+  ],
+  "SwaggerEndPoints": [
+    {
+      "Key": "Users",
+      "Config": [
+        {
+          "Name": "Users APIs",
+          "Version": "v1.0",
+          "Url": "http://localhost:9001/swagger/v1.0/swagger.json"
+        }
+      ]
+    },
+    {
+      "Key": "Airlines",
+      "Config": [
+        {
+          "Name": "Airlines APIs",
+          "Version": "v1.0",
+          "Url": "http://localhost:9003/swagger/v1.0/swagger.json"
+        }
+      ]
+    },
+    {
+      "Key": "DiscountTags",
+      "Config": [
+        {
+          "Name": "DiscountTags APIs",
+          "Version": "v1.0",
+          "Url": "http://localhost:9003/swagger/v1.0/swagger.json"
+        }
+      ]
+    },
+    {
+      "Key": "AirlineSchedules",
+      "Config": [
+        {
+          "Name": "AirlineSchedules APIs",
+          "Version": "v1.0",
+          "Url": "http://localhost:9003/swagger/v1.0/swagger.json"
+        }
+      ]
+    },
+    {
+      "Key": "AirlineScheduleTracker",
+      "Config": [
+        {
+          "Name": "AirlineScheduleTracker APIs",
+          "Version": "v1.0",
+          "Url": "http://localhost:9003/swagger/v1.0/swagger.json"
+        }
+      ]
+    },
+    {
+      "Key": "Bookings",
+      "Config": [
+        {
+          "Name": "Bookings API",
+          "Version": "v1.0",
+          "Url": "http://localhost:9005/swagger/v1.0/swagger.json"
+        }
+      ]
+    },
+    {
+      "Key": "AuthTokens",
+      "Config": [
+        {
+          "Name": "AuthTokens API",
+          "Version": "v1.0",
+          "Url": "http://localhost:9007/swagger/v1.0/swagger.json"
+        }
+      ]
     }
   ],
   "GlobalConfiguration": {

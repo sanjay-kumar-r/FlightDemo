@@ -2,6 +2,7 @@
 using BookingsDTOs;
 using CommonDTOs;
 using Flight.Airlines.Models.Utils;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.Configuration;
@@ -16,6 +17,7 @@ using System.Threading.Tasks;
 
 namespace Flight.Airlines.Controllers
 {
+    [Authorize(Roles = "admin")]
     [Route("api/v1.0/[controller]")]
     [ApiController]
     public class AirlinesController : ControllerBase
@@ -49,7 +51,7 @@ namespace Flight.Airlines.Controllers
 
         [HttpGet]
         [Route("{id}")]
-        [Route("GetAirlines/{id}")]
+        //[Route("GetAirlines/{id}")]
         public IEnumerable<AirlinesDTOs.Airlines> Get(long id)
         {
             return airlinesRepo.GetAirlines(id);
