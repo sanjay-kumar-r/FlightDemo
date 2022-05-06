@@ -1,0 +1,132 @@
+.registerPage
+{
+    background-image: url("../../assets/flight5.jpg");
+    background-size: 100%;
+    height: 100vh;
+    width: 100vw;
+    color: white;
+    font-family: auto; 
+    text-align: center;
+}
+.registerPanel
+{
+    height: 100vh;
+    width: 30%;
+    background-color: #000000d9;
+    float: right;
+}
+
+.registerForm
+{
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+    width: 100%;
+}
+
+.registerForm table {
+    width: 70%;
+}
+
+.registerForm td>div{
+    height: 80px;
+    /* margin: 10px; */
+}
+
+.formFirstCol{
+    width: 50%;
+    padding-right: 10px;
+}
+
+.formlastCol{
+    width: 50%;
+    padding-left: 10px;
+}
+
+.registerForm input
+{
+    width: 100%;
+    height: 35px;
+    border-radius: 5px;
+    border: 0px;
+}
+
+.registerForm .formTitle
+{
+    text-decoration-style: wavy;
+    text-decoration-line: underline;
+    font-size: x-large;
+    margin-bottom: 20px;
+}
+
+.registerForm input.invalidInput
+{
+    border: 1px solid red;
+}
+
+.invalidText{
+    font-size: small;
+    color: red;
+    font-style: italic;
+    margin: 5px;
+}
+
+.registerForm button.submit
+{
+    border: 0px;
+    border-radius: 5px;
+    height: 35px;
+    width: 100px;
+    background: #0a38e1;
+    font-size: larger;
+    color: white;
+    float: left;
+    /* margin-left: 30%; */
+    cursor: pointer;
+}
+
+.registerForm button.submit:disabled
+{
+    opacity: 40%;
+    cursor: auto;
+    pointer-events: none;
+}
+
+.registerForm button.submit:hover
+{
+    background: #092daf;
+}
+
+.registerForm .regLink
+{
+    float: right;
+    /* margin-right: 25%;
+    width: 100px; */
+    text-decoration: underline;
+    cursor: pointer;
+    font-size: large;
+}
+
+.registerForm .regLink:hover
+{
+    color: #0a38e1;
+}
+
+.registerForm .fieldLabel{
+    text-align: left;
+    width: fit-content;
+    height: fit-content;
+    margin: 0px;
+    padding: 0px;
+}
+
+.alertPopUp{
+    position: absolute;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+

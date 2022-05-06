@@ -48,6 +48,9 @@ namespace APIGateway
             //        log.AddConsole(LogLevel.Debug);
             //    }).WithDictionaryHandle();
             //};
+
+            services.AddCors();
+
             services.AddControllers();
             services.AddOcelot(Configuration);
             services.AddSwaggerGen(options =>
@@ -82,6 +85,12 @@ namespace APIGateway
             }
 
             app.UseRouting();
+
+            app.UseCors(x => x
+                .AllowAnyMethod()
+                .AllowAnyHeader()
+                .SetIsOriginAllowed(origin => true) // allow any origin
+                .AllowCredentials()); // allow credentials
 
             await app.UseOcelot();
 

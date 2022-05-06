@@ -1,0 +1,130 @@
+.homePage{
+    width:100vw;
+    height: 100vh;
+    padding: 0px;
+    margin: 0px;
+    font-family: auto;
+}
+
+.header, .footer{
+    background-color: rgb(15 101 163);
+    text-align: center;
+    color: white;
+    /* font-family: cursive; */
+    padding: 10px;
+    width: 100%;
+}
+
+.header{
+    height: 60px;
+    top: 0;
+    /* position: fixed; */
+    /* font-size: x-large; */
+}
+
+.footer{
+    height: 30px;
+    bottom: 0;
+    position: fixed;
+    font-size: smaller;
+}
+
+.appName{
+    float: left;
+    width: fit-content;
+}
+
+.userAccount{
+    float: right;
+    width: fit-content;
+}
+
+.welcomeSpan{
+    margin-right: 20px;
+    float: left;
+}
+
+.logOut{
+    border: 0px;
+    border-radius: 5px;
+    height: 35px;
+    width: 100px;
+    background: red;
+    font-size: larger;
+    color: white;
+    float: right;
+    /* margin-left: 30%; */
+    cursor: pointer;
+}
+
+.logOut:hover{
+    background: #c70000;
+    cursor: pointer;
+}
+
+.navigationPanel{
+    background-color: #4091cb;
+    /* background-color: #00adef61; */
+    height: calc(100vh - 90px);
+    width: 10%;
+    text-align: center;
+    color: black;
+    font-size: large;
+    /* padding: 10px; */
+    /* border: 1px solid black; */
+    float: left;
+}
+
+.navItem{
+    height: 40px;
+    text-align: center;
+    padding-top: 5px;
+    /* border: 1px solid black */
+}
+
+.navItem:hover{
+    background-color: rgb(15 101 163);
+    cursor: pointer;
+}
+
+.tabsControl{
+    float: right;
+    background: #dddddd;
+    width: 100%;
+    height: 35px;
+    font-size: larger;
+    color: black;
+    display: flex;
+    align-items: center;
+    text-align: center;
+}
+
+.dataPanel{
+    float: right;
+    width: 90%;
+    /* should comment bg color */
+    /* background: #181818; */
+    height: calc(100vh - 90px);
+}
+
+.subTabItems{
+    width: fit-content;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 3px;
+    height: 100%;
+    text-align: center;
+}
+
+.subTabItems:hover{
+    background-color: #acacac;
+    cursor: pointer;
+}
+
+.dataGrid{
+    float: right;
+    width: 100%;
+    /* should comment bg color */
+    /* background: blue; */
+    height: calc(100% - 35px);
+}

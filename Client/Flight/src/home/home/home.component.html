@@ -1,0 +1,36 @@
+<div class="homePage">
+    <div class="header">
+        <div class="appName"><h3>'Fly me' airlines</h3></div>
+        <div class="userAccount">
+            <span class="welcomeSpan"><h3>Welcome {{userDetails.FirstName}}</h3></span>
+            <button class="logOut" (click)="logout()">Logout</button>
+        </div>
+    </div>
+    <div class="mainPanel">
+        <div class="navigationPanel">
+            <ng-template [ngIf]="userDetails.IsSuperAdmin || true">
+                <div class="navItem">Administration</div>
+            </ng-template>
+            <div class="navItem">Bookings</div>
+        </div>
+        <div class="dataPanel">
+            <div class="tabsControl">
+                <span *ngIf = "selectedTab.toLocaleLowerCase() === 'administration'.toLocaleLowerCase();then administrationSubTabs else bookingsSubTabs"></span>
+                <ng-template #administrationSubTabs>
+                    <span class="subTabItems" tabName="Airlines" (click)="loadSubTab('Airlines')">Airlines</span>
+                    <span class="subTabItems" tabName="Discounts" (click)="loadSubTab('Discounts')">Discounts</span>
+                </ng-template>
+                <ng-template #bookingsSubTabs>
+                    <span class="subTabItems" tabName="BookTicket" (click)="loadSubTab('BookTicket')">Plan For Trip</span>
+                    <span class="subTabItems" tabName="BookingHistory" (click)="loadSubTab('BookingHistory')">Booking History</span>
+                </ng-template>
+            </div>
+            <div class="dataGrid">
+                <ng-template appComponentLoader></ng-template>
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        About site : Not the best one there
+    </div>
+</div>

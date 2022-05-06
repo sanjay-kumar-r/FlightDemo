@@ -34,7 +34,7 @@ namespace UsersRepositoryUtils.DBHelper
         public UsersDTOs.Users ValidateLoginAndUdpateAccountStatus(UsersDTOs.Users user)
         {
             context.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
-            var userExisting = context.Users.FirstOrDefault(x =>
+            var userExisting = context.Users.Include(x => x.AccountStatus).FirstOrDefault(x =>
                 x.EmailId.ToUpper().Equals(user.EmailId.ToUpper())
                 && x.Password.ToUpper().Equals(user.Password.ToUpper())
                 && (x.AccountStatusId == (int)AccountStatusCode.Active || x.AccountStatusId == (int)AccountStatusCode.Registered)

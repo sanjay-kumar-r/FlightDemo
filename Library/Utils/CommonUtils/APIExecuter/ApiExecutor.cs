@@ -23,7 +23,7 @@ namespace CommonUtils.APIExecuter
         }
 
         public async Task<HttpResponseMessage> CallAPIWithRetry(APIRequestType requestType, string requestUrl, HeaderInfo headerInfo,
-            object requestBody, string refreshTokenUrl = null, bool isAuthorizatonRequired = false)
+            object requestBody = null, string refreshTokenUrl = null, bool isAuthorizatonRequired = false)
         {
             logger.Log(LogLevel.INFO, $"Entering method CallAPIWithRetry:=> requestUrl = '{requestUrl}', requestType = '{requestType.ToString()}', "
                 + $"headerInfo = '{JsonConvert.SerializeObject(headerInfo)}', requestBody = '{JsonConvert.SerializeObject(requestBody)}' ,"

@@ -1,0 +1,95 @@
+<!-- <p>Register works!</p> -->
+<div id="registerPage" class="registerPage">
+    <p *ngIf="(alert ?? null) != null" class="alertPopUp">
+        <ngb-alert [type]="alert?.type ?? ''" (closed)="closeAlert()">{{ alert?.message ?? '' }}</ngb-alert>
+    </p>
+    <div class="registerPanel">
+    <form class="registerForm" [formGroup]="registerForm" (ngSubmit)="registerUser()">
+        <table>
+            <thead ><tr><th colspan="2"><h2 class="formTitle">Register</h2></th></tr></thead>
+            <tbody>
+                <tr>
+                    <td class="formFirstCol">
+                        <div>
+                            <div>
+                                <div class="fieldLabel" >First Name :</div>
+                                <input type="text" placeholder="enter first name"
+                                [ngClass]="{'invalidInput' : (firstName.touched || firstName.dirty) && firstName.invalid}"
+                                formControlName="firstName" />
+                            </div>
+                            <div #inValidFirstName class="invalidText" *ngIf="(firstName.touched || firstName.dirty) && firstName.invalid">
+                                firstname is required
+                            </div>
+                        </div>
+                    </td>
+                    <td class="formlastCol">
+                        <div>
+                            <div>
+                                <div class="fieldLabel" >Last Name :</div>
+                                <input type="text" placeholder="enter last name"
+                                 formControlName="lastName" />
+                            </div>
+                            <!-- <div #inValidLast class="invalidText" *ngIf="(lastName.touched || lastName.dirty) && lastName.invalid">
+                                Please enter lastName
+                            </div> -->
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <div>
+                            <div>
+                                <div class="fieldLabel" >EmailId :</div>
+                                <input type="text" placeholder="please enter emailId"
+                                [ngClass]="{'invalidInput' : (emailId.touched || emailId.dirty) && emailId.invalid}"
+                                 formControlName="emailId" />
+                            </div>
+                            <div #inValidEmailId class="invalidText" *ngIf="(emailId.touched || emailId.dirty) && emailId.invalid">
+                                Please enter valid emailId (eg: 123@123.com)
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <div>
+                            <div>
+                                <div class= "fieldLabel" >Password :</div>
+                                <input type="password" placeholder="please enter password"
+                                [ngClass]="{'invalidInput' : (password.touched || password.dirty) && password.invalid}"
+                                 formControlName="password" />
+                            </div>
+                            <div #inValidPassword class="invalidText" *ngIf="(password.touched || password.dirty) && password.invalid">
+                                Password msut be atlease 5 characters
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <div>
+                            <div>
+                                <div class= "fieldLabel" >Confirm Password :</div>
+                                <input type="password" placeholder="please enter confirm password" name="confirmPassword"
+                                [ngClass]="{'invalidInput' : (confirmPassword.touched || confirmPassword.dirty) && confirmPassword.invalid}"
+                                formControlName="confirmPassword" />
+                            </div>
+                            <div #inValidConfirmPassword class="invalidText" *ngIf="(confirmPassword.touched || confirmPassword.dirty) && confirmPassword.invalid">
+                                ConfirmPassword must be same as password
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <button class="submit" [disabled]="registerForm.invalid">Register</button>
+                    </td>
+                    <td>
+                        <span class="regLink" (click)="redirectTologinr()">Login</span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </form>
+    </div>
+</div>

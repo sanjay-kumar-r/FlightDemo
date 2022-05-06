@@ -11,3 +11,5 @@ D:\WorkSpace\Library\DTOs\AirlinesDTOs\obj\Debug\netcoreapp3.1\AirlinesDTOs.cspr
 D:\WorkSpace\Library\DTOs\AirlinesDTOs\obj\Debug\netcoreapp3.1\AirlinesDTOs.dll
 D:\WorkSpace\Library\DTOs\AirlinesDTOs\obj\Debug\netcoreapp3.1\AirlinesDTOs.pdb
 D:\WorkSpace\Library\DTOs\AirlinesDTOs\obj\Debug\netcoreapp3.1\AirlinesDTOs.csproj.CopyComplete
+D:\WorkSpace\Library\DTOs\AirlinesDTOs\bin\Debug\netcoreapp3.1\AuthDTOs.dll
+D:\WorkSpace\Library\DTOs\AirlinesDTOs\bin\Debug\netcoreapp3.1\AuthDTOs.pdb

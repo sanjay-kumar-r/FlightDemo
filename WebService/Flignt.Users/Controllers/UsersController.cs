@@ -78,10 +78,18 @@ namespace Flight.Users.Controllers
         public long Register([FromBody] UsersDTOs.Users user)
         {
             if (!UsersValidation.ValidateRegistration(user))
-                throw new Exception("UsersValidation.ValidateRegistration Falied");
+            {
+                logger.Log(LogLevel.ERROR, "UsersValidation.ValidateRegistration Falied");
+                throw new CustomException() { CustomErrorCode = CustomErrorCode.Invalid, CustomErrorMessage = "validation failed" };
+                //throw new Exception("UsersValidation.ValidateRegistration Falied");
+            }
 
             if (usersRepo.UserExists(user.EmailId))
-                throw new Exception("User with same emailId already exists");
+            {
+                logger.Log(LogLevel.ERROR, "User with same emailId already exists");
+                throw new CustomException() { CustomErrorCode = CustomErrorCode.Duplicate, CustomErrorMessage = "User with same emailId already exists" };
+                //throw new Exception("User with same emailId already exists");
+            }
 
             user.IsSuperAdmin = false;
             user.IsDeleted = false;
@@ -95,10 +103,18 @@ namespace Flight.Users.Controllers
         public long RegisterAsAdmin([FromBody] UsersDTOs.Users user)
         {
             if (!UsersValidation.ValidateRegistration(user))
-                throw new Exception("UsersValidation.ValidateRegistration Falied");
+            {
+                logger.Log(LogLevel.ERROR, "UsersValidation.ValidateRegistration Falied");
+                throw new CustomException() { CustomErrorCode = CustomErrorCode.Invalid, CustomErrorMessage = "validation failed" };
+                //throw new Exception("UsersValidation.ValidateRegistration Falied");
+            }
 
             if (usersRepo.UserExists(user.EmailId))
-                throw new Exception("User with same emailId already exists");
+            {
+                logger.Log(LogLevel.ERROR, "User with same emailId already exists");
+                throw new CustomException() { CustomErrorCode = CustomErrorCode.Duplicate, CustomErrorMessage = "User with same emailId already exists" };
+                //throw new Exception("User with same emailId already exists");
+            }
 
             user.IsSuperAdmin = true;
             user.IsDeleted = false;
@@ -119,8 +135,12 @@ namespace Flight.Users.Controllers
         [Route("Login")]
         public async Task<UsersDTOs.UserLoginResponse> Login([FromBody] UsersDTOs.Users user)
         {
-            if(!UsersValidation.ValidateLogin(user))
-                throw new Exception("UsersValidation.ValidateLogin Falied");
+            if (!UsersValidation.ValidateLogin(user))
+            {
+                logger.Log(LogLevel.ERROR, "UsersValidation.ValidateLogin Falied");
+                throw new CustomException() { CustomErrorCode = CustomErrorCode.Invalid, CustomErrorMessage = "validation failed" };
+                //throw new Exception("UsersValidation.ValidateLogin Falied");
+            }
 
             var userLoginResponse = new UserLoginResponse();
             var userDetail = usersRepo.ValidateLoginAndUdpateAccountStatus(user);
@@ -146,7 +166,7 @@ namespace Flight.Users.Controllers
                     //RefreshToken = HttpContext.Request.Headers["RefreshToken"]
                 };
                 var authResponse = new AuthResponse();
-                using (var response = await (new ApiExecutor(logger)).CallAPI(APIRequestType.Post, getTokenRequestUrl, headerInfo, 
+                using (var response = await (new ApiExecutor(logger)).CallAPI(APIRequestType.Post, getTokenRequestUrl, headerInfo,
                     authRequest, false))
                 {
                     string apiResponse = await response.Content.ReadAsStringAsync();
@@ -155,7 +175,15 @@ namespace Flight.Users.Controllers
                 userLoginResponse.AuthResponse = authResponse;
             }
             else
-                throw new Exception("Invalid email and/or password");
+            {
+                //throw new Exception("Invalid email and/or password");
+                throw new CustomException()
+                {
+                    CustomErrorCode = CustomErrorCode.Invalid,
+                    CustomErrorMessage = "Invalid email and/or password",
+                    CustomStackTrace = null
+                };
+            }
 
             return userLoginResponse;
         }
@@ -165,10 +193,18 @@ namespace Flight.Users.Controllers
         public Result Update([FromBody] UsersDTOs.Users user)
         {
             if (!UsersValidation.ValidateUpdate(user))
-                throw new Exception("UsersValidation.ValidateUpdate Falied");
+            {
+                logger.Log(LogLevel.ERROR, "UsersValidation.ValidateUpdate Falied");
+                throw new CustomException() { CustomErrorCode = CustomErrorCode.Invalid, CustomErrorMessage = "validation failed" };
+                //throw new Exception("UsersValidation.ValidateUpdate Falied");
+            }
 
             if (usersRepo.UserExists(user.EmailId, user.Id))
-                throw new Exception("User with same emailId already exists");
+            {
+                logger.Log(LogLevel.ERROR, "User with same emailId already exists");
+                throw new CustomException() { CustomErrorCode = CustomErrorCode.Duplicate, CustomErrorMessage = "User with same emailId already exists" };
+                //throw new Exception("User with same emailId already exists");
+            }
             return usersRepo.UpdateUser(user);
         }
 

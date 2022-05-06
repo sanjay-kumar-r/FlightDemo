@@ -66,7 +66,6 @@ D:\WorkSpace\WebService\Flignt.Users\obj\Debug\netcoreapp3.1\Flight.Users.Genera
 D:\WorkSpace\WebService\Flignt.Users\obj\Debug\netcoreapp3.1\Flight.Users.AssemblyInfoInputs.cache
 D:\WorkSpace\WebService\Flignt.Users\obj\Debug\netcoreapp3.1\Flight.Users.AssemblyInfo.cs
 D:\WorkSpace\WebService\Flignt.Users\obj\Debug\netcoreapp3.1\Flight.Users.csproj.CoreCompileInputs.cache
-D:\WorkSpace\WebService\Flignt.Users\obj\Debug\netcoreapp3.1\Flight.Users.MvcApplicationPartsAssemblyInfo.cs
 D:\WorkSpace\WebService\Flignt.Users\obj\Debug\netcoreapp3.1\Flight.Users.MvcApplicationPartsAssemblyInfo.cache
 D:\WorkSpace\WebService\Flignt.Users\obj\Debug\netcoreapp3.1\staticwebassets\Flight.Users.StaticWebAssets.Manifest.cache
 D:\WorkSpace\WebService\Flignt.Users\obj\Debug\netcoreapp3.1\staticwebassets\Flight.Users.StaticWebAssets.xml

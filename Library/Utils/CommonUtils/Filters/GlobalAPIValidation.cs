@@ -16,6 +16,9 @@ using System.Linq;
 using Newtonsoft.Json.Linq;
 using CommonUtils.APIExecuter;
 using AuthDTOs;
+using Microsoft.AspNetCore.Http;
+using System.Net;
+using System.Web.Http.Results;
 
 namespace CommonUtils.Filters
 {
@@ -68,8 +71,40 @@ namespace CommonUtils.Filters
             timer.Stop();
             logger.Log(LogLevel.INFO,
                 $"Execution Ended => timeElapsed = '{timer?.Elapsed.TotalMilliseconds}'ms");
-            //throw new Exception("Internal_Setver_Error");
-            throw context.Exception;
+
+            string result = string.Empty;
+            if (context.Exception.GetType() == typeof(CustomException))
+            {
+                CustomException customException = context.Exception as CustomException;
+                result = JsonConvert.SerializeObject(new {
+                    CustomErrorCode = customException.CustomErrorCode,
+                    CustomErrorMessage = customException.CustomErrorMessage,
+                    CustomStackTrace = ""
+                });
+                //context.Result = new ContentResult()
+                //{
+                //    Content = result,
+                //    StatusCode = (int)HttpStatusCode.InternalServerError,
+                //    ContentType = "application/json"
+                //};
+            }
+            else
+            {
+                result = JsonConvert.SerializeObject(new
+                {
+                    CustomErrorCode = CustomErrorCode.Unknown,
+                    CustomErrorMessage = "Internal_Server_Error",
+                    CustomStackTrace = ""
+                });
+                //throw new Exception("Internal_Server_Error");
+                //throw context.Exception;
+            }
+            context.Result = new ContentResult()
+            {
+                Content = result,
+                StatusCode = (int)HttpStatusCode.InternalServerError,
+                ContentType = "application/json"
+            };
         }
 
         private void SetHeaderInfo(ActionExecutingContext context)

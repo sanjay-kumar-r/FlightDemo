@@ -1,0 +1,56 @@
+<!-- <p>airlines works!</p> -->
+<div class="mainData">
+    <!-- <div class="filtersDiv">
+        <span class="searchSpan">
+            <input #searchText class="searchText" placeholder="enter text to search" [(value)]="searchText"/>
+            <button (click)="SearchFilter">Search</button>
+        </span>
+        <span></span>
+    </div> -->
+    <div class="actionDiv"><button class="addActionButton" (click)="addAirlinePopup()">Add Airline</button></div>
+    <div class="dataDiv">
+        <div class="tableTitleDiv">
+            <table class="dataTable">
+                <thead>
+                    <tr>
+                        <th class="nameCell">Name</th>
+                        <th class="codeCell">Airline Code</th>
+                        <th class="detailsCell">Contact Details</th>
+                        <th class="countCell">Total Seats</th>
+                        <th class="countCell">BC Seats</th>
+                        <th class="countCell"> NBC Seats</th>
+                        <th class="costCell">BC Cost</th>
+                        <th class="costCell">NBC Cost</th>
+                        <th class="statusCell">Status</th>
+                        <th class="actionCell"> </th>
+                        <th class="actionCell"> </th>
+                        <th class="actionCell"> </th>
+                        <th class="actionCell"> </th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+        <div class="tableBodyDiv">
+            <!-- table table-striped -->
+            <table class="dataTable">
+                <tbody>
+                    <tr *ngFor="let airline of airlines">
+                        <td title={{airline.Name}} class="nameCell">{{airline.Name}}</td>
+                        <td title={{airline.AirlineCode}} class="codeCell">{{airline.AirlineCode}}</td>
+                        <td class="detailsCell"><span title={{airline.ContactAddress}} >addr:{{airline.ContactAddress}}</span><span title={{airline.ContactNumber}}>ph.{{airline.ContactNumber}}</span></td>
+                        <td title={{airline.TotalSeats}} class="countCell">{{airline.TotalSeats}}</td>
+                        <td title={{airline.TotalBCSeats}} class="countCell">{{airline.TotalBCSeats}}</td>
+                        <td title={{airline.TotalNBCSeats}} class="countCell">{{airline.TotalNBCSeats}}</td>
+                        <td title={{airline.BCTicketCost}} class="costCell">{{airline.BCTicketCost | number:'4.2'}}</td>
+                        <td title={{airline.NBCTicketCost}} class="costCell">{{airline.NBCTicketCost | number:'4.2'}}</td>
+                        <td class="statusCell"><button [ngClass]="airline.IsActive ? 'active':'inactive'">{{airline.IsActive ? "Active" : "InActive"}}</button></td>
+                        <td class="actionCell"><button title="click to schedule" class="actionButton">Schedule</button></td>
+                        <td class="actionCell"><button title="click to assign discount" class="actionButton">Discount</button></td>
+                        <td class="actionCell"><button title="click to update airlines" class="actionButton">Update</button></td>
+                        <td class="actionCell"><button title="click to delete airlines" class="deleteButton">Delete</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

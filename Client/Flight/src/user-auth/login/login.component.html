@@ -1,0 +1,54 @@
+<!-- <p>login works!</p> -->
+<div id="loginPage" class="loginPage">
+    <p *ngIf="alert ?? null != null" class="alertPopUp">
+        <ngb-alert [type]="alert?.type ?? ''" (closed)="closeAlert()">{{ alert?.message ?? '' }}</ngb-alert>
+    </p>
+    <div class="loginPanel">
+    <form #loginForm="ngForm" class="loginForm" (submit)="loginUser(loginForm.value)">
+        <table>
+            <!-- <thead><tr><th></th></tr></thead> -->
+            <thead ><tr><th colspan="2"><h2 class="formTitle">Login</h2></th></tr></thead>
+            <tbody>
+                <tr>
+                    <td colspan="2">
+                        <div>
+                            <div>
+                                <div class="fieldLabel" >EmailId :</div>
+                                <input type="text" placeholder="please enter emailId" name="emailId"
+                                [ngClass]="{'invalidInput' : (emailId.touched || emailId.dirty) && emailId.invalid}"
+                                #emailId="ngModel" required pattern="^[a-zA-Z0-9_\.-]+@([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,6}$" ngModel />
+                            </div>
+                            <div #inValidEmailId class="invalidText" *ngIf="(emailId.touched || emailId.dirty) && emailId.invalid">
+                                Please enter valid emailId (eg: 123@123.com)
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <div>
+                            <div>
+                                <div class= "fieldLabel" >Password :</div>
+                                <input type="password" placeholder="please enter password" name="password"
+                                [ngClass]="{'invalidInput' : (password.touched || password.dirty) && password.invalid}"
+                                #password="ngModel" required minlength="5" ngModel />
+                            </div>
+                            <div #inValidPassword class="invalidText" *ngIf="(password.touched || password.dirty) && password.invalid">
+                                Please enter valid password
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <button class="submit" [disabled]="loginForm.invalid">Login</button>
+                    </td>
+                    <td>
+                        <span class="regLink" (click)="redirectToRegister()">Register</span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </form>
+    </div>
+</div>
