@@ -90,3 +90,4 @@ D:\WorkSpace\WebService\TokenManager\bin\Debug\netcoreapp3.1\AuthDTOs.pdb
 D:\WorkSpace\WebService\TokenManager\bin\Debug\netcoreapp3.1\TokenManager.xml
 D:\WorkSpace\WebService\TokenManager\bin\Debug\netcoreapp3.1\Humanizer.dll
 D:\WorkSpace\WebService\TokenManager\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.Design.dll
+D:\WorkSpace\WebService\TokenManager\obj\Debug\netcoreapp3.1\TokenManager.csproj.CopyComplete

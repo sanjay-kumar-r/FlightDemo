@@ -48,7 +48,7 @@
                         <td title={{airline.NBCTicketCost}} class="costCell">{{airline.NBCTicketCost | number:'4.2'}}</td>
                         <td class="statusCell"><button [ngClass]="airline.IsActive ? 'active':'inactive'">{{airline.IsActive ? "Active" : "InActive"}}</button></td>
                         <td class="actionCell"><button title="click to schedule" class="actionButton">Schedule</button></td>
-                        <td class="actionCell"><button title="click to assign discount" class="actionButton">Discount</button></td>
+                        <td class="actionCell"><button title="click to assign discount" class="actionButton" (click)="airlineDiscountTagMappingPopup(airline.Id ?? 0, airline.Name ?? '')">Discount</button></td>
                         <td class="actionCell"><button title="click to update airlines" class="actionButton" (click)="editAirlinePopup(airline.Id ?? 0)">Update</button></td>
                         <td class="actionCell"><button title="click to delete airlines" class="deleteButton" (click)="deleteAirlinePopup(airline.Id ?? 0)">Delete</button></td>
                     </tr>

@@ -30,7 +30,7 @@ export interface DiscountTags {
 
 export interface AirlineDiscountTagMappingDetails {
     Airline?:Airlines;
-    DiscountTagDetails?:DiscountTags[];
+    DiscountTags?:DiscountTags[];
 }
 
 export interface RemapAirlineDiscountTagsDetails {

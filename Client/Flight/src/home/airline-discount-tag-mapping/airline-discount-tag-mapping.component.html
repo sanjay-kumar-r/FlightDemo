@@ -1,0 +1,51 @@
+<!-- <p>airline-discount-tag-mapping works!</p> -->
+<div class="mappingMain">
+    <div class="mappingTitle"><h5>DiscountTag Mappings for '{{airlineName}}'</h5></div>
+    <table class="mappingTable">
+        <thead>
+            <tr>
+                <th class="listCell">Assigned Discounts</th>
+                <th class="actionCell"></th>
+                <th class="listCell">Existing Discounts</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="itemRow">
+                <td class="listCell">
+                    <div class="scrollableList">
+                        <span *ngFor="let discountTag of assignedDiscountTags" 
+                        [attr.discountId]="discountTag.Id"
+                        title="click to select"
+                        (click)="onSelectItem($event, 'assigned')">
+                            {{discountTag.Name}}
+                        </span>
+                    </div>
+                </td>
+                <td class="actionCell">
+                    <div class="arrowAction" title="click here to remove from assigned" (click)="removeItems()"><span>{{">"}} </span></div>
+                    <div class="arrowAction" title="click here to add from existing" (click)="addItems()"> <span>{{'<'}} </span> </div>
+                </td>
+                <td class="listCell">
+                    <div class="scrollableList">
+                        <span *ngFor="let discountTag of existingDiscountTags" 
+                        [attr.discountId]="discountTag.Id"
+                        title="click to select"
+                        (click)="onSelectItem($event, 'existing')">
+                            {{discountTag.Name}}
+                        </span>
+                    </div>
+                </td>
+            </tr>
+            <tr class="submitRow">
+                <td ></td>
+                <td ></td>
+                <td >
+                    <div class="submitRowDiv">
+                        <button class="submit" (click)="saveChanges()" >Save Changes</button>
+                        <span class="cancel" (click)="cancel()">Cancel</span>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

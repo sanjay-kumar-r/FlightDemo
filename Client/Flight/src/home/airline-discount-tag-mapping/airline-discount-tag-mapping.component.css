@@ -1,0 +1,162 @@
+
+
+
+.mappingMain{
+    width: 100%;
+    height: 350px;
+    font-family: auto;
+}
+
+.mappingMain .mappingTitle{
+    width: 100%;
+    height: 50px;
+    padding-top: 13px;
+    text-align: center;
+    background: #2b6289;
+    color: white;
+}
+
+.mappingMain .mappingTable{
+    width: 100%;
+    height: calc(100% - 60px);
+    margin-top: 15px;
+    text-align: center;
+}
+
+.mappingMain .mappingTable thead{
+    height: 50px;
+    background: #cdcdcd;
+}
+
+.mappingMain .mappingTable tbody{
+    height: calc(100% - 50px);
+}
+
+/* thead .listCell{
+    background: #afafaf;
+} */
+
+.listCell{
+    width: 40%;
+    /* background: #cdcdcd; */
+}
+
+.actionCell{
+    width: 10%;
+    cursor: pointer;
+}
+
+.mappingMain .mappingTable tbody tr.itemRow{
+    height: calc(100% - 50px);
+}
+
+.mappingMain .mappingTable tbody tr.submitRow{
+    height: 50px
+}
+
+.mappingMain .mappingTable tbody td.listCell{
+    height: 100%;
+    border: 1px dotted rgba(0, 0, 0, 0.329);
+    border-radius: 5px;
+}
+
+.scrollableList{
+    height: 100%;
+    overflow-y: scroll;
+}
+
+.scrollableList span{
+    display: block;
+    height: 30px;
+    text-align: center;
+    padding-top: 3px;
+    cursor: pointer;
+    border:none;
+    border-radius: 5px;
+    margin: 10px;
+    width: calc(100% - 20px);
+}
+
+.scrollableList span:hover{
+    background: #3377a8;
+    color: white;
+    cursor: pointer;
+    border:none;
+    border-radius: 5px;
+}
+
+.selectedDiscout{
+    background: #3377a8;
+    color: white;
+    cursor: pointer;
+    border:none;
+    border-radius: 5px;
+}
+
+.arrowAction{
+    height: 50%;
+    text-align: center;
+    display: flex;
+    justify-content:space-around;
+    align-items: center;
+}
+
+.arrowAction span{
+    width: 100%;
+    height: 100%;
+    font-size: larger;
+    font-weight: bolder;
+    text-align: center;
+    align-items: center;
+    display: flex;
+    justify-content: space-around;
+}
+
+.arrowAction span:hover{
+    background: #3377a8;
+    color: white;
+    cursor: pointer;
+}
+
+.mappingMain button.submit
+{
+    border: 0px;
+    border-radius: 5px;
+    height: 35px;
+    width: 100px;
+    background: #0a38e1;
+    font-size: larger;
+    color: white;
+    margin-right: 30px;
+    cursor: pointer;
+    padding-top: 3px;
+}
+
+.mappingMain button.submit:hover
+{
+    background: #0a38e1;
+}
+
+.submitRowDiv{
+    float: right;
+}
+
+.mappingMain .cancel
+{
+    text-decoration: underline;
+    cursor: pointer;
+    font-size: large;
+}
+
+.mappingMain .cancel:hover
+{
+    color: #0a38e1;
+}
+
+
+
+
+
+
+
+

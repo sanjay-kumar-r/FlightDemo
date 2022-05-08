@@ -12,6 +12,7 @@ import { NgbModule, NgbPaginationModule, NgbAlertModule, NgbAlert } from '@ng-bo
 import { AddOrEditAirlineComponent } from './add-or-edit-airline/add-or-edit-airline.component';
 import { DeleteConfirmationComponent } from './delete-confirmation/delete-confirmation.component';
 import { AddOrEditDiscountTagComponent } from './add-or-edit-discount-tag/add-or-edit-discount-tag.component';
+import { AirlineDiscountTagMappingComponent } from './airline-discount-tag-mapping/airline-discount-tag-mapping.component';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { AddOrEditDiscountTagComponent } from './add-or-edit-discount-tag/add-or
     ComponentLoaderDirective,
     AddOrEditAirlineComponent,
     DeleteConfirmationComponent,
-    AddOrEditDiscountTagComponent
+    AddOrEditDiscountTagComponent,
+    AirlineDiscountTagMappingComponent
   ],
   imports: [
     CommonModule,

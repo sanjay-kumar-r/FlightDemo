@@ -171,17 +171,17 @@ export class AirlineService {
   //Airlines - DiscountTags mappings
   getAirlineDiscountTagsMapping(airlinesId:number, discountTagId:number, headerInfo:HeaderInfo) : Observable<any>
   {
-    if(((airlinesId ?? null) == null || airlinesId === 0 ) 
-      && ((discountTagId ?? null) == null || discountTagId === 0 ))
+    if(((airlinesId ?? null) == null || airlinesId <= 0 ) 
+      && ((discountTagId ?? null) == null || discountTagId <= 0 ))
     { 
       return this.apiExecutor.CallAPI(APIRequestType.Get, this.getAirlineDiscountTagsMappingUrl, headerInfo ,
         null, true);
     }
     else
     {
-      let requestUrl = this.getAirlinesByFilterconditionUrl + "/" +
-      (((airlinesId ?? null) == null || airlinesId === 0 )  ? "0" : airlinesId) + "/" +
-      (((discountTagId ?? null) == null || discountTagId === 0 ) ? "0" : discountTagId);
+      let requestUrl = this.getAirlineDiscountTagsMappingUrl + "/" +
+      (((airlinesId ?? null) == null || airlinesId <= 0 )  ? "0" : airlinesId) + "/" +
+      (((discountTagId ?? null) == null || discountTagId <= 0 ) ? "0" : discountTagId);
       return this.apiExecutor.CallAPI(APIRequestType.Get, requestUrl, headerInfo ,
         null, true);
     }

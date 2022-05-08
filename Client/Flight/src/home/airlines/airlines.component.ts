@@ -12,6 +12,7 @@ import { DynamicComponentService } from 'src/Services/dynamic-component.service'
 import { MatDialogRef, MatDialog } from '@angular/material/dialog';
 import { AddOrEditAirlineComponent } from '../add-or-edit-airline/add-or-edit-airline.component';
 import { DeleteConfirmationComponent } from '../delete-confirmation/delete-confirmation.component';
+import { AirlineDiscountTagMappingComponent } from '../airline-discount-tag-mapping/airline-discount-tag-mapping.component';
 
 @Component({
   selector: 'app-airlines',
@@ -25,6 +26,7 @@ export class AirlinesComponent implements OnInit {
 
   isAddEditError:boolean = false;
   isAddEditCancel:boolean = false;
+  isAddEditSaved:boolean = false;
   confirmDelete:boolean = false;
 
   alert?:{type:string|null, message:string|null}|null;
@@ -221,10 +223,17 @@ export class AirlinesComponent implements OnInit {
     addAirlinePopupRef.componentInstance.isCancel.subscribe(
       isCancel => this.isAddEditCancel = isCancel
     );
+    // addAirlinePopupRef.componentInstance.isCancel.subscribe(
+    //   isSaved => this.isAddEditSaved = isSaved
+    // );
     addAirlinePopupRef.afterClosed().subscribe(
       (result) => {
         if(!this.isAddEditCancel)
         {
+          // if(this.isAddEditSaved)
+          // {
+          //   this.loadAirlines();
+          // }
           if(this.isAddEditError)
           {
             this.alert = {type : "danger", message : "internal server error"};
@@ -249,10 +258,17 @@ export class AirlinesComponent implements OnInit {
     editAirlinePopupRef.componentInstance.isCancel.subscribe(
       isCancel => this.isAddEditCancel = isCancel
     );
+    // editAirlinePopupRef.componentInstance.isCancel.subscribe(
+    //   isSaved => this.isAddEditSaved = isSaved
+    // );
     editAirlinePopupRef.afterClosed().subscribe(
       (result) => {
         if(!this.isAddEditCancel)
         {
+          // if(this.isAddEditSaved)
+          // {
+          //   this.loadAirlines();
+          // }
           if(this.isAddEditError)
           {
             this.alert = {type : "danger", message : "internal server error"};
@@ -341,6 +357,39 @@ export class AirlinesComponent implements OnInit {
     );
   }
 
+  airlineDiscountTagMappingPopup(airlineId:number, airlineName:string){
+    const airlineDiscountTagMappingPopupRef = this.matDialog.open(AirlineDiscountTagMappingComponent, {
+      "width": '600px',
+      "maxHeight": '90vh',
+      "data": {airlineName:airlineName,airlineId:airlineId},
+      "autoFocus": false
+    });
+    airlineDiscountTagMappingPopupRef.componentInstance.isErrorOutput.subscribe(
+      iserror => this.isAddEditError = iserror
+    );
+    airlineDiscountTagMappingPopupRef.componentInstance.isCancel.subscribe(
+      isCancel => this.isAddEditCancel = isCancel
+    );
+    airlineDiscountTagMappingPopupRef.componentInstance.isCancel.subscribe(
+      isSaved => this.isAddEditSaved = isSaved
+    );
+    airlineDiscountTagMappingPopupRef.afterClosed().subscribe(
+      (result) => {
+        if(!this.isAddEditCancel && !this.isAddEditSaved)
+        {
+          if(this.isAddEditError)
+          {
+            this.alert = {type : "danger", message : "internal server error"};
+          }
+          else
+          {  
+            //this.loadAirlines();
+          }
+        }
+      }
+    );
+  }
+
   logout()
   {
     localStorage.clear();
@@ -351,6 +400,10 @@ export class AirlinesComponent implements OnInit {
     this.alert = null;
   }
 
-
+  // trial($event:any, x:string){
+  //   console.log($event.target);
+  //   console.log("x ", x);
+  //   $event.target.remove();
+  // }
 
 }

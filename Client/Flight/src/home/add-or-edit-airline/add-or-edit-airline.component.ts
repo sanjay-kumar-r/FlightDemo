@@ -21,6 +21,7 @@ export class AddOrEditAirlineComponent implements OnInit {
   @Output() airlineSaveResult : EventEmitter<boolean> = new EventEmitter<boolean>(); 
   @Output() isErrorOutput : EventEmitter<boolean> = new EventEmitter<boolean>(); 
   @Output() isCancel : EventEmitter<boolean> = new EventEmitter<boolean>(); 
+  @Output() isSaveTrigger : EventEmitter<boolean> = new EventEmitter<boolean>(); 
 
   isEdit:boolean = false;
   airlineId?:number|null;
@@ -30,6 +31,7 @@ export class AddOrEditAirlineComponent implements OnInit {
   isDuplicate:boolean = false;
   isSeatsInvalid:boolean = false;
   isCanceled:boolean = false;
+  isSavedTriggered:boolean = false;
 
   userDetails:Users|null;
   authResponse:AuthResponse|null;
