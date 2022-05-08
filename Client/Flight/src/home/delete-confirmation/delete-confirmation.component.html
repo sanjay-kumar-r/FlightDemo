@@ -1,0 +1,15 @@
+<!-- <p>delete-confirmation works!</p> -->
+<div class="confirmDeleteDiv">
+    <div class="deleteHead">
+        <h3>Are you sure?</h3>
+    </div>
+    <div class="deleteDetail">
+        <span>Do you really want to delete ' </span>
+        <span class="deleteItemName">{{itemName}}</span>
+        <span> ' {{title}} ?</span>
+    </div>
+    <div class="submitDiv">
+        <button class="confirmDelete" (click)="yes()" >Confirm</button>
+        <span class="cancelDelete" (click)="no()">Cancel</span>
+    </div>
+</div>

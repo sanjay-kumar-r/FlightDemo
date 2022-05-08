@@ -150,11 +150,11 @@ namespace TokenManager.Controllers
                     {
                         if (!string.IsNullOrWhiteSpace(claim.Value))
                         {
-                            if (claim.Type == ClaimTypes.NameIdentifier)
+                            if (claim.Type == "nameid")
                                 emailId = claim.Value;
-                            else if (claim.Type == ClaimTypes.Role )
+                            else if (claim.Type == "role" )
                             {
-                                roles = JsonConvert.DeserializeObject<List<string>>(claim.Value);
+                                roles.AddRange(claim.Value.Split(",").Where(x => !string.IsNullOrWhiteSpace(x)).ToList());
                             }
                         }
                     }

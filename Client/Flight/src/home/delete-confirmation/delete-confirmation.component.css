@@ -1,0 +1,69 @@
+.confirmDeleteDiv{
+    width: 100%;
+    text-align: center;
+    font-family: auto;
+}
+
+.deleteHead{
+    width: 100%;
+    height: 50px;
+    background: #ffbfbf;
+    padding-top: 5px;
+}
+
+.deleteDetail{
+    width: 100%;
+    height: 70px;
+    padding: 15px;
+}
+
+.deleteItemName{
+    position: relative;
+    max-width: 200px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    display: inline-block;
+    bottom: -7px;
+    color: red;
+    font-weight: bold;
+}
+
+.submitDiv{
+    width: 100%;
+    height: 30px;
+}
+
+.confirmDeleteDiv button.confirmDelete
+{
+    border: 0px;
+    border-radius: 5px;
+    height: 35px;
+    width: 90px;
+    background: rgb(214, 13, 13);
+    font-size: larger;
+    color: white;
+    float: left;
+    margin-left: 13%;
+    cursor: pointer;
+}
+
+.confirmDeleteDiv button.confirmDelete:hover
+{
+    background: rgb(182, 0, 0);
+}
+
+.confirmDeleteDiv .cancelDelete
+{
+    float: right;
+    margin-right: 13%;
+   /* width: 100px; */
+    text-decoration: underline;
+    cursor: pointer;
+    font-size: large;
+}
+
+.confirmDeleteDiv .cancelDelete:hover
+{
+    color: #0a38e1;
+}

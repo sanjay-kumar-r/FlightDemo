@@ -1,1 +1,51 @@
-<p>discounts works!</p>
+<!-- <p>discounts works!</p> -->
+<div class="mainData">
+    <p *ngIf="alert ?? null != null" class="alertPopUp">
+        <ngb-alert [type]="alert?.type ?? ''" (closed)="closeAlert()">{{ alert?.message ?? '' }}</ngb-alert>
+    </p>
+    <!-- <div class="filtersDiv">
+        <span class="searchSpan">
+            <input #searchText class="searchText" placeholder="enter text to search" [(value)]="searchText"/>
+            <button (click)="SearchFilter">Search</button>
+        </span>
+        <span></span>
+    </div> -->
+    <div class="actionDiv"><button class="addActionButton" title="click here to add discount tag" (click)="addDiscountTag()">Add Discount</button></div>
+    <div class="dataDiv">
+        <div class="tableTitleDiv">
+            <table class="dataTable">
+                <thead>
+                    <tr>
+                        <th class="nameCell">Name</th>
+                        <th class="codeCell">Discount Code</th>
+                        <th class="detailsCell">Description</th>
+                        <th class="countCell">Discount</th>
+                        <th class="isRateCell">IsByRate</th>
+                        <th class="statusCell">Status</th>
+                        <th class="actionCell"> </th>
+                        <th class="actionCell"> </th>
+                        <th class="actionCell"> </th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+        <div class="tableBodyDiv">
+            <!-- table table-striped -->
+            <table class="dataTable">
+                <tbody>
+                    <tr *ngFor="let discountTag of discountTags">
+                        <td title={{discountTag.Name}} class="nameCell">{{discountTag.Name}}</td>
+                        <td title={{discountTag.DiscountCode}} class="codeCell">{{discountTag.DiscountCode}}</td>
+                        <td title={{discountTag.Description}} class="detailsCell">{{discountTag.Description}}</td>
+                        <td title={{discountTag.Discount}} class="countCell">{{discountTag.Discount | number:'4.2'}}</td>
+                        <td class="isRateCell"><span>{{discountTag.IsByRate ? "true" : "false"}}</span></td>
+                        <td class="statusCell"><button [ngClass]="discountTag.IsActive ? 'active':'inactive'">{{discountTag.IsActive ? "Active" : "InActive"}}</button></td>
+                        <td class="actionCell"></td>
+                        <td class="actionCell"><button title="click to update discount Tag" class="actionButton" (click)="editDiscountTagPopup(discountTag.Id ?? 0)">Update</button></td>
+                        <td class="actionCell"><button title="click to delete discount Tag" class="deleteButton" (click)="deleteDiscountTagPopup(discountTag.Id ?? 0)">Delete</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,150 @@
+
+.addEditAirline{
+    width: 100%;
+    height: 100%;
+    font-family: auto;
+}
+
+.airlineForm{
+    width: 100%;
+    height: 100%;
+}
+
+.airlineForm table{
+    width: 100%;
+    height: 100%;
+}
+
+.airlineForm thead{
+    width: 100%;
+    height: 50px;
+    text-align: center;
+    background: #2b6289;
+    color: white;
+}
+
+.airlineForm thead .AddEditAirlineTitle{
+    margin: 0px;
+}
+
+.airlineForm tbody tr{
+    min-height: 95px;
+    height: 95px;
+    max-height: 95px;
+}
+
+.airlineForm tbody tr.addressRow{
+    min-height: 140px;
+    height: 140px;
+    max-height: 140px;
+}
+.airlineForm tbody tr.activationRow{
+    min-height: 65px;
+    height: 65px;
+    max-height: 65px;
+}
+
+.airlineForm tbody tr.submitRow{
+    min-height: 30px;
+    height: 30px;
+    max-height: 30px;
+}
+
+.airlineForm tbody tr.activationRow td{
+    vertical-align: middle;
+}
+
+.airlineForm tbody tr.submitRow td{
+    vertical-align: bottom;
+
+}
+
+.airlineForm tbody tr td{
+    vertical-align: top;
+}
+
+.airlineForm .fieldLabel{
+    text-align: left;
+    width: fit-content;
+    height: fit-content;
+    margin: 0px;
+    padding: 0px;
+    float: left;
+    display: block;
+}
+
+.airlineForm input.field
+{
+    width: 90%;
+    height: 35px;
+    border-radius: 5px;
+    border: 0px;
+    background-color: #cdd6dd;
+}
+
+.airlineForm textarea
+{
+    width: 97%;
+    max-width: 97%;
+    border-radius: 5px;
+    border: 0px;
+    background-color: #cdd6dd;
+}
+
+.invalidText{
+    font-size: small;
+    color: red;
+    font-style: italic;
+    margin: 5px;
+    width: 90%;
+    float: left;
+    display: block;
+}
+
+.airlineForm input.invalidInput
+{
+    border: 1px solid red;
+}
+
+.airlineForm button.submit
+{
+    border: 0px;
+    border-radius: 5px;
+    height: 35px;
+    width: 100px;
+    background: #0a38e1;
+    font-size: larger;
+    color: white;
+    margin-right: 30px;
+    cursor: pointer;
+}
+
+.airlineForm button.submit:disabled
+{
+    opacity: 60%;
+    cursor: auto;
+    pointer-events: none;
+}
+
+.airlineForm button.submit:hover
+{
+    background: #092daf;
+}
+
+.submitRowDiv{
+    float: right;
+}
+
+.airlineForm .cancel
+{
+    /* margin-right: 25%;
+    width: 100px; */
+    text-decoration: underline;
+    cursor: pointer;
+    font-size: large;
+}
+
+.airlineForm .cancel:hover
+{
+    color: #0a38e1;
+}

@@ -6,6 +6,25 @@
     font-family: auto;
 }
 
+/* .homePage *{
+    margin: 0px;
+}
+
+.homePage > *{
+    margin: 0px;
+} */
+
+.alertPopUp{
+    top: 5px;
+    left: 0px;
+    position: absolute;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+
 .header, .footer{
     background-color: rgb(15 101 163);
     text-align: center;
@@ -87,6 +106,11 @@
     cursor: pointer;
 }
 
+.navItem.selectedNavTab{
+    background-color: rgb(15 101 163);
+    cursor: pointer;
+}
+
 .tabsControl{
     float: right;
     background: #dddddd;
@@ -119,6 +143,11 @@
 .subTabItems:hover{
     background-color: #acacac;
     cursor: pointer;
+}
+
+.subTabItems.selectedSubTab{
+    background-color: #acacac;
+    cursor: pointer; 
 }
 
 .dataGrid{

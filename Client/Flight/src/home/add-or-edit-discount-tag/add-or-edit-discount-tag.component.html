@@ -1,0 +1,105 @@
+<!-- <p>add-or-edit-discount-tag works!</p> -->
+<div class="addEditDiscountTag">
+    <form #discountTagForm="ngForm" class="discountTagForm" (submit)="saveDiscountTag(discountTagForm)">
+        <table>
+            <thead ><tr><th colspan="2">
+                <h2 class="AddEditDiscountTagTitle">{{!isEdit ? "Add Discount Tag" : "Edit Discount Tag"}}</h2>
+            </th></tr></thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <div>
+                            <div class= "fieldLabel" >DiscountTag Name :</div>
+                            <input type="text" placeholder="please enter discountTag name" name="discountTagName"
+                            class="field" (keyup) ="isFormSubmitted=false;isDuplicate=false;"
+                            [ngClass]="{'invalidInput' : (((discountTagName.touched || discountTagName.dirty) && discountTagName.invalid) || (isFormSubmitted && isDuplicate))}"
+                            #discountTagName="ngModel" required [ngModel]="(discountTag?.Name ?? '')" />
+                        </div>
+                        <div #inValidDiscountTagName class="invalidText" *ngIf="(discountTagName.touched || discountTagName.dirty) && discountTagName.invalid">
+                            Please enter valid discount tag Name
+                        </div>
+                        <div #inValidDiscountTagNameDuplicate class="invalidText" *ngIf="(isFormSubmitted && isDuplicate)">
+                            Name or discountTag code already exists
+                        </div>
+                    </td>
+                    <td>
+                        <div>
+                            <div class= "fieldLabel" >DiscountTag Code :</div>
+                            <input type="text" placeholder="please enter discountTag code" name="discountTagCode"
+                            class="field" (keyup) ="isFormSubmitted=false;isDuplicate=false;"
+                            [ngClass]="{'invalidInput' : (((discountTagCode.touched || discountTagCode.dirty) && discountTagCode.invalid) || (isFormSubmitted && isDuplicate))}"
+                            #discountTagCode="ngModel" required [ngModel]="(discountTag?.DiscountCode ?? '')" />
+                        </div>
+                        <div #inValidDiscountTagCode class="invalidText" *ngIf="(discountTagCode.touched || discountTagCode.dirty) && discountTagCode.invalid">
+                            Please enter valid discountTag Code
+                        </div>
+                        <div #inValidDiscountTagCodeDuplicate class="invalidText" *ngIf="(isFormSubmitted && isDuplicate)">
+                            Name or discountTag code already exists
+                        </div>
+                    </td>
+                </tr>
+                <tr class="descriptionRow">
+                    <td colspan="2" >
+                        <div>
+                            <div class= "fieldLabel" >Description :</div>
+                            <textarea placeholder="please enter contact address" name="description" rows="3" cols="100"
+                            [ngClass]="{'invalidInput' : (description.touched || description.dirty) && description.invalid}"
+                            #description="ngModel" required [ngModel]="(discountTag?.Description ?? '')" >
+                            </textarea>
+                        </div>
+                        <div #inValidDescription class="invalidText" *ngIf="(description.touched || description.dirty) && description.invalid">
+                            description is Required
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div>
+                            <div class= "fieldLabel" >Discount :</div>
+                            <input type="number" name="discount" class="field"
+                            [ngClass]="{'invalidInput' : (((discount.touched || discount.dirty) && discount.invalid) || ((isFormSubmitted && isDiscountInvalid)) )}"
+                            #discount="ngModel" required min="0" pattern="^\d*(\.\d{0,4})?$"
+                            [ngModel]="(discountTag?.Discount ?? '0')" />
+                        </div>
+                        <div #inValidBcTicketCost class="invalidText" *ngIf="(((discount.touched || discount.dirty) && discount.invalid) || ((isFormSubmitted && isDiscountInvalid)) )">
+                            please enter valid discount greated than zero (eg: 12.34)
+                        </div>
+                    </td>
+                    <td class="isRateCell">
+                        <div>
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" name="isByRate" 
+                                #isByRate="ngModel" 
+                                 [ngModel]="discountTag?.IsByRate ?? false" />
+                                <label class="form-check-label" for="flexSwitchCheckDefault"> By Rate(%)</label>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr class="activationRow">
+                    <td>
+                        <div>
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" name="isActive" 
+                                #isActive="ngModel" 
+                                 [ngModel]="discountTag?.IsActive ?? false" />
+                                <label class="form-check-label" for="flexSwitchCheckDefault">Active</label>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                    </td>
+                </tr>
+                <tr class="submitRow">
+                    <td></td>
+                    <td>
+                        <div class="submitRowDiv">
+                            <button type="submit" class="submit" [disabled]="discountTagForm.invalid">Save</button>
+                            <span class="cancel" (click)="cancel()">Cancel</span>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </form>
+</div>

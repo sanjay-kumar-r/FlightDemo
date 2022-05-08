@@ -6,6 +6,9 @@ import { AppComponent } from './app.component';
 import { NgbModule, NgbPaginationModule, NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { HttpClientModule } from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { MatDialogModule } from '@angular/material/dialog';
 
 
 @NgModule({
@@ -18,7 +21,9 @@ import { HttpClientModule } from '@angular/common/http';
     NgbModule,
     HttpClientModule,
     NgbPaginationModule,
-    NgbAlertModule
+    NgbAlertModule,
+    BrowserAnimationsModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]

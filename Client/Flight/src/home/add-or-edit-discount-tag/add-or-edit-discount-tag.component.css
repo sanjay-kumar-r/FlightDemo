@@ -1,0 +1,158 @@
+
+
+.addEditDiscountTag{
+    width: 100%;
+    height: 100%;
+    font-family: auto;
+}
+
+.discountTagForm{
+    width: 100%;
+    height: 100%;
+}
+
+.discountTagForm table{
+    width: 100%;
+    height: 100%;
+}
+
+.discountTagForm thead{
+    width: 100%;
+    height: 50px;
+    text-align: center;
+    background: #2b6289;
+    color: white;
+}
+
+.discountTagForm thead .AddEditDiscountTagTitle{
+    margin: 0px;
+}
+
+.discountTagForm tbody tr{
+    min-height: 100px;
+    height: 100px;
+    max-height: 100px;
+}
+
+.discountTagForm tbody tr.descriptionRow{
+    min-height: 150px;
+    height: 150px;
+    max-height: 150px;
+}
+.discountTagForm tbody tr.activationRow{
+    min-height: 65px;
+    height: 65px;
+    max-height: 65px;
+}
+
+.discountTagForm tbody tr.submitRow{
+    min-height: 30px;
+    height: 30px;
+    max-height: 30px;
+}
+
+.discountTagForm tbody tr td{
+    vertical-align: top;
+    padding-top: 10px;
+}
+
+.discountTagForm tbody tr.activationRow td{
+    vertical-align: middle;
+    padding-top: 10px;
+}
+
+.discountTagForm tbody tr.submitRow td{
+    vertical-align: bottom;
+    padding-top: 10px;
+}
+
+.discountTagForm tbody tr td.isRateCell{
+    vertical-align: middle;
+    padding-top: 10px;
+}
+
+.discountTagForm .fieldLabel{
+    text-align: left;
+    width: fit-content;
+    height: fit-content;
+    margin: 0px;
+    padding: 0px;
+    float: left;
+    display: block;
+}
+
+.discountTagForm input.field
+{
+    width: 90%;
+    height: 35px;
+    border-radius: 5px;
+    border: 0px;
+    background-color: #cdd6dd;
+}
+
+.discountTagForm textarea
+{
+    width: 95%;
+    max-width: 95%;
+    border-radius: 5px;
+    border: 0px;
+    background-color: #cdd6dd;
+}
+
+.invalidText{
+    font-size: small;
+    color: red;
+    font-style: italic;
+    margin: 5px;
+    width: 90%;
+    float: left;
+    display: block;
+}
+
+.discountTagForm input.invalidInput
+{
+    border: 1px solid red;
+}
+
+.discountTagForm button.submit
+{
+    border: 0px;
+    border-radius: 5px;
+    height: 35px;
+    width: 100px;
+    background: #0a38e1;
+    font-size: larger;
+    color: white;
+    margin-right: 30px;
+    cursor: pointer;
+}
+
+.discountTagForm button.submit:disabled
+{
+    opacity: 60%;
+    cursor: auto;
+    pointer-events: none;
+}
+
+.discountTagForm button.submit:hover
+{
+    background: #092daf;
+}
+
+.submitRowDiv{
+    float: right;
+}
+
+.discountTagForm .cancel
+{
+    /* margin-right: 25%;
+    width: 100px; */
+    text-decoration: underline;
+    cursor: pointer;
+    font-size: large;
+}
+
+.discountTagForm .cancel:hover
+{
+    color: #0a38e1;
+}

@@ -53,7 +53,11 @@ namespace Flight.Airlines.Controllers
             //if (airlinesSearchRequest.ArrivalDate == null)
             //    airlinesSearchRequest.ArrivalDate = DateTime.Now.AddDays(7).Date;
             if (!AirlinesValidation.ValidateGetAvailableAirlines(airlinesSearchRequest))
-                throw new Exception("AirlinesValidation.ValidateGetAvailableAirlines Failed");
+            {
+                logger.Log(LogLevel.ERROR, "AirlinesValidation.ValidateGetAvailableAirlines Failed");
+                throw new CustomException() { CustomErrorCode = CustomErrorCode.Invalid, CustomErrorMessage = "validation failed" };
+                //throw new Exception("AirlinesValidation.ValidateGetAvailableAirlines Failed");
+            }
 
             var airlinesSearchResponse = new List<AirlinesSearchResponse>();
             //get available airlineSchedules
@@ -146,7 +150,11 @@ namespace Flight.Airlines.Controllers
         public BookingStatusCode CheckForAvailableSeatsAndAddTracker([FromBody] AirlineScheduleTracker airlineScheduleTracker)
         {
             if (AirlinesValidation.ValidateCheckForAvailableSeats(airlineScheduleTracker))
-                throw new Exception("AirlinesValidation.ValidateCheckForAvailableSeats Failed");
+            {
+                logger.Log(LogLevel.ERROR, "AirlinesValidation.ValidateCheckForAvailableSeats Failed");
+                throw new CustomException() { CustomErrorCode = CustomErrorCode.Invalid, CustomErrorMessage = "validation failed" };
+                //throw new Exception("AirlinesValidation.ValidateCheckForAvailableSeats Failed");
+            }
 
             if (airlineScheduleTracker.BCSeatsRemaining < 0)
                 airlineScheduleTracker.BCSeatsRemaining = 0;
@@ -263,7 +271,11 @@ namespace Flight.Airlines.Controllers
         public bool RevertScheduleTracker([FromBody] AirlineScheduleTracker airlineScheduleTracker)
         {
             if (AirlinesValidation.RevertScheduleTracker(airlineScheduleTracker))
-                throw new Exception("AirlinesValidation.RevertScheduleTracker Failed");
+            {
+                logger.Log(LogLevel.ERROR, "AirlinesValidation.RevertScheduleTracker Failed");
+                throw new CustomException() { CustomErrorCode = CustomErrorCode.Invalid, CustomErrorMessage = "validation failed" };
+                //throw new Exception("AirlinesValidation.RevertScheduleTracker Failed");
+            }
 
             if (airlineScheduleTracker.BCSeatsRemaining < 0)
                 airlineScheduleTracker.BCSeatsRemaining = 0;

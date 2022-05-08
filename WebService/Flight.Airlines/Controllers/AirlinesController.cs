@@ -69,10 +69,18 @@ namespace Flight.Airlines.Controllers
         public long Add([FromBody] AirlinesDTOs.Airlines airline)
         {
             if (!AirlinesValidation.ValidateAddFlight(airline))
-                throw new Exception("AirlinesValidation.ValidateAddFlight Falied");
+            {
+                logger.Log(LogLevel.ERROR, "AirlinesValidation.ValidateAddFlight Falied");
+                throw new CustomException() { CustomErrorCode = CustomErrorCode.Invalid, CustomErrorMessage = "validation failed" };
+                //throw new Exception("AirlinesValidation.ValidateAddFlight Falied");
+            }
 
             if (airlinesRepo.IsAirlineAlreadyExists(airline))
-                throw new Exception("Airline name and/or code already exists");
+            {
+                logger.Log(LogLevel.ERROR, "Airline name and/or code already exists");
+                throw new CustomException() { CustomErrorCode = CustomErrorCode.Duplicate, CustomErrorMessage = "Airline name and/or code already exists" };
+                //throw new Exception("Airline name and/or code already exists");
+            }
 
             long userId = Convert.ToInt64(HttpContext.Request.Headers["UserId"]);
             airline.Createdby = Convert.ToInt64(userId);
@@ -85,7 +93,11 @@ namespace Flight.Airlines.Controllers
         public Result Update([FromBody] AirlinesDTOs.AirlineDetails airline)
         {
             if (!AirlinesValidation.ValidateUpdateFlight(airline))
-                throw new Exception("AirlinesValidation.ValidateUpdateFlight Falied");
+            {
+                logger.Log(LogLevel.ERROR, "AirlinesValidation.ValidateUpdateFlight Falied");
+                throw new CustomException() { CustomErrorCode = CustomErrorCode.Invalid, CustomErrorMessage = "validation failed" };
+                //throw new Exception("AirlinesValidation.ValidateUpdateFlight Falied");
+            }
 
             AirlinesDTOs.Airlines airline_1 = new AirlinesDTOs.Airlines()
             {
@@ -103,7 +115,11 @@ namespace Flight.Airlines.Controllers
             if (airline.IsActive != null)
                 airline_1.IsActive = (bool)airline.IsActive;
             if (airlinesRepo.IsAirlineAlreadyExists(airline_1))
-                throw new Exception("Airline name and/or code already exists");
+            {
+                logger.Log(LogLevel.ERROR, "Airline name and/or code already exists");
+                throw new CustomException() { CustomErrorCode = CustomErrorCode.Duplicate, CustomErrorMessage = "Airline name and/or code already exists" };
+                //throw new Exception("Airline name and/or code already exists");
+            }
 
             long userId = Convert.ToInt64(HttpContext.Request.Headers["UserId"]);
             return airlinesRepo.UpdateAirline(airline, userId);
@@ -115,7 +131,11 @@ namespace Flight.Airlines.Controllers
         {
             //long id = Convert.ToInt64(airline["Id"].ToString());
             if (!AirlinesValidation.ValidateActivateDeactivateAirline(obj.GetProperty("Id"), obj.GetProperty("IsActive")))
-                throw new Exception("AirlinesValidation.ValidateActivateDeactivateAirline Falied");
+            {
+                logger.Log(LogLevel.ERROR, "AirlinesValidation.ValidateActivateDeactivateAirline Falied");
+                throw new CustomException() { CustomErrorCode = CustomErrorCode.Invalid, CustomErrorMessage = "validation failed" };
+                //throw new Exception("AirlinesValidation.ValidateActivateDeactivateAirline Falied");
+            }
 
             AirlinesDTOs.Airlines airline = new AirlinesDTOs.Airlines()
             {
@@ -150,7 +170,11 @@ namespace Flight.Airlines.Controllers
         public bool MapAirlinesDiscountTags([FromBody] List<AirlinesDTOs.AirlineDiscountTagMappingDetails> airlineDiscountTagMappingDetails)
         {
             if (!AirlinesValidation.ValidateAirlineDiscountTagMappings(airlineDiscountTagMappingDetails))
-                throw new Exception("AirlinesValidation.ValidateAirlineDiscountTagMappings Falied");
+            {
+                logger.Log(LogLevel.ERROR, "AirlinesValidation.ValidateAirlineDiscountTagMappings Falied");
+                throw new CustomException() { CustomErrorCode = CustomErrorCode.Invalid, CustomErrorMessage = "validation failed" };
+                //throw new Exception("AirlinesValidation.ValidateAirlineDiscountTagMappings Falied");
+            }
 
             List<AirlineDiscountTagMappings> airlineDiscountTagMappings = new List<AirlineDiscountTagMappings>();
             var mappings = airlineDiscountTagMappingDetails.Where(x => x.Airline != null
@@ -187,7 +211,11 @@ namespace Flight.Airlines.Controllers
                 }
 
                 if (airlineDiscountTagMappings == null || airlineDiscountTagMappings.Count() <= 0)
-                    throw new Exception("All input mappings are invalid");
+                {
+                    logger.Log(LogLevel.ERROR, "All input mappings are invalid");
+                    throw new CustomException() { CustomErrorCode = CustomErrorCode.Invalid, CustomErrorMessage = "invalid input" };
+                    //throw new Exception("All input mappings are invalid");
+                }
 
                 return airlinesRepo.AddAirlineDiscountTagMappings(airlineDiscountTagMappings);
             }
@@ -204,7 +232,11 @@ namespace Flight.Airlines.Controllers
         {
             bool result = false;
             if (!AirlinesValidation.ValidateRemapAirlineDiscountTagsDetails(remapAirlineDiscountTagsDetails))
-                throw new Exception("AirlinesValidation.ValidateRemapAirlineDiscountTagsDetails Falied");
+            {
+                logger.Log(LogLevel.ERROR, "AirlinesValidation.ValidateRemapAirlineDiscountTagsDetails Falied");
+                throw new CustomException() { CustomErrorCode = CustomErrorCode.Invalid, CustomErrorMessage = "validation failed" };
+                //throw new Exception("AirlinesValidation.ValidateRemapAirlineDiscountTagsDetails Falied");
+            }
 
             List<AirlineDiscountTagMappings> addedAirlineDiscountTagMappings = new List<AirlineDiscountTagMappings>();
             List<AirlineDiscountTagMappings> removedAirlineDiscountTagMappings = new List<AirlineDiscountTagMappings>();
@@ -258,7 +290,11 @@ namespace Flight.Airlines.Controllers
 
                 if ((addedAirlineDiscountTagMappings == null || addedAirlineDiscountTagMappings.Count() <= 0)
                     && (removedAirlineDiscountTagMappings == null || removedAirlineDiscountTagMappings.Count() <= 0))
-                    throw new Exception("All input mappings are invalid");
+                {
+                    logger.Log(LogLevel.ERROR, "All input mappings are invalid");
+                    throw new CustomException() { CustomErrorCode = CustomErrorCode.Invalid, CustomErrorMessage = "All input mappings are invalid" };
+                    //throw new Exception("All input mappings are invalid");
+                }
 
                 if (addedAirlineDiscountTagMappings != null && addedAirlineDiscountTagMappings.Count() > 0)
                     result = airlinesRepo.AddAirlineDiscountTagMappings(addedAirlineDiscountTagMappings);
@@ -317,7 +353,12 @@ namespace Flight.Airlines.Controllers
         public IEnumerable<AirlineDiscountTagMappingDetails> GetAirlineDiscountTagsMapping(long airlineId = 0, long discountId = 0)
         {
             if (airlineId <= 0 && discountId <= 0)
-                throw new Exception("Atleast one of the fields (airlineId or discountId) should be be greated than zero");
+            {
+                logger.Log(LogLevel.ERROR, "Atleast one of the fields (airlineId or discountId) should be be greated than zero");
+                throw new CustomException() { CustomErrorCode = CustomErrorCode.Invalid, 
+                    CustomErrorMessage = "Atleast one of the fields (airlineId or discountId) should be be greated than zero" };
+                //throw new Exception("Atleast one of the fields (airlineId or discountId) should be be greated than zero");
+            }
 
             var airlineDiscountTagsMappingDetails = new List<AirlineDiscountTagMappingDetails>();
             var airlineDiscountTagsMappings = airlinesRepo.GetAirlineDiscountTagsMappings(airlineId, discountId);

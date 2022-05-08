@@ -53,22 +53,49 @@ export class LoginComponent implements OnInit {
         EmailId : loginFormData.emailId,
         Password : loginFormData.password
       }
-      console.log(loginFormData);
-      console.log(headerInfo);
-      console.log(user);
+      // console.log(loginFormData);
+      // console.log(headerInfo);
+      // console.log(user);
       this.userService.LoginUser(user, headerInfo).subscribe(
         (response) =>{
           //console.log("response :=>" ,response);
           if((response ?? null) != null)
           {
             localStorage.setItem("userId", response.user.id);
-            localStorage.setItem("userDetails", JSON.stringify(response.user));
-            let authResponse:any = response.authResponse;
-            if(((authResponse?.token ?? null) != null) && ((authResponse?.refreshToken ?? null) != null))
-            { 
-              localStorage.setItem("authResponse", JSON.stringify(authResponse));
-              this.alert = {type : "success", message : "login successful"};
-              this.router.navigateByUrl("home/home");
+            let userDetails:Users = {
+              Id: response.user.id,
+              FirstName: response.user.firstName,
+              LastName: response.user.lastName,
+              EmailId: response.user.emailId,
+              Password: response.user.password,
+              AccountStatusId: response.user.accountStatusId,
+              AccountStatus: response.user.accountStatus.status,
+              IsSuperAdmin: response.user.isSuperAdmin,
+              CreatedOn: new Date(response.user.createdOn ?? ""),
+              ModifiedOn: new Date(response.user.modifiedOn ?? "")
+            };
+            localStorage.setItem("userDetails", JSON.stringify(userDetails));
+            //localStorage.setItem("userDetails", JSON.stringify(response.user));
+            if((response.authResponse ?? null) != null)
+            {
+              let authResponse:AuthResponse = {
+                IsSuccess: response.authResponse?.isSuccess,
+                Token: response.authResponse?.token,
+                RefreshToken: response.authResponse?.refreshToken,
+                Reason: response.authResponse?.Reason
+              }
+            
+              //let authResponse:any = response.authResponse;
+              if(((authResponse?.Token ?? null) != null) && ((authResponse?.RefreshToken ?? null) != null))
+              { 
+                localStorage.setItem("authResponse", JSON.stringify(authResponse));
+                this.alert = {type : "success", message : "login successful"};
+                this.router.navigateByUrl("home/home");
+              }
+              else
+              {
+                this.alert = {type : "danger", message : "internal server error"};
+              }
             }
             else
             {

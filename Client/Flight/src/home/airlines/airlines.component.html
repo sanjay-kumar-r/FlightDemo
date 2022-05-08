@@ -1,5 +1,8 @@
 <!-- <p>airlines works!</p> -->
 <div class="mainData">
+    <p *ngIf="alert ?? null != null" class="alertPopUp">
+        <ngb-alert [type]="alert?.type ?? ''" (closed)="closeAlert()">{{ alert?.message ?? '' }}</ngb-alert>
+    </p>
     <!-- <div class="filtersDiv">
         <span class="searchSpan">
             <input #searchText class="searchText" placeholder="enter text to search" [(value)]="searchText"/>
@@ -46,8 +49,8 @@
                         <td class="statusCell"><button [ngClass]="airline.IsActive ? 'active':'inactive'">{{airline.IsActive ? "Active" : "InActive"}}</button></td>
                         <td class="actionCell"><button title="click to schedule" class="actionButton">Schedule</button></td>
                         <td class="actionCell"><button title="click to assign discount" class="actionButton">Discount</button></td>
-                        <td class="actionCell"><button title="click to update airlines" class="actionButton">Update</button></td>
-                        <td class="actionCell"><button title="click to delete airlines" class="deleteButton">Delete</button></td>
+                        <td class="actionCell"><button title="click to update airlines" class="actionButton" (click)="editAirlinePopup(airline.Id ?? 0)">Update</button></td>
+                        <td class="actionCell"><button title="click to delete airlines" class="deleteButton" (click)="deleteAirlinePopup(airline.Id ?? 0)">Delete</button></td>
                     </tr>
                 </tbody>
             </table>

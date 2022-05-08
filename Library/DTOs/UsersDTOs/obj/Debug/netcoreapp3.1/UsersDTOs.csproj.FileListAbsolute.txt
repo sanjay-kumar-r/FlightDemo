@@ -10,3 +10,4 @@ D:\WorkSpace\Library\DTOs\UsersDTOs\obj\Debug\netcoreapp3.1\UsersDTOs.pdb
 D:\WorkSpace\Library\DTOs\UsersDTOs\obj\Debug\netcoreapp3.1\UsersDTOs.csproj.AssemblyReference.cache
 D:\WorkSpace\Library\DTOs\UsersDTOs\bin\Debug\netcoreapp3.1\AuthDTOs.dll
 D:\WorkSpace\Library\DTOs\UsersDTOs\bin\Debug\netcoreapp3.1\AuthDTOs.pdb
+D:\WorkSpace\Library\DTOs\UsersDTOs\obj\Debug\netcoreapp3.1\UsersDTOs.csproj.CopyComplete

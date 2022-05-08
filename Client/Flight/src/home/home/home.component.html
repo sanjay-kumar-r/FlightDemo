@@ -9,20 +9,32 @@
     <div class="mainPanel">
         <div class="navigationPanel">
             <ng-template [ngIf]="userDetails.IsSuperAdmin || true">
-                <div class="navItem">Administration</div>
+                <div class="navItem" 
+                [ngClass]="{'selectedNavTab' : (selectedTab.toLowerCase() === 'administration'.toLowerCase())}"
+                (click)="loadMainTab('Administration')">Administration</div>
             </ng-template>
-            <div class="navItem">Bookings</div>
+            <div class="navItem"
+            [ngClass]="{'selectedNavTab' : (selectedTab.toLowerCase() === 'Bookings'.toLowerCase())}" 
+            (click)="loadMainTab('Bookings')">Bookings</div>
         </div>
         <div class="dataPanel">
             <div class="tabsControl">
-                <span *ngIf = "selectedTab.toLocaleLowerCase() === 'administration'.toLocaleLowerCase();then administrationSubTabs else bookingsSubTabs"></span>
+                <span *ngIf = "selectedTab.toLowerCase() === 'administration'.toLowerCase();then administrationSubTabs else bookingsSubTabs"></span>
                 <ng-template #administrationSubTabs>
-                    <span class="subTabItems" tabName="Airlines" (click)="loadSubTab('Airlines')">Airlines</span>
-                    <span class="subTabItems" tabName="Discounts" (click)="loadSubTab('Discounts')">Discounts</span>
+                    <span class="subTabItems" tabName="Airlines"
+                    [ngClass]="{'selectedSubTab' : ((selectedTab.toLowerCase() === 'administration'.toLowerCase()) && (selectedSubTab.toLowerCase() === 'Airlines'.toLowerCase()))}"
+                    (click)="loadSubTab('Airlines')">Airlines</span>
+                    <span class="subTabItems" tabName="Discounts" 
+                    [ngClass]="{'selectedSubTab' : ((selectedTab.toLowerCase() === 'administration'.toLowerCase()) && (selectedSubTab.toLowerCase() === 'Discounts'.toLowerCase()))}"
+                    (click)="loadSubTab('Discounts')">Discounts</span>
                 </ng-template>
                 <ng-template #bookingsSubTabs>
-                    <span class="subTabItems" tabName="BookTicket" (click)="loadSubTab('BookTicket')">Plan For Trip</span>
-                    <span class="subTabItems" tabName="BookingHistory" (click)="loadSubTab('BookingHistory')">Booking History</span>
+                    <span class="subTabItems" tabName="BookTicket"
+                    [ngClass]="{'selectedSubTab' : ((selectedTab.toLowerCase() === 'Bookings'.toLowerCase()) && (selectedSubTab.toLowerCase() === 'BookTicket'.toLowerCase()))}"
+                    (click)="loadSubTab('BookTicket')">Plan For Trip</span>
+                    <span class="subTabItems" tabName="BookingHistory"
+                    [ngClass]="{'selectedSubTab' : ((selectedTab.toLowerCase() === 'Bookings'.toLowerCase()) && (selectedSubTab.toLowerCase() === 'BookingHistory'.toLowerCase()))}"
+                    (click)="loadSubTab('BookingHistory')">Booking History</span>
                 </ng-template>
             </div>
             <div class="dataGrid">

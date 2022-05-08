@@ -1,7 +1,6 @@
 D:\WorkSpace\Library\DTOs\AuthDTOs\bin\Debug\netcoreapp3.1\AuthDTOs.deps.json
 D:\WorkSpace\Library\DTOs\AuthDTOs\bin\Debug\netcoreapp3.1\AuthDTOs.dll
 D:\WorkSpace\Library\DTOs\AuthDTOs\bin\Debug\netcoreapp3.1\AuthDTOs.pdb
-D:\WorkSpace\Library\DTOs\AuthDTOs\obj\Debug\netcoreapp3.1\AuthDTOs.csproj.AssemblyReference.cache
 D:\WorkSpace\Library\DTOs\AuthDTOs\obj\Debug\netcoreapp3.1\AuthDTOs.GeneratedMSBuildEditorConfig.editorconfig
 D:\WorkSpace\Library\DTOs\AuthDTOs\obj\Debug\netcoreapp3.1\AuthDTOs.AssemblyInfoInputs.cache
 D:\WorkSpace\Library\DTOs\AuthDTOs\obj\Debug\netcoreapp3.1\AuthDTOs.AssemblyInfo.cs

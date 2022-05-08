@@ -65,10 +65,18 @@ namespace Flight.Airlines.Controllers
         public long Add([FromBody] AirlinesDTOs.DiscountTags discountTag)
         {
             if (!AirlinesValidation.ValidateAddDiscountTag(discountTag))
-                throw new Exception("AirlinesValidation.ValidateAddDiscountTag Falied");
+            {
+                logger.Log(LogLevel.ERROR, "AirlinesValidation.ValidateAddDiscountTag Falied");
+                throw new CustomException() { CustomErrorCode = CustomErrorCode.Invalid, CustomErrorMessage = "validation failed" };
+                //throw new Exception("AirlinesValidation.ValidateAddDiscountTag Falied");
+            }
 
             if (airlinesRepo.IsDiscountTagAlreadyExists(discountTag))
-                throw new Exception("DiscountTag name and/or code already exists");
+            {
+                logger.Log(LogLevel.ERROR, "DiscountTag name and/or code already exists");
+                throw new CustomException() { CustomErrorCode = CustomErrorCode.Duplicate, CustomErrorMessage = "DiscountTag name and/or code already exists" };
+                //throw new Exception("DiscountTag name and/or code already exists");
+            }
 
             long userId = Convert.ToInt64(HttpContext.Request.Headers["UserId"]);
             discountTag.Createdby = Convert.ToInt64(userId);
@@ -81,7 +89,11 @@ namespace Flight.Airlines.Controllers
         public Result Update([FromBody] AirlinesDTOs.DiscountTagDetails discountTag)
         {
             if (!AirlinesValidation.ValidateUpdateDiscountTag(discountTag))
-                throw new Exception("AirlinesValidation.ValidateUpdateDiscountTag Falied");
+            {
+                logger.Log(LogLevel.ERROR, "AirlinesValidation.ValidateUpdateDiscountTag Falied");
+                throw new CustomException() { CustomErrorCode = CustomErrorCode.Invalid, CustomErrorMessage = "validation failed" };
+                //throw new Exception("AirlinesValidation.ValidateUpdateDiscountTag Falied");
+            }
 
             AirlinesDTOs.DiscountTags discountTag_1 = new AirlinesDTOs.DiscountTags()
             {
@@ -96,7 +108,11 @@ namespace Flight.Airlines.Controllers
             if (discountTag.IsActive != null)
                 discountTag_1.IsActive = (bool)discountTag.IsActive;
             if (airlinesRepo.IsDiscountTagAlreadyExists(discountTag_1))
-                throw new Exception("DiscountTag name and/or code already exists");
+            {
+                logger.Log(LogLevel.ERROR, "DiscountTag name and/or code already exists");
+                throw new CustomException() { CustomErrorCode = CustomErrorCode.Duplicate, CustomErrorMessage = "DiscountTag name and/or code already exists" };
+                //throw new Exception("DiscountTag name and/or code already exists");
+            }
 
             long userId = Convert.ToInt64(HttpContext.Request.Headers["UserId"]);
             return airlinesRepo.UpdateDiscountTag(discountTag, userId);
@@ -107,7 +123,11 @@ namespace Flight.Airlines.Controllers
         public Result ActivateDeactivateDiscountTag([FromBody] dynamic obj)
         {
             if (!AirlinesValidation.ValidateActivateDeactivateDiscountTag(obj.GetProperty("Id"), obj.GetProperty("IsActive")))
-                throw new Exception("AirlinesValidation.ValidateActivateDeactivateDiscountTag Falied");
+            {
+                logger.Log(LogLevel.ERROR, "AirlinesValidation.ValidateActivateDeactivateDiscountTag Falied");
+                throw new CustomException() { CustomErrorCode = CustomErrorCode.Invalid, CustomErrorMessage = "validation failed" };
+                //throw new Exception("AirlinesValidation.ValidateActivateDeactivateDiscountTag Falied");
+            }
 
             AirlinesDTOs.DiscountTags discountTag = new AirlinesDTOs.DiscountTags()
             {

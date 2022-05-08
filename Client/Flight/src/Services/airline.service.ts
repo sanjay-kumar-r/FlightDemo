@@ -6,6 +6,7 @@ import { Airlines, DiscountTags, AirlineDiscountTagMappingDetails,
    AirlineSchedules,
    AirlineScheduleTracker} from 'src/Models/Airlines';
 import { ApiExecutorService } from './api-executor.service';
+import { RefreshTokenRequest } from 'src/Models/Users';
 
 @Injectable({
   providedIn: 'root'
@@ -51,14 +52,14 @@ export class AirlineService {
   constructor(apiExecutor:ApiExecutorService) {
     this.baseUrl = "http://localhost:9050";
 
-    this.getAirlinesUrl = this.baseUrl.trim() + '/' + "api/v1.0/Airlines/";
+    this.getAirlinesUrl = this.baseUrl.trim() + '/' + "api/v1.0/Airlines";
     this.getAirlinesByFilterconditionUrl = this.baseUrl.trim() + '/' + "api/v1.0/Airlines/GetAirlinesByFiltercondition";
     this.addAirlineUrl = this.baseUrl.trim() + '/' + "api/v1.0/Airlines/Add";
     this.updateAirlineUrl = this.baseUrl.trim() + '/' + "api/v1.0/Airlines/Update";
     this.activateDeactivateAirlineUrl = this.baseUrl.trim() + '/' + "api/v1.0/Airlines/ActivateDeactivateAirline";
     this.deleteAirlineUrl = this.baseUrl.trim() + '/' + "api/v1.0/Airlines/Delete";
 
-    this.getDiscountTagsUrl = this.baseUrl.trim() + '/' + "api/v1.0/DiscountTags/";
+    this.getDiscountTagsUrl = this.baseUrl.trim() + '/' + "api/v1.0/DiscountTags";
     this.getDiscountTagsByFilterconditionUrl = this.baseUrl.trim() + '/' + "api/v1.0/DiscountTags/GetDiscountTagsByFiltercondition";
     this.addDiscountTagUrl = this.baseUrl.trim() + '/' + "api/v1.0/DiscountTags/Add";
     this.updateDiscountTagUrl = this.baseUrl.trim() + '/' + "api/v1.0/DiscountTags/Update";
@@ -69,7 +70,7 @@ export class AirlineService {
     this.mapAirlinesDiscountTagsUrl = this.baseUrl.trim() + '/' + "api/v1.0/Airlines/MapAirlinesDiscountTags";
     this.remapAirlinesDiscountTagsUrl = this.baseUrl.trim() + '/' + "api/v1.0/Airlines/RemapAirlinesDiscountTags";
 
-    this.getSchedulesUrl = this.baseUrl.trim() + '/' + "api/v1.0/AirlineSchedules/";
+    this.getSchedulesUrl = this.baseUrl.trim() + '/' + "api/v1.0/AirlineSchedules";
     this.getAirlineSchedulesByAirlineIdUrl = this.baseUrl.trim() + '/' + "api/v1.0/AirlineSchedules/GetAirlineSchedulesByAirlineId";
     this.getAirlineSchedulesByFilterConditionUrl = this.baseUrl.trim() + '/' + "api/v1.0/AirlineSchedules/GetAirlineSchedulesByFilterCondition";
     this.addScheduleUrl = this.baseUrl.trim() + '/' + "api/v1.0/AirlineSchedules/Add";
@@ -80,17 +81,20 @@ export class AirlineService {
     
     this.getAvailableAirlinesUrl = this.baseUrl.trim() + '/' + "api/v1.0/AirlineScheduleTracker/GetAvailableAirlines";
 
-    this.getTokenUrl = "api/AuthTokens/GetAuthToken";
-    this.refreshTokenUrl = "api/AuthTokens/RefreshToken";
+    this.getTokenUrl = this.baseUrl.trim() + '/' + "api/AuthTokens/GetAuthToken";
+    this.refreshTokenUrl = this.baseUrl.trim() + '/' + "api/AuthTokens/RefreshToken";
 
     this.apiExecutor = apiExecutor;
   }
   // Airlines
-  getAirlines(airlines:Airlines|null, headerInfo:HeaderInfo) : Observable<any>
+  getAirlines(airlines:Airlines|null, headerInfo:HeaderInfo, id:number = 0) : Observable<any>
   {
     if((airlines ?? null) == null)
-    { 
-      return this.apiExecutor.CallAPI(APIRequestType.Get, this.getAirlinesUrl, headerInfo ,
+    {
+      let url = this.getAirlinesUrl;
+      if(id !== 0)
+        url = url + "/" + id;
+      return this.apiExecutor.CallAPI(APIRequestType.Get, url, headerInfo ,
         null, true);
     }
     else
@@ -124,11 +128,14 @@ export class AirlineService {
       id, true);
   }
   // DiscountTags
-  getDiscountTags(discountTags:DiscountTags|null, headerInfo:HeaderInfo) : Observable<any>
+  getDiscountTags(discountTags:DiscountTags|null, headerInfo:HeaderInfo, id:number = 0) : Observable<any>
   {
     if((discountTags ?? null) == null)
-    { 
-      return this.apiExecutor.CallAPI(APIRequestType.Get, this.getDiscountTagsUrl, headerInfo ,
+    {
+      let url = this.getDiscountTagsUrl;
+      if(id !== 0)
+        url = url + "/" + id;
+      return this.apiExecutor.CallAPI(APIRequestType.Get, url, headerInfo ,
         null, true);
     }
     else
@@ -172,7 +179,7 @@ export class AirlineService {
     }
     else
     {
-      let requestUrl = this.getAirlinesByFilterconditionUrl.replace(/\\/g, '') + "/" +
+      let requestUrl = this.getAirlinesByFilterconditionUrl + "/" +
       (((airlinesId ?? null) == null || airlinesId === 0 )  ? "0" : airlinesId) + "/" +
       (((discountTagId ?? null) == null || discountTagId === 0 ) ? "0" : discountTagId);
       return this.apiExecutor.CallAPI(APIRequestType.Get, requestUrl, headerInfo ,
@@ -202,14 +209,14 @@ export class AirlineService {
     else
     {
       return this.apiExecutor.CallAPI(APIRequestType.Get, 
-        this.getSchedulesUrl.replace(/\\/g, '') + "/" + id , headerInfo , null, true);
+        this.getSchedulesUrl + "/" + id , headerInfo , null, true);
     }
   }
 
   getAirlineSchedulesByAirlineId(airlineId:number, headerInfo:HeaderInfo) : Observable<any>
   {
     return this.apiExecutor.CallAPI(APIRequestType.Get, 
-      this.getAirlineSchedulesByAirlineIdUrl.replace(/\\/g, '') + "/" + airlineId, headerInfo ,
+      this.getAirlineSchedulesByAirlineIdUrl + "/" + airlineId, headerInfo ,
       null, true);
   }
 

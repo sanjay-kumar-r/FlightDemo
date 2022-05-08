@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {HeaderInfo, APIRequestType} from '../Models/HeaderInfo';
 import {AuthRequest, AuthResponse, RefreshTokenRequest} from '../Models/Users';
-import { Observable, throwError } from 'rxjs';
+import { Observable, throwError, map } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -123,7 +123,7 @@ export class ApiExecutorService {
     return response;
   }
 
-  RefreshTokenAndCallAPI(requestType:APIRequestType, requestUrl:string, headerInfo:HeaderInfo, 
+  RefreshTokenAndCallAPI_Test(requestType:APIRequestType, requestUrl:string, headerInfo:HeaderInfo, 
     requestBody:any|null = null, refreshTokenUrl:string, isAuthorizatonRequired:boolean)
     : Observable<any>
   {
@@ -151,6 +151,37 @@ export class ApiExecutorService {
           throw e;
       });
     return response;
+  }
+
+  RefreshTokenAndCallAPI(requestType:APIRequestType, requestUrl:string, headerInfo:HeaderInfo, 
+    requestBody:any|null = null, refreshTokenUrl:string, isAuthorizatonRequired:boolean)
+    : Observable<any>
+  {
+    let response:any|null = null;
+    let refreshTokenBody:RefreshTokenRequest = 
+    {
+        RefreshToken: headerInfo.RefreshToken ?? "",
+        ExpiredToken: headerInfo.Authorization?.split(" ").pop() ?? ""
+    };
+
+    return this.CallAPI(requestType, refreshTokenUrl, headerInfo, refreshTokenBody, isAuthorizatonRequired)
+      .pipe(
+        map((authResponse) => {
+          let refreshResult:AuthResponse = {
+            IsSuccess: authResponse.isSuccess,
+            Token : authResponse.token,
+            RefreshToken : authResponse.refreshToken,
+            Reason: authResponse.reason
+          };
+          // if(refreshResult != undefined && refreshResult != null && refreshResult.IsSuccess)
+          // {
+            //localStorage.setItem('Token', refreshResult.Token ?? "" );
+            localStorage.setItem("authResponse", JSON.stringify(refreshResult));
+            headerInfo.Authorization = `Bearer ${refreshResult.Token}`;
+            return this.CallAPI(requestType, requestUrl, headerInfo, requestBody, isAuthorizatonRequired);
+          //}
+        })
+      );
   }
 
 }

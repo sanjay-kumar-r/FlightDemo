@@ -122,6 +122,8 @@
 }
 
 .alertPopUp{
+    top: 5px;
+    left: 0px;
     position: absolute;
     width: 100%;
     display: flex;

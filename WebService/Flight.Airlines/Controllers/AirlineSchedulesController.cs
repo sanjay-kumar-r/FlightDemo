@@ -73,14 +73,26 @@ namespace Flight.Airlines.Controllers
         public long Add([FromBody] AirlineSchedules schedule)
         {
             if (!AirlinesValidation.ValidateAddAirlineSchedule(schedule))
-                throw new Exception("AirlinesValidation.ValidateAddAirlineSchedule Falied");
+            {
+                logger.Log(LogLevel.ERROR, "AirlinesValidation.ValidateAddAirlineSchedule Falied");
+                throw new CustomException() { CustomErrorCode = CustomErrorCode.Invalid, CustomErrorMessage = "validation failed" };
+                //throw new Exception("AirlinesValidation.ValidateAddAirlineSchedule Falied");
+            }
 
             var apirline = airlinesRepo.GetAirlines(schedule.AirlineId);
-            if(apirline == null || apirline.Count() <= 0 || apirline.FirstOrDefault() == null)
-                throw new Exception("Invalid AirlineId");
+            if (apirline == null || apirline.Count() <= 0 || apirline.FirstOrDefault() == null)
+            {
+                logger.Log(LogLevel.ERROR, "Invalid AirlineId");
+                throw new CustomException() { CustomErrorCode = CustomErrorCode.Invalid, CustomErrorMessage = "Invalid AirlineId" };
+                //throw new Exception("Invalid AirlineId");
+            }
 
             if (airlinesRepo.IsAirlineScheduleAlreadyExists(schedule))
-                throw new Exception("AirlineSchedule details already exists");
+            {
+                logger.Log(LogLevel.ERROR, "AirlineSchedule details already exists");
+                throw new CustomException() { CustomErrorCode = CustomErrorCode.Duplicate, CustomErrorMessage = "AirlineSchedule details already exists" };
+                //throw new Exception("AirlineSchedule details already exists");
+            }
 
             long userId = Convert.ToInt64(HttpContext?.Request?.Headers["UserId"]);
             schedule.Createdby = userId;
@@ -93,7 +105,11 @@ namespace Flight.Airlines.Controllers
         public List<long> ReSchedulesAirlinesByRange([FromBody] List<AirlineSchedules> schedules)
         {
             if (!AirlinesValidation.ValidateAddAirlineScheduleByRangs(schedules))
-                throw new Exception("AirlinesValidation.ValidateAddAirlineSchedule Falied");
+            {
+                logger.Log(LogLevel.ERROR, "AirlinesValidation.ValidateAddAirlineSchedule Falied");
+                throw new CustomException() { CustomErrorCode = CustomErrorCode.Invalid, CustomErrorMessage = "validation failed" };
+                //throw new Exception("AirlinesValidation.ValidateAddAirlineSchedule Falied");
+            }
 
             long userId = Convert.ToInt64(HttpContext?.Request?.Headers["UserId"]);
             var airlineIds = schedules.Select(x => x.AirlineId).ToList();
@@ -111,7 +127,7 @@ namespace Flight.Airlines.Controllers
                 if (scheduledAirlineIds != null && scheduledAirlineIds.Count() > 0)
                 {
                     var airlineSchedules = airlinesRepo.GetAirlineSchedulesByIds(scheduledAirlineIds, true);
-                    if(airlineSchedules != null && airlineSchedules.Count() > 0)
+                    if (airlineSchedules != null && airlineSchedules.Count() > 0)
                     {
                         scheduleIds = airlineSchedules.Select(x => x.Id).ToList();
                         result = airlinesRepo.DeleteAirlineScheduleByScheduleIds(scheduleIds, userId);
@@ -130,10 +146,18 @@ namespace Flight.Airlines.Controllers
                     return airlinesRepo.AddAirlineSchedulesByRange(validschedules.ToList());
                 }
                 else
-                    throw new Exception("Error while deleting existing mappings");
+                {
+                    logger.Log(LogLevel.ERROR, "Error while deleting existing mappings");
+                    throw new CustomException() { CustomErrorCode = CustomErrorCode.Invalid, CustomErrorMessage = "Error while deleting existing mappings" };
+                    //throw new Exception("Error while deleting existing mappings");
+                }
             }
             else
-                throw new Exception("All AirlineIds are Invalid");
+            {
+                logger.Log(LogLevel.ERROR, "All AirlineIds are Invalid");
+                throw new CustomException() { CustomErrorCode = CustomErrorCode.Invalid, CustomErrorMessage = "All AirlineIds are Invalid" };
+                //throw new Exception("All AirlineIds are Invalid");
+            }
         }
 
         [HttpPost]
@@ -141,7 +165,11 @@ namespace Flight.Airlines.Controllers
         public bool DeleteAirlineSchedule([FromBody] long id)
         {
             if (id <= 0)
-                throw new Exception("Validate DeleteAirlineSchedule Falied");
+            {
+                logger.Log(LogLevel.ERROR, "Validate DeleteAirlineSchedule Falied");
+                throw new CustomException() { CustomErrorCode = CustomErrorCode.Invalid, CustomErrorMessage = "validation failed" };
+                //throw new Exception("Validate DeleteAirlineSchedule Falied");
+            }
 
 
             long userId = Convert.ToInt64(HttpContext?.Request?.Headers["UserId"]);
@@ -153,7 +181,11 @@ namespace Flight.Airlines.Controllers
         public bool DeleteAirlineScheduleByIds([FromBody] List<long> ids)
         {
             if (ids == null || ids.Count() <= 0)
-                throw new Exception("Validate DeleteAirlineScheduleByIds Falied");
+            {
+                logger.Log(LogLevel.ERROR, "Validate DeleteAirlineScheduleByIds Falied");
+                throw new CustomException() { CustomErrorCode = CustomErrorCode.Invalid, CustomErrorMessage = "validation failed" };
+                //throw new Exception("Validate DeleteAirlineScheduleByIds Falied");
+            }
 
             long userId = Convert.ToInt64(HttpContext?.Request?.Headers["UserId"]);
             return airlinesRepo.DeleteAirlineScheduleByScheduleIds(ids, userId);
@@ -164,7 +196,11 @@ namespace Flight.Airlines.Controllers
         public bool DeleteAirlineScheduleByAirlineIds([FromBody] List<long> ids)
         {
             if (ids == null || ids.Count() <= 0)
-                throw new Exception("Validate DeleteAirlineScheduleByIds Falied");
+            {
+                logger.Log(LogLevel.ERROR, "Validate DeleteAirlineScheduleByIds Falied");
+                throw new CustomException() { CustomErrorCode = CustomErrorCode.Invalid, CustomErrorMessage = "validation failed" };
+                //throw new Exception("Validate DeleteAirlineScheduleByIds Falied");
+            }
 
             bool result = false;
             long userId = Convert.ToInt64(HttpContext?.Request?.Headers["UserId"]);
