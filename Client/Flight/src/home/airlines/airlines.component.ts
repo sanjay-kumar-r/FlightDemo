@@ -175,7 +175,9 @@ export class AirlinesComponent implements OnInit {
                 Reason: authResponse.reason
               };
               localStorage.setItem("authResponse", JSON.stringify(refreshResult));
-              this.headerInfo.Authorization = `Bearer ${refreshResult.Token}`;
+              this.getAuthResponse(JSON.parse(localStorage.getItem("authResponse") ?? "{}"));
+              this.getHeader();
+              //this.headerInfo.Authorization = `Bearer ${refreshResult.Token}`;
               //retry
               this.airlineService.getAirlines(null, this.headerInfo).subscribe(
                 (result) =>{
@@ -324,7 +326,9 @@ export class AirlinesComponent implements OnInit {
                     Reason: authResponse.reason
                   };
                   localStorage.setItem("authResponse", JSON.stringify(refreshResult));
-                  this.headerInfo.Authorization = `Bearer ${refreshResult.Token}`;
+                  this.getAuthResponse(JSON.parse(localStorage.getItem("authResponse") ?? "{}"));
+                  this.getHeader();
+                  //this.headerInfo.Authorization = `Bearer ${refreshResult.Token}`;
                   //retry
                   this.airlineService.deleteAirline(airlineId, this.headerInfo).subscribe(
                   (result) =>{

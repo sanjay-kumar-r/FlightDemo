@@ -1,0 +1,58 @@
+<!-- <p>airline-schedule works!</p> -->
+<div class="mainData">
+    <p *ngIf="alert ?? null != null" class="alertPopUp">
+        <ngb-alert [type]="alert?.type ?? ''" (closed)="closeAlert()">{{ alert?.message ?? '' }}</ngb-alert>
+    </p>
+    <!-- <div class="filtersDiv">
+        <span class="searchSpan">
+            <input #searchText class="searchText" placeholder="enter text to search" [(value)]="searchText"/>
+            <button (click)="SearchFilter">Search</button>
+        </span>
+        <span></span>
+    </div> -->
+    <div class="actionDiv"><button class="addActionButton" (click)="addAirlineSchedulePopup()">Add Airline Schedule</button></div>
+    <div class="dataDiv">
+        <div class="tableTitleDiv">
+            <table class="dataTable">
+                <thead>
+                    <tr>
+                        <th class="nameCell">Airline Name</th>
+                        <th class="locCell">From</th>
+                        <th class="locCell">To</th>
+                        <th class="locCell">IsRegular</th>
+                        <th class="dateCell">Departure Day</th>
+                        <th class="dateCell"> Departure Date</th>
+                        <th class="dateCell">Departure time</th>
+                        <th class="dateCell">Arrival Day</th>
+                        <th class="dateCell"> Arrival Date</th>
+                        <th class="dateCell">Arrival time</th>
+                        <th class="actionCell"> </th>
+                        <th class="actionCell"> </th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+        <div class="tableBodyDiv">
+            <!-- table table-striped -->
+            <table class="dataTable">
+                <tbody>
+                    <tr *ngFor="let airlineSchedule of airlineSchedules">
+                        <td title="airlineSchedule.Airline | json" class="nameCell">{{airlineSchedule.Airline?.Name}}</td>
+                        <td title={{airlineSchedule.From}} class="locCell">{{airlineSchedule.From}}</td>
+                        <td title={{airlineSchedule.To}} class="locCell">{{airlineSchedule.To}}</td>
+                        <td title={{airlineSchedule.IsRegular}} class="isRegularCell">{{airlineSchedule.IsRegular}}</td>
+                        <td title={{airlineSchedule.DepartureDay}} class="dateCell">{{airlineSchedule.IsRegular ? airlineSchedule.DepartureDay : "-"}}</td>
+                        <td title={{airlineSchedule.DepartureDate}} class="dateCell">{{airlineSchedule.IsRegular ? "-" : airlineSchedule.DepartureDate | date: 'MMM d, y'}}</td>
+                        <td title={{airlineSchedule.DepartureTime}} class="dateCell">{{airlineSchedule.DepartureTime | date: 'h:mm a'}}</td>
+                        <td title={{airlineSchedule.ArrivalDay}} class="dateCell">{{airlineSchedule.IsRegular ? airlineSchedule.ArrivalDay : "-"}}</td>
+                        <td title={{airlineSchedule.ArrivalDate}} class="dateCell">{{airlineSchedule.IsRegular ? "-" : airlineSchedule.ArrivalDate | date: 'MMM d, y'}}</td>
+                        <td title={{airlineSchedule.ArrivalTime}} class="dateCell">{{airlineSchedule.ArrivalTime | date: 'h:mm a'}}</td>
+                        <td class="actionCell"><button title="click to update airline schedule" class="actionButton" (click)="editAirlineSchedulePopup(airlineSchedule.Id ?? 0)">Update</button></td>
+                        <td class="actionCell"><button title="click to delete airline schedule" class="deleteButton" (click)="deleteAirlineSchedulePopup(airlineSchedule.Id ?? 0)">Delete</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+

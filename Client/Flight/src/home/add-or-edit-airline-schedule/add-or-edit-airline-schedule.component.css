@@ -1,0 +1,150 @@
+
+.addEditAirlineSchedule{
+    width: 100%;
+    height: 100%;
+    font-family: auto;
+}
+
+.airlineScheduleForm{
+    width: 100%;
+    height: 100%;
+}
+
+.airlineScheduleForm table{
+    width: 100%;
+    height: 100%;
+}
+
+.airlineScheduleForm thead{
+    width: 100%;
+    height: 50px;
+    text-align: center;
+    background: #2b6289;
+    color: white;
+}
+
+.airlineScheduleForm thead .AddEditAirlineScheduleTitle{
+    margin: 0px;
+}
+
+.airlineScheduleForm tbody tr{
+    min-height: 95px;
+    height: 95px;
+    max-height: 95px;
+}
+
+.airlineScheduleForm tbody tr.detailsRow{
+    min-height: 140px;
+    height: 140px;
+    max-height: 140px;
+}
+.airlineScheduleForm tbody tr.activationRow{
+    min-height: 65px;
+    height: 65px;
+    max-height: 65px;
+}
+
+.airlineScheduleForm tbody tr.submitRow{
+    min-height: 30px;
+    height: 30px;
+    max-height: 30px;
+}
+
+.airlineScheduleForm tbody tr.activationRow td{
+    vertical-align: middle;
+}
+
+.airlineScheduleForm tbody tr.submitRow td{
+    vertical-align: bottom;
+
+}
+
+.airlineScheduleForm tbody tr td{
+    vertical-align: top;
+}
+
+.airlineScheduleForm .fieldLabel{
+    text-align: left;
+    width: fit-content;
+    height: fit-content;
+    margin: 0px;
+    padding: 0px;
+    float: left;
+    display: block;
+}
+
+.airlineScheduleForm input.field
+{
+    width: 90%;
+    height: 35px;
+    border-radius: 5px;
+    border: 0px;
+    background-color: #cdd6dd;
+}
+
+.airlineScheduleForm textarea
+{
+    width: 97%;
+    max-width: 97%;
+    border-radius: 5px;
+    border: 0px;
+    background-color: #cdd6dd;
+}
+
+.invalidText{
+    font-size: small;
+    color: red;
+    font-style: italic;
+    margin: 5px;
+    width: 90%;
+    float: left;
+    display: block;
+}
+
+.airlineScheduleForm input.invalidInput
+{
+    border: 1px solid red;
+}
+
+.airlineScheduleForm button.submit
+{
+    border: 0px;
+    border-radius: 5px;
+    height: 35px;
+    width: 100px;
+    background: #0a38e1;
+    font-size: larger;
+    color: white;
+    margin-right: 30px;
+    cursor: pointer;
+}
+
+.airlineScheduleForm button.submit:disabled
+{
+    opacity: 60%;
+    cursor: auto;
+    pointer-events: none;
+}
+
+.airlineScheduleForm button.submit:hover
+{
+    background: #092daf;
+}
+
+.submitRowDiv{
+    float: right;
+}
+
+.airlineScheduleForm .cancel
+{
+    /* margin-right: 25%;
+    width: 100px; */
+    text-decoration: underline;
+    cursor: pointer;
+    font-size: large;
+}
+
+.airlineScheduleForm .cancel:hover
+{
+    color: #0a38e1;
+}

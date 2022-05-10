@@ -547,10 +547,10 @@ namespace Flight.Airlines.Models.Utils
                   x.AirlineId == schedule.AirlineId 
                  && !x.IsDeleted
                  && x.From.Equals(schedule.From) && x.To.Equals(schedule.To)
-                 && ((x.DepartureDay != null && x.DepartureDay.Equals(schedule.DepartureDay))
-                     || (x.DepartureDate != null && x.DepartureDate.Value.Date.Equals(schedule.DepartureDate.Value.Date)))
-                 && ((x.ArrivalDay != null && x.ArrivalDay.Equals(schedule.ArrivalDay))
-                     || (x.ArrivalDate != null && x.ArrivalDate.Value.Date.Equals(schedule.ArrivalDate.Value.Date)))
+                 && ((schedule.IsRegular && (x.DepartureDay != null && x.DepartureDay.Equals(schedule.DepartureDay)))
+                     || (!schedule.IsRegular && x.DepartureDate != null && x.DepartureDate.Value.Date.Equals(schedule.DepartureDate.Value.Date)))
+                 && ((schedule.IsRegular && (x.ArrivalDay != null && x.ArrivalDay.Equals(schedule.ArrivalDay)))
+                     || (!schedule.IsRegular && x.ArrivalDate != null && x.ArrivalDate.Value.Date.Equals(schedule.ArrivalDate.Value.Date)))
                  && ((x.DepartureTime != null && x.DepartureTime.Hour == schedule.DepartureTime.Hour)
                      || ((x.ArrivalTime != null && x.ArrivalTime.Hour == schedule.ArrivalTime.Hour))));
         }

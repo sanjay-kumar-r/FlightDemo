@@ -13,6 +13,11 @@ import { AddOrEditAirlineComponent } from './add-or-edit-airline/add-or-edit-air
 import { DeleteConfirmationComponent } from './delete-confirmation/delete-confirmation.component';
 import { AddOrEditDiscountTagComponent } from './add-or-edit-discount-tag/add-or-edit-discount-tag.component';
 import { AirlineDiscountTagMappingComponent } from './airline-discount-tag-mapping/airline-discount-tag-mapping.component';
+import { AirlineScheduleComponent } from './airline-schedule/airline-schedule.component';
+import { AddOrEditAirlineScheduleComponent } from './add-or-edit-airline-schedule/add-or-edit-airline-schedule.component';
+import { BookingsComponent } from './bookings/bookings.component';
+import { BookTicketComponent } from './book-ticket/book-ticket.component';
+import { BookingActionComponent } from './booking-action/booking-action.component';
 
 
 @NgModule({
@@ -24,7 +29,12 @@ import { AirlineDiscountTagMappingComponent } from './airline-discount-tag-mappi
     AddOrEditAirlineComponent,
     DeleteConfirmationComponent,
     AddOrEditDiscountTagComponent,
-    AirlineDiscountTagMappingComponent
+    AirlineDiscountTagMappingComponent,
+    AirlineScheduleComponent,
+    AddOrEditAirlineScheduleComponent,
+    BookingsComponent,
+    BookTicketComponent,
+    BookingActionComponent
   ],
   imports: [
     CommonModule,

@@ -77,7 +77,11 @@ namespace Flight.Bookings.Controllers
         public async Task<BookingResponse> BookTicket([FromBody] BookingsDTOs.Bookings booking)
         {
             if (!BookingsValidation.ValidateBookTicket(booking))
-                throw new Exception("BookingsValidation.ValidateBookTicket Falied");
+            {
+                logger.Log(LogLevel.ERROR, "BookingsValidation.ValidateBookTicket Falied");
+                throw new CustomException() { CustomErrorCode = CustomErrorCode.Invalid, CustomErrorMessage = "validation failed" };
+                //throw new Exception("BookingsValidation.ValidateBookTicket Falied");
+            }
 
             HeaderInfo headerInfo = new HeaderInfo()
             {
@@ -184,7 +188,7 @@ namespace Flight.Bookings.Controllers
                 logger.Log(LogLevel.INFO, "Reverting Schedule tracker changes(updating back the available seats)");
                 BookingHelper bookingHelper = new BookingHelper(config, bookingsRepo, logger, headerInfo);
                 bool result = await bookingHelper.BookingRevert(booking);
-                if(result)
+                if (result)
                 {
                     BookingResponse bookingResponse = new BookingResponse()
                     {
@@ -194,7 +198,11 @@ namespace Flight.Bookings.Controllers
                     return bookingResponse;
                 }
                 else
-                    throw new Exception("Error while reverting booking");
+                {
+                    logger.Log(LogLevel.ERROR, "Error while reverting booking");
+                    throw new CustomException() { CustomErrorCode = CustomErrorCode.Unknown, CustomErrorMessage = "Error while reverting booking" };
+                    //throw new Exception("Error while reverting booking");
+                }
             }
         }
 

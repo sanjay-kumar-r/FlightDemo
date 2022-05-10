@@ -1,0 +1,225 @@
+
+.mainData{
+    width: 100%;
+    height: 100%;
+    font-family: auto;
+}
+
+.alertPopUp{
+    top: 5px;
+    left: 0px;
+    position: absolute;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+
+.actionDiv{
+    width: 100%;
+    height: 60px;
+}
+
+.addActionButton{
+    float: right;
+    margin-right: 30px;
+    margin-top: 12px;
+    border: 0px;
+    border-radius: 5px;
+    height: 35px;
+    width: 130px;
+    background: #0a38e1;
+    font-size: larger;
+    color: white;
+    cursor: pointer;
+}
+
+.addActionButton:hover{
+    background: #092daf;
+    cursor: pointer;
+}
+
+.dataDiv{
+    width: 100%;
+    height: calc(100% - 60px);
+    text-align: center;
+}
+
+.tableTitleDiv{
+    width: calc(100% - 15px);
+    height: 50px;
+}
+
+.tableBodyDiv{
+    width: 100%;
+    height:  calc(100% - 40px);
+    overflow-y: scroll;
+}
+
+.tableTitleDiv th, .tableBodyDiv td{
+    padding: 5px;
+}
+
+.tableBodyDiv td{
+    /* font-size: smaller; */
+}
+
+.dataTable{
+    width: 100%;
+    height: 100%;
+}
+
+
+.dataTable thead
+{
+    width: 100%;
+    height: 100%;
+    background: #cdcdcd;
+}
+
+.dataTable tbody{
+    width: 100%;
+    height:  100%;
+}
+
+/* .dataTable td, .dataTable th {
+ margin: 0px;
+ padding:0px;
+} */
+ 
+.nameCell{
+    max-width: 100px;
+    width: 100px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.codeCell{
+    max-width: 100px;
+    width: 100px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.detailsCell{
+    max-width: 150px;
+    width: 150px;
+}
+
+.detailsCell span{
+    width: 150px;
+    max-width: 150px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    display: block;
+}
+
+.countCell{
+    max-width: 50px;
+    width: 50px;
+}
+
+.costCell{
+    max-width: 100px;
+    width: 100px;
+}
+
+.statusCell{
+    max-width: 70px;
+    width: 70px;
+}
+
+.actionCell{
+    max-width: 80px;
+    width: 80px;
+} 
+
+.actionButton{
+    /* margin-right: 30px;
+    margin-top: 12px; */
+    border: 0px;
+    border-radius: 5px;
+    height: 35px;
+    width: 60px;
+    background: #0a38e1;
+    font-size: smaller;
+    color: white;
+    /* margin-left: 30%; */
+    cursor: pointer;
+}
+
+.actionButton:hover{
+    background: #092daf;
+    cursor: pointer;
+}
+
+.deleteButton{
+    border: 0px;
+    border-radius: 5px;
+    height: 35px;
+    width: 60px;
+    background: rgb(203 24 24);
+    font-size: smaller;
+    color: white;
+    /* margin-left: 30%; */
+    cursor: pointer;
+}
+
+.deleteButton:hover{
+    background: #a50000;
+    cursor: pointer;
+}
+
+.tableTitleDiv .dataTable tr{
+    max-height: 50px;
+    display: inline-flex;
+    width: 100%;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.tableBodyDiv .dataTable tr{
+    height:70px;
+    max-height: 70px;
+    display: inline-flex;
+    width: 100%;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.tableBodyDiv .dataTable tr:nth-child(even){
+    background-color: rgb(225 225 225);
+    
+}
+
+.tableBodyDiv .dataTable tr:nth-child(odd){
+    background-color: white;
+}
+
+.active{
+    border: 1px solid rgb(8, 163, 8);
+    border-radius: 5px;
+    height: 35px;
+    width: 60px;
+    /* background: rgb(203 24 24); */
+    font-size: smaller;
+    color: rgb(8, 163, 8);
+    /* margin-left: 30%; */
+    cursor: pointer;
+}
+
+.inactive{
+    border: 1px solid rgb(199, 14, 14);
+    border-radius: 5px;
+    height: 35px;
+    width: 60px;
+    /* background: rgb(203 24 24); */
+    font-size: smaller;
+    color: rgb(199, 14, 14);
+    /* margin-left: 30%; */
+    cursor: pointer;
+}

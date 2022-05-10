@@ -15,7 +15,7 @@ export class HomeComponent implements OnInit {
   @ViewChild(ComponentLoaderDirective, { static : true }) componentLoaderDirective!: ComponentLoaderDirective;
 
 
-  readonly userDetails:Users;
+  userDetails:Users;
   readonly dynamicComponent:DynamicComponentService;
   //readonly viewContainerRef:ViewContainerRef;
   selectedTab:string;
@@ -46,9 +46,16 @@ export class HomeComponent implements OnInit {
     // }
     this.userDetails =  JSON.parse(localStorage.getItem("userDetails") ?? '{}');
     //console.log(this.userDetails);
-
-    this.selectedTab = "administration";
-    this.selectedSubTab = "Airlines";
+    if(this.userDetails.IsSuperAdmin ?? false)
+    {  
+      this.selectedTab = "administration";
+      this.selectedSubTab = "Airlines";
+    }
+    else
+    {
+      this.selectedTab = "bookings";
+      this.selectedSubTab = "BookingHistory";
+    }
 
     this.dynamicComponent = dynamicComponent;
     //viewContainerRef.clear();
@@ -71,27 +78,45 @@ export class HomeComponent implements OnInit {
         value: () => import('../discounts/discounts.component').then(
           m => m.DiscountsComponent
         )
+      },
+      {
+        name:"schedules",
+        value: () => import('../airline-schedule/airline-schedule.component').then(
+          m => m.AirlineScheduleComponent
+        )
       }
     ]
     this.bookingSubTabComponentImports = [
       {
-        name:"BookTicket",
-        value: () => import('../airlines/airlines.component').then(
-          m => m.AirlinesComponent
+        name:"BookingHistory",
+        value: () => import('../bookings/bookings.component').then(
+          m => m.BookingsComponent
         )
       },
       {
-        name:"BookingHistory",
-        value: () => import('../airlines/airlines.component').then(
-          m => m.AirlinesComponent
+        name:"BookTicket",
+        value: () => import('../book-ticket/book-ticket.component').then(
+          m => m.BookTicketComponent
         )
       }
-  ]
+    ];
     this.router = router;
     // this.loadSubTab(this.selectedSubTab);
   }
 
   ngOnInit(): void {
+    
+    this.userDetails =  JSON.parse(localStorage.getItem("userDetails") ?? '{}');
+    if(this.userDetails.IsSuperAdmin ?? false)
+    {  
+      this.selectedTab = "administration";
+      this.selectedSubTab = "Airlines";
+    }
+    else
+    {
+      this.selectedTab = "bookings";
+      this.selectedSubTab = "BookingHistory";
+    }
     //check for session variable 
     //if not then logout
     if(((localStorage.getItem("userId") ?? null) == null)
@@ -142,14 +167,30 @@ export class HomeComponent implements OnInit {
         this.loadComponent(discountComponent, data);
         break;
       }
-      case "BookTicket".toLowerCase() :{
+      case "Schedules".toLowerCase() :{
         //update selected subtabs
-        //call BookTicket component
+        //call Schedules component
+        this.selectedSubTab = subTab.toLowerCase();
+        let discountComponent = this.adminSubTabComponentImports.find(x => 
+          x.name.toLowerCase() == subTab.toLowerCase())?.value;
+        let data = {value:this.selectedSubTab};
+        this.loadComponent(discountComponent, data);
+        break;
+      }
+      case "BookTicket".toLowerCase() :{
+        this.selectedSubTab = subTab.toLowerCase();
+        let bookingsComponent = this.bookingSubTabComponentImports.find(x => 
+          x.name.toLowerCase() == subTab.toLowerCase())?.value;
+        let data = {value:this.selectedSubTab};
+        this.loadComponent(bookingsComponent, data);
         break;
       }
       case "BookingHistory".toLowerCase() :{
-        //update selected subtabs
-        //call BookingHistory component
+        this.selectedSubTab = subTab.toLowerCase();
+        let bookingsComponent = this.bookingSubTabComponentImports.find(x => 
+          x.name.toLowerCase() == subTab.toLowerCase())?.value;
+        let data = {value:this.selectedSubTab};
+        this.loadComponent(bookingsComponent, data);
         break;
       }
     }
@@ -157,13 +198,13 @@ export class HomeComponent implements OnInit {
 
   loadMainTab(navTab:string){
     switch(navTab.toLowerCase()){
-      case "Administration":{
+      case "administration":{
         this.selectedTab = navTab.toLowerCase();
         this.selectedSubTab = this.adminSubTabComponentImports[0].name.toLowerCase();
         this.loadSubTab(this.selectedSubTab);
         break;
       }
-      case "Bookings":{
+      case "bookings":{
         this.selectedTab = navTab.toLowerCase();
         this.selectedSubTab = this.bookingSubTabComponentImports[0].name.toLowerCase();
         this.loadSubTab(this.selectedSubTab);

@@ -9,11 +9,13 @@ import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { MatDialogModule } from '@angular/material/dialog';
+import { BookingActionComponent } from './home/booking-action/booking-action.component';
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    BookingActionComponent
   ],
   imports: [
     BrowserModule,

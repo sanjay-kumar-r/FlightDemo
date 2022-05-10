@@ -1,0 +1,76 @@
+<!-- <p>bookings works!</p> -->
+<!-- <p>airlines works!</p> -->
+<div class="mainData">
+    <p *ngIf="alert ?? null != null" class="alertPopUp">
+        <ngb-alert [type]="alert?.type ?? ''" (closed)="closeAlert()">{{ alert?.message ?? '' }}</ngb-alert>
+    </p>
+    <!-- <div class="filtersDiv">
+        <span class="searchSpan">
+            <input #searchText class="searchText" placeholder="enter text to search" [(value)]="searchText"/>
+            <button (click)="SearchFilter">Search</button>
+        </span>
+        <span></span>
+    </div> -->
+    <!-- <div class="actionDiv"><button class="addActionButton" (click)="addAirlinePopup()">Add Airline</button></div> -->
+    <div class="actionDiv"></div>
+    <div class="dataDiv">
+        <div class="tableTitleDiv">
+            <table class="dataTable">
+                <thead>
+                    <!-- <tr>
+                        <th class="nameCell">From</th>
+                        <th class="nameCell">To</th>
+                        <th class="dateCell">Departure Date</th>
+                        <th class="countCell"> BC Seats</th>
+                        <th class="countCell">NBC Seats</th>
+                        <th class="costCell">Amount Paid</th>
+                        <th class="statusCell">Booking Status</th>
+                        <th class="nameCell">pnr</th>
+                        <th class="actionCell"> </th>
+                    </tr> -->
+                    <tr>
+                        <th class="nameCell">ScheduleId</th>
+                        <th class="dateCell">Departure Date</th>
+                        <th class="countCell"> BC Seats</th>
+                        <th class="countCell">NBC Seats</th>
+                        <th class="costCell">Amount Paid</th>
+                        <th class="statusCell">Booking Status</th>
+                        <th class="nameCell">pnr</th>
+                        <th class="actionCell"> </th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+        <div class="tableBodyDiv">
+            <table class="dataTable">
+                <tbody>
+                    <!-- <tr *ngFor="let bookingDetail of bookingDetails">
+                        <td  class="nameCell">{{bookingDetail?.ScheduleDetail?.From ?? ''}}</td>
+                        <td  class="nameCell">{{bookingDetail?.ScheduleDetail?.To ?? ''}}</td>
+                        <td class="dateCell" >a{{(bookingDetail?.booking?.DateBookedFor ?? '') | date: 'MMM d, y'}}</td>
+                        <td  class="countCell">{{bookingDetail?.booking?.BCSeats ?? ''}}</td>
+                        <td  class="countCell">{{bookingDetail?.booking?.NBCSeats ?? ''}}</td>
+                        <td  class="costCell">{{(bookingDetail?.booking?.ActualPaidAmount ?? '') | number:'4.2'}}</td>
+                        
+                        <td class="statusCell">{{bookingDetail?.booking?.BookingStatus?.Status ?? ''}}</td>
+                        <td  class="nameCell">{{bookingDetail?.booking?.PNR ?? ''}}</td>
+                        <td class="actionCell"><button title="click to cancel booking" class="deleteButton" (click)="cancelBookingPopUp(bookingDetail?.booking?.Id ?? 0)">Cancel Booking</button></td>
+                    </tr> -->
+                    <tr *ngFor="let booking of bookings">
+                        <!-- <td  class="nameCell">{{ScheduleDetail?.From ?? ''}}</td> -->
+                        <td  class="nameCell">{{booking?.ScheduleId ?? ''}}</td>
+                        <td class="dateCell" >{{(booking?.DateBookedFor ?? '') | date: 'MMM d, y'}}</td>
+                        <td  class="countCell">{{booking?.BCSeats ?? ''}}</td>
+                        <td  class="countCell">{{booking?.NBCSeats ?? ''}}</td>
+                        <td  class="costCell">{{(booking?.ActualPaidAmount ?? '') | number:'4.2'}}</td>
+                        <!-- <td class="statusCell"><button [ngClass]="((booking?.BookingStatus?.Status?.toLowerCase() ?? '') == 'booked') ? 'booked':(((bookingDetail?.booking?.BookingStatus?.Status?.toLowerCase() ?? '') == 'waiting')? waiting : 'canceled')">{{(bookingDetail?.booking.BookingStatus.Status}}</button></td> -->
+                        <td class="statusCell">{{booking?.BookingStatus?.Status ?? ''}}</td>
+                        <td  class="nameCell">{{booking?.PNR ?? ''}}</td>
+                        <td class="actionCell"><button title="click to cancel booking" class="deleteButton" (click)="cancelBooking(booking?.Id ?? 0)">Cancel Booking</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+

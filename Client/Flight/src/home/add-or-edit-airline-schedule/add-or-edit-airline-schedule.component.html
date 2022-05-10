@@ -1,0 +1,178 @@
+<!-- <p>add-or-edit-airline-schedule works!</p> -->
+<div class="addEditAirlineSchedule">
+    <form #airlineScheduleForm="ngForm" class="airlineScheduleForm" (submit)="saveAirlineSchedule(airlineScheduleForm)">
+        <table>
+            <thead ><tr><th colspan="3">
+                <h2 class="AddEditAirlineScheduleTitle">{{!isEdit ? "Add Airline Schedule" : "Edit Airline Schedule"}}</h2>
+            </th></tr></thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <div>
+                            <div class= "fieldLabel" >Select Airline :</div>
+                            <span *ngIf = "!isEdit ;then airlineList else singleAirline"></span>
+                            <ng-template #airlineList>
+                                <select name="airlineSelect" #airlineSelect="ngModel"  
+                                [ngClass]="{'invalidInput' : (((airlineSelect.touched || airlineSelect.dirty) && (airlineSelect.invalid)) )}"
+                                required ngModel>
+                                        <option [ngValue] = "0" disabled>select an Airline</option>
+                                        <option *ngFor="let air of airlines" [ngValue]="air.Id" >{{air.Name}}</option>
+                                </select>
+                                <div #inValidAirlineSelection class="invalidText" *ngIf="(((airlineSelect.touched || airlineSelect.dirty) && (airlineSelect.invalid)))">
+                                    Please select valid airline
+                                </div>
+                            </ng-template>
+                            <ng-template #singleAirline>
+                                <select name="airlineSelect" #airlineSelect="ngModel"  
+                                [ngClass]="{'invalidInput' : (((airlineSelect.touched || airlineSelect.dirty) && (airlineSelect.invalid || airlineSelect.value === '0')) || (isFormSubmitted && invalidSelection) )}"
+                                required [ngModel]="airlineSchedule?.Airline?.Id ?? 0">
+                                        <option [ngValue] = "0" disabled >select an Airline</option>
+                                        <option [ngValue]="airlineSchedule?.Airline?.Id ?? 0" [selected]="1==1" >{{airlineSchedule?.Airline?.Name ?? ""}}</option>
+                                </select>
+                                <div #inValidAirlineSelection class="invalidText" *ngIf="(((airlineSelect.touched || airlineSelect.dirty) && (airlineSelect.invalid || airlineSelect.value === '0')) || (isFormSubmitted && invalidSelection))">
+                                    Please select valid airline
+                                </div>
+                            </ng-template>
+                        </div>
+                    </td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>
+                        <div>
+                            <div class= "fieldLabel" >From :</div>
+                            <input type="text" placeholder="please enter departure location" name="from"
+                            class="field"
+                            [ngClass]="{'invalidInput' : (((from.touched || from.dirty) && from.invalid))}"
+                            #from="ngModel" required [ngModel]="(airlineSchedule?.From ?? '')" />
+                        </div>
+                        <div #inValidFrom class="invalidText" *ngIf="(from.touched || from.dirty) && from.invalid">
+                            Please enter valid 'From' location
+                        </div>
+                    </td>
+                    <td>
+                        <div>
+                            <div class= "fieldLabel" >To :</div>
+                            <input type="text" placeholder="please enter arrival loaction" name="to"
+                            class="field"
+                            [ngClass]="{'invalidInput' : (((to.touched || to.dirty) && to.invalid))}"
+                            #to="ngModel" required [ngModel]="(airlineSchedule?.To ?? '')" />
+                        </div>
+                        <div #inValidTo class="invalidText" *ngIf="((to.touched || to.dirty) && to.invalid)">
+                            Please enter valid 'To' location
+                        </div>
+                    </td>
+                    <td>
+                        <div>
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" name="isRegular" 
+                                #isRegular="ngModel"
+                                 [ngModel]="airlineSchedule?.IsRegular ?? false" />
+                                <label class="form-check-label" for="flexSwitchCheckDefault">Is Regular</label>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <span *ngIf="isRegular.value == true; then regularDetails else exactDetails"></span>
+                <tr class="detailsRow">
+                    <td >
+                        <ng-template #regularDetails>
+                            <div>
+                                <div class= "fieldLabel" >Departure Day :</div>
+                                <select name="departureDay" #departureDay="ngModel"  
+                                    [ngClass]="{'invalidInput' : (((departureDay.touched || departureDay.dirty) && (departureDay.invalid)) )}"
+                                    required [ngModel]="getDepartureDay()" >
+                                    <option [ngValue]="-1" disabled>Select departure day</option>
+                                    <option *ngFor="let day of weekDays" [ngValue]="day.value"
+                                    [selected]="(day.value) === getDepartureDay()">{{day.key}}</option>
+                                </select>
+                            </div>
+                            <div #inValidDapartureDay class="invalidText" *ngIf="(((departureDay.touched || departureDay.dirty) && (departureDay.invalid)) )">
+                                Select valid departure date
+                            </div>
+                        </ng-template>
+                        <ng-template #exactDetails>
+                            <div>
+                                <div class= "fieldLabel" >Departure Date :</div>
+                                <input type="date" name="departureDate"
+                                class="field" 
+                                [ngClass]="{'invalidInput' : (((departureDate.touched || departureDate.dirty) && departureDate.invalid))}"
+                                #departureDate="ngModel" required [ngModel]="((airlineSchedule?.DepartureDate ?? '') | date:'yyyy-MM-dd')" />
+                            </div>
+                            <div #inValidDepartureDate class="invalidText" *ngIf="(((departureDate.touched || departureDate.dirty) && departureDate.invalid))">
+                                please enter valid departure date
+                            </div>
+                        </ng-template>
+                    </td>
+                    <td>
+                        <div>
+                            <div class= "fieldLabel" >Departure Time :</div>
+                            <input type="time" name="departureTime"
+                            class="field"
+                            [ngClass]="{'invalidInput' : (((departureTime.touched || departureTime.dirty) && departureTime.invalid) || (isFormSubmitted && invalidDate))}"
+                            #departureTime="ngModel" required [ngModel]="departureTimeDisplay" />
+                        </div>
+                        <div #inValidDepartureTime class="invalidText" *ngIf="(((departureTime.touched || departureTime.dirty) && departureTime.invalid) || (isFormSubmitted && invalidDate))">
+                            please enter valid departure time
+                        </div>
+                    </td>
+                </tr>
+                <span *ngIf="isRegular.value == true; then regularDetails1 else exactDetails1"></span>
+                <tr class="detailsRow">
+                    <td >
+                        <ng-template #regularDetails1>
+                            <div>
+                                <div class= "fieldLabel" >Arrival Day :</div>
+                                <select name="arrivalDay" #arrivalDay="ngModel"  
+                                    [ngClass]="{'invalidInput' : (((arrivalDay.touched || arrivalDay.dirty) && (arrivalDay.invalid)) )}"
+                                    required [ngModel]="getArrivalDay()">
+                                    <option [ngValue]="-1" disabled>Select arrival day</option>
+                                    <option *ngFor="let day of weekDays" [ngValue]="day.value"
+                                    [selected]="(day.value) === getArrivalDay()">{{day.key}}</option>
+                                </select>
+                            </div>
+                            <div #inValidArrivalDay class="invalidText" *ngIf="(((arrivalDay.touched || arrivalDay.dirty) && (arrivalDay.invalid )) )">
+                                Select valid arriavl day
+                            </div>
+                        </ng-template>
+                        <ng-template #exactDetails1>
+                            <div>
+                                <div class= "fieldLabel" >Arrival Date :</div>
+                                <input type="date" name="arrivalDate"
+                                class="field" 
+                                [ngClass]="{'invalidInput' : (((arrivalDate.touched || arrivalDate.dirty) && arrivalDate.invalid))}"
+                                #arrivalDate="ngModel" required [ngModel]="((airlineSchedule?.ArrivalDate ?? '') | date:'yyyy-MM-dd')" />
+                            </div>
+                            <div #inValidArrivalDate class="invalidText" *ngIf="(((arrivalDate.touched || arrivalDate.dirty) && arrivalDate.invalid) )">
+                                please enter valid arrival date
+                            </div>
+                        </ng-template>
+                    </td>
+                    <td>
+                        <div>
+                            <div class= "fieldLabel" >Arrival Time :</div>
+                            <input type="time" name="arrivalTime"
+                            class="field"
+                            [ngClass]="{'invalidInput' : (((arrivalTime.touched || arrivalTime.dirty) && arrivalTime.invalid))}"
+                            #arrivalTime="ngModel" required [ngModel]="arrivalTimeDisplay" />
+                        </div>
+                        <div #inValidArrivalTime class="invalidText" *ngIf="(((arrivalTime.touched || arrivalTime.dirty) && arrivalTime.invalid))">
+                            please enter valid arrival time
+                        </div>
+                    </td>
+                </tr>
+                <tr class="submitRow">
+                    <td></td>
+                    <td></td>
+                    <td>
+                        <div class="submitRowDiv">
+                            <button type="submit" class="submit" [disabled]="airlineScheduleForm.invalid">Save</button>
+                            <span class="cancel" (click)="cancel()">Cancel</span>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </form>
+</div>

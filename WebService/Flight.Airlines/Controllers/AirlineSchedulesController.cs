@@ -142,6 +142,7 @@ namespace Flight.Airlines.Controllers
                         schedule.CreatedOn = DateTime.Now;
                         schedule.ModifiedOn = DateTime.Now;
                         schedule.Airline = null;
+                        schedule.Id = 0;
                     }
                     return airlinesRepo.AddAirlineSchedulesByRange(validschedules.ToList());
                 }

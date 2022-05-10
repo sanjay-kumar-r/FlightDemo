@@ -348,90 +348,92 @@ export class AirlineDiscountTagMappingComponent implements OnInit {
 
   saveChanges()
   {
-    //save already triggered
-    if(this.isSavedTriggered)
-      return;
-    
-    if(
-      (((this.addedDiscountTagIds ?? null) == null) 
-      || ((this.addedDiscountTagIds?.length ?? 0) <= 0))
-      &&(((this.removedDiscountTagIds ?? null) == null) 
-      || ((this.removedDiscountTagIds?.length ?? 0) <= 0))
-      )
+    if(!this.isCanceled)
     {
-      alert("no change made");
-      return;
-    }
-
-    this.isSavedTriggered = true;
-    let remapDetails:RemapAirlineDiscountTagsDetails[] = [
+      //save already triggered
+      if(this.isSavedTriggered)
+        return;
+      
+      if(
+        (((this.addedDiscountTagIds ?? null) == null) 
+        || ((this.addedDiscountTagIds?.length ?? 0) <= 0))
+        &&(((this.removedDiscountTagIds ?? null) == null) 
+        || ((this.removedDiscountTagIds?.length ?? 0) <= 0))
+        )
       {
-        AirlineId : this.airlineId ?? 0,
-        AddedDiscountTagIds: this.addedDiscountTagIds,
-        RemovedDiscountTagIds: this.removedDiscountTagIds
+        alert("no change made");
+        return;
       }
-    ];
-    this.airlineService.remapAirlinesDiscountTags(remapDetails, this.headerInfo).subscribe(
-      (result) => {
-        if(((result ?? null) != null) && ((result ?? false) == true))
+    
+      this.isSavedTriggered = true;
+      let remapDetails:RemapAirlineDiscountTagsDetails[] = [
         {
-          alert("airline discount Tag mapping added sucessfully");
-          this.saveAndClose();
+          AirlineId : this.airlineId ?? 0,
+          AddedDiscountTagIds: this.addedDiscountTagIds,
+          RemovedDiscountTagIds: this.removedDiscountTagIds
         }
-        else
-        {
-          this.emitError();
-        }     
-      },
-      (error) =>{
-        if(error.status == 401)
-        {
-          //refreshToken
-          this.commonService.refreshToken(this.headerInfo).subscribe(
-            (authResponse) =>{
-              let refreshResult:AuthResponse = {
-                IsSuccess: authResponse.isSuccess,
-                Token : authResponse.token,
-                RefreshToken : authResponse.refreshToken,
-                Reason: authResponse.reason
-              };
-              localStorage.setItem("authResponse", JSON.stringify(refreshResult));
-              this.getAuthResponse(JSON.parse(localStorage.getItem("authResponse") ?? "{}"));
-              this.getHeader();
-              //this.headerInfo.Authorization = `Bearer ${refreshResult.Token}`;
-              //retry
-              this.airlineService.remapAirlinesDiscountTags(remapDetails, this.headerInfo).subscribe(
-                (result) =>{
-                  if(((result ?? null) != null) && ((result ?? false) == true))
-                  {
-                    alert("airline discount Tag mapping added sucessfully");
-                    this.saveAndClose();
+      ];
+      this.airlineService.remapAirlinesDiscountTags(remapDetails, this.headerInfo).subscribe(
+        (result) => {
+          if(((result ?? null) != null) && ((result ?? false) == true))
+          {
+            alert("airline discount Tag mapping added sucessfully");
+            this.saveAndClose();
+          }
+          else
+          {
+            this.emitError();
+          }     
+        },
+        (error) =>{
+          if(error.status == 401)
+          {
+            //refreshToken
+            this.commonService.refreshToken(this.headerInfo).subscribe(
+              (authResponse) =>{
+                let refreshResult:AuthResponse = {
+                  IsSuccess: authResponse.isSuccess,
+                  Token : authResponse.token,
+                  RefreshToken : authResponse.refreshToken,
+                  Reason: authResponse.reason
+                };
+                localStorage.setItem("authResponse", JSON.stringify(refreshResult));
+                this.getAuthResponse(JSON.parse(localStorage.getItem("authResponse") ?? "{}"));
+                this.getHeader();
+                //this.headerInfo.Authorization = `Bearer ${refreshResult.Token}`;
+                //retry
+                this.airlineService.remapAirlinesDiscountTags(remapDetails, this.headerInfo).subscribe(
+                  (result) =>{
+                    if(((result ?? null) != null) && ((result ?? false) == true))
+                    {
+                      alert("airline discount Tag mapping added sucessfully");
+                      this.saveAndClose();
+                    }
+                    else
+                    {
+                      this.emitError();
+                    }
+                  },
+                  (e) =>{
+                    console.error(e);
+                    this.emitError();  
                   }
-                  else
-                  {
-                    this.emitError();
-                  }
-                },
-                (e) =>{
-                  console.error(e);
-                  this.emitError();  
-                }
-              );
-            },
-            (refreshError) => {
-              console.error(refreshError);
-              this.emitError();
-            }
-          );
+                );
+              },
+              (refreshError) => {
+                console.error(refreshError);
+                this.emitError();
+              }
+            );
+          }
+          else
+          {
+            console.error(error);
+            this.emitError();
+          }
         }
-        else
-        {
-          console.error(error);
-          this.emitError();
-        }
-      }
-    );
-
+      );
+    }
    
   }
 
@@ -527,8 +529,8 @@ export class AirlineDiscountTagMappingComponent implements OnInit {
         if(((x ?? null) != null))
         {
           let discountTag = this.getDiscountTag(x);
-          if(((this.assignedDiscountTags ?? null) != null) && ((this.assignedDiscountTags?.length ?? 0) > 0)
-            && !(this.assignedDiscountTags?.some(x => x.Id === discountTag.Id)))
+          if(((this.assignedDiscountTags ?? null) == null) || ((this.assignedDiscountTags?.length ?? 0) <= 0)
+            || !(this.assignedDiscountTags?.some(x => x.Id === discountTag.Id)))
           {
             this.existingDiscountTags?.push(this.getDiscountTag(x));
           }

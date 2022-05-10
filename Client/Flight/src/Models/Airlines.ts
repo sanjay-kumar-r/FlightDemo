@@ -1,4 +1,4 @@
-import { WeekDay } from '@angular/common'
+import { Time, WeekDay } from '@angular/common'
 
 export interface Airlines {
     Id?:number,
@@ -64,4 +64,20 @@ export interface AirlineScheduleTracker {
     ActualArrivalDate?:Date;
     BCSeatsRemaining?:number;
     NBCSeatsRemaining?:number;
+}
+
+export interface AirlinesSearchRequest {
+    From?:string;
+    To?:string;
+    DepartureDate?:Date;
+    ArrivalDate?:Date;
+}
+
+export interface AirlinesSearchResponse {
+    AirlineSchedules?:AirlineSchedules;
+    ActualDepartureDate?:Date;
+    ActualArrivalDate?:Date;
+    DiscountTags?:DiscountTags[];
+    BCSeatsAvailable?:number;
+    NBCSeatsAvailable?:number;
 }

@@ -4,7 +4,9 @@ import { APIRequestType, HeaderInfo } from 'src/Models/HeaderInfo';
 import { Airlines, DiscountTags, AirlineDiscountTagMappingDetails,
    RemapAirlineDiscountTagsDetails, 
    AirlineSchedules,
-   AirlineScheduleTracker} from 'src/Models/Airlines';
+   AirlineScheduleTracker,
+   AirlinesSearchRequest,
+   AirlinesSearchResponse} from 'src/Models/Airlines';
 import { ApiExecutorService } from './api-executor.service';
 import { RefreshTokenRequest } from 'src/Models/Users';
 
@@ -201,7 +203,7 @@ export class AirlineService {
   //airline schedules
   getSchedules(id:number|null, headerInfo:HeaderInfo) : Observable<any>
   {
-    if(((id ?? null) == null) || id === 0)
+    if(((id ?? null) == null) || ((id ?? 0) <= 0))
     { 
       return this.apiExecutor.CallAPI(APIRequestType.Get, this.getSchedulesUrl, headerInfo ,
         null, true);
@@ -257,9 +259,9 @@ export class AirlineService {
   }
 
   // ------------------- getAvailableAirlines -------------------------------------- 
-  getAvailableAirlines(airlineScheduleTracker:AirlineScheduleTracker, headerInfo:HeaderInfo) : Observable<any>
+  getAvailableAirlines(airlinesSearchRequest:AirlinesSearchRequest, headerInfo:HeaderInfo) : Observable<any>
   {
     return this.apiExecutor.CallAPI(APIRequestType.Post, this.getAvailableAirlinesUrl, headerInfo ,
-      airlineScheduleTracker, true);
+      airlinesSearchRequest, true);
   }
 }
