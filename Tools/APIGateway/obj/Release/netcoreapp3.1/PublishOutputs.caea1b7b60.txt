@@ -2,6 +2,7 @@ D:\WorkSpace\Tools\APIGateway\obj\Release\netcoreapp3.1\PubTmp\Out\APIGateway.ex
 D:\WorkSpace\Tools\APIGateway\obj\Release\netcoreapp3.1\PubTmp\Out\appsettings.Development.json
 D:\WorkSpace\Tools\APIGateway\obj\Release\netcoreapp3.1\PubTmp\Out\appsettings.json
 D:\WorkSpace\Tools\APIGateway\obj\Release\netcoreapp3.1\PubTmp\Out\OcelotConfigs\ocelot.development.json
+D:\WorkSpace\Tools\APIGateway\obj\Release\netcoreapp3.1\PubTmp\Out\OcelotConfigs\ocelot.development_BAK_AzureConfig.json
 D:\WorkSpace\Tools\APIGateway\obj\Release\netcoreapp3.1\PubTmp\Out\OcelotConfigs\ocelot.json
 D:\WorkSpace\Tools\APIGateway\obj\Release\netcoreapp3.1\PubTmp\Out\OcelotConfigs\ocelot.SIT.json
 D:\WorkSpace\Tools\APIGateway\obj\Release\netcoreapp3.1\PubTmp\Out\OcelotConfigs_Bak\ocelot.development.json

@@ -1,59 +1,31 @@
 {
   "Routes": [
-    //Users (onPrem):->
-    //{
-    //  "DownstreamPathTemplate": "/api/{version}/Users/",
-    //  "DownstreamScheme": "http",
-    //  "DownstreamHostAndPorts": [
-    //    {
-    //      "Host": "localhost",
-    //      "Port": "9001"
-    //    }
-    //  ],
-    //  "UpstreamPathTemplate": "/api/{version}/Users/",
-    //  "UpstreamHttpMethod": [ "Get", "Post" ],
-    //  "SwaggerKey": "Users"
-    //},
-    //{
-    //  "DownstreamPathTemplate": "/api/{version}/Users/{everything}",
-    //  "DownstreamScheme": "http",
-    //  "DownstreamHostAndPorts": [
-    //    {
-    //      "Host": "localhost",
-    //      "Port": "9001"
-    //    }
-    //  ],
-    //  "UpstreamPathTemplate": "/api/{version}/Users/{everything}",
-    //  "UpstreamHttpMethod": [ "Get", "Post" ],
-    //  "SwaggerKey": "Users"
-    //},
-
-    //Users :->
+    //users (onprem):->
     {
-      "DownstreamPathTemplate": "/api/{version}/Users/",
-      "DownstreamScheme": "https",
-      "DownstreamHostAndPorts": [
+      "downstreampathtemplate": "/api/{version}/users/",
+      "downstreamscheme": "http",
+      "downstreamhostandports": [
         {
-          "Host": "flightusers20220510115650.azurewebsites.net",
-          "Port": "443"
+          "host": "localhost",
+          "port": "9001"
         }
       ],
-      "UpstreamPathTemplate": "/api/{version}/Users/",
-      "UpstreamHttpMethod": [ "Get", "Post" ],
-      "SwaggerKey": "Users"
+      "upstreampathtemplate": "/api/{version}/users/",
+      "upstreamhttpmethod": [ "get", "post" ],
+      "swaggerkey": "users"
     },
     {
-      "DownstreamPathTemplate": "/api/{version}/Users/{everything}",
-      "DownstreamScheme": "https",
-      "DownstreamHostAndPorts": [
+      "downstreampathtemplate": "/api/{version}/users/{everything}",
+      "downstreamscheme": "http",
+      "downstreamhostandports": [
         {
-          "Host": "flightusers20220510115650.azurewebsites.net",
-          "Port": "443"
+          "host": "localhost",
+          "port": "9001"
         }
       ],
-      "UpstreamPathTemplate": "/api/{version}/Users/{everything}",
-      "UpstreamHttpMethod": [ "Get", "Post" ],
-      "SwaggerKey": "Users"
+      "upstreampathtemplate": "/api/{version}/users/{everything}",
+      "upstreamhttpmethod": [ "get", "post" ],
+      "swaggerkey": "users"
     },
     //Airlines :->
     {
@@ -191,40 +163,13 @@
       "SwaggerKey": "Bookings"
     },
     ////AuthTokens (on prem) :->
-    //{
-    //  "DownstreamPathTemplate": "/api/AuthTokens/",
-    //  "DownstreamScheme": "http",
-    //  "DownstreamHostAndPorts": [
-    //    {
-    //      "Host": "localhost",
-    //      "Port": "9007"
-    //    }
-    //  ],
-    //  "UpstreamPathTemplate": "/api/AuthTokens/",
-    //  "UpstreamHttpMethod": [ "Get", "Post" ],
-    //  "SwaggerKey": "AuthTokens"
-    //},
-    //{
-    //  "DownstreamPathTemplate": "/api/AuthTokens/{everything}",
-    //  "DownstreamScheme": "http",
-    //  "DownstreamHostAndPorts": [
-    //    {
-    //      "Host": "localhost",
-    //      "Port": "9007"
-    //    }
-    //  ],
-    //  "UpstreamPathTemplate": "/api/AuthTokens/{everything}",
-    //  "UpstreamHttpMethod": [ "Get", "Post" ],
-    //  "SwaggerKey": "AuthTokens"
-    //}
-    // auth token
     {
       "DownstreamPathTemplate": "/api/AuthTokens/",
-      "DownstreamScheme": "https",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "tokenmanager20220511043808.azurewebsites.net",
-          "Port": "443"
+          "Host": "localhost",
+          "Port": "9007"
         }
       ],
       "UpstreamPathTemplate": "/api/AuthTokens/",
@@ -233,11 +178,11 @@
     },
     {
       "DownstreamPathTemplate": "/api/AuthTokens/{everything}",
-      "DownstreamScheme": "https",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "tokenmanager20220511043808.azurewebsites.net",
-          "Port": "443"
+          "Host": "localhost",
+          "Port": "9007"
         }
       ],
       "UpstreamPathTemplate": "/api/AuthTokens/{everything}",
@@ -247,23 +192,13 @@
   ],
   "SwaggerEndPoints": [
     // user(on prem)
-    //{
-    //  "Key": "Users",
-    //  "Config": [
-    //    {
-    //      "Name": "Users APIs",
-    //      "Version": "v1.0",
-    //      "Url": "http://localhost:9001/swagger/v1.0/swagger.json"
-    //    }
-    //  ]
-    //},
     {
       "Key": "Users",
       "Config": [
         {
           "Name": "Users APIs",
           "Version": "v1.0",
-          "Url": "https://flightusers20220510115650.azurewebsites.net/swagger/v1.0/swagger.json"
+          "Url": "http://localhost:9001/swagger/v1.0/swagger.json"
         }
       ]
     },
@@ -318,23 +253,13 @@
       ]
     },
     //auth token (on prem)
-    //{
-    //  "Key": "AuthTokens",
-    //  "Config": [
-    //    {
-    //      "Name": "AuthTokens API",
-    //      "Version": "v1.0",
-    //      "Url": "http://localhost:9007/swagger/v1.0/swagger.json"
-    //    }
-    //  ]
-    //}
     {
       "Key": "AuthTokens",
       "Config": [
         {
           "Name": "AuthTokens API",
           "Version": "v1.0",
-          "Url": "https://tokenmanager20220511043808.azurewebsites.net/swagger/v1.0/swagger.json"
+          "Url": "http://localhost:9007/swagger/v1.0/swagger.json"
         }
       ]
     }

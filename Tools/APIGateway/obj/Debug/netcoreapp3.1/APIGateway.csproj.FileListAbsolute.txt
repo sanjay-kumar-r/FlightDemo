@@ -49,3 +49,4 @@ D:\WorkSpace\Tools\APIGateway\bin\Debug\netcoreapp3.1\APIGateway.xml
 D:\WorkSpace\Tools\APIGateway\bin\Debug\netcoreapp3.1\OcelotConfigs_Bak\ocelot.development.json
 D:\WorkSpace\Tools\APIGateway\bin\Debug\netcoreapp3.1\OcelotConfigs_Bak\ocelot.json
 D:\WorkSpace\Tools\APIGateway\bin\Debug\netcoreapp3.1\OcelotConfigs_Bak\ocelot.SIT.json
+D:\WorkSpace\Tools\APIGateway\bin\Debug\netcoreapp3.1\OcelotConfigs\ocelot.development_BAK_AzureConfig.json
