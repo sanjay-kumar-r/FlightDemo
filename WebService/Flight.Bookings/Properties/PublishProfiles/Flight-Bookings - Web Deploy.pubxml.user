@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+This file is used by the publish/package process of your Web project. You can customize the behavior of this process
+by editing this MSBuild file. In order to learn more about this please visit https://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAsfFP9irqyUmpU9N1ab742wAAAAACAAAAAAAQZgAAAAEAACAAAACzYGak+9yrrF6eHhWZWCKe14OTHzFxWBmyoQe30FWFJAAAAAAOgAAAAAIAACAAAABTex0/7aCBoRTd4hpKEI83y7MEFXOjIdcVOdMxnB+9qoAAAACz3QpwJ4sQgoVFW08+giwdunp5pN1mavEgwpwCS5ylwko0KpjOQiwlMdcCEcoz0voRdaeDgaMc7lTL4UrlrPfE10I+JE1QoU1G4NnaqU9wKZaIPJyswbIRKcN3G3sZcN+BAwZLB93W/MaC3PM7nrBGpnqW3Ne8gzXkSKTc1xkBeEAAAADcV/E1h24/3HU9SlWpvhzFs7Re4+vor+nhpPgxq5JwJkWoal/0OQUUSHO05ToMJwSDpjyccIIdhezg4cEhJuti</EncryptedPassword>
+    <History>True|2022-05-11T01:58:21.0714585Z;True|2022-05-11T06:32:05.8517670+05:30;</History>
+  </PropertyGroup>
+  <ItemGroup>
+    <DestinationConnectionStrings Include="SqlServerConnectionString">
+      <Value>Data Source=tcp:flightsdemodbserver.database.windows.net,1433%3bInitial Catalog=Flight.Bookings_db%3bUser Id=sanjay%40flightsdemodbserver%3bPassword=Password%401234</Value>
+    </DestinationConnectionStrings>
+  </ItemGroup>
+  <ItemGroup>
+    <EFMigrations Include="Flight.Users.Model.Utils.BookingsDBContext">
+      <Value>Data Source=tcp:flightsdemodbserver.database.windows.net,1433%3bInitial Catalog=Flight.Bookings_db%3bUser Id=sanjay%40flightsdemodbserver%3bPassword=Password%401234</Value>
+    </EFMigrations>
+  </ItemGroup>
+</Project>

@@ -42,6 +42,9 @@ namespace Flight.Airlines
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            //cors
+            services.AddCors();
+
             services.AddControllers();
             services.AddSwaggerGen(options =>
             {
@@ -146,14 +149,26 @@ namespace Flight.Airlines
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseSwagger();
-                app.UseSwaggerUI(options => {
-                    options.SwaggerEndpoint("/swagger/v1.0/swagger.json", "Flight.Airlines Service Swagger");
-                    options.RoutePrefix = string.Empty;
-                });
+                //app.UseSwagger();
+                //app.UseSwaggerUI(options => {
+                //    options.SwaggerEndpoint("/swagger/v1.0/swagger.json", "Flight.Airlines Service Swagger");
+                //    options.RoutePrefix = string.Empty;
+                //});
             }
 
+            app.UseSwagger();
+            app.UseSwaggerUI(options => {
+                options.SwaggerEndpoint("/swagger/v1.0/swagger.json", "Flight.Airlines Service Swagger");
+                options.RoutePrefix = string.Empty;
+            });
+
             app.UseRouting();
+
+            app.UseCors(x => x
+                .AllowAnyMethod()
+                .AllowAnyHeader()
+                .SetIsOriginAllowed(origin => true) // allow any origin
+                .AllowCredentials()); // allow credentials
 
             app.UseAuthentication();
 

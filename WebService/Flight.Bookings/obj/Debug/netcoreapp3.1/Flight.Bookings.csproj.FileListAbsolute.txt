@@ -86,7 +86,6 @@ D:\WorkSpace\WebService\Flight.Bookings\bin\Debug\netcoreapp3.1\Swashbuckle.AspN
 D:\WorkSpace\WebService\Flight.Bookings\bin\Debug\netcoreapp3.1\Swashbuckle.AspNetCore.SwaggerGen.dll
 D:\WorkSpace\WebService\Flight.Bookings\bin\Debug\netcoreapp3.1\Swashbuckle.AspNetCore.SwaggerUI.dll
 D:\WorkSpace\WebService\Flight.Bookings\bin\Debug\netcoreapp3.1\Flight.Bookings.xml
-D:\WorkSpace\WebService\Flight.Bookings\obj\Debug\netcoreapp3.1\Flight.Bookings.csproj.CopyComplete
 D:\WorkSpace\WebService\Flight.Bookings\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 D:\WorkSpace\WebService\Flight.Bookings\bin\Debug\netcoreapp3.1\AuthDTOs.dll
 D:\WorkSpace\WebService\Flight.Bookings\bin\Debug\netcoreapp3.1\AuthDTOs.pdb

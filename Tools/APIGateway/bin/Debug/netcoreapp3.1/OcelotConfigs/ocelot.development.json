@@ -3,11 +3,11 @@
     //Users :->
     {
       "DownstreamPathTemplate": "/api/{version}/Users/",
-      "DownstreamScheme": "http",
+      "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": "9001"
+          "Host": "flight-users.azurewebsites.net",
+          "Port": "443"
         }
       ],
       "UpstreamPathTemplate": "/api/{version}/Users/",
@@ -16,11 +16,11 @@
     },
     {
       "DownstreamPathTemplate": "/api/{version}/Users/{everything}",
-      "DownstreamScheme": "http",
+      "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": "9001"
+          "Host": "flight-users.azurewebsites.net",
+          "Port": "443"
         }
       ],
       "UpstreamPathTemplate": "/api/{version}/Users/{everything}",
@@ -30,11 +30,11 @@
     //Airlines :->
     {
       "DownstreamPathTemplate": "/api/{version}/Airlines/",
-      "DownstreamScheme": "http",
+      "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": "9003"
+          "Host": "flight-airlines.azurewebsites.net",
+          "Port": "443"
         }
       ],
       "UpstreamPathTemplate": "/api/{version}/Airlines/",
@@ -43,11 +43,11 @@
     },
     {
       "DownstreamPathTemplate": "/api/{version}/Airlines/{everything}",
-      "DownstreamScheme": "http",
+      "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": "9003"
+          "Host": "flight-airlines.azurewebsites.net",
+          "Port": "443"
         }
       ],
       "UpstreamPathTemplate": "/api/{version}/Airlines/{everything}",
@@ -57,11 +57,11 @@
     //DiscountTags :->
     {
       "DownstreamPathTemplate": "/api/{version}/DiscountTags/",
-      "DownstreamScheme": "http",
+      "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": "9003"
+          "Host": "flight-airlines.azurewebsites.net",
+          "Port": "443"
         }
       ],
       "UpstreamPathTemplate": "/api/{version}/DiscountTags/",
@@ -70,11 +70,11 @@
     },
     {
       "DownstreamPathTemplate": "/api/{version}/DiscountTags/{everything}",
-      "DownstreamScheme": "http",
+      "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": "9003"
+          "Host": "flight-airlines.azurewebsites.net",
+          "Port": "443"
         }
       ],
       "UpstreamPathTemplate": "/api/{version}/DiscountTags/{everything}",
@@ -84,11 +84,11 @@
     //AirlineSchedules :->
     {
       "DownstreamPathTemplate": "/api/{version}/AirlineSchedules/",
-      "DownstreamScheme": "http",
+      "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": "9003"
+          "Host": "flight-airlines.azurewebsites.net",
+          "Port": "443"
         }
       ],
       "UpstreamPathTemplate": "/api/{version}/AirlineSchedules/",
@@ -97,11 +97,11 @@
     },
     {
       "DownstreamPathTemplate": "/api/{version}/AirlineSchedules/{everything}",
-      "DownstreamScheme": "http",
+      "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": "9003"
+          "Host": "flight-airlines.azurewebsites.net",
+          "Port": "443"
         }
       ],
       "UpstreamPathTemplate": "/api/{version}/AirlineSchedules/{everything}",
@@ -111,11 +111,11 @@
     //AirlineScheduleTracker :->
     {
       "DownstreamPathTemplate": "/api/{version}/AirlineScheduleTracker/",
-      "DownstreamScheme": "http",
+      "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": "9003"
+          "Host": "flight-airlines.azurewebsites.net",
+          "Port": "443"
         }
       ],
       "UpstreamPathTemplate": "/api/{version}/AirlineScheduleTracker/",
@@ -124,11 +124,11 @@
     },
     {
       "DownstreamPathTemplate": "/api/{version}/AirlineScheduleTracker/{everything}",
-      "DownstreamScheme": "http",
+      "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": "9003"
+          "Host": "flight-airlines.azurewebsites.net",
+          "Port": "443"
         }
       ],
       "UpstreamPathTemplate": "/api/{version}/AirlineScheduleTracker/{everything}",
@@ -138,11 +138,11 @@
     //Bookings :->
     {
       "DownstreamPathTemplate": "/api/{version}/Bookings/",
-      "DownstreamScheme": "http",
+      "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": "9005"
+          "Host": "flight-bookings.azurewebsites.net",
+          "Port": "443"
         }
       ],
       "UpstreamPathTemplate": "/api/{version}/Bookings/",
@@ -151,25 +151,25 @@
     },
     {
       "DownstreamPathTemplate": "/api/{version}/Bookings/{everything}",
-      "DownstreamScheme": "http",
+      "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": "9005"
+          "Host": "flight-bookings.azurewebsites.net",
+          "Port": "443"
         }
       ],
       "UpstreamPathTemplate": "/api/{version}/Bookings/{everything}",
       "UpstreamHttpMethod": [ "Get", "Post" ],
       "SwaggerKey": "Bookings"
     },
-    //AuthTokens :->
+    // auth token
     {
       "DownstreamPathTemplate": "/api/AuthTokens/",
-      "DownstreamScheme": "http",
+      "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": "9007"
+          "Host": "flight-tokenmanager.azurewebsites.net",
+          "Port": "443"
         }
       ],
       "UpstreamPathTemplate": "/api/AuthTokens/",
@@ -178,11 +178,11 @@
     },
     {
       "DownstreamPathTemplate": "/api/AuthTokens/{everything}",
-      "DownstreamScheme": "http",
+      "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": "9007"
+          "Host": "flight-tokenmanager.azurewebsites.net",
+          "Port": "443"
         }
       ],
       "UpstreamPathTemplate": "/api/AuthTokens/{everything}",
@@ -197,7 +197,7 @@
         {
           "Name": "Users APIs",
           "Version": "v1.0",
-          "Url": "http://localhost:9001/swagger/v1.0/swagger.json"
+          "Url": "https://flight-users.azurewebsites.net/swagger/v1.0/swagger.json"
         }
       ]
     },
@@ -207,7 +207,7 @@
         {
           "Name": "Airlines APIs",
           "Version": "v1.0",
-          "Url": "http://localhost:9003/swagger/v1.0/swagger.json"
+          "Url": "https://flight-airlines.azurewebsites.net/swagger/v1.0/swagger.json"
         }
       ]
     },
@@ -217,7 +217,7 @@
         {
           "Name": "DiscountTags APIs",
           "Version": "v1.0",
-          "Url": "http://localhost:9003/swagger/v1.0/swagger.json"
+          "Url": "https://flight-airlines.azurewebsites.net/swagger/v1.0/swagger.json"
         }
       ]
     },
@@ -227,7 +227,7 @@
         {
           "Name": "AirlineSchedules APIs",
           "Version": "v1.0",
-          "Url": "http://localhost:9003/swagger/v1.0/swagger.json"
+          "Url": "https://flight-airlines.azurewebsites.net/swagger/v1.0/swagger.json"
         }
       ]
     },
@@ -237,7 +237,7 @@
         {
           "Name": "AirlineScheduleTracker APIs",
           "Version": "v1.0",
-          "Url": "http://localhost:9003/swagger/v1.0/swagger.json"
+          "Url": "https://flight-airlines.azurewebsites.net/swagger/v1.0/swagger.json"
         }
       ]
     },
@@ -247,7 +247,7 @@
         {
           "Name": "Bookings API",
           "Version": "v1.0",
-          "Url": "http://localhost:9005/swagger/v1.0/swagger.json"
+          "Url": "https://flight-bookings.azurewebsites.net/swagger/v1.0/swagger.json"
         }
       ]
     },
@@ -257,7 +257,7 @@
         {
           "Name": "AuthTokens API",
           "Version": "v1.0",
-          "Url": "http://localhost:9007/swagger/v1.0/swagger.json"
+          "Url": "https://flight-tokenmanager.azurewebsites.net/swagger/v1.0/swagger.json"
         }
       ]
     }

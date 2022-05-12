@@ -1,0 +1,187 @@
+
+
+.bookTicket{
+    width: 100%;
+    height: 100%;
+    font-family: auto;
+}
+
+.bookTicket{
+    width: 100%;
+    height: 100%;
+}
+
+.bookTicket table{
+    width: 100%;
+    height: 100%;
+}
+
+.bookTicket thead{
+    width: 100%;
+    height: 50px;
+    text-align: center;
+    background: #2b6289;
+    color: white;
+}
+
+.bookTicket thead .bookTicketTitle{
+    margin: 0px;
+}
+
+.bookTicket tbody tr{
+    min-height: 100px;
+    height: 100px;
+    max-height: 100px;
+}
+
+.bookTicket tbody tr.numberRow{
+    min-height: 80px;
+    height: 80px;
+    max-height: 80px;
+}
+
+.bookTicket tbody tr.descriptionRow{
+    min-height: 150px;
+    height: 150px;
+    max-height: 150px;
+}
+.bookTicket tbody tr.activationRow{
+    min-height: 65px;
+    height: 65px;
+    max-height: 65px;
+}
+
+.bookTicket tbody tr.submitRow{
+    min-height: 30px;
+    height: 30px;
+    max-height: 30px;
+}
+
+.bookTicket tbody tr td{
+    vertical-align: top;
+    padding-top: 10px;
+}
+
+.bookTicket tbody tr.activationRow td{
+    vertical-align: middle;
+    padding-top: 10px;
+}
+
+.bookTicket tbody tr.submitRow td{
+    vertical-align: bottom;
+    padding-top: 10px;
+}
+
+.bookTicket tbody tr td.isRateCell{
+    vertical-align: middle;
+    padding-top: 10px;
+}
+
+.bookTicket .fieldLabel{
+    text-align: left;
+    width: fit-content;
+    height: fit-content;
+    margin: 0px;
+    padding: 0px;
+    float: left;
+    display: block;
+}
+
+.bookTicket input.field, .bookTicket select.field
+{
+    width: 90%;
+    height: 35px;
+    border-radius: 5px;
+    border: 0px;
+    background-color: #cdd6dd;
+}
+
+.bookTicket textarea
+{
+    width: 95%;
+    max-width: 95%;
+    border-radius: 5px;
+    border: 0px;
+    background-color: #cdd6dd;
+}
+
+.invalidText{
+    font-size: small;
+    color: red;
+    font-style: italic;
+    margin: 5px;
+    width: 90%;
+    float: left;
+    display: block;
+}
+
+.bookTicket input.invalidInput
+{
+    border: 1px solid red;
+}
+
+.bookTicket button.submit
+{
+    border: 0px;
+    border-radius: 5px;
+    height: 35px;
+    width: 100px;
+    background: #0a38e1;
+    font-size: larger;
+    color: white;
+    margin-right: 30px;
+    cursor: pointer;
+}
+
+.bookTicket button.submit:disabled
+{
+    opacity: 60%;
+    cursor: auto;
+    pointer-events: none;
+}
+
+.bookTicket button.submit:hover
+{
+    background: #092daf;
+}
+
+.submitRowDiv{
+    float: right;
+}
+
+.bookTicket .cancel
+{
+    /* margin-right: 25%;
+    width: 100px; */
+    text-decoration: underline;
+    cursor: pointer;
+    font-size: large;
+}
+
+.bookTicket .cancel:hover
+{
+    color: #0a38e1;
+}
+
+.numberBox{
+    border: 1px solid rgb(8, 163, 8);
+    border-radius: 5px;
+    height: 35px;
+    width: 150px;
+    font-size: large;
+    color: rgb(8, 163, 8);
+    float: left;
+    /* position: relative; */
+    /* text-align: center; */
+    /* align-content: center; */
+    align-items: center;
+    display: flex;
+    justify-content: space-around;
+    margin-left: 10px;
+}
+
+.bookTicket tr.numberRow{
+    min-height: 80px;
+    height: 80px;
+    max-height: 80px;
+}

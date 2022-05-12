@@ -13,7 +13,7 @@
                         <div>
                             <div>
                                 <div class="fieldLabel" >First Name :</div>
-                                <input type="text" placeholder="enter first name"
+                                <input type="text" placeholder="enter first name" class="field"
                                 [ngClass]="{'invalidInput' : (firstName.touched || firstName.dirty) && firstName.invalid}"
                                 formControlName="firstName" />
                             </div>
@@ -26,7 +26,7 @@
                         <div>
                             <div>
                                 <div class="fieldLabel" >Last Name :</div>
-                                <input type="text" placeholder="enter last name"
+                                <input type="text" placeholder="enter last name" class="field"
                                  formControlName="lastName" />
                             </div>
                             <!-- <div #inValidLast class="invalidText" *ngIf="(lastName.touched || lastName.dirty) && lastName.invalid">
@@ -40,7 +40,7 @@
                         <div>
                             <div>
                                 <div class="fieldLabel" >EmailId :</div>
-                                <input type="text" placeholder="please enter emailId"
+                                <input type="text" placeholder="please enter emailId" class="field"
                                 [ngClass]="{'invalidInput' : (emailId.touched || emailId.dirty) && emailId.invalid}"
                                  formControlName="emailId" />
                             </div>
@@ -55,7 +55,7 @@
                         <div>
                             <div>
                                 <div class= "fieldLabel" >Password :</div>
-                                <input type="password" placeholder="please enter password"
+                                <input type="password" placeholder="please enter password" class="field"
                                 [ngClass]="{'invalidInput' : (password.touched || password.dirty) && password.invalid}"
                                  formControlName="password" />
                             </div>
@@ -70,12 +70,23 @@
                         <div>
                             <div>
                                 <div class= "fieldLabel" >Confirm Password :</div>
-                                <input type="password" placeholder="please enter confirm password" name="confirmPassword"
+                                <input type="password" placeholder="please enter confirm password" name="confirmPassword" class="field"
                                 [ngClass]="{'invalidInput' : (confirmPassword.touched || confirmPassword.dirty) && confirmPassword.invalid}"
                                 formControlName="confirmPassword" />
                             </div>
                             <div #inValidConfirmPassword class="invalidText" *ngIf="(confirmPassword.touched || confirmPassword.dirty) && confirmPassword.invalid">
                                 ConfirmPassword must be same as password
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr class="checkBoxRow">
+                    <td colspan="2">
+                        <div class="checkBoxDiv">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" name="isSuperAdmin" 
+                                formControlName="isSuperAdmin" />
+                                <label class="form-check-label" for="flexSwitchCheckDefault">Register as Admin</label>
                             </div>
                         </div>
                     </td>

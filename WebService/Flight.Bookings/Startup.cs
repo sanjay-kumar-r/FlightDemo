@@ -41,6 +41,7 @@ namespace Flight.Bookings
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors();
             services.AddControllers();
             services.AddSwaggerGen(options =>
             {
@@ -144,14 +145,26 @@ namespace Flight.Bookings
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseSwagger();
-                app.UseSwaggerUI(options => {
-                    options.SwaggerEndpoint("/swagger/v1.0/swagger.json", "Flight.Bookings Service Swagger");
-                    options.RoutePrefix = string.Empty;
-                });
+                //app.UseSwagger();
+                //app.UseSwaggerUI(options => {
+                //    options.SwaggerEndpoint("/swagger/v1.0/swagger.json", "Flight.Bookings Service Swagger");
+                //    options.RoutePrefix = string.Empty;
+                //});
             }
 
+            app.UseSwagger();
+            app.UseSwaggerUI(options => {
+                options.SwaggerEndpoint("/swagger/v1.0/swagger.json", "Flight.Bookings Service Swagger");
+                options.RoutePrefix = string.Empty;
+            });
+
             app.UseRouting();
+
+            app.UseCors(x => x
+                .AllowAnyMethod()
+                .AllowAnyHeader()
+                .SetIsOriginAllowed(origin => true) // allow any origin
+                .AllowCredentials()); // allow credentials
 
             app.UseAuthentication();
 

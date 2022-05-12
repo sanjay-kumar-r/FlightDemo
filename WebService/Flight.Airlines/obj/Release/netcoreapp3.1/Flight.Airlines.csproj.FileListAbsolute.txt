@@ -91,4 +91,3 @@ D:\WorkSpace\WebService\Flight.Airlines\bin\Release\netcoreapp3.1\AuthDTOs.dll
 D:\WorkSpace\WebService\Flight.Airlines\bin\Release\netcoreapp3.1\UsersRepositoryUtils.dll
 D:\WorkSpace\WebService\Flight.Airlines\bin\Release\netcoreapp3.1\UsersRepositoryUtils.pdb
 D:\WorkSpace\WebService\Flight.Airlines\bin\Release\netcoreapp3.1\AuthDTOs.pdb
-D:\WorkSpace\WebService\Flight.Airlines\obj\Release\netcoreapp3.1\Flight.Airlines.csproj.CopyComplete

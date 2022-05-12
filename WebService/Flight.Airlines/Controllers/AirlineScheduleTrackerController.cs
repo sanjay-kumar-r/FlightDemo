@@ -130,7 +130,8 @@ namespace Flight.Airlines.Controllers
                         var scheduleTrackerSearch = new AirlineScheduleTracker()
                         {
                             ScheduleId = schedule.Id,
-                            ActualDepartureDate = airlinesSearchRequest.DepartureDate.Value.Date
+                            //ActualDepartureDate = airlinesSearchRequest.DepartureDate.Value.Date
+                            ActualDepartureDate = response.ActualDepartureDate.Value
                         };
                         var scheduleTrackers = airlinesRepo.GetAirlineScheduleTrackerByFilterCondition(scheduleTrackerSearch);
                         if (scheduleTrackers != null && scheduleTrackers.Count() > 0 && scheduleTrackers.FirstOrDefault() != null)

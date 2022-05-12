@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+This file is used by the publish/package process of your Web project. You can customize the behavior of this process
+by editing this MSBuild file. In order to learn more about this please visit https://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAsfFP9irqyUmpU9N1ab742wAAAAACAAAAAAAQZgAAAAEAACAAAACGESHKoCSMD0/7/1TlF9i7imVjQ6nyrW1CqjrT+FLrqwAAAAAOgAAAAAIAACAAAADdI1TCdJW+9FXC1JQu9+o89U826JIbMdztZHmkG3UM+4AAAABqXMhn7fycnDIo0+svwmauCYfTxlqDQSVYJzx4ZKIVaRWUa/J0VZlcMATEhVrOxoU2mGDhQ0PSH3atl6Boy+sEjjPLxXdU1ExVZ6joHGxJqPBPE9nK7LVjbd6OrWsVB10asA/6nWSY9APLkz2MgZLntUcP+6Wj0JsnN3h2WDgsCkAAAABXC1CoSKqUM4AgidkUkFbEMfHvG+fmzh7QgM+G/ltSbuUDR44MsnZjYpJjWGauGNAXjIqzs1LsSvIly7XeYvyi</EncryptedPassword>
+    <History>True|2022-05-11T01:49:30.8978440Z;True|2022-05-11T07:06:12.3329153+05:30;True|2022-05-11T07:03:32.7736846+05:30;False|2022-05-11T07:00:11.7391364+05:30;False|2022-05-11T06:40:49.1854924+05:30;False|2022-05-11T06:30:38.5902075+05:30;False|2022-05-11T06:28:17.2004541+05:30;</History>
+  </PropertyGroup>
+  <ItemGroup>
+    <DestinationConnectionStrings Include="SqlServerConnectionString">
+      <Value>Data Source=tcp:flightsdemodbserver.database.windows.net,1433%3bInitial Catalog=Flight.Users_db%3bUser Id=sanjay%40flightsdemodbserver%3bPassword=Password%401234</Value>
+    </DestinationConnectionStrings>
+  </ItemGroup>
+  <ItemGroup>
+    <EFMigrations Include="UsersRepositoryUtils.DBContext.TokensDBContext">
+      <Value>Data Source=tcp:flightsdemodbserver.database.windows.net,1433%3bInitial Catalog=Flight.Users_db%3bUser Id=sanjay%40flightsdemodbserver%3bPassword=Password%401234</Value>
+    </EFMigrations>
+    <EFMigrations Include="UsersRepositoryUtils.DBContext.UsersDBContext">
+      <Value>Data Source=tcp:flightsdemodbserver.database.windows.net,1433%3bInitial Catalog=Flight.Users_db%3bUser Id=sanjay%40flightsdemodbserver%3bPassword=Password%401234</Value>
+    </EFMigrations>
+  </ItemGroup>
+</Project>

@@ -21,6 +21,7 @@ export class RegisterComponent implements OnInit {
   emailId:FormControl;
   password:FormControl;
   confirmPassword:FormControl;
+  isSuperAdmin:FormControl;
 
   registerForm:FormGroup;
   
@@ -34,13 +35,15 @@ export class RegisterComponent implements OnInit {
       Validators.pattern("^[a-zA-Z0-9_\.-]+@([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,6}$")]);
     this.password = new FormControl("", [Validators.required, Validators.minLength(5)]);
     this.confirmPassword= new FormControl("", [Validators.required]);
+    this.isSuperAdmin = new FormControl("false");
 
     this.registerForm = new FormGroup({
       firstName : this.firstName,
       lastName : this.lastName,
       emailId : this.emailId,
       password : this.password,
-      confirmPassword : this.confirmPassword
+      confirmPassword : this.confirmPassword,
+      isSuperAdmin : this.isSuperAdmin
     });
 
     this.router = router;
@@ -56,13 +59,15 @@ export class RegisterComponent implements OnInit {
       Validators.pattern("^[a-zA-Z0-9_\.-]+@([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,6}$")]);
     this.password = new FormControl("", [Validators.required, Validators.minLength(5)]);
     this.confirmPassword= new FormControl("", [Validators.required]);
+    this.isSuperAdmin = new FormControl("false");
 
     this.registerForm = new FormGroup({
       firstName : this.firstName,
       lastName : this.lastName,
       emailId : this.emailId,
       password : this.password,
-      confirmPassword : this.confirmPassword
+      confirmPassword : this.confirmPassword,
+      isSuperAdmin : this.isSuperAdmin
     });
   }
 
@@ -94,40 +99,48 @@ export class RegisterComponent implements OnInit {
             LastName:this.lastName.value,
             EmailId:this.emailId.value,
             Password:this.password.value
-          } 
-          this.userService.registerUser(user, headerInfo).subscribe(
-            (response) =>{
-              //console.log("response :=>" ,response);
-              if((response ?? null) != null)
-              {
-                this.alert = {type : "success", message : "registration successful"};
-                this.router.navigateByUrl("users/login");
-              }
-              else
-              {
-                this.alert = {type : "danger", message : "internal server error"};
-              }
-              //alert(`<span style="color:green">login successful </span>`);
-            },
-            (error:any)=>{
-              if(error?.error?.CustomErrorCode ?? null != null )
-              {
-                if(error?.error?.CustomErrorCode == CustomErrorCode.Duplicate)
-                {
-                  this.alert = {type : "danger", message : error?.error?.CustomErrorMessage ?? ""};
-                }
-                else
-                {
-                  this.alert = {type : "danger", message : "internal server error"};
-                }
-              }
-              else
-              {
-                this.alert = {type : "danger", message : "internal server error"};
-              }
-            });
+          }
 
-          //this.alert = {type : "danger", message : "registration successful"};
+          if((this.isSuperAdmin.value ?? false) ?? true)
+          {
+            this.registerAsAdmin(user, headerInfo);
+          }
+          else
+          {
+            this.registerAsNormal(user, headerInfo);
+          }
+          // this.userService.registerUser(user, headerInfo).subscribe(
+          //   (response) =>{
+          //     //console.log("response :=>" ,response);
+          //     if((response ?? null) != null)
+          //     {
+          //       this.alert = {type : "success", message : "registration successful"};
+          //       this.router.navigateByUrl("users/login");
+          //     }
+          //     else
+          //     {
+          //       this.alert = {type : "danger", message : "internal server error"};
+          //     }
+          //     //alert(`<span style="color:green">login successful </span>`);
+          //   },
+          //   (error:any)=>{
+          //     if(error?.error?.CustomErrorCode ?? null != null )
+          //     {
+          //       if(error?.error?.CustomErrorCode == CustomErrorCode.Duplicate)
+          //       {
+          //         this.alert = {type : "danger", message : error?.error?.CustomErrorMessage ?? ""};
+          //       }
+          //       else
+          //       {
+          //         this.alert = {type : "danger", message : "internal server error"};
+          //       }
+          //     }
+          //     else
+          //     {
+          //       this.alert = {type : "danger", message : "internal server error"};
+          //     }
+          //   });
+
 
         }
         else
@@ -149,7 +162,78 @@ export class RegisterComponent implements OnInit {
     }
   }
 
+  registerAsNormal(user:Users, headerInfo:HeaderInfo)
+  {
+    this.userService.registerUser(user, headerInfo).subscribe(
+      (response) =>{
+        //console.log("response :=>" ,response);
+        if((response ?? null) != null)
+        {
+          this.alert = {type : "success", message : "registration successful"};
+          this.router.navigateByUrl("users/login");
+        }
+        else
+        {
+          this.alert = {type : "danger", message : "internal server error"};
+        }
+        //alert(`<span style="color:green">login successful </span>`);
+      },
+      (error:any)=>{
+        if(error?.error?.CustomErrorCode ?? null != null )
+        {
+          if(error?.error?.CustomErrorCode == CustomErrorCode.Duplicate)
+          {
+            this.alert = {type : "danger", message : error?.error?.CustomErrorMessage ?? ""};
+          }
+          else
+          {
+            this.alert = {type : "danger", message : "internal server error"};
+          }
+        }
+        else
+        {
+          this.alert = {type : "danger", message : "internal server error"};
+        }
+      });
+  }
+
+  registerAsAdmin(user:Users, headerInfo:HeaderInfo)
+  {
+    this.userService.registerAsAdmin(user, headerInfo).subscribe(
+      (response) =>{
+        //console.log("response :=>" ,response);
+        if((response ?? null) != null)
+        {
+          this.alert = {type : "success", message : "registration successful"};
+          this.router.navigateByUrl("users/login");
+        }
+        else
+        {
+          this.alert = {type : "danger", message : "internal server error"};
+        }
+        //alert(`<span style="color:green">login successful </span>`);
+      },
+      (error:any)=>{
+        if(error?.error?.CustomErrorCode ?? null != null )
+        {
+          if(error?.error?.CustomErrorCode == CustomErrorCode.Duplicate)
+          {
+            this.alert = {type : "danger", message : error?.error?.CustomErrorMessage ?? ""};
+          }
+          else
+          {
+            this.alert = {type : "danger", message : "internal server error"};
+          }
+        }
+        else
+        {
+          this.alert = {type : "danger", message : "internal server error"};
+        }
+      });
+  }
+
 }
+
 
 // export function ConfirmPasswordValidator(controlName: string, matchingControlName: string) {
 //   return (formGroup: FormGroup) => {

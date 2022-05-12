@@ -11,10 +11,32 @@
         <span></span>
     </div> -->
     <div class="actionDiv">
-        From: <input type="text" placeholder="please enter from "  #from name="from" />
-        To : <input type="text" placeholder="please enter from "  #to name="to" /> 
-        Departure Date : <input type="date" placeholder="please enter from " #departureDate name="departureDate" />
-        <button class="addActionButton" (click)="getAvailableAirlineSearch(from.value, to.value, departureDate.value)">Search</button></div>
+        <div class="actionTableDiv">
+            <table class="actionTable">
+                <tr>
+                    <td>
+                        <div class= "fieldLabel" >From :</div>
+                        <input type="text" field placeholder="please enter 'from' loc"  class="field"
+                        #from name="from" />
+                    </td>
+                    <td>
+                        <div class= "fieldLabel" >To :&nbsp;&nbsp;&nbsp;</div>
+                        <input type="text" placeholder="please enter 'to' loc " class="field"
+                         #to name="to" /> 
+                    </td>
+                    <td>
+                        <div class= "fieldLabel" >Departure Date : :</div>
+                        <input type="date" class="field" 
+                        #departureDate name="departureDate" />
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <button class="addActionButton" 
+        (click)="getAvailableAirlineSearch(from.value, to.value, departureDate.value)">
+            Search
+        </button>
+    </div>
     <div class="dataDiv">
         <div class="tableTitleDiv">
             <table class="dataTable">
@@ -23,11 +45,11 @@
                         <th class="nameCell">From</th>
                         <th class="nameCell">To</th>
                         <th class="nameCell">Airline Name</th>
-                        <th class="codeCell">Departure Date</th>
-                        <th class="codeCell">Arrival Date</th>
-                        <th class="nameCell">BC Seats remaining</th>
-                        <th class="nameCell"> NBC Seats remaining</th>
-                        <th class="countCell">Discounts</th>
+                        <th class="dateCell">Departure Date</th>
+                        <th class="dateCell">Arrival Date</th>
+                        <th class="countCell">BC Seats remaining</th>
+                        <th class="countCell"> NBC Seats remaining</th>
+                        <th class="discountCell">Discounts</th>
                         <th class="actionCell"> </th>
                     </tr>
                 </thead>
@@ -42,12 +64,15 @@
                         <td class="nameCell">{{airline?.AirlineSchedules?.To ?? ''}}</td>
                         
                         <td class="nameCell">{{airline?.AirlineSchedules?.Airline?.Name ?? ''}}</td>
-                        <td class="codeCell">{{airline?.ActualDepartureDate ?? ''}}</td>
-                        <td class="codeCell">{{airline?.ActualArrivalDate ?? ''}}</td>
-                        <td class="nameCell">{{airline?.BCSeatsAvailable ?? ''}}</td>
-                        <td class="nameCell">{{airline?.NBCSeatsAvailable ?? ''}}</td>
-                        <td class="detailsCell">
-                            <select #discount name="discount" style="z-index: 5;">
+                        <td title="{{(airline?.ActualDepartureDate ?? '') | date : 'MMM d, y, h:mm:ss a'}}"
+                        class="dateCell">{{(airline?.ActualDepartureDate ?? '') | date : 'MMM d, y, h:mm:ss a'}}</td>
+                        <td title="{{(airline?.ActualArrivalDate ?? '') | date : 'MMM d, y, h:mm:ss a'}}"
+                        class="dateCell">{{(airline?.ActualArrivalDate ?? '') | date : 'MMM d, y, h:mm:ss a'}}</td>
+                        <td class="countCell">{{airline?.BCSeatsAvailable ?? ''}}</td>
+                        <td class="countCell">{{airline?.NBCSeatsAvailable ?? ''}}</td>
+                        <td class="discountCell">
+                            <select #discount name="discount" class="field"
+                            style="z-index: 5;">
                                 <option *ngFor="let disc of (airline?.DiscountTags)"
                                 [value]="disc.Id">
                                     {{disc.Name}}

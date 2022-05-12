@@ -1,3 +1,272 @@
+//{
+//  "Routes": [
+//    //Users :->
+//    {
+//      "DownstreamPathTemplate": "/api/{version}/Users/",
+//      "DownstreamScheme": "https",
+//      "DownstreamHostAndPorts": [
+//        {
+//          "Host": "flight-users.azurewebsites.net",
+//          "Port": "443"
+//        }
+//      ],
+//      "UpstreamPathTemplate": "/api/{version}/Users/",
+//      "UpstreamHttpMethod": [ "Get", "Post" ],
+//      "SwaggerKey": "Users"
+//    },
+//    {
+//      "DownstreamPathTemplate": "/api/{version}/Users/{everything}",
+//      "DownstreamScheme": "https",
+//      "DownstreamHostAndPorts": [
+//        {
+//          "Host": "flight-users.azurewebsites.net",
+//          "Port": "443"
+//        }
+//      ],
+//      "UpstreamPathTemplate": "/api/{version}/Users/{everything}",
+//      "UpstreamHttpMethod": [ "Get", "Post" ],
+//      "SwaggerKey": "Users"
+//    },
+//    //Airlines :->
+//    {
+//      "DownstreamPathTemplate": "/api/{version}/Airlines/",
+//      "DownstreamScheme": "https",
+//      "DownstreamHostAndPorts": [
+//        {
+//          "Host": "flight-airlines.azurewebsites.net",
+//          "Port": "443"
+//        }
+//      ],
+//      "UpstreamPathTemplate": "/api/{version}/Airlines/",
+//      "UpstreamHttpMethod": [ "Get", "Post" ],
+//      "SwaggerKey": "Airlines"
+//    },
+//    {
+//      "DownstreamPathTemplate": "/api/{version}/Airlines/{everything}",
+//      "DownstreamScheme": "https",
+//      "DownstreamHostAndPorts": [
+//        {
+//          "Host": "flight-airlines.azurewebsites.net",
+//          "Port": "443"
+//        }
+//      ],
+//      "UpstreamPathTemplate": "/api/{version}/Airlines/{everything}",
+//      "UpstreamHttpMethod": [ "Get", "Post" ],
+//      "SwaggerKey": "Airlines"
+//    },
+//    //DiscountTags :->
+//    {
+//      "DownstreamPathTemplate": "/api/{version}/DiscountTags/",
+//      "DownstreamScheme": "https",
+//      "DownstreamHostAndPorts": [
+//        {
+//          "Host": "flight-airlines.azurewebsites.net",
+//          "Port": "443"
+//        }
+//      ],
+//      "UpstreamPathTemplate": "/api/{version}/DiscountTags/",
+//      "UpstreamHttpMethod": [ "Get", "Post" ],
+//      "SwaggerKey": "DiscountTags"
+//    },
+//    {
+//      "DownstreamPathTemplate": "/api/{version}/DiscountTags/{everything}",
+//      "DownstreamScheme": "https",
+//      "DownstreamHostAndPorts": [
+//        {
+//          "Host": "flight-airlines.azurewebsites.net",
+//          "Port": "443"
+//        }
+//      ],
+//      "UpstreamPathTemplate": "/api/{version}/DiscountTags/{everything}",
+//      "UpstreamHttpMethod": [ "Get", "Post" ],
+//      "SwaggerKey": "DiscountTags"
+//    },
+//    //AirlineSchedules :->
+//    {
+//      "DownstreamPathTemplate": "/api/{version}/AirlineSchedules/",
+//      "DownstreamScheme": "https",
+//      "DownstreamHostAndPorts": [
+//        {
+//          "Host": "flight-airlines.azurewebsites.net",
+//          "Port": "443"
+//        }
+//      ],
+//      "UpstreamPathTemplate": "/api/{version}/AirlineSchedules/",
+//      "UpstreamHttpMethod": [ "Get", "Post" ],
+//      "SwaggerKey": "AirlineSchedules"
+//    },
+//    {
+//      "DownstreamPathTemplate": "/api/{version}/AirlineSchedules/{everything}",
+//      "DownstreamScheme": "https",
+//      "DownstreamHostAndPorts": [
+//        {
+//          "Host": "flight-airlines.azurewebsites.net",
+//          "Port": "443"
+//        }
+//      ],
+//      "UpstreamPathTemplate": "/api/{version}/AirlineSchedules/{everything}",
+//      "UpstreamHttpMethod": [ "Get", "Post" ],
+//      "SwaggerKey": "AirlineSchedules"
+//    },
+//    //AirlineScheduleTracker :->
+//    {
+//      "DownstreamPathTemplate": "/api/{version}/AirlineScheduleTracker/",
+//      "DownstreamScheme": "https",
+//      "DownstreamHostAndPorts": [
+//        {
+//          "Host": "flight-airlines.azurewebsites.net",
+//          "Port": "443"
+//        }
+//      ],
+//      "UpstreamPathTemplate": "/api/{version}/AirlineScheduleTracker/",
+//      "UpstreamHttpMethod": [ "Get", "Post" ],
+//      "SwaggerKey": "AirlineScheduleTracker"
+//    },
+//    {
+//      "DownstreamPathTemplate": "/api/{version}/AirlineScheduleTracker/{everything}",
+//      "DownstreamScheme": "https",
+//      "DownstreamHostAndPorts": [
+//        {
+//          "Host": "flight-airlines.azurewebsites.net",
+//          "Port": "443"
+//        }
+//      ],
+//      "UpstreamPathTemplate": "/api/{version}/AirlineScheduleTracker/{everything}",
+//      "UpstreamHttpMethod": [ "Get", "Post" ],
+//      "SwaggerKey": "AirlineScheduleTracker"
+//    },
+//    //Bookings :->
+//    {
+//      "DownstreamPathTemplate": "/api/{version}/Bookings/",
+//      "DownstreamScheme": "https",
+//      "DownstreamHostAndPorts": [
+//        {
+//          "Host": "flight-bookings.azurewebsites.net",
+//          "Port": "443"
+//        }
+//      ],
+//      "UpstreamPathTemplate": "/api/{version}/Bookings/",
+//      "UpstreamHttpMethod": [ "Get", "Post" ],
+//      "SwaggerKey": "Bookings"
+//    },
+//    {
+//      "DownstreamPathTemplate": "/api/{version}/Bookings/{everything}",
+//      "DownstreamScheme": "https",
+//      "DownstreamHostAndPorts": [
+//        {
+//          "Host": "flight-bookings.azurewebsites.net",
+//          "Port": "443"
+//        }
+//      ],
+//      "UpstreamPathTemplate": "/api/{version}/Bookings/{everything}",
+//      "UpstreamHttpMethod": [ "Get", "Post" ],
+//      "SwaggerKey": "Bookings"
+//    },
+//    // auth token
+//    {
+//      "DownstreamPathTemplate": "/api/AuthTokens/",
+//      "DownstreamScheme": "https",
+//      "DownstreamHostAndPorts": [
+//        {
+//          "Host": "flight-tokenmanager.azurewebsites.net",
+//          "Port": "443"
+//        }
+//      ],
+//      "UpstreamPathTemplate": "/api/AuthTokens/",
+//      "UpstreamHttpMethod": [ "Get", "Post" ],
+//      "SwaggerKey": "AuthTokens"
+//    },
+//    {
+//      "DownstreamPathTemplate": "/api/AuthTokens/{everything}",
+//      "DownstreamScheme": "https",
+//      "DownstreamHostAndPorts": [
+//        {
+//          "Host": "flight-tokenmanager.azurewebsites.net",
+//          "Port": "443"
+//        }
+//      ],
+//      "UpstreamPathTemplate": "/api/AuthTokens/{everything}",
+//      "UpstreamHttpMethod": [ "Get", "Post" ],
+//      "SwaggerKey": "AuthTokens"
+//    }
+//  ],
+//  "SwaggerEndPoints": [
+//    {
+//      "Key": "Users",
+//      "Config": [
+//        {
+//          "Name": "Users APIs",
+//          "Version": "v1.0",
+//          "Url": "https://flight-users.azurewebsites.net/swagger/v1.0/swagger.json"
+//        }
+//      ]
+//    },
+//    {
+//      "Key": "Airlines",
+//      "Config": [
+//        {
+//          "Name": "Airlines APIs",
+//          "Version": "v1.0",
+//          "Url": "https://flight-airlines.azurewebsites.net/swagger/v1.0/swagger.json"
+//        }
+//      ]
+//    },
+//    {
+//      "Key": "DiscountTags",
+//      "Config": [
+//        {
+//          "Name": "DiscountTags APIs",
+//          "Version": "v1.0",
+//          "Url": "https://flight-airlines.azurewebsites.net/swagger/v1.0/swagger.json"
+//        }
+//      ]
+//    },
+//    {
+//      "Key": "AirlineSchedules",
+//      "Config": [
+//        {
+//          "Name": "AirlineSchedules APIs",
+//          "Version": "v1.0",
+//          "Url": "https://flight-airlines.azurewebsites.net/swagger/v1.0/swagger.json"
+//        }
+//      ]
+//    },
+//    {
+//      "Key": "AirlineScheduleTracker",
+//      "Config": [
+//        {
+//          "Name": "AirlineScheduleTracker APIs",
+//          "Version": "v1.0",
+//          "Url": "https://flight-airlines.azurewebsites.net/swagger/v1.0/swagger.json"
+//        }
+//      ]
+//    },
+//    {
+//      "Key": "Bookings",
+//      "Config": [
+//        {
+//          "Name": "Bookings API",
+//          "Version": "v1.0",
+//          "Url": "https://flight-bookings.azurewebsites.net/swagger/v1.0/swagger.json"
+//        }
+//      ]
+//    },
+//    {
+//      "Key": "AuthTokens",
+//      "Config": [
+//        {
+//          "Name": "AuthTokens API",
+//          "Version": "v1.0",
+//          "Url": "https://flight-tokenmanager.azurewebsites.net/swagger/v1.0/swagger.json"
+//        }
+//      ]
+//    }
+//  ],
+//  "GlobalConfiguration": {
+//    "RequestIdKey": "OcRequestId",
+//    "AdministrationPath": "/administration"
+//  }
+//}
 {
   "Routes": [
     //Users :->
@@ -11,8 +280,7 @@
         }
       ],
       "UpstreamPathTemplate": "/api/{version}/Users/",
-      "UpstreamHttpMethod": [ "Get", "Post" ],
-      "SwaggerKey": "Users"
+      "UpstreamHttpMethod": [ "Get", "Post" ]
     },
     {
       "DownstreamPathTemplate": "/api/{version}/Users/{everything}",
@@ -24,8 +292,7 @@
         }
       ],
       "UpstreamPathTemplate": "/api/{version}/Users/{everything}",
-      "UpstreamHttpMethod": [ "Get", "Post" ],
-      "SwaggerKey": "Users"
+      "UpstreamHttpMethod": [ "Get", "Post" ]
     },
     //Airlines :->
     {
@@ -38,8 +305,7 @@
         }
       ],
       "UpstreamPathTemplate": "/api/{version}/Airlines/",
-      "UpstreamHttpMethod": [ "Get", "Post" ],
-      "SwaggerKey": "Airlines"
+      "UpstreamHttpMethod": [ "Get", "Post" ]
     },
     {
       "DownstreamPathTemplate": "/api/{version}/Airlines/{everything}",
@@ -51,8 +317,7 @@
         }
       ],
       "UpstreamPathTemplate": "/api/{version}/Airlines/{everything}",
-      "UpstreamHttpMethod": [ "Get", "Post" ],
-      "SwaggerKey": "Airlines"
+      "UpstreamHttpMethod": [ "Get", "Post" ]
     },
     //DiscountTags :->
     {
@@ -65,8 +330,7 @@
         }
       ],
       "UpstreamPathTemplate": "/api/{version}/DiscountTags/",
-      "UpstreamHttpMethod": [ "Get", "Post" ],
-      "SwaggerKey": "DiscountTags"
+      "UpstreamHttpMethod": [ "Get", "Post" ]
     },
     {
       "DownstreamPathTemplate": "/api/{version}/DiscountTags/{everything}",
@@ -78,8 +342,7 @@
         }
       ],
       "UpstreamPathTemplate": "/api/{version}/DiscountTags/{everything}",
-      "UpstreamHttpMethod": [ "Get", "Post" ],
-      "SwaggerKey": "DiscountTags"
+      "UpstreamHttpMethod": [ "Get", "Post" ]
     },
     //AirlineSchedules :->
     {
@@ -92,8 +355,7 @@
         }
       ],
       "UpstreamPathTemplate": "/api/{version}/AirlineSchedules/",
-      "UpstreamHttpMethod": [ "Get", "Post" ],
-      "SwaggerKey": "AirlineSchedules"
+      "UpstreamHttpMethod": [ "Get", "Post" ]
     },
     {
       "DownstreamPathTemplate": "/api/{version}/AirlineSchedules/{everything}",
@@ -105,8 +367,7 @@
         }
       ],
       "UpstreamPathTemplate": "/api/{version}/AirlineSchedules/{everything}",
-      "UpstreamHttpMethod": [ "Get", "Post" ],
-      "SwaggerKey": "AirlineSchedules"
+      "UpstreamHttpMethod": [ "Get", "Post" ]
     },
     //AirlineScheduleTracker :->
     {
@@ -119,8 +380,7 @@
         }
       ],
       "UpstreamPathTemplate": "/api/{version}/AirlineScheduleTracker/",
-      "UpstreamHttpMethod": [ "Get", "Post" ],
-      "SwaggerKey": "AirlineScheduleTracker"
+      "UpstreamHttpMethod": [ "Get", "Post" ]
     },
     {
       "DownstreamPathTemplate": "/api/{version}/AirlineScheduleTracker/{everything}",
@@ -132,8 +392,7 @@
         }
       ],
       "UpstreamPathTemplate": "/api/{version}/AirlineScheduleTracker/{everything}",
-      "UpstreamHttpMethod": [ "Get", "Post" ],
-      "SwaggerKey": "AirlineScheduleTracker"
+      "UpstreamHttpMethod": [ "Get", "Post" ]
     },
     //Bookings :->
     {
@@ -146,8 +405,7 @@
         }
       ],
       "UpstreamPathTemplate": "/api/{version}/Bookings/",
-      "UpstreamHttpMethod": [ "Get", "Post" ],
-      "SwaggerKey": "Bookings"
+      "UpstreamHttpMethod": [ "Get", "Post" ]
     },
     {
       "DownstreamPathTemplate": "/api/{version}/Bookings/{everything}",
@@ -159,107 +417,7 @@
         }
       ],
       "UpstreamPathTemplate": "/api/{version}/Bookings/{everything}",
-      "UpstreamHttpMethod": [ "Get", "Post" ],
-      "SwaggerKey": "Bookings"
-    },
-    //AuthTokens :->
-    {
-      "DownstreamPathTemplate": "/api/AuthTokens/",
-      "DownstreamScheme": "http",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "localhost",
-          "Port": "9007"
-        }
-      ],
-      "UpstreamPathTemplate": "/api/AuthTokens/",
-      "UpstreamHttpMethod": [ "Get", "Post" ],
-      "SwaggerKey": "AuthTokens"
-    },
-    {
-      "DownstreamPathTemplate": "/api/AuthTokens/{everything}",
-      "DownstreamScheme": "http",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "localhost",
-          "Port": "9007"
-        }
-      ],
-      "UpstreamPathTemplate": "/api/AuthTokens/{everything}",
-      "UpstreamHttpMethod": [ "Get", "Post" ],
-      "SwaggerKey": "AuthTokens"
-    }
-  ],
-  "SwaggerEndPoints": [
-    {
-      "Key": "Users",
-      "Config": [
-        {
-          "Name": "Users APIs",
-          "Version": "v1.0",
-          "Url": "http://localhost:9001/swagger/v1.0/swagger.json"
-        }
-      ]
-    },
-    {
-      "Key": "Airlines",
-      "Config": [
-        {
-          "Name": "Airlines APIs",
-          "Version": "v1.0",
-          "Url": "http://localhost:9003/swagger/v1.0/swagger.json"
-        }
-      ]
-    },
-    {
-      "Key": "DiscountTags",
-      "Config": [
-        {
-          "Name": "DiscountTags APIs",
-          "Version": "v1.0",
-          "Url": "http://localhost:9003/swagger/v1.0/swagger.json"
-        }
-      ]
-    },
-    {
-      "Key": "AirlineSchedules",
-      "Config": [
-        {
-          "Name": "AirlineSchedules APIs",
-          "Version": "v1.0",
-          "Url": "http://localhost:9003/swagger/v1.0/swagger.json"
-        }
-      ]
-    },
-    {
-      "Key": "AirlineScheduleTracker",
-      "Config": [
-        {
-          "Name": "AirlineScheduleTracker APIs",
-          "Version": "v1.0",
-          "Url": "http://localhost:9003/swagger/v1.0/swagger.json"
-        }
-      ]
-    },
-    {
-      "Key": "Bookings",
-      "Config": [
-        {
-          "Name": "Bookings API",
-          "Version": "v1.0",
-          "Url": "http://localhost:9005/swagger/v1.0/swagger.json"
-        }
-      ]
-    },
-    {
-      "Key": "AuthTokens",
-      "Config": [
-        {
-          "Name": "AuthTokens API",
-          "Version": "v1.0",
-          "Url": "http://localhost:9007/swagger/v1.0/swagger.json"
-        }
-      ]
+      "UpstreamHttpMethod": [ "Get", "Post" ]
     }
   ],
   "GlobalConfiguration": {
@@ -267,3 +425,4 @@
     "AdministrationPath": "/administration"
   }
 }
+

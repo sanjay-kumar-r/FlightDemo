@@ -46,3 +46,6 @@ D:\WorkSpace\Tools\APIGateway\bin\Release\netcoreapp3.1\runtimes\win-x64\native\
 D:\WorkSpace\Tools\APIGateway\bin\Release\netcoreapp3.1\runtimes\win-x86\native\sni.dll
 D:\WorkSpace\Tools\APIGateway\bin\Release\netcoreapp3.1\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
 D:\WorkSpace\Tools\APIGateway\bin\Release\netcoreapp3.1\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
+D:\WorkSpace\Tools\APIGateway\bin\Release\netcoreapp3.1\OcelotConfigs_Bak\ocelot.development.json
+D:\WorkSpace\Tools\APIGateway\bin\Release\netcoreapp3.1\OcelotConfigs_Bak\ocelot.json
+D:\WorkSpace\Tools\APIGateway\bin\Release\netcoreapp3.1\OcelotConfigs_Bak\ocelot.SIT.json

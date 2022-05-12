@@ -23,4 +23,3 @@ D:\WorkSpace\Library\Utils\UsersRepositoryUtils\bin\Debug\netcoreapp3.1\AuthDTOs
 D:\WorkSpace\Library\Utils\UsersRepositoryUtils\bin\Debug\netcoreapp3.1\UsersRepositoryUtils.runtimeconfig.json
 D:\WorkSpace\Library\Utils\UsersRepositoryUtils\bin\Debug\netcoreapp3.1\UsersRepositoryUtils.runtimeconfig.dev.json
 D:\WorkSpace\Library\Utils\UsersRepositoryUtils\obj\Debug\netcoreapp3.1\UsersRepositoryUtils.genruntimeconfig.cache
-D:\WorkSpace\Library\Utils\UsersRepositoryUtils\obj\Debug\netcoreapp3.1\UsersRepositoryUtils.csproj.CopyComplete

@@ -9,6 +9,7 @@ import { AuthResponse, Users } from 'src/Models/Users';
 import { AirlineService } from 'src/Services/airline.service';
 import { CommonService } from 'src/Services/common.service';
 import { DynamicComponentService } from 'src/Services/dynamic-component.service';
+import { BookingActionComponent } from '../booking-action/booking-action.component';
 
 @Component({
   selector: 'app-book-ticket',
@@ -281,39 +282,39 @@ export class BookTicketComponent implements OnInit {
     );
   }
 
-  bookTicket(scheduleId?:number, dateBookedFor?:Date, discount?:string ){
+  bookTicket(scheduleId?:number, dateBookedFor?:Date, discountId?:string ){
     // console.log("scheduleId : " , scheduleId);
     // console.log("dateBookedFor : ", dateBookedFor);
     // console.log("discount : ", discount);
-    const addAirlinePopupRef = this.matDialog.open(AddOrEditAirlineComponent, {
+    const BookingActionPopupRef = this.matDialog.open(BookingActionComponent, {
       "width": '6000px',
       "maxHeight": '90vh',
-      "data": {isEdit:false,airlineId:0},
+      "data": {airlineSearchResponse:(this.airlinesSearchResponse?.find(x => ((x.AirlineSchedules?.Id ?? 0) == (scheduleId)) && (x.ActualDepartureDate == dateBookedFor) ))},
       "autoFocus": false
     });
-    addAirlinePopupRef.componentInstance.isErrorOutput.subscribe(
+    BookingActionPopupRef.componentInstance.isErrorOutput.subscribe(
       iserror => this.isAddEditError = iserror
     );
-    addAirlinePopupRef.componentInstance.isCancel.subscribe(
+    BookingActionPopupRef.componentInstance.isCancel.subscribe(
       isCancel => this.isAddEditCancel = isCancel
     );
-    // addAirlinePopupRef.componentInstance.isCancel.subscribe(
-    //   isSaved => this.isAddEditSaved = isSaved
-    // );
-    addAirlinePopupRef.afterClosed().subscribe(
+    BookingActionPopupRef.componentInstance.isSaveTrigger.subscribe(
+      isSaved => this.isAddEditSaved = isSaved
+    );
+    BookingActionPopupRef.afterClosed().subscribe(
       (result) => {
         if(!this.isAddEditCancel)
         {
-          // if(this.isAddEditSaved)
-          // {
-          //   this.loadAirlines();
-          // }
-          if(this.isAddEditError)
+          if(this.isAddEditSaved)
+          {
+            //success
+          }
+          else if(this.isAddEditError)
           {
             this.alert = {type : "danger", message : "internal server error"};
           }
-          else
-            this.loadAirlines();
+          // else
+          //   this.loadAirlines();
         }
       }
     );

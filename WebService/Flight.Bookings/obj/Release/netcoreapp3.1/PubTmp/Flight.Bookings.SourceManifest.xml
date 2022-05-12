@@ -1,0 +1,5 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<sitemanifest>
+  <IisApp path="D:\WorkSpace\WebService\Flight.Bookings\obj\Release\netcoreapp3.1\PubTmp\Out\" />
+  <dbfullsql path="D:\WorkSpace\WebService\Flight.Bookings\obj\Release\netcoreapp3.1\PubTmp\EFSQLScripts\Flight.Users.Model.Utils.BookingsDBContext.sql" />
+</sitemanifest>

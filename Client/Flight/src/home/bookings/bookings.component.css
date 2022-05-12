@@ -89,33 +89,13 @@
 } */
  
 .nameCell{
-    max-width: 100px;
-    width: 100px;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
+    max-width: 85px;
+    width: 85px;
 }
 
-.codeCell{
-    max-width: 100px;
-    width: 100px;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-}
-
-.detailsCell{
-    max-width: 150px;
-    width: 150px;
-}
-
-.detailsCell span{
-    width: 150px;
-    max-width: 150px;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    display: block;
+.dateCell{
+    max-width: 120px;
+    width: 120px;
 }
 
 .countCell{
@@ -134,9 +114,29 @@
 }
 
 .actionCell{
-    max-width: 80px;
-    width: 80px;
+    max-width: 120px;
+    width: 120px;
 } 
+
+.pnrCell {
+    max-width: 350px;
+    width: 350px;
+}
+
+tbody .nameCell, tbody .dateCell, tbody .countCell, tbody .costCell, tbody .pnrCell{
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.detailsCell span{
+    width: 150px;
+    max-width: 150px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    display: block;
+}
 
 .actionButton{
     /* margin-right: 30px;
@@ -161,7 +161,7 @@
     border: 0px;
     border-radius: 5px;
     height: 35px;
-    width: 60px;
+    width: 100px;
     background: rgb(203 24 24);
     font-size: smaller;
     color: white;
@@ -200,7 +200,7 @@
     background-color: white;
 }
 
-.active{
+.booked{
     border: 1px solid rgb(8, 163, 8);
     border-radius: 5px;
     height: 35px;
@@ -208,6 +208,28 @@
     /* background: rgb(203 24 24); */
     font-size: smaller;
     color: rgb(8, 163, 8);
+    /* margin-left: 30%; */
+    cursor: pointer;
+}
+
+.waiting{
+    border: 1px solid #092daf;
+    border-radius: 5px;
+    height: 35px;
+    width: 60px;
+    font-size: smaller;
+    color: #092daf;
+    cursor: pointer;
+}
+
+.canceled{
+    border: 1px solid rgb(180, 66, 0);
+    border-radius: 5px;
+    height: 35px;
+    width: 60px;
+    /* background: rgb(203 24 24); */
+    font-size: smaller;
+    color: rgb(180, 66, 0);
     /* margin-left: 30%; */
     cursor: pointer;
 }

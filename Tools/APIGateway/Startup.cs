@@ -73,16 +73,26 @@ namespace APIGateway
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseSwagger();
-                app.UseSwaggerUI(options => {
-                    options.SwaggerEndpoint("/swagger/v1.0/swagger.json", "Flight API Gateway Swagger");
-                    options.RoutePrefix = string.Empty;
-                });
-                app.UseSwaggerForOcelotUI(options =>
-                {
-                    options.PathToSwaggerGenerator = "/swagger/docs";
-                });
+                //app.UseSwagger();
+                //app.UseSwaggerUI(options => {
+                //    options.SwaggerEndpoint("/swagger/v1.0/swagger.json", "Flight API Gateway Swagger");
+                //    options.RoutePrefix = string.Empty;
+                //});
+                //app.UseSwaggerForOcelotUI(options =>
+                //{
+                //    options.PathToSwaggerGenerator = "/swagger/docs";
+                //});
             }
+
+            app.UseSwagger();
+            app.UseSwaggerUI(options => {
+                options.SwaggerEndpoint("/swagger/v1.0/swagger.json", "Flight API Gateway Swagger");
+                options.RoutePrefix = string.Empty;
+            });
+            app.UseSwaggerForOcelotUI(options =>
+            {
+                options.PathToSwaggerGenerator = "/swagger/docs";
+            });
 
             app.UseRouting();
 

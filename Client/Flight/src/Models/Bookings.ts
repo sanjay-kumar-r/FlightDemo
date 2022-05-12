@@ -26,3 +26,9 @@ export interface BookingDetails {
     booking?:Bookings
     ScheduleDetail?:AirlineSchedules
 }
+
+export interface BookingResponse {
+    booking?:Bookings
+    ScheduleDetail?:AirlineSchedules
+}
+

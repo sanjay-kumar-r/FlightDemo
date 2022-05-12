@@ -33,6 +33,9 @@ namespace TokenManager
 
         public void ConfigureServices(IServiceCollection services)
         {
+            //cors
+            services.AddCors();
+
             services.AddControllers();
             services.AddSwaggerGen(options =>
             {
@@ -67,20 +70,30 @@ namespace TokenManager
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseSwagger();
-                //app.UseSwagger(options =>
+                //app.UseSwagger();
+                //app.UseSwaggerUI(options =>
                 //{
-                //    options.RouteTemplate = "swagger/{documentName}/swagger.json";
+                //    options.SwaggerEndpoint("/swagger/v1.0/swagger.json", "Token Manager Service Swagger");
+                //    //options.RoutePrefix = "swagger";
+                //    options.RoutePrefix = string.Empty;
                 //});
-                app.UseSwaggerUI(options =>
-                {
-                    options.SwaggerEndpoint("/swagger/v1.0/swagger.json", "Token Manager Service Swagger");
-                    //options.RoutePrefix = "swagger";
-                    options.RoutePrefix = string.Empty;
-                });
             }
 
+            app.UseSwagger();
+            app.UseSwaggerUI(options =>
+            {
+                options.SwaggerEndpoint("/swagger/v1.0/swagger.json", "Token Manager Service Swagger");
+                //options.RoutePrefix = "swagger";
+                options.RoutePrefix = string.Empty;
+            });
+
             app.UseRouting();
+
+            app.UseCors(x => x
+                .AllowAnyMethod()
+                .AllowAnyHeader()
+                .SetIsOriginAllowed(origin => true) // allow any origin
+                .AllowCredentials()); // allow credentials
 
             app.UseAuthorization();
 

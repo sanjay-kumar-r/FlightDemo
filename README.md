@@ -3,6 +3,8 @@ To create Flight demo projects for training
 
 # 1. Workspace File Structure Overview :-
 
+.\WorkSpace\Client\Flight -> has the client side code
+
 ./UsefulDocs/DesignDiagram/FlightAppDesign.html -> has design diagram of the demo
 
 ./UsefulDocs/Postman/ -> has postman api testing collection exported.
@@ -30,7 +32,7 @@ To create Flight demo projects for training
 			(d) endpointUrls/ValidateAdminUrl = specifies url for admin validation api.
 			(e) APIGatewayUrl = api gateway url.
 			
-=> create databases Airlines and Users and Bookings. 
+=> create databases Airlines and Users and Bookings. and mention the connection string in the app.config file of all the microservices
 
 => .\WebService\Flight.Airlines\Migrations = contains migration scripts and db snapshots
 => .\WebService\Flignt.Users\Migrations = contains migration scripts and db snapshots
@@ -60,7 +62,7 @@ Tools/APIGateway/bin/Release/netcoreapp3.1/publish/  -> we can just go to this f
 
 (or)
 
-Simply open the projects in VS2019 and run them there.
+Simply open the projects in VS2019 or VSCode and run them there.
 # ----------------------------------------------------------------------------------------------------------------------------------
 
 # 4. To test the microservices :-

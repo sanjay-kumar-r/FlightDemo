@@ -16,6 +16,6 @@ D:\WorkSpace\Library\ServiceContracts\ServiceContracts\bin\Release\netcoreapp3.1
 D:\WorkSpace\Library\ServiceContracts\ServiceContracts\bin\Release\netcoreapp3.1\AirlinesDTOs.pdb
 D:\WorkSpace\Library\ServiceContracts\ServiceContracts\bin\Release\netcoreapp3.1\BookingsDTOs.dll
 D:\WorkSpace\Library\ServiceContracts\ServiceContracts\bin\Release\netcoreapp3.1\BookingsDTOs.pdb
-D:\WorkSpace\Library\ServiceContracts\ServiceContracts\obj\Release\netcoreapp3.1\ServiceContracts.csproj.CopyComplete
 D:\WorkSpace\Library\ServiceContracts\ServiceContracts\bin\Release\netcoreapp3.1\AuthDTOs.dll
 D:\WorkSpace\Library\ServiceContracts\ServiceContracts\bin\Release\netcoreapp3.1\AuthDTOs.pdb
+D:\WorkSpace\Library\ServiceContracts\ServiceContracts\obj\Release\netcoreapp3.1\ServiceContracts.csproj.CopyComplete

@@ -7,3 +7,4 @@ D:\WorkSpace\Library\DTOs\BookingsDTOs\obj\Debug\netcoreapp3.1\BookingsDTOs.Asse
 D:\WorkSpace\Library\DTOs\BookingsDTOs\obj\Debug\netcoreapp3.1\BookingsDTOs.csproj.CoreCompileInputs.cache
 D:\WorkSpace\Library\DTOs\BookingsDTOs\obj\Debug\netcoreapp3.1\BookingsDTOs.dll
 D:\WorkSpace\Library\DTOs\BookingsDTOs\obj\Debug\netcoreapp3.1\BookingsDTOs.pdb
+D:\WorkSpace\Library\DTOs\BookingsDTOs\obj\Debug\netcoreapp3.1\BookingsDTOs.csproj.AssemblyReference.cache

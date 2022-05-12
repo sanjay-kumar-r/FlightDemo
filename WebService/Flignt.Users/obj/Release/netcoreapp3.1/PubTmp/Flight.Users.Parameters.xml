@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="IIS Web Application Name" description="" value="Flight-Users" tags="IisApp">
+    <parameterEntry kind="ProviderPath" scope="IisApp" match="^D:\\WorkSpace\\WebService\\Flignt\.Users\\obj\\Release\\netcoreapp3\.1\\PubTmp\\Out\\$" />
+  </parameter>
+  <parameter name="UsersRepositoryUtils.DBContext.TokensDBContext" description="" value="Data Source=tcp:flightsdemodbserver.database.windows.net,1433;Initial Catalog=Flight.Users_db;User Id=sanjay@flightsdemodbserver;Password=Password@1234" tags="dbfullsql">
+    <parameterEntry kind="ProviderPath" scope="dbfullsql" match="^D:\\WorkSpace\\WebService\\Flignt\.Users\\obj\\Release\\netcoreapp3\.1\\PubTmp\\EFSQLScripts\\UsersRepositoryUtils\.DBContext\.TokensDBContext\.sql$" />
+  </parameter>
+  <parameter name="UsersRepositoryUtils.DBContext.UsersDBContext" description="" value="Data Source=tcp:flightsdemodbserver.database.windows.net,1433;Initial Catalog=Flight.Users_db;User Id=sanjay@flightsdemodbserver;Password=Password@1234" tags="dbfullsql">
+    <parameterEntry kind="ProviderPath" scope="dbfullsql" match="^D:\\WorkSpace\\WebService\\Flignt\.Users\\obj\\Release\\netcoreapp3\.1\\PubTmp\\EFSQLScripts\\UsersRepositoryUtils\.DBContext\.UsersDBContext\.sql$" />
+  </parameter>
+</parameters>

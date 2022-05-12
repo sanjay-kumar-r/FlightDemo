@@ -43,7 +43,7 @@ namespace Flight.Users
         public void ConfigureServices(IServiceCollection services)
         {
             //cors
-            //services.AddCors();
+            services.AddCors();
 
             services.AddControllers();
             //swagger
@@ -155,26 +155,29 @@ namespace Flight.Users
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseSwagger();
+                //app.UseSwagger();
                 //app.UseSwagger(options =>
                 //{
                 //    options.RouteTemplate = "swagger/{documentName}/swagger.json";
                 //});
-                app.UseSwaggerUI(options =>
-                {
-                    options.SwaggerEndpoint("/swagger/v1.0/swagger.json", "Flight.Users Service Swagger");
-                    //options.RoutePrefix = "swagger";
-                    options.RoutePrefix = string.Empty;
-                });
+                
             }
+
+            app.UseSwagger();
+            app.UseSwaggerUI(options =>
+            {
+                options.SwaggerEndpoint("/swagger/v1.0/swagger.json", "Flight.Users Service Swagger");
+                //options.RoutePrefix = "swagger";
+                options.RoutePrefix = string.Empty;
+            });
 
             app.UseRouting();
 
-            //app.UseCors(x => x
-            //    .AllowAnyMethod()
-            //    .AllowAnyHeader()
-            //    .SetIsOriginAllowed(origin => true) // allow any origin
-            //    .AllowCredentials()); // allow credentials
+            app.UseCors(x => x
+                .AllowAnyMethod()
+                .AllowAnyHeader()
+                .SetIsOriginAllowed(origin => true) // allow any origin
+                .AllowCredentials()); // allow credentials
 
             app.UseAuthentication();
 

@@ -1,1 +1,95 @@
-<p>booking-action works!</p>
+<!-- <p>booking-action works!</p> -->
+<div class="bookTicket">
+    <table>
+        <thead >
+            <tr>
+                <th colspan="2">
+                    <h2 class="bookTicketTitle">{{"Book Ticket"}}</h2>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <div>
+                        <div class= "fieldLabel" >BC Seats :</div>
+                        <select name="discountSelect" #discountSelect class="field" >
+                            <option [ngValue] = "0" disabled>select a discount</option>
+                            <option *ngFor="let disc of (airlineSearchResponse?.DiscountTags ?? [])" [value]="disc?.Id ?? -1" >
+                                <!-- {{disc?.Name ?? ''}} => {{!(disc?.IsByRate ?? false) ? ' - ' : ' ' }} {{disc?.Discount ?? 0}} {{(disc?.IsByRate ?? false) ? '%' : ''}} -->
+                                {{disc?.Name ?? ''}} : {{ '- ' }} {{disc?.Discount ?? 0}} {{(disc?.IsByRate ?? false) ? '%' : 'Rs'}}
+                                
+                                <!-- {{disc?.Name ?? ''}} -->
+                            </option>
+                        </select>
+                    </div>
+                </td>
+                <td>
+                    <!-- <div class= "fieldLabel" >Discount amount :</div> -->
+                    <!-- <div>
+                        <span>
+                            {{!(airlineSearchResponse?.DiscountTags?.find(x => (x.Id ?? 0) == ((!isNaN(Number(discountSelect.value)) ? Number(discountSelect.value) : null) ?? -1))?.IsByRate ?? false) ? '- ' : ''}}}
+                        </span>
+                        <span>
+                        {{(airlineSearchResponse?.DiscountTags?.find(x => (x.Id ?? 0) == ((!isNaN(Number(discountSelect.value)) ? Number(discountSelect.value) : null) ?? -1))?.Discount ?? 0)}}}
+                        </span>
+                        <span>
+                            {{(airlineSearchResponse?.DiscountTags?.find(x => (x.Id ?? 0) == ((!isNaN(Number(discountSelect.value)) ? Number(discountSelect.value) : null) ?? -1))?.IsByRate ?? false) ? ' %' : ''}}}
+                        </span>
+                    </div> -->
+                </td>
+            </tr>
+            <tr class="numberRow">
+                <td>
+                    <div>
+                        <div class= "fieldLabel" >Availible BC Seats :</div>
+                        <div class="numberBox">{{dynamicBCAvailableSeats}}</div>
+                    </div>
+                </td>
+                <td>
+                    <div>
+                        <div class= "fieldLabel" >Availible NBC Seats :</div>
+                        <div class="numberBox" >{{dynamicNBCAvailableSeats}}</div>
+                    </div>
+                    
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div>
+                        <div class= "fieldLabel" >BC Seats :</div>
+                        <input #bcSeats names="bcSeats" type="number" class="field"
+                        (change)="validateBCMaxAndMin($event, bcSeats.value, nbcSeats.value, discountSelect.value)"
+                        />
+                    </div>
+                </td>
+                <td>
+                    <div>
+                        <div class= "fieldLabel" >NBC Seats :</div>
+                        <input #nbcSeats names="nbcSeats" type="number" class="field"
+                        (change)="validateNBCMaxAndMin($event,bcSeats.value, nbcSeats.value, discountSelect.value)"
+                         />
+                    </div>
+                </td>
+            </tr>
+            <tr class="numberRow">
+                <td>
+                    <div class= "fieldLabel" >Total Cost :</div>
+                    <div class="numberBox">
+                        {{actualPaidAmount}}
+                    </div>
+                </td>
+                <td></td>
+            </tr>
+            <tr class="submitRow">
+                <td></td>
+                <td>
+                    <div class="submitRowDiv">
+                        <button type="submit" class="submit" (click)="bookTicket(bcSeats.value, nbcSeats.value, discountSelect.value)">Book ticket</button>
+                        <span class="cancel" (click)="cancel()">Cancel</span>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

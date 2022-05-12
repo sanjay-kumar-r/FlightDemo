@@ -18,4 +18,3 @@ D:\WorkSpace\Library\ServiceContracts\ServiceContracts\bin\Debug\netcoreapp3.1\B
 D:\WorkSpace\Library\ServiceContracts\ServiceContracts\bin\Debug\netcoreapp3.1\BookingsDTOs.pdb
 D:\WorkSpace\Library\ServiceContracts\ServiceContracts\bin\Debug\netcoreapp3.1\AuthDTOs.dll
 D:\WorkSpace\Library\ServiceContracts\ServiceContracts\bin\Debug\netcoreapp3.1\AuthDTOs.pdb
-D:\WorkSpace\Library\ServiceContracts\ServiceContracts\obj\Debug\netcoreapp3.1\ServiceContracts.csproj.CopyComplete

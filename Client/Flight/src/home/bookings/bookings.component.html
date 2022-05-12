@@ -35,7 +35,7 @@
                         <th class="countCell">NBC Seats</th>
                         <th class="costCell">Amount Paid</th>
                         <th class="statusCell">Booking Status</th>
-                        <th class="nameCell">pnr</th>
+                        <th class="pnrCell">PNR</th>
                         <th class="actionCell"> </th>
                     </tr>
                 </thead>
@@ -64,9 +64,20 @@
                         <td  class="countCell">{{booking?.NBCSeats ?? ''}}</td>
                         <td  class="costCell">{{(booking?.ActualPaidAmount ?? '') | number:'4.2'}}</td>
                         <!-- <td class="statusCell"><button [ngClass]="((booking?.BookingStatus?.Status?.toLowerCase() ?? '') == 'booked') ? 'booked':(((bookingDetail?.booking?.BookingStatus?.Status?.toLowerCase() ?? '') == 'waiting')? waiting : 'canceled')">{{(bookingDetail?.booking.BookingStatus.Status}}</button></td> -->
-                        <td class="statusCell">{{booking?.BookingStatus?.Status ?? ''}}</td>
-                        <td  class="nameCell">{{booking?.PNR ?? ''}}</td>
-                        <td class="actionCell"><button title="click to cancel booking" class="deleteButton" (click)="cancelBooking(booking?.Id ?? 0)">Cancel Booking</button></td>
+                        <td class="statusCell">
+                            <button [ngClass]="((booking?.BookingStatus?.Status?.toLowerCase() ?? '') == 'booked') ? 'booked':(((booking?.BookingStatus?.Status?.toLowerCase() ?? '') == 'waiting')? 'waiting' : 'canceled')">
+                                {{booking?.BookingStatus?.Status ?? ''}}
+                            </button>
+                        </td>
+                        <td  class="pnrCell">{{booking?.PNR ?? ''}}</td>
+                        <td class="actionCell">
+                            <ng-template [ngIf]="((booking?.BookingStatus?.Status ?? '').toLowerCase() != 'canceled')">
+                                <button title="click to cancel booking" class="deleteButton" 
+                                (click)="cancelBooking(booking?.Id ?? 0)">
+                                    Cancel Booking
+                                </button>
+                            </ng-template>
+                        </td>
                     </tr>
                 </tbody>
             </table>

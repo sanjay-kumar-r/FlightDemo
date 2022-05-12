@@ -73,13 +73,17 @@
     display: block;
 }
 
-.airlineScheduleForm input.field
+.airlineScheduleForm input.field, .airlineScheduleForm select.field
 {
     width: 90%;
     height: 35px;
     border-radius: 5px;
     border: 0px;
     background-color: #cdd6dd;
+}
+
+.airlineScheduleForm td{
+    width: calc(100% / 3);
 }
 
 .airlineScheduleForm textarea
@@ -101,9 +105,19 @@
     display: block;
 }
 
-.airlineScheduleForm input.invalidInput
+.airlineScheduleForm input.invalidInput, .airlineScheduleForm select.invalidInput
 {
     border: 1px solid red;
+}
+
+.airlineScheduleForm .isRegularDiv
+{
+    width: 90%;
+    height: 90%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin-top: 0px;
 }
 
 .airlineScheduleForm button.submit

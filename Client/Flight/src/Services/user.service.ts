@@ -11,6 +11,7 @@ export class UserService {
 
   baseUrl:string;
   registerUrl:string;
+  registerAsAdminUrl:string;
   loginUrl:string;
   updateUserUrl:string;
   updateAsAdminUrl:string;
@@ -28,6 +29,7 @@ export class UserService {
     this.updateUserUrl = this.baseUrl.trim() + '/' + "api/v1.0/Users/Update";
     this.updateAsAdminUrl = this.baseUrl.trim() + '/' + "api/v1.0/Users/UpdateUserAsSuperAdmin";
     this.deleteUserUrl = this.baseUrl.trim() + '/' + "api/v1.0/Users/Delete";
+    this.registerAsAdminUrl = this.baseUrl.trim() + "/" + "api/v1.0/Users/RegisterAsAdmin";
 
     this.getTokenUrl = "api/AuthTokens/GetAuthToken";
     this.refreshTokenUrl = "api/AuthTokens/RefreshToken";
@@ -57,6 +59,12 @@ export class UserService {
   {
     return this.apiExecutor.CallAPI(APIRequestType.Post, this.registerUrl, headerInfo ,
         user, false);
+  }
+
+  registerAsAdmin(user:Users, headerInfo:HeaderInfo) : Observable<any>
+  {
+    return this.apiExecutor.CallAPI(APIRequestType.Post, this.registerAsAdminUrl, headerInfo ,
+      user, false);
   }
   
 
