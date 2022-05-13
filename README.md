@@ -5,7 +5,9 @@ To create Flight demo projects for training
 
 .\WorkSpace\Client\Flight -> has the client side code
 
-./UsefulDocs/DesignDiagram/FlightAppDesign.html -> has design diagram of the demo
+./UsefulDocs/DesignDiagram/ -> has design diagrams (db and aplication design) of the demo
+
+./UsefulDocs/UI-pics/ -> has ui-ux pics of the application site pages.
 
 ./UsefulDocs/Postman/ -> has postman api testing collection exported.
 
@@ -22,7 +24,7 @@ To create Flight demo projects for training
 ./WebService/TokenManager/ folder -> has microservice project related to TokenManager - GetAuthToken/RefreshToken ...
 
 ./Tools/APIGateway/ folder -> has microservice project related to API Gateway - routing json file is present in OcelotConfigs/ocelot.json (or) ocelot.{env}.json
-# ----------------------------------------------------------------------------------------------------------------------------------
+# -----------------------------------------------------------------------------------------------
 
 # 2. SetUp :-
 => <project>/appsettings.json :
@@ -37,7 +39,7 @@ To create Flight demo projects for training
 => .\WebService\Flight.Airlines\Migrations = contains migration scripts and db snapshots
 => .\WebService\Flignt.Users\Migrations = contains migration scripts and db snapshots
 => .\WebService\Flignt.Bookings\Migrations = contains migration scripts and db snapshots
-# ----------------------------------------------------------------------------------------------------------------------------------
+# -----------------------------------------------------------------------------------------------
 
 # 3. To run the microservices :-
 
@@ -63,7 +65,7 @@ Tools/APIGateway/bin/Release/netcoreapp3.1/publish/  -> we can just go to this f
 (or)
 
 Simply open the projects in VS2019 or VSCode and run them there.
-# ----------------------------------------------------------------------------------------------------------------------------------
+# -----------------------------------------------------------------------------------------------
 
 # 4. To test the microservices :-
 
